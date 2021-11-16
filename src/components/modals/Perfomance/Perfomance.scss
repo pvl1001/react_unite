@@ -1,0 +1,286 @@
+.performance {
+
+   &.hide-price {
+      .modal-order {
+         visibility: hidden;
+         margin-top: -102px;
+      }
+
+      .performance__radio {
+         display: none;
+      }
+   }
+
+   .modal-dialog {
+      padding: 0 48px;
+      max-width: 916px;
+   }
+
+   &__title {
+      margin-bottom: 45px;
+      padding-right: 47px;
+   }
+
+   &__sale {
+      margin-top: -28px;
+      margin-bottom: 50px;
+
+      .mark {
+         background-color: var(--mf-orange);
+         padding: 4px 8px;
+      }
+   }
+
+   .performance-sale {
+      &__mark {
+         margin-bottom: 14px;
+      }
+   }
+
+   &__container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 57px;
+   }
+
+   &__text {
+      max-width: 295px;
+
+      h3 {
+         line-height: 24px;
+         margin-bottom: 28px;
+      }
+
+      ul {
+         margin-bottom: 27px;
+
+         li {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+
+            &:last-child {
+               margin-bottom: 0;
+            }
+
+            > * {
+               vertical-align: middle;
+            }
+
+            img {
+               width: 32px;
+               margin-right: 11px;
+            }
+
+         }
+      }
+   }
+
+   &__img {
+      width: 292px;
+      height: 242px;
+      text-align: center;
+
+      img {
+         max-width: 100%;
+         max-height: 100%;
+      }
+   }
+
+   &__radio {
+      margin-top: -9px;
+      margin-bottom: 15px;
+   }
+
+   &__radio-title {
+      margin-bottom: 7px;
+   }
+
+   .download-info {
+      display: flex;
+      align-items: flex-start;
+
+      &__icon {
+         width: 20px;
+         margin-top: 5px;
+         margin-right: 17px;
+      }
+
+      &__link,
+      &__size {
+         display: block;
+         font-size: 12px;
+         line-height: 16px;
+         font-weight: 400;
+      }
+
+      &__size {
+         white-space: nowrap;
+      }
+   }
+
+   .modal-order {
+      justify-content: flex-end;
+      flex-direction: row-reverse;
+
+      &__text {
+         width: auto;
+         margin-bottom: 0;
+      }
+
+      .btn {
+         padding: 0 46px;
+         margin-right: 25px;
+      }
+
+      @media (max-width: 767px) {
+         align-items: center;
+
+         .btn {
+            order: 0;
+         }
+      }
+
+      @media (max-width: 350px) {
+         &__text {
+            margin-bottom: 20px;
+         }
+      }
+   }
+
+   .modal-close {
+      top: 51px;
+   }
+
+   sup {
+      font-size: 60%;
+   }
+
+
+   @media (max-width: 1023px) {
+
+      .modal-content {
+         padding: 47px 48px 54px;
+      }
+
+      &__container {
+         margin-bottom: 57px;
+      }
+
+      &__text {
+         width: 186px;
+
+         h3 {
+            margin-bottom: 26px;
+         }
+
+         ul {
+            margin-bottom: 25px;
+
+            li {
+               margin-bottom: 14px;
+            }
+         }
+      }
+
+      &__img {
+         width: 268px;
+         height: 223px;
+      }
+
+      &__sale {
+         margin-top: -25px;
+         margin-bottom: 49px;
+
+         &__text {
+            width: 90%;
+         }
+      }
+
+      .download-info {
+         display: flex;
+         align-items: flex-start;
+
+         &__icon {
+            width: 20px;
+            margin-right: 17px;
+            margin-top: 4px;
+         }
+
+         &__size {
+            white-space: nowrap;
+         }
+      }
+
+      .modal-close {
+         top: 47px;
+         right: 16px;
+      }
+   }
+
+   @media (max-width: 767px) {
+      .modal-dialog {
+         margin: 54px 0;
+         padding: 0;
+      }
+   }
+
+   @media (max-width: 677px) {
+      .modal-content {
+         padding: 47px 16px 54px;
+      }
+
+      &__container {
+         margin-bottom: 54px;
+      }
+
+      &__sale {
+         margin-bottom: 49px;
+      }
+
+      .performance-sale {
+         margin-top: -24px;
+
+         &__text {
+            width: 90%;
+         }
+      }
+
+      &__text {
+         width: 100%;
+         min-width: 0;
+         margin-bottom: 54px;
+
+         h3 {
+            font-size: 18px;
+            margin-bottom: 29px;
+         }
+
+          ul li {
+             margin-bottom: 16px;
+          }
+      }
+
+      &__img {
+         min-width: 0;
+         margin: 0 auto;
+      }
+
+      &__radio {
+         margin-top: -2px;
+         margin-bottom: 15px;
+      }
+
+      &__radio-title {
+         margin-bottom: 4px;
+      }
+
+      .modal-close {
+         top: 45px;
+         right: 16px;
+      }
+
+   }
+
+}

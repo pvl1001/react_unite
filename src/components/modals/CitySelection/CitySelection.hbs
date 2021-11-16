@@ -1,0 +1,36 @@
+<!--Выбор города-->
+<div class="modal city-selection" id="citySelection" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
+         <div class="city-selection-wrapper">
+            <div class="city-selection__header header-city">
+               <div class="header-city__title">Выбор региона</div>
+               <input type="text" placeholder="Поиск региона">
+               <div class="header-city__auto">
+                  Автоопределение местоположения: <span>Москва и область</span>
+               </div>
+            </div>
+
+            <div class="city-selection__body select-region">
+               <div class="select-region__top">
+                  <a href="#">Москва и область</a>
+                  <a href="#">Санкт-Петербург и область</a>
+               </div>
+               {{#each cities}}
+                  <div class="select-region__regions-group">
+                     <div class="select-region__region-title">{{alph}}</div>
+                     {{#each cities}}
+                        <div class="select-region__region">
+                           <a class="select-region__link" href="{{link}}">{{name}}</a>
+                        </div>
+                     {{/each}}
+                  </div>
+               {{/each}}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

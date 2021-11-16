@@ -1,0 +1,36 @@
+<!--Заказать-->
+<div class="modal order-modal" id="order" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+
+      <div class="modal-content requisition">
+         <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
+
+         <h2>Заявка на подключение</h2>
+         <form class="needs-validation" id="orderForm">
+            <div class="order-modal__inputs">
+               <div class="order-modal__input">
+                  <div class="order-modal__input-title">Контактный номер</div>
+                  <input type="text" name="phone" id="validationCustom01">
+               </div>
+
+               <div class="order-modal__input">
+                  <div class="order-modal__input-title">Имя</div>
+                  <input type="text" name="name" id="validationCustom02">
+               </div>
+            </div>
+
+            <button type="submit" class="order-modal__btn btn" data-view="modal_order">Отправить</button>
+         </form>
+      </div>
+
+      <div class="modal-content order-thx">
+         <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
+
+         <h2 class="order-thx__title">Спасибо за заявку!</h2>
+         <p class="order-thx__text">Наш оператор свяжется с вами в рабочее время с 9 до 21 часов</p>
+      </div>
+
+   </div>
+</div>

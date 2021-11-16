@@ -1,0 +1,32 @@
+@import 'null';
+@import 'slick';
+//@import 'datepicker';
+@import 'colors';
+@import 'template';
+@import 'tail-select';
+
+// components
+@import '../components/Support/Support';
+@import '../components/Nav/Nav';
+@import '../components/Header/Header';
+@import '../components/Tariffs/Tariffs';
+@import '../components/UniteCheckAddress/UniteCheckAddress';
+@import '../components/Equipments/Equipments';
+@import '../components/TariffBanner/TariffBanner';
+@import '../components/WhatElse/WhatElse';
+@import '../components/App/App';
+@import '../components/FAQ/FAQ';
+@import '../components/Footer/Footer';
+@import '../components/BannerMFTVStart/BannerMFTVStart';
+
+// components/modals
+@import '../components/modals/CitySelection/CitySelection';
+@import '../components/modals/ModalTariff/ModalTariff';
+@import '../components/modals/Order/Order';
+@import '../components/modals/Perfomance/Perfomance';
+@import '../components/modals/Almond/Almond';
+@import '../components/modals/ChoiceRouter/ChoiceRouter';
+@import '../components/modals/AboutAlmond/AboutAlmond';
+@import '../components/modals/AboutSensor/AboutSensor';
+@import '../components/modals/TariffAll/TariffAll';
+@import '../components/modals/MfTV/MfTV';

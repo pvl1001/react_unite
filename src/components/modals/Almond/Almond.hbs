@@ -1,0 +1,93 @@
+{{#each equipments}}
+   {{#h-if id '===' 'eq-almond'}}
+      <div class="modal modalAlmond" id="modalAlmond" tabindex="-1">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+               <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
+               <h2 class="modalAlmond__banners-title modalAlmond__banners-title_head d-mobile">Роутер Almond</h2>
+
+               <div class="modalAlmond__banners">
+                  <h2 class="modalAlmond__banners-title modalAlmond__banners-title_head">Роутер Almond</h2>
+
+                  {{#each ../almondBanners}}
+                     <div class="modalAlmond__banner modalAlmond__banner_{{class}}">
+                        <div class="modalAlmond__banner-img">
+                           <picture>
+                              {{#if imgMob}}
+                                 <source srcset="img/pic/{{imgMob}}" media="(max-width: 767px)">
+                              {{/if}}
+                              <img class="head-banner__img" src="img/pic/{{img}}" alt="{{alt}}"/>
+                           </picture>
+                        </div>
+                        <div class="modalAlmond__banner-text">
+                           <h3 class="modalAlmond__banners-title">{{{title}}}</h3>
+                           <p>{{text}}</p>
+                        </div>
+                     </div>
+                  {{/each}}
+
+               </div>
+               <div class="modalAlmond__price">
+                  <h3 class="modalAlmond__price-title">Купить Almond</h3>
+
+                  <div class="modalAlmond__price-router">
+                     <h4 class="modalAlmond__price-router-title">Выберите роутер</h4>
+                     <span class="modalAlmond__price-link"
+                           data-toggle="modal" data-target="#choiceRouter">Какой роутер мне подойдет?</span>
+                     <div class="modalAlmond__price-cards">
+                        {{#each routers}}
+                           <div data-toggle="modal" data-target="#about_almond-{{id}}"
+                                id="{{id}}" class="modalAlmond__price-card card-price">
+                              <div class="card-price__img">
+                                 <img src="img/pic/{{img}}" alt="{{img}}">
+                              </div>
+                              <div class="card-price__text">
+                                 <p class="card-price__text-name">{{name}}</p>
+                                 <div class="card-price__text-price">
+                                    <p>{{price}} ₽ в месяц</p>
+                                    <p class="card-price__cnt"><span>1</span> шт.</p>
+                                 </div>
+                              </div>
+                           </div>
+                        {{/each}}
+                     </div>
+
+                  </div>
+
+                  <div class="modalAlmond__price-device">
+                     <h4 class="modalAlmond__price-device-title">Выберите устройство</h4>
+
+                     <div class="modalAlmond__price-cards">
+                        {{#each sensors}}
+                           <div data-toggle="modal" data-target="#about_sensor-{{id}}"
+                                id="{{id}}" class="modalAlmond__price-card card-price">
+                              <div class="card-price__img">
+                                 <img src="img/pic/{{img}}" alt="{{img}}">
+                              </div>
+                              <div class="card-price__text">
+                                 <p class="card-price__text-name">{{name}}</p>
+                                 <div class="card-price__text-price">
+                                    <p>{{price}} ₽ в месяц</p>
+                                    <p class="card-price__cnt"><span>1</span> шт.</p>
+                                 </div>
+                              </div>
+                           </div>
+                        {{/each}}
+                     </div>
+                  </div>
+
+                  <div class="modalAlmond__price-price price" hidden>
+                     <!--               <span class="old-price">600 ₽</span>-->
+                     <span class="new-price">{{price}}</span>
+                     <span>₽</span>
+                     <span>в месяц</span>
+                     <!--                  <div class="price__icon" aria-expanded="false"></div>-->
+                  </div>
+                  <button class="modalAlmond__price-btn btn" disabled>Добавить к тарифу</button>
+                  <button class="modalAlmond__price-btn btn js-modalAlmond-btn" hidden>Отправить заявку</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   {{/h-if}}
+{{/each}}

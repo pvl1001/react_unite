@@ -1,0 +1,215 @@
+<!--Подробнее Тарифы-->
+{{#each tariffs}}
+   <div class="modal tariff-modal about-tariff-modal tariff-modal_{{id}}" id="{{id}}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+      <div class="tariff-modal__btn-close modal-dialog">
+         <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-dialog modal-dialog-centered" role="document">
+
+         <div class="modal-content">
+
+            <div class="tariff-modal__title wrapp">
+               <h1>Объединяй! {{name}}</h1>
+            </div>
+
+            <div class="tariff-modal__container">
+
+               <ul class="tariff-modal__items">
+                  {{#each infoModal}}
+                     <li class="tariff-modal__item item-modal wrapp">
+                        <div class="item-modal__title">
+                           <div class="item-modal__title-icon">
+                              <img src="img/svg/{{icon}}" alt="{{icon}}">
+                           </div>
+                           <h2>{{title}}</h2>
+                        </div>
+
+                        <ul class="item-modal__options">
+                           {{#each options}}
+                              <li class="item-modal__option option-item">
+                                 <div class="option-item__text">
+                                    <p class="option-item__text-name">{{name}}</p>
+                                    {{#if description}}
+                                       <p class="option-item__text-desc">{{description}}</p>
+                                    {{/if}}
+                                 </div>
+                                 <p class="option-item__value">
+                                    {{value}}{{#h-if name '===' 'Мегафон ТВ'}}{{#each ../../mftv}}
+                                    ,<br> {{name}}{{/each}}{{/h-if}}
+                                 </p>
+                              </li>
+                           {{/each}}
+                        </ul>
+                     </li>
+                  {{/each}}
+               </ul>
+
+               {{#h-if mftv.length '===' 2}}{{> BannerMFTVStart}}{{/h-if}}
+               {{#h-if mftv.length '===' 4}}{{> BannerMFTVAll}}{{/h-if}}
+
+               <div class="tariff-modal__dop-options wrapp">
+                  <h2 class="tariff-modal__dop-options-title">Дополнительные опции:</h2>
+
+                  <ul class="tariff-modal__dop-options-cards">
+
+                     {{#each equipments}}
+                        {{#h-if id '!==' 'equipment-sim'}}
+                           <li id="card-{{../id}}-{{id}}"
+                               class="tariff-modal__dop-options-card dop-options-card
+                                  {{#h-if id '===' 'eq-almond'}} dop-options-card_almond{{/h-if}}
+                                  {{#if plan}} dop-options-card__option_plan{{/if}}">
+                              <div class="dop-options-card__img">
+                                 {{#h-if name '===' 'Android TV'}}
+                                    <div class="dop-options-card__mark mark">Акция</div>
+                                 {{/h-if}}
+                                 <img src="img/pic/{{img}}" alt="{{img}}">
+                              </div>
+
+                              <div class="dop-options-card__option">
+                                 <div>
+
+                                    <h3 class="dop-options-card__option-title"
+                                       {{#h-if id '!==' 'eq-almond'}}
+                                        onclick="equipments.open('#{{id}}', {{@index}}, 'details_{{dataView}}')"
+                                       {{else}}
+                                        data-toggle="modal" data-target="#modalAlmond"
+                                        onclick="openAlmond({{@../index}}, '{{dataView}}')"
+                                       {{/h-if}}
+                                    >{{{name}}}
+                                       <nobr>{{speed}}</nobr>
+                                    </h3>
+
+                                 </div>
+
+                                 {{#if plan}}
+                                    <p>Рассрочка</p>
+                                 {{else}}
+                                    <p>Аренда</p>
+                                 {{/if}}
+
+                                 {{#if plan}}
+                                    <div class="dop-options-card__option-radio option-radio">
+
+                                       <label class="option-radio__radio-btn">
+                                          <input name="radio-{{../id}}-{{@index}}" id="radio36-id-{{../id}}-{{@index}}"
+                                                 type="radio" value="{{plan.[36]}}" checked disabled>
+                                          <label for="radio36-id-{{../id}}-{{@index}}"></label>
+                                          <span>36 мес</span>
+                                       </label>
+
+                                       <label class="option-radio__radio-btn">
+                                          <input name="radio-{{../id}}-{{@index}}" id="radio24-id-{{../id}}-{{@index}}"
+                                                 type="radio" value="{{plan.[24]}}" disabled>
+                                          <label for="radio24-id-{{../id}}-{{@index}}"></label>
+                                          <span>24 мес</span>
+                                       </label>
+                                    </div>
+                                 {{/if}}
+                              </div>
+
+                              <div class="dop-options-card__price">
+                                 <div class="price">
+                                    <span class="price__current">
+                                       {{#if plan}}
+                                          {{plan.[36]}}
+                                       {{else}}
+                                          {{price}}
+                                       {{/if}}
+                                    </span> <span> ₽</span>
+                                    <span class="price__month"> в месяц</span>
+                                 </div>
+
+                                 <label class="switch">
+                                    <input type="checkbox"
+                                           data-equip-name="{{dataView}}"
+                                       {{#h-if price '===' '0'}}checked{{/h-if}}
+                                       {{#h-if id '===' 'eq-unite'}}checked{{/h-if}}>
+                                    <span class="round"></span>
+                                 </label>
+                              </div>
+
+                           </li>
+                        {{else}}
+                           <li id="card-{{../id}}-{{id}}" class="tariff-modal__dop-options-card dop-options-card">
+                              <div class="dop-options-card__sim">
+                                 <p>SIM-карта с тарифом
+                                    <span data-toggle="modal" data-target="#tariff-all"> «Без переплат. Всё»</span>
+                                    Скидка 40% на абонентскую плату
+                                 </p>
+                                 <div class="tariff-modal__counter counter">
+                                    <div class="counter__minus">&minus;</div>
+                                    <input type="text" readonly value="1">
+                                    <div class="counter__plus">+</div>
+                                 </div>
+                              </div>
+
+                              <div class="dop-options-card__price">
+                                 <div class="price">
+                                    <span class="price__old">{{oldPrice}} ₽</span>
+                                    <span class="price__current">{{price}}</span> <span> ₽</span>
+                                    <span class="price__month"> в месяц</span>
+                                 </div>
+
+                                 <label class="switch">
+                                    <input type="checkbox" data-equip-name="SIM">
+                                    <span class="round"></span>
+                                 </label>
+                              </div>
+
+                           </li>
+                        {{/h-if}}
+                     {{/each}}
+
+                  </ul>
+
+                  <div class="tariff-modal__download-pdf download-pdf">
+                     <a href="#" class="download-pdf__icon">
+                        <img src="img/svg/download-pdf.svg" alt="img">
+                     </a>
+                     <div class="download-pdf__text">
+                        <a href="#">Скачать подробную информацию о тарифе</a>
+                        <span>(PDF, 0.4 MB)</span>
+                     </div>
+                  </div>
+
+               </div>
+
+            </div>
+
+            <div class="tariff-modal__footer wrapp">
+               <div class="tariff-modal__price price">
+                  {{#if oldPrice}}
+                     <span class="price__old">{{oldPrice}} ₽</span>
+                  {{/if}}
+                  <span class="price__current">{{price}}</span>
+                  <span class="price__month"> ₽ в месяц</span>
+                  {{#if iconInfo}}
+                     <div class="price__icon price__icon_all" aria-expanded="false"></div>
+                  {{/if}}
+               </div>
+
+               <button type="button"
+                       class="tariff-modal__price-btn btn"
+                       data-toggle="modal"
+                       data-target="#order"
+                       data-view="modal_{{dataView}}"
+                       onclick="openOrder(
+                          '{{dataView}}',
+                          '',
+                          '#{{id}}',
+                          '{{tariffId}}',
+                          'Объединяй! {{name}}')">Заказать
+               </button>
+               <p class="tariff-modal__price-desc">с учетом выбранных опций</p>
+            </div>
+
+         </div>
+
+      </div>
+   </div>
+{{/each}}
+

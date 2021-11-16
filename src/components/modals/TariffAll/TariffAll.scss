@@ -1,0 +1,34 @@
+.tariff-all {
+
+   .modal-content {
+      > * {
+         $br: 10px;
+         overflow: hidden;
+
+         &:first-child {
+            border-radius: $br $br 0 0;
+         }
+
+         &:last-child {
+            border-radius: 0 0 $br $br;
+         }
+      }
+   }
+
+   .tariff-modal__items,
+   .tariff-modal__item {
+      margin: 0;
+   }
+
+   .tariff-modal__item {
+      padding-top: 50px;
+      padding-bottom: 75px;
+   }
+
+   .item-modal__options {
+      li:first-child {
+         border-top: 1px solid #D8D8D8;
+      }
+   }
+
+}

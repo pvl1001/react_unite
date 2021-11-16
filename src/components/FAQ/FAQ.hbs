@@ -1,0 +1,39 @@
+<section class="faq">
+   <div class="wrapper">
+      <h1 class="faq__title" data-view="block_faq">Дополнительная информация:</h1>
+
+      <div id="accordion1" class="accordion">
+         {{#each FAQ}}
+            <div>
+               {{#each col}}
+                  <div class="accordion__item">
+                     <div class="accordion__header collapsed"
+                          data-toggle="collapse"
+                          data-target="#collapse{{@../index}}{{@index}}"
+                          aria-controls="collapse{{@../index}}{{@index}}"
+                          aria-expanded="false">
+                        {{question}}
+                     </div>
+                     <div id="collapse{{@../index}}{{@index}}" class="collapse" data-parent="#accordion1">
+                        <div class="card-body">
+                           {{{answer}}}
+                        </div>
+                     </div>
+                  </div>
+
+                  {{#h-if @../last '&&' @last}}
+                     <div class="accordion__item">
+                        <a href="https://help.home.megafon.ru/" style="color:#333;">
+                           <div class="accordion__header collapsed">
+                              Помощь и обслуживание клиентов
+                           </div>
+                        </a>
+                     </div>
+                  {{/h-if}}
+
+               {{/each}}
+            </div>
+         {{/each}}
+      </div>
+   </div>
+</section>

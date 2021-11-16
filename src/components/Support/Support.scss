@@ -1,0 +1,64 @@
+.support {
+   box-shadow: 0 0 16px #00000033;
+   position: relative;
+   font-size: 12px;
+
+   .wrapper {
+      padding: 0 40px;
+
+      @media (max-width: 1279px) {
+         padding: 0 32px;
+      }
+
+      @media (max-width: 1023px) {
+         padding: 0 24px;
+      }
+
+      @media (max-width: 767px) {
+         padding: 0 16px;
+      }
+   }
+
+   &__container {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+   }
+
+   &__phone {
+      margin-right: 17px;
+
+      a {
+         text-decoration: none;
+         color: #333;
+         font-weight: 500;
+      }
+   }
+
+   &__icon {
+      margin-right: 17px;
+
+      svg {
+         width: 17px;
+         fill: var(--mf-green)
+      }
+
+   }
+
+   &__link {
+      position: relative;
+      margin-right: 8px;
+
+      a:hover {
+         color: var(--mf-blue)
+      }
+
+      svg {
+         position: absolute;
+         right: -8px;
+         top: -1px;
+         width: 5px;
+      }
+   }
+}

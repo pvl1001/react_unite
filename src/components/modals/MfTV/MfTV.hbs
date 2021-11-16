@@ -1,0 +1,82 @@
+{{#each tariffs}}
+   <div class="modal tariff-modal mftv mftv_{{id}}" id="mftv-{{id}}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+      <div class="tariff-modal__btn-close modal-dialog">
+         <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-dialog modal-dialog-centered" role="document">
+
+         <div class="modal-content">
+
+            <div class="tariff-modal__title wrapp" data-view="mftv_{{id}}_start">
+               <h1>МегаФон ТВ</h1>
+            </div>
+
+
+            <div class="tariff-modal__container">
+
+               <ul class="tariff-modal__items">
+                  {{#each mftv}}
+                     <li class="tariff-modal__item item-modal wrapp">
+
+                        <img src="img/svg/mftv_{{icon}}.svg"
+                             class="item-modal__logo item-modal__logo_{{icon}}">
+
+                        <p class="item-modal__desc">{{desc}}</p>
+
+                     </li>
+                  {{/each}}
+               </ul>
+
+               <div class="mftv__faq wrapp">
+                  <h2 class="mftv__faq-title">Часто задаваемые вопросы</h2>
+
+                  <div id="accordion-faq-{{id}}" class="accordion">
+
+                     {{#each ../faqMftv}}
+                        <div class="accordion__item">
+                           <div class="accordion__header collapsed"
+                                data-toggle="collapse"
+                                data-target="#collapse-mftv-{{../id}}-{{@index}}"
+                                aria-controls="collapse-mftv-{{../id}}-{{@index}}"
+                                aria-expanded="false">
+                              {{question}}
+                           </div>
+                           <div id="collapse-mftv-{{../id}}-{{@index}}" class="collapse"
+                                data-parent="#accordion-faq-{{../id}}">
+                              <div class="card-body">
+                                 {{{answer}}}
+                              </div>
+                           </div>
+                        </div>
+                     {{/each}}
+
+                  </div>
+
+                  <button type="button"
+                          class="mftv__faq-btn btn"
+                          onclick="openOrder(
+                             '{{dataView}}',
+                             '.slider__card_{{id}} .new-price',
+                             '',
+                             '{{tariffId}}',
+                             'Объединяй! {{name}}')"
+                          data-target="#order"
+                          data-toggle="modal"
+                          data-view="mftv_{{id}}_end">Подключить
+                  </button>
+
+               </div>
+
+               <div></div>
+            </div>
+
+
+         </div>
+
+      </div>
+   </div>
+{{/each}}

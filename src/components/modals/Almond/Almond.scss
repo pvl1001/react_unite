@@ -1,0 +1,496 @@
+.modalAlmond {
+   .modal-dialog {
+      max-width: 1130px;
+      height: auto;
+   }
+
+   .modal-content {
+      height: auto;
+      padding: 45px 75px 45px;
+      max-height: 825px;
+      flex-direction: row;
+   }
+
+   &__banners {
+      width: 66%;
+      max-width: 647px;
+      overflow-y: auto;
+      padding-right: 20px;
+
+      @media (hover: hover) {
+         // firefox
+         scrollbar-color: #DDDDDD #EDEDED; /* «цвет ползунка» «цвет полосы скроллбара»*/
+         scrollbar-width: thin; /* толщина */
+
+         &::-webkit-scrollbar {
+            width: 6px; /* ширина для вертикального скролла */
+            background-color: #EDEDED;
+            margin-right: -15px;
+            position: absolute;
+            right: 0;
+         }
+
+         /* ползунок скроллбара */
+         &::-webkit-scrollbar-thumb {
+            background-color: #DDDDDD;
+            height: 350px;
+            width: 6px;
+            margin-right: -15px;
+         }
+
+         &::-webkit-scrollbar-thumb:hover {
+            background-color: #333333;
+         }
+      }
+   }
+
+   &__banners-title {
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: 700;
+      margin-bottom: 29px !important;
+   }
+
+   &__banner {
+      border-radius: 10px;
+      background-color: #EDEDED;
+      min-height: 370px;
+      margin-bottom: 20px;
+
+      &:last-child {
+         margin-bottom: 0;
+      }
+
+      img {
+         max-width: 100%;
+         max-height: inherit;
+      }
+   }
+
+   &__banner-text {
+      h3 {
+         margin-bottom: 15px !important;
+
+         span {
+            color: var(--mf-green);
+         }
+      }
+
+   }
+
+   &__banner_easy {
+      padding: 0 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .modalAlmond__banner-text {
+         max-width: 205px;
+         width: 50%;
+      }
+
+      .modalAlmond__banner-img {
+         width: 50%;
+         align-self: flex-end;
+         max-width: 269px;
+      }
+   }
+
+   &__banner_their {
+      padding: 0 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .modalAlmond__banner-text {
+         width: 42%;
+      }
+
+      .modalAlmond__banner-img {
+         width: 50%;
+         max-width: 307px;
+      }
+   }
+
+   &__banner_around {
+      padding: 38px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+
+      .modalAlmond__banner-text {
+         max-width: 390px;
+         text-align: center;
+      }
+
+      .modalAlmond__banner-img {
+         position: absolute;
+         bottom: 0;
+         width: 710px;
+      }
+   }
+
+   &__banner_habits {
+      padding: 0 38px;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+
+      .modalAlmond__banner-text {
+         max-width: 218px;
+         width: 50%;
+      }
+
+      .modalAlmond__banner-img {
+         width: 50%;
+         align-self: flex-end;
+         max-width: 257px;
+      }
+   }
+
+   &__banner_smartphone {
+      padding: 38px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+
+      .modalAlmond__banner-text {
+         max-width: 543px;
+         text-align: center;
+
+         p {
+            max-width: 471px;
+            margin: 0 auto;
+         }
+      }
+
+      .modalAlmond__banner-img {
+         position: absolute;
+         bottom: 0;
+         width: 290px;
+      }
+   }
+
+   &__price {
+      flex-grow: 1;
+      padding-left: 39px;
+      display: flex;
+      flex-direction: column;
+   }
+
+   &__price-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 15px !important;
+   }
+
+   &__price-router {
+      margin-bottom: 24px;
+   }
+
+   &__price-device {
+      margin-bottom: 29px;
+      flex-grow: 1;
+   }
+
+   &__price-price {
+      margin: 0 auto;
+   }
+
+   .price {
+      .new-price,
+      .new-price + span {
+         font-size: 32px;
+         font-weight: 600;
+      }
+   }
+
+   &__price-router-title {
+      font-size: 15px;
+      line-height: 20px;
+      font-weight: 500;
+      margin-bottom: 3px !important;
+   }
+
+   &__price-device-title {
+      font-weight: 500;
+      margin-bottom: 10px !important;
+   }
+
+   &__price-link {
+      display: inline-block;
+      font-size: 12px;
+      line-height: 20px;
+      color: var(--mf-blue);
+      font-weight: 400;
+      margin-bottom: 10px;
+      cursor: pointer;
+   }
+
+   &__price-btn {
+      margin: 15px auto 0;
+      width: 100%;
+      justify-content: center;
+   }
+
+   .card-price {
+      border-radius: 10px;
+      border: 1px solid #DDD;
+      padding: 11px 15px;
+      display: flex;
+      margin-bottom: 10px;
+
+      &:last-child {
+         margin-bottom: 0;
+      }
+
+      &:hover {
+         border-color: #333;
+         cursor: pointer;
+      }
+
+      &__img {
+         flex: 0 0 35px;
+         text-align: center;
+         margin-right: 15px;
+         z-index: 0;
+         white-space: nowrap;
+
+         img {
+            max-width: 100%;
+            max-height: 35px;
+            vertical-align: middle;
+         }
+
+         &:before {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+         }
+      }
+
+      &__text {
+         flex-grow: 1;
+         line-height: 23px;
+      }
+
+      &__text-name {
+         font-weight: 400;
+      }
+
+      &__text-price {
+         display: flex;
+         justify-content: space-between;
+      }
+
+      &__cnt {
+         display: none;
+         font-weight: 400;
+         color: #33333380;
+      }
+
+      &.active {
+         border-color: var(--mf-green);
+
+         .card-price__cnt {
+            display: block;
+         }
+      }
+
+   }
+
+   .d-mobile {
+      display: none;
+   }
+
+
+   @media (max-width: 1279px) {
+      background-color: #fff;
+
+      .modal-dialog {
+         height: 100%;
+         margin: 0;
+         max-width: none;
+         width: 100%;
+      }
+
+      .modal-content {
+         padding: 45px 24px 45px;
+         height: 100%;
+         justify-content: center;
+         min-height: 100vh;
+         width: 100%;
+      }
+   }
+   @media (max-width: 1023px) {
+      .modal-content {
+         flex-wrap: wrap;
+         max-height: none;
+      }
+
+      &__banners-title_head.d-mobile {
+         display: block;
+         width: 100%;
+      }
+
+      &__banners {
+         width: 100%;
+         display: flex;
+         position: relative;
+         margin-bottom: 25px;
+         overflow-y: hidden;
+
+         .modalAlmond__banners-title_head {
+            display: none;
+         }
+
+         @media (hover: hover) {
+            padding-right: 0;
+            // firefox
+            scrollbar-color: #DDDDDD #EDEDED; /* «цвет ползунка» «цвет полосы скроллбара»*/
+            scrollbar-width: thin; /* толщина */
+
+            &::-webkit-scrollbar {
+               height: 6px; /* ширина для вертикального скролла */
+               background-color: transparent;
+               margin-top: 15px;
+               position: absolute;
+               right: 0;
+            }
+
+            /* ползунок скроллбара */
+            &::-webkit-scrollbar-thumb {
+               background-color: #DDDDDD;
+               width: 30%;
+               height: 6px;
+               margin-top: 15px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+               background-color: #333333;
+            }
+         }
+      }
+
+      &__banner {
+         width: 622px;
+         flex-shrink: 0;
+         margin: 0 16px 0 0;
+
+         &:last-child {
+            margin: 0;
+         }
+      }
+
+      &__price {
+         padding-left: 0;
+      }
+
+      &__price-cards {
+         display: grid;
+         grid: auto / 1fr 1fr;
+         grid-gap: 10px;
+      }
+
+      .card-price {
+         margin: 0;
+      }
+
+      &__price-btn {
+         max-width: 296px;
+      }
+
+   }
+   @media (max-width: 767px) {
+
+      .modal-content {
+         padding: 45px 16px 45px;
+
+      }
+
+      &__price-cards {
+         grid: auto / 1fr;
+      }
+
+      &__banner {
+         width: 270px;
+         height: 529px;
+         padding: 0 20px;
+         display: block;
+         position: relative;
+      }
+
+      &__banner-text {
+         width: 100% !important;
+         max-width: none !important;
+
+         h3 {
+            margin-bottom: 18px !important;
+         }
+      }
+
+      &__banners-title:not(&__banners-title_head) {
+         font-size: 28px;
+         line-height: 36px;
+      }
+
+      &__banner_easy {
+         padding: 24px 20px 0;
+
+         .modalAlmond__banner-img {
+            width: 186px;
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 93px);
+         }
+      }
+
+      &__banner_their {
+         .modalAlmond__banner-img {
+            width: 100%;
+            padding: 50px 0 18px;
+         }
+      }
+
+      &__banner_around {
+         .modalAlmond__banner-img {
+            width: 640px;
+            left: calc(50% - 320px);
+         }
+
+         .modalAlmond__banner-text {
+            width: 100%;
+            padding: 83px 8px 0;
+         }
+      }
+
+      &__banner_habits {
+         padding-top: 33px;
+
+         .modalAlmond__banner-img {
+            position: absolute;
+            bottom: 0;
+            width: 178px;
+            left: calc(50% - 87px);
+         }
+
+      }
+
+      &__banner_smartphone {
+         padding-top: 34px;
+
+         .modalAlmond__banner-img {
+            width: 188px;
+            left: calc(50% - 94px);
+         }
+      }
+
+   }
+
+
+}
+
