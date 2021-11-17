@@ -43,6 +43,7 @@ a.btn,
    background-color: var(--mf-green);
 
    &:hover {
+      color: #FFFFFF;
       background-color: #00EE6F;
    }
 
@@ -89,12 +90,15 @@ button.back {
    }
 
    .modal-content {
+      border: 0;
+      border-radius: 10px;
+   }
+
+   .modal-body {
       padding: 47px 78px 54px;
       font-size: 15px;
       line-height: 20px;
       font-weight: 500;
-      border: 0;
-      border-radius: 10px;
    }
 
    .modal-close {
@@ -120,7 +124,7 @@ button.back {
    //      position: relative;
    //   }
    //
-   //   .modal-content {
+   //   .modal-body {
    //      min-height: 100vh;
    //      padding: 60px 112px;
    //      width: 100%;
@@ -143,7 +147,7 @@ button.back {
    //      position: relative;
    //   }
    //
-   //   .modal-content {
+   //   .modal-body {
    //      min-height: 100vh;
    //      padding: 0 30px;
    //      width: 100%;
@@ -167,7 +171,7 @@ button.back {
    //      flex-direction: column;
    //   }
    //
-   //   .modal-content {
+   //   .modal-body {
    //      min-height: 100vh;
    //      padding: 95px 30px 80px;
    //      width: 100%;

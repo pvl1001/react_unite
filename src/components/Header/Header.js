@@ -1,10 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Header.scss'
 import head_banner_mob from '../../img/pic/head_banner_mob.png'
 import head_banner_tap from '../../img/pic/head_banner_tap.png'
 import head_banner_desctop from '../../img/pic/head_banner_desctop.png'
+import ModalOrder from "../modals/Order/ModalOrder";
 
 export default function Header() {
+   const [modalStatus, setModalStatus] = useState(false)
+
+   const handleShow = () => setModalStatus( true )
+   const handleHide = () => setModalStatus( false )
+
    return (
       <header className="header">
          <div className="wrapper">
@@ -16,12 +22,10 @@ export default function Header() {
                   </h1>
                   <p>В тарифах «Объединяй!»</p>
                   <div className="header__btns">
-                     <button
+                     <button onClick={handleShow}
                              type="button"
                              className="btn btn-fiolet"
                              data-view="first_banner"
-                             data-target="#order"
-                             data-toggle="modal"
                      >Подключить
                      </button>
                      <span data-target="#for-their" data-toggle="modal"
@@ -37,6 +41,9 @@ export default function Header() {
                </div>
             </div>
          </div>
+
+
+         <ModalOrder show={modalStatus} onHide={handleHide}/>
       </header>
    )
 }

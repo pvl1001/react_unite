@@ -4,7 +4,7 @@
       justify-content: center;
    }
 
-   .modal-content {
+   .modal-body {
       padding: 81px 125px 73px;
 
       &__title {
@@ -87,7 +87,7 @@
 
          input.valid {
             border: 1px solid var(--mf-green);
-            background: url('../img/svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat;
+            background: url('../../../img/svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat;
 
             + label {
                display: block;
@@ -148,7 +148,7 @@
             display: flex;
             align-items: center;
             border-radius: 0;
-            background: url('../img/svg/arrow-select.svg') calc(100% - 20px) 50% / 12px no-repeat;
+            background: url('../../../img/svg/arrow-select.svg') calc(100% - 20px) 50% / 12px no-repeat;
             border: 1px solid #ddd;
 
             &:hover {
@@ -197,7 +197,7 @@
                   right: 0;
                   left: auto;
                   height: 100%;
-                  background: url('../img/svg/check.svg') center / 15px no-repeat;
+                  background: url('../../../img/svg/check.svg') center / 15px no-repeat;
                }
             }
 
@@ -231,9 +231,11 @@
    @media (max-width: 1279px) {
       background-color: #fff;
 
-      .modal-content {
+      .modal-body {
          padding: 60px 275px;
          height: 100vh;
+         display: flex;
+         flex-direction: column;
          justify-content: center;
       }
 
@@ -273,7 +275,7 @@
    }
 
    @media (max-width: 1023px) {
-      .modal-content {
+      .modal-body {
          padding: 60px 122px;
       }
 
@@ -321,7 +323,7 @@
 
    @media (max-width: 767px) {
 
-      .modal-content {
+      .modal-body {
          padding: 95px 30px 80px;
       }
 
