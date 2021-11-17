@@ -15,7 +15,7 @@ const tariffs = [
       calls: 2100,
       tvLength: '188 каналов',
       mark: 'Акция',
-      mftvChannels: [
+      mftv: [
          {
             name: "START",
             icon: "start",
@@ -2005,7 +2005,7 @@ const tariffs = [
       homeWeb: 300,
       calls: 1500,
       tvLength: '',
-      mftvChannels: [
+      mftv: [
          {
             name: "START",
             icon: "start",
@@ -2028,7 +2028,7 @@ const tariffs = [
       homeWeb: 500,
       calls: 3000,
       tvLength: '250 каналов',
-      mftvChannels: [
+      mftv: [
          {
             name: "START",
             icon: "start",
