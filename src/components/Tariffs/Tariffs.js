@@ -4042,12 +4042,31 @@ export default function Tariffs() {
    const [collapseGroup, setCollapseGroup] = React.useState(false)
    const [collapseChannels, setCollapseChannels] = React.useState([])
 
-   const settings = {
+   const settingsSlider = {
       dots: true,
       infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
+      responsive: [
+         {
+            breakpoint: 1280,
+            settings: {
+               slidesToShow: 3,
+            }
+         }, {
+            breakpoint: 1024,
+            settings: {
+               slidesToShow: 2,
+            }
+         }, {
+            breakpoint: 768,
+            settings: {
+               slidesToShow: 1,
+               arrows: false,
+            }
+         }
+      ]
    }
 
    return (
@@ -4055,7 +4074,7 @@ export default function Tariffs() {
          <div className="wrapper">
             <h1 className="tariffs__title">Тарифы «Объединяй!»</h1>
 
-            <Slider className="slider" {...settings}>
+            <Slider className="slider" {...settingsSlider}>
                {
                   tariffs.map( (tariff, i) => (
                      <TariffCard key={tariff.id}
