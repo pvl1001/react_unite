@@ -1,7 +1,6 @@
 ﻿# mf-react
- ```
+
 https://pvl1001.github.io/mf_react/
-```
 
 ```
 Запустить проект:
