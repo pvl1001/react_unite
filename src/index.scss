@@ -943,19 +943,22 @@ form {
 .accordion {
 
    &__item {
-      font-size: 15px;
-      line-height: 24px;
-      font-weight: 500;
       border-bottom: 1px solid #DDDDDD;
    }
 
-   &__header {
+   &-button {
       padding: 0 72px 0 24px;
       cursor: pointer;
       position: relative;
       height: 72px;
       display: flex;
       align-items: center;
+      font-size: 15px;
+      line-height: 24px;
+      font-weight: 500;
+      background-color: #fff !important;
+      color: #333 !important;
+      box-shadow: none !important;
 
       &:after {
          content: '';
@@ -964,8 +967,10 @@ form {
          top: 0;
          width: 13px;
          height: 100%;
-         background: url('./img/svg/arrow.svg') center / contain no-repeat;
+         background: url('./img/svg/arrow.svg') center / contain no-repeat !important;
          transform: rotate(180deg);
+         transition: none;
+         
       }
 
       &.collapsed:after {
@@ -993,14 +998,14 @@ form {
 
    @media (max-width: 1279px) {
 
-      &__header {
+      &-button {
          height: auto;
          padding: 24px 72px 24px 24px;
       }
    }
 
    @media (max-width: 767px) {
-      &__header {
+      &-button {
          padding: 24px 72px 24px 16px;
       }
    }

@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import Nav from "../components/Nav/Nav";
 import Tariffs from "../components/Tariffs/Tariffs";
 import Footer from "../components/Footer/Footer";
+import FAQ from "../components/FAQ/FAQ";
 
 
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
          <Header/>
          <main>
             <Tariffs/>
-
+            <FAQ/>
          </main>
          <Footer/>
       </>
