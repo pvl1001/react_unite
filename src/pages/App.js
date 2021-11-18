@@ -4,6 +4,7 @@ import Nav from "../components/Nav/Nav";
 import Tariffs from "../components/Tariffs/Tariffs";
 import Footer from "../components/Footer/Footer";
 import FAQ from "../components/FAQ/FAQ";
+import AppBanner from "../components/AppBanner/AppBanner";
 
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
          <Header/>
          <main>
             <Tariffs/>
+            <AppBanner/>
             <FAQ/>
          </main>
          <Footer/>
