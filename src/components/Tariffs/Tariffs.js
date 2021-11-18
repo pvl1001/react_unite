@@ -4035,12 +4035,12 @@ const tariffs = [
    },
 ]
 
-const premium = tariffs.find(el => el.id === 'premium')
+const premium = tariffs.find( el => el.id === 'premium' )
 
 
 export default function Tariffs() {
-   const [collapseGroup, setCollapseGroup] = React.useState(false)
-   const [collapseChannels, setCollapseChannels] = React.useState([])
+   const [collapseGroup, setCollapseGroup] = React.useState( false )
+   const [collapseChannels, setCollapseChannels] = React.useState( [] )
 
    const settingsSlider = {
       dots: true,
