@@ -65,5 +65,6 @@ export default function ModalOrder (props) {
 }
 
 ModalOrder.propTypes = {
-   modalOrder: PropTypes.bool
+   show: PropTypes.bool,
+   onHide: PropTypes.func
 }
