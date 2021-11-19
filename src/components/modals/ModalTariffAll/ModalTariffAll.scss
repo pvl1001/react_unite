@@ -1,5 +1,9 @@
 .tariff-all {
 
+   ul {
+      padding-left: 0;
+   }
+
    .modal-body {
       > * {
          $br: 10px;

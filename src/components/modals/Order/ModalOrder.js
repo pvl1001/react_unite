@@ -22,9 +22,9 @@ export default function ModalOrder (props) {
 
    return (
       <Modal centered
+             animation={false}
              show={props.show}
              onHide={props.onHide}
-             animation={false}
              className="order-modal">
             <Modal.Body className="requisition" >
                <button type="button" className="modal-close" onClick={props.onHide}/>

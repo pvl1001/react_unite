@@ -4,7 +4,7 @@ import films from '../../img/pic/films.png'
 import sales from '../../img/pic/sales.png'
 import ModalOrder from "../modals/Order/ModalOrder";
 import {useState} from "react";
-import ModalTariffAll from "../modals/TariffAll/ModalTariffAll";
+import ModalTariffAll from "../modals/ModalTariffAll/ModalTariffAll";
 
 
 export default function WhatElse() {
