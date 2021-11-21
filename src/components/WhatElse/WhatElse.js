@@ -9,7 +9,7 @@ import ModalTariffAll from "../modals/ModalTariffAll/ModalTariffAll";
 
 export default function WhatElse() {
 
-   const [showModalOrder, setShowModalOrder] = useState( false )
+   const [statusModalOrder, setStatusModalOrder] = useState( false )
    const [showModalWhatElse, setShowModalWhatElse] = useState( false )
 
    const data = [
@@ -65,15 +65,14 @@ export default function WhatElse() {
 
 
                      <span className="card-what-else__link link"
-                           onClick={() => setShowModalOrder( true )}>Подключить</span>
+                           onClick={() => setStatusModalOrder( true )}>Подключить</span>
                   </div>
 
                ) )}
             </div>
          </div>
 
-         <ModalOrder show={showModalOrder}
-                     onHide={() => setShowModalOrder( false )}/>
+         <ModalOrder status={{statusModalOrder, setStatusModalOrder}}/>
 
          <ModalTariffAll show={showModalWhatElse} onHide={() => setShowModalWhatElse( false )}/>
       </section>

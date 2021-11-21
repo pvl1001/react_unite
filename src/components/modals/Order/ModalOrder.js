@@ -3,7 +3,16 @@ import {Modal} from "react-bootstrap";
 import PropTypes from "prop-types";
 import {useState} from "react";
 
+
+ModalOrder.propTypes = {
+   status: PropTypes.object,
+}
+
+
 export default function ModalOrder (props) {
+
+   const handleHide = () => props.status.setStatusModalOrder( false )
+
 
    const [nameValue, setNameValue] = useState('')
    const [phoneValue, setPhoneValue] = useState('')
@@ -23,11 +32,11 @@ export default function ModalOrder (props) {
    return (
       <Modal centered
              animation={false}
-             show={props.show}
-             onHide={props.onHide}
+             show={props.status.statusModalOrder}
+             onHide={handleHide}
              className="order-modal">
             <Modal.Body className="requisition" >
-               <button type="button" className="modal-close" onClick={props.onHide}/>
+               <button type="button" className="modal-close" onClick={handleHide}/>
 
                <h2>Заявка на подключение</h2>
                <form onSubmit={handleSubmit} className="needs-validation" id="orderForm">
@@ -62,9 +71,4 @@ export default function ModalOrder (props) {
       </Modal>
    )
 
-}
-
-ModalOrder.propTypes = {
-   show: PropTypes.bool,
-   onHide: PropTypes.func
 }

@@ -6,10 +6,9 @@ import head_banner_desctop from '../../img/pic/head_banner_desctop.png'
 import ModalOrder from "../modals/Order/ModalOrder";
 
 export default function Header() {
-   const [modalStatus, setModalStatus] = useState(false)
 
-   const handleShow = () => setModalStatus( true )
-   const handleHide = () => setModalStatus( false )
+   const [statusModalOrder, setStatusModalOrder] = useState(false)
+
 
    return (
       <header className="header">
@@ -22,7 +21,7 @@ export default function Header() {
                   </h1>
                   <p>В тарифах «Объединяй!»</p>
                   <div className="header__btns">
-                     <button onClick={handleShow}
+                     <button onClick={() => setStatusModalOrder(true)}
                              type="button"
                              className="btn btn-fiolet"
                              data-view="first_banner"
@@ -43,7 +42,7 @@ export default function Header() {
          </div>
 
 
-         <ModalOrder show={modalStatus} onHide={handleHide}/>
+         <ModalOrder status={{statusModalOrder, setStatusModalOrder}}/>
       </header>
    )
 }

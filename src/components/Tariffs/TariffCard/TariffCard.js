@@ -8,10 +8,9 @@ import ModalOrder from "../../modals/Order/ModalOrder";
 
 
 export default function TariffCard({tariff, collapse, premium}) {
-   const [modalStatus, setModalStatus] = useState(false)
 
-   const openModal = () => setModalStatus( true )
-   const closeModal = () => setModalStatus( false )
+   const [statusModalOrder, setStatusModalOrder] = useState(false)
+
 
    const progressBar = [
       {
@@ -76,12 +75,12 @@ export default function TariffCard({tariff, collapse, premium}) {
                <div className="price__icon {{#if (iconInfo @index)}}price__icon_all{{/if}}"/>
 
             </div>
-            <button className="price-card__btn btn" onClick={openModal}>Подключить</button>
+            <button className="price-card__btn btn" onClick={() => setStatusModalOrder(true)}>Подключить</button>
             <div className="link">Подробнее</div>
          </div>
 
 
-         <ModalOrder show={modalStatus} onHide={closeModal}/>
+         <ModalOrder status={{statusModalOrder, setStatusModalOrder}}/>
       </div>
    )
 }
