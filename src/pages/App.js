@@ -8,6 +8,7 @@ import AppBanner from "../components/AppBanner/AppBanner";
 import WhatElse from "../components/WhatElse/WhatElse";
 import Support from "../components/Support/Support";
 import Equipments from "../components/Equipments/Equipments";
+import CheckAddress from "../components/CheckAddress/CheckAddress";
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
          <Header/>
          <main>
             <Tariffs/>
+            <CheckAddress/>
             <Equipments/>
             <WhatElse/>
             <AppBanner/>
