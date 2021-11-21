@@ -25,5 +25,4 @@ export default function MfTv({mftv}) {
 
 MfTv.propTypes = {
    mftv: PropTypes.array,
-   callbackfn: PropTypes.func
 }
