@@ -1,10 +1,18 @@
 import * as PropTypes from "prop-types";
 import ModalOrder from "../../modals/Order/ModalOrder";
 import {useState} from "react";
+import ModalEquipment from "../../modals/ModalEquipment/ModalEquipment";
+
+
+EqCard.propTypes = {
+   eq: PropTypes.object,
+}
+
 
 export default function EqCard(props) {
 
    const [statusModalOrder, setStatusModalOrder] = useState(false)
+   const [statusModalEquipment, setStatusModalEquipment] = useState(false)
 
    const styleMark = (mark) => mark === 'ГОД СЕРИАЛОВ В ПОДАРОК' && "var(--mf-orange)"
 
@@ -23,7 +31,7 @@ export default function EqCard(props) {
          <div className="equipments-card__info info-card">
 
             <div className="info-card__img">
-               <img src={props.eq.img} alt={props.eq.img}/>
+               <img src={props.eq.img} alt={props.eq.name}/>
             </div>
             <h2 className="info-card__title">{props.eq.name}</h2>
             <p className="info-card__text">{props.eq.text}</p>
@@ -47,16 +55,14 @@ export default function EqCard(props) {
 
             {props.eq.id === "eq-almond"
                ? <div className="link almond">Подробнее</div>
-               : <div className="link">Подробнее</div>
+               : <div className="link" onClick={()=> setStatusModalEquipment(true)}>Подробнее</div>
             }
 
          </div>
 
+
+         <ModalEquipment status={{statusModalEquipment, setStatusModalEquipment}} eq={props.eq}/>
          <ModalOrder status={{statusModalOrder, setStatusModalOrder}} />
       </div>
    )
-}
-
-EqCard.propTypes = {
-   eq: PropTypes.object,
 }
