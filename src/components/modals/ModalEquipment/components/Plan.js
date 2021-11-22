@@ -2,14 +2,12 @@ import PropTypes from 'prop-types'
 
 
 Plan.propTypes = {
-   plan: PropTypes.object,
+   eq: PropTypes.object,
    handleChange: PropTypes.func,
 }
 
 
 export default function Plan(props) {
-
-
 
    return (
       <div className="performance__radio">
@@ -18,19 +16,20 @@ export default function Plan(props) {
          </p>
 
          <div className="option-radio">
+            {props.eq.plan.map((el, i) => (
+               <label key={i} className="option-radio__radio-btn">
 
-            <label className="option-radio__radio-btn">
-               <input name="radio-plan" id="plan-36"
-                      type="radio" onChange={props.handleChange} value={props.plan.plan_36} defaultChecked/>
-               <label htmlFor="plan-36"/>
-               <span>36 мес</span>
-            </label>
+                  <input name="radio-plan"
+                         id={`plan-${i}`}
+                         type="radio"
+                         onChange={() => props.handleChange(props.eq.id)}
+                         value={el.value}
+                         checked={el.checked}
+                  />
 
-            <label className="option-radio__radio-btn">
-               <input name="radio-plan" id="plan-24"
-                      type="radio" onChange={props.handleChange} value={props.plan.plan_24}/>
-               <label htmlFor="plan-24"/><span>24 мес</span>
-            </label>
+                  <label htmlFor={`plan-${i}`}/><span>{el.name}</span>
+               </label>
+            ))}
 
          </div>
       </div>)

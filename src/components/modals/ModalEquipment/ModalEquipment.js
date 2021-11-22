@@ -14,18 +14,15 @@ ModalEquipment.propTypes = {
 
 
 export default function ModalEquipment(props) {
-
    const [showModalOrder, setShowModalOrder] = useState( false )
-   const [price, setPrice] = useState( props.eq.plan?.plan_36 )
+   const price = props.eq.plan?.find(el => el.checked).value
 
    const handleHide = () => props.status.setStatusModalEquipment( false )
-   const handleChange = (e) => setPrice( e.target.value )
-
 
    return (
       <Modal centered
              animation={false}
-             className="modal performance"
+             className="performance"
              show={props.status.statusModalEquipment}
              onHide={handleHide}>
          <Modal.Body>
@@ -52,7 +49,7 @@ export default function ModalEquipment(props) {
                      {props.eq.params.map( (param, i) => (
                         <li key={i}>
                            {param.icon && (
-                              <img src={require( `../../../img/svg/${param.icon}` ).default} alt={param.icon}/>)}
+                              <img src={param.icon} alt="icon"/>)}
                            <p dangerouslySetInnerHTML={{__html: param.text}}/>
                         </li>)
                      )}
@@ -72,7 +69,7 @@ export default function ModalEquipment(props) {
                </picture>
             </div>
 
-            <Plan plan={props.eq.plan} handleChange={handleChange}/>
+            <Plan eq={props.eq} handleChange={props.handleChangePlan}/>
 
             <div className="modal-order">
                <div className="modal-order__text"><p><span>{price}</span> ₽ в месяц</p></div>

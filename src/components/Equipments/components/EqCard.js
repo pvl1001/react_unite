@@ -44,7 +44,7 @@ export default function EqCard(props) {
                <span className="new-price">
                               {
                                  props.eq.plan
-                                    ? <>от {props.eq.plan.plan_36}</>
+                                    ? <>от {props.eq.plan[0].value}</>
                                     : <>{props.eq.price}</>
                               }
                            </span><span className="always">₽</span>
@@ -61,7 +61,9 @@ export default function EqCard(props) {
          </div>
 
 
-         <ModalEquipment status={{statusModalEquipment, setStatusModalEquipment}} eq={props.eq}/>
+         <ModalEquipment status={{statusModalEquipment, setStatusModalEquipment}}
+                         eq={props.eq}
+                         handleChangePlan={props.handleChangePlan}/>
          <ModalOrder status={{statusModalOrder, setStatusModalOrder}} />
       </div>
    )
