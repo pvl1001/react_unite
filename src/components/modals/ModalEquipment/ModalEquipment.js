@@ -9,7 +9,8 @@ import Plan from "./components/Plan";
 
 ModalEquipment.propTypes = {
    status: PropTypes.object,
-   eq: PropTypes.object
+   eq: PropTypes.object,
+   handleChangePlan: PropTypes.func,
 }
 
 
