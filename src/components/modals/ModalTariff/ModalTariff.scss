@@ -3,6 +3,10 @@
    line-height: 20px;
    font-weight: 500;
 
+   ul {
+      padding-left: 0;
+   }
+
    &_premium {
       .tariff-modal__title {
          background-color: #444189;

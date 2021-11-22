@@ -3,7 +3,7 @@ import './Header.scss'
 import head_banner_mob from '../../img/pic/head_banner_mob.png'
 import head_banner_tap from '../../img/pic/head_banner_tap.png'
 import head_banner_desctop from '../../img/pic/head_banner_desctop.png'
-import ModalOrder from "../modals/Order/ModalOrder";
+import ModalOrder from "../modals/ModalOrder/ModalOrder";
 
 export default function Header() {
 

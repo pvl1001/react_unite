@@ -12,6 +12,10 @@ export default function TvChannels(props) {
       props.collapse.setCollapseChannels( newArr )
    }
 
+   function handleCollapseChannels() {
+      props.collapse.setCollapseGroup( !props.collapse.collapseGroup )
+   }
+
 
    return (
       <div className="block-progress__progress-bar info-progress-bar">
@@ -22,11 +26,10 @@ export default function TvChannels(props) {
 
                   <div className="block-progress__desc_icon tv"/>
 
-                  <a onClick={() => props.collapse.setCollapseGroup( !props.collapse.collapseGroup )}
+                  <a onClick={handleCollapseChannels}
                      aria-controls="tv-group"
                      aria-expanded={props.collapse.collapseGroup}>
-                     {props.tvLength}
-                  </a>
+                     {props.tvLength}</a>
 
                </div>
             </div>
@@ -40,7 +43,7 @@ export default function TvChannels(props) {
          <Collapse in={props.collapse.collapseGroup}
                    className="multi-collapse collapse-channel">
 
-            <ul id="tv-group" className="collapse-channel__channels">
+            <ul className="collapse-channel__channels">
                {props.premium.tvChannels.map( (tv, i) => (
                   <TvChannelsGroup key={tv.group}
                                    onClick={() => isCollapseChannels( i )}

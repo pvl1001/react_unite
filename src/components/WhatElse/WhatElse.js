@@ -2,7 +2,7 @@ import './WhatElse.scss'
 import megaDisk from '../../img/pic/megaDisk.png'
 import films from '../../img/pic/films.png'
 import sales from '../../img/pic/sales.png'
-import ModalOrder from "../modals/Order/ModalOrder";
+import ModalOrder from "../modals/ModalOrder/ModalOrder";
 import {useState} from "react";
 import ModalTariffAll from "../modals/ModalTariffAll/ModalTariffAll";
 

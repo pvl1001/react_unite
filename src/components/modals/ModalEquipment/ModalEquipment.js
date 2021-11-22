@@ -2,7 +2,7 @@ import './Perfomance.scss'
 import {Modal} from "react-bootstrap";
 import download_pdf from '../../../img/svg/download-pdf.svg'
 import PropTypes from 'prop-types'
-import ModalOrder from "../Order/ModalOrder";
+import ModalOrder from "../ModalOrder/ModalOrder";
 import {useState} from "react";
 import Plan from "./components/Plan";
 

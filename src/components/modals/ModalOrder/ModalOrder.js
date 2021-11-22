@@ -1,4 +1,4 @@
-import './Order.scss'
+import './ModalOrder.scss'
 import {Modal} from "react-bootstrap";
 import PropTypes from "prop-types";
 import {useState} from "react";

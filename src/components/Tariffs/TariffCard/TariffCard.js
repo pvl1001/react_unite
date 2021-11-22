@@ -1,15 +1,23 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import Mark from "./components/Mark"
 import ProgressBar from "./components/ProgressBar"
 import MfTv from "./components/MfTv"
 import TvChannels from "./components/TvChannels"
 import * as PropTypes from 'prop-types'
-import ModalOrder from "../../modals/Order/ModalOrder";
+import ModalOrder from "../../modals/ModalOrder/ModalOrder";
+import ModalMftv from "../../modals/ModalMftv/ModalMftv";
+
+
+TariffCard.propTypes = {
+   tariff: PropTypes.object,
+   collapse: PropTypes.object,
+   premium: PropTypes.object
+}
 
 
 export default function TariffCard({tariff, collapse, premium}) {
 
-   const [statusModalOrder, setStatusModalOrder] = useState(false)
+   const [statusModalOrder, setStatusModalOrder] = useState( false )
 
 
    const progressBar = [
@@ -57,8 +65,7 @@ export default function TariffCard({tariff, collapse, premium}) {
 
             </div>
 
-            {tariff.mftv && (
-               <MfTv mftv={tariff.mftv}/>)}
+            {tariff.mftv && <MfTv mftv={tariff.mftv} id={tariff.id}/>}
 
          </div>
 
@@ -75,7 +82,7 @@ export default function TariffCard({tariff, collapse, premium}) {
                <div className="price__icon {{#if (iconInfo @index)}}price__icon_all{{/if}}"/>
 
             </div>
-            <button className="price-card__btn btn" onClick={() => setStatusModalOrder(true)}>Подключить</button>
+            <button className="price-card__btn btn" onClick={() => setStatusModalOrder( true )}>Подключить</button>
             <div className="link">Подробнее</div>
          </div>
 
@@ -83,10 +90,4 @@ export default function TariffCard({tariff, collapse, premium}) {
          <ModalOrder status={{statusModalOrder, setStatusModalOrder}}/>
       </div>
    )
-}
-
-TariffCard.propTypes = {
-   tariff: PropTypes.object,
-   collapse: PropTypes.object,
-   premium: PropTypes.object
 }

@@ -1,6 +1,18 @@
 import * as PropTypes from "prop-types"
+import ModalMftv from "../../../modals/ModalMftv/ModalMftv";
+import React, {useState} from "react";
 
-export default function MfTv({mftv}) {
+
+MfTv.propTypes = {
+   mftv: PropTypes.array,
+}
+
+
+export default function MfTv(props) {
+
+   const [statusModalMftv, setStatusModalMftv] = useState( false )
+
+
    return (
       <div className="card__block-tv block-tv">
 
@@ -10,19 +22,18 @@ export default function MfTv({mftv}) {
 
 
          <div className="block-tv__icons tv-icons">
-            {mftv.map( el => (
+            {props.mftv.map( el => (
                <div key={el.icon}
                     data-toggle="modal"
                     data-target="#mftv-{{../id}}"
                     className={`tv-icons__icon tv-icons__icon_${el.icon}`}
+                    onClick={() => setStatusModalMftv( true )}
                />
             ) )}
          </div>
 
+
+         <ModalMftv status={{statusModalMftv, setStatusModalMftv}} mftv={props.mftv}/>
       </div>
    )
-}
-
-MfTv.propTypes = {
-   mftv: PropTypes.array,
 }

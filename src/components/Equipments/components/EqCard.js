@@ -1,5 +1,5 @@
 import * as PropTypes from "prop-types";
-import ModalOrder from "../../modals/Order/ModalOrder";
+import ModalOrder from "../../modals/ModalOrder/ModalOrder";
 import {useState} from "react";
 import ModalEquipment from "../../modals/ModalEquipment/ModalEquipment";
 

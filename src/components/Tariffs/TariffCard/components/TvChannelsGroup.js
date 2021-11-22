@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 
 export default function TvChannelsGroup(props) {
 
-   let classNameChannel
+   let classNameChannel = null
 
    function isChannelGreen(premiumGroup, premiumChannel) {
       const findGroup = props.tvChannels.find( tvGroup => tvGroup.group === premiumGroup )
