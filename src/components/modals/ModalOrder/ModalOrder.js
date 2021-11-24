@@ -1,17 +1,14 @@
 import './ModalOrder.scss'
 import {Modal} from "react-bootstrap";
 import PropTypes from "prop-types";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {Context} from "../../../pages/App";
 
 
-ModalOrder.propTypes = {
-   status: PropTypes.object,
-}
+export default function ModalOrder () {
+   const {cxt, setState} = useContext(Context)
 
-
-export default function ModalOrder (props) {
-
-   const handleHide = () => props.status.setStatusModalOrder( false )
+   const handleHide = () => setState({...cxt, showModalOrder: false})
 
 
    const [nameValue, setNameValue] = useState('')
@@ -32,7 +29,7 @@ export default function ModalOrder (props) {
    return (
       <Modal centered
              animation={false}
-             show={props.status.statusModalOrder}
+             show={cxt.showModalOrder}
              onHide={handleHide}
              className="order-modal">
             <Modal.Body className="requisition" >
@@ -63,7 +60,7 @@ export default function ModalOrder (props) {
                </form>
             </Modal.Body>
             <Modal.Body className="order-thx" hidden>
-               <button type="button" className="modal-close" onClick={props.onHide}/>
+               <button type="button" className="modal-close" onClick={handleHide}/>
 
                <h2 className="order-thx__title">Спасибо за заявку!</h2>
                <p className="order-thx__text">Наш оператор свяжется с вами в рабочее время с 9 до 21 часов</p>

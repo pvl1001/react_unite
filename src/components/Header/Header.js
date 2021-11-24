@@ -1,13 +1,15 @@
-import React, {useState} from 'react'
+import React, {useContext} from 'react'
 import './Header.scss'
 import head_banner_mob from '../../img/pic/head_banner_mob.png'
 import head_banner_tap from '../../img/pic/head_banner_tap.png'
 import head_banner_desctop from '../../img/pic/head_banner_desctop.png'
-import ModalOrder from "../modals/ModalOrder/ModalOrder";
+import {Context} from "../../pages/App";
 
 export default function Header() {
 
-   const [statusModalOrder, setStatusModalOrder] = useState(false)
+   const {cxt, setState} = useContext(Context)
+
+   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
 
 
    return (
@@ -21,7 +23,7 @@ export default function Header() {
                   </h1>
                   <p>В тарифах «Объединяй!»</p>
                   <div className="header__btns">
-                     <button onClick={() => setStatusModalOrder(true)}
+                     <button onClick={ openModalOrder }
                              type="button"
                              className="btn btn-fiolet"
                              data-view="first_banner"
@@ -42,7 +44,6 @@ export default function Header() {
          </div>
 
 
-         <ModalOrder status={{statusModalOrder, setStatusModalOrder}}/>
       </header>
    )
 }

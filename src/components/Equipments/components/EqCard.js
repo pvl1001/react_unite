@@ -1,7 +1,7 @@
 import * as PropTypes from "prop-types";
-import ModalOrder from "../../modals/ModalOrder/ModalOrder";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import ModalEquipment from "../../modals/ModalEquipment/ModalEquipment";
+import {Context} from "../../../pages/App";
 
 
 EqCard.propTypes = {
@@ -10,11 +10,12 @@ EqCard.propTypes = {
 
 
 export default function EqCard(props) {
-
-   const [statusModalOrder, setStatusModalOrder] = useState(false)
+   const {cxt, setState} = useContext(Context)
    const [statusModalEquipment, setStatusModalEquipment] = useState(false)
 
    const styleMark = (mark) => mark === 'ГОД СЕРИАЛОВ В ПОДАРОК' && "var(--mf-orange)"
+
+   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
 
 
    return (
@@ -51,7 +52,7 @@ export default function EqCard(props) {
 
                <span>в месяц</span>
             </div>
-            <button className="price-card__btn btn" onClick={() => setStatusModalOrder(true)}>Заказать</button>
+            <button className="price-card__btn btn" onClick={openModalOrder}>Заказать</button>
 
             {props.eq.id === "eq-almond"
                ? <div className="link almond">Подробнее</div>
@@ -64,7 +65,6 @@ export default function EqCard(props) {
          <ModalEquipment status={{statusModalEquipment, setStatusModalEquipment}}
                          eq={props.eq}
                          handleChangePlan={props.handleChangePlan}/>
-         <ModalOrder status={{statusModalOrder, setStatusModalOrder}} />
       </div>
    )
 }

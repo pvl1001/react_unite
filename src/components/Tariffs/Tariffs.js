@@ -29,7 +29,6 @@ export default function Tariffs() {
                desc: "Пакет «Мировое кино». 3478 фильмов, 729 сериалов."
             }
          ],
-
          tvChannels: [
             {
                "group": "HD",
@@ -1001,7 +1000,6 @@ export default function Tariffs() {
                ]
             }
          ],
-
       },
       {
          id: 'two-web',

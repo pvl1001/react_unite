@@ -2,9 +2,9 @@ import './Perfomance.scss'
 import {Modal} from "react-bootstrap";
 import download_pdf from '../../../img/svg/download-pdf.svg'
 import PropTypes from 'prop-types'
-import ModalOrder from "../ModalOrder/ModalOrder";
-import {useState} from "react";
+import {useContext} from "react";
 import Plan from "./components/Plan";
+import {Context} from "../../../pages/App";
 
 
 ModalEquipment.propTypes = {
@@ -15,10 +15,13 @@ ModalEquipment.propTypes = {
 
 
 export default function ModalEquipment(props) {
-   const [showModalOrder, setShowModalOrder] = useState( false )
+   const {cxt, setState} = useContext(Context)
+
    const price = props.eq.plan?.find(el => el.checked).value
 
    const handleHide = () => props.status.setStatusModalEquipment( false )
+
+   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
 
    return (
       <Modal centered
@@ -74,12 +77,11 @@ export default function ModalEquipment(props) {
 
             <div className="modal-order">
                <div className="modal-order__text"><p><span>{price}</span> ₽ в месяц</p></div>
-               <button className="btn" onClick={() => setShowModalOrder( true )}>Заказать</button>
+               <button className="btn" onClick={openModalOrder}>Заказать</button>
             </div>
 
          </Modal.Body>
 
-         <ModalOrder status={{showModalOrder, setShowModalOrder}}/>
       </Modal>
    )
 }

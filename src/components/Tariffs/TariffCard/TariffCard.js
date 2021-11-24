@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import Mark from "./components/Mark"
 import ProgressBar from "./components/ProgressBar"
 import MfTv from "./components/MfTv"
 import TvChannels from "./components/TvChannels"
 import * as PropTypes from 'prop-types'
-import ModalOrder from "../../modals/ModalOrder/ModalOrder";
-import ModalMftv from "../../modals/ModalMftv/ModalMftv";
+import {Context} from "../../../pages/App";
 
 
 TariffCard.propTypes = {
@@ -17,8 +16,9 @@ TariffCard.propTypes = {
 
 export default function TariffCard({tariff, collapse, premium}) {
 
-   const [statusModalOrder, setStatusModalOrder] = useState( false )
+   const {cxt, setState} = useContext(Context)
 
+   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
 
    const progressBar = [
       {
@@ -82,12 +82,10 @@ export default function TariffCard({tariff, collapse, premium}) {
                <div className="price__icon {{#if (iconInfo @index)}}price__icon_all{{/if}}"/>
 
             </div>
-            <button className="price-card__btn btn" onClick={() => setStatusModalOrder( true )}>Подключить</button>
+            <button className="price-card__btn btn" onClick={openModalOrder}>Подключить</button>
             <div className="link">Подробнее</div>
          </div>
 
-
-         <ModalOrder status={{statusModalOrder, setStatusModalOrder}}/>
       </div>
    )
 }

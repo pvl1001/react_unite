@@ -2,14 +2,14 @@ import './WhatElse.scss'
 import megaDisk from '../../img/pic/megaDisk.png'
 import films from '../../img/pic/films.png'
 import sales from '../../img/pic/sales.png'
-import ModalOrder from "../modals/ModalOrder/ModalOrder";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import ModalTariffAll from "../modals/ModalTariffAll/ModalTariffAll";
+import {Context} from "../../pages/App";
 
 
 export default function WhatElse() {
-
-   const [statusModalOrder, setStatusModalOrder] = useState( false )
+      const {cxt, setState} = useContext(Context)
+   // const [statusModalOrder, setStatusModalOrder] = useState( false )
    const [showModalWhatElse, setShowModalWhatElse] = useState( false )
 
    const data = [
@@ -35,6 +35,8 @@ export default function WhatElse() {
          "text": "Общайтесь выгодно: подключите до 10 человек к тарифу «Без переплат. Всё» со скидкой 40 % по"
       }
    ]
+
+   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
 
 
    return (
@@ -65,14 +67,12 @@ export default function WhatElse() {
 
 
                      <span className="card-what-else__link link"
-                           onClick={() => setStatusModalOrder( true )}>Подключить</span>
+                           onClick={openModalOrder}>Подключить</span>
                   </div>
 
                ) )}
             </div>
          </div>
-
-         <ModalOrder status={{statusModalOrder, setStatusModalOrder}}/>
 
          <ModalTariffAll show={showModalWhatElse} onHide={() => setShowModalWhatElse( false )}/>
       </section>

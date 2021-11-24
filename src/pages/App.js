@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {createContext, useState} from 'react'
 import Header from "../components/Header/Header";
 import Nav from "../components/Nav/Nav";
 import Tariffs from "../components/Tariffs/Tariffs";
@@ -9,11 +9,17 @@ import WhatElse from "../components/WhatElse/WhatElse";
 import Support from "../components/Support/Support";
 import Equipments from "../components/Equipments/Equipments";
 import CheckAddress from "../components/CheckAddress/CheckAddress";
+import ModalOrder from "../components/modals/ModalOrder/ModalOrder";
 
+export const Context = createContext()
 
 export default function App() {
+   const [cxt, setState] = useState( {
+      showModalOrder: false
+   } )
+
    return (
-      <>
+      <Context.Provider value={{cxt, setState}}>
          <Support/>
          <Nav/>
          <Header/>
@@ -26,6 +32,8 @@ export default function App() {
             <FAQ/>
          </main>
          <Footer/>
-      </>
+
+         <ModalOrder/>
+      </Context.Provider>
    )
 }
