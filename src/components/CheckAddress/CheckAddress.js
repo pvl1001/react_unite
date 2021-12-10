@@ -42,7 +42,7 @@ export default function CheckAddress() {
                   <span className="link">Изменить адрес</span>
                   <button className="btn"
                           data-toggle="modal"
-                          data-target="#order"
+                          data-target="#showOrder"
                   >Отправить заявку
                   </button>
                </div>
@@ -133,7 +133,7 @@ export default function CheckAddress() {
                         </div>
 
                         <div className="unite-order">
-                           <div data-toggle="modal" data-target="#order" className="btn" data-view="block_vezde_ntv"
+                           <div data-toggle="modal" data-target="#showOrder" className="btn" data-view="block_vezde_ntv"
                            >Отправить заявку
                            </div>
                            <div className="price">

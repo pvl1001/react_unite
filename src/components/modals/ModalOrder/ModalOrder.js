@@ -1,39 +1,26 @@
 import './ModalOrder.scss'
 import {Modal} from "react-bootstrap";
-import PropTypes from "prop-types";
-import {useContext, useState} from "react";
-import {Context} from "../../../pages/App";
+import {useState} from "react";
+import {connect} from 'react-redux'
+import showModal from "../../../redux/actions/showModal";
 
 
-export default function ModalOrder () {
-   const {cxt, setState} = useContext(Context)
-
-   const handleHide = () => setState({...cxt, showModalOrder: false})
-
-
+function ModalOrder (props) {
    const [nameValue, setNameValue] = useState('')
    const [phoneValue, setPhoneValue] = useState('')
 
 
-   const handleSubmit = (e) => {
-      e.preventDefault()
-   }
-
-
-   // if(nameValue, phoneValue)
-      const validate = () => {
-         return nameValue && phoneValue > 10
-      }
-
+   const handleSubmit = (e) => e.preventDefault()
+   const onHide =() => props.showModal({modal: 'order', bool: false})
 
    return (
       <Modal centered
              animation={false}
-             show={cxt.showModalOrder}
-             onHide={handleHide}
+             show={props.show}
+             onHide={onHide}
              className="order-modal">
             <Modal.Body className="requisition" >
-               <button type="button" className="modal-close" onClick={handleHide}/>
+               <button type="button" className="modal-close" onClick={onHide}/>
 
                <h2>Заявка на подключение</h2>
                <form onSubmit={handleSubmit} className="needs-validation" id="orderForm">
@@ -59,8 +46,8 @@ export default function ModalOrder () {
                   <button type="submit" className="order-modal__btn btn" data-view="modal_order" >Отправить</button>
                </form>
             </Modal.Body>
-            <Modal.Body className="order-thx" hidden>
-               <button type="button" className="modal-close" onClick={handleHide}/>
+            <Modal.Body className="showModal-thx" hidden>
+               <button type="button" className="modal-close" onClick={onHide}/>
 
                <h2 className="order-thx__title">Спасибо за заявку!</h2>
                <p className="order-thx__text">Наш оператор свяжется с вами в рабочее время с 9 до 21 часов</p>
@@ -69,3 +56,14 @@ export default function ModalOrder () {
    )
 
 }
+
+
+const mapStateToProps = state => ({
+   show: state.modals.order.show
+})
+
+const mapDispatchToProps = {
+   showModal
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalOrder)

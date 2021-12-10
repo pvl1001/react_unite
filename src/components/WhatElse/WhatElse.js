@@ -2,14 +2,13 @@ import './WhatElse.scss'
 import megaDisk from '../../img/pic/megaDisk.png'
 import films from '../../img/pic/films.png'
 import sales from '../../img/pic/sales.png'
-import {useContext, useState} from "react";
+import {useState} from "react";
 import ModalTariffAll from "../modals/ModalTariffAll/ModalTariffAll";
-import {Context} from "../../pages/App";
+import {connect} from "react-redux";
+import showModal from "../../redux/actions/showModal";
 
 
-export default function WhatElse() {
-      const {cxt, setState} = useContext(Context)
-   // const [statusModalOrder, setStatusModalOrder] = useState( false )
+function WhatElse(props) {
    const [showModalWhatElse, setShowModalWhatElse] = useState( false )
 
    const data = [
@@ -36,7 +35,7 @@ export default function WhatElse() {
       }
    ]
 
-   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
+   const openModalOrder = () => {}
 
 
    return (
@@ -67,7 +66,7 @@ export default function WhatElse() {
 
 
                      <span className="card-what-else__link link"
-                           onClick={openModalOrder}>Подключить</span>
+                           onClick={() => props.showOrder({modal: 'order', bool: true})}>Подключить</span>
                   </div>
 
                ) )}
@@ -78,3 +77,9 @@ export default function WhatElse() {
       </section>
    )
 }
+
+const mapDispatchToProps = {
+   showOrder: showModal
+}
+
+export default connect(null, mapDispatchToProps)(WhatElse)

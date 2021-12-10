@@ -1,16 +1,12 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import './Header.scss'
+import {connect} from 'react-redux'
 import head_banner_mob from '../../img/pic/head_banner_mob.png'
 import head_banner_tap from '../../img/pic/head_banner_tap.png'
 import head_banner_desctop from '../../img/pic/head_banner_desctop.png'
-import {Context} from "../../pages/App";
+import showModal from "../../redux/actions/showModal";
 
-export default function Header() {
-
-   const {cxt, setState} = useContext(Context)
-
-   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
-
+function Header(props) {
 
    return (
       <header className="header">
@@ -23,7 +19,7 @@ export default function Header() {
                   </h1>
                   <p>В тарифах «Объединяй!»</p>
                   <div className="header__btns">
-                     <button onClick={ openModalOrder }
+                     <button onClick={ () => props.showModal( {modal: 'order', bool: true}) }
                              type="button"
                              className="btn btn-fiolet"
                              data-view="first_banner"
@@ -42,8 +38,12 @@ export default function Header() {
                </div>
             </div>
          </div>
-
-
       </header>
    )
 }
+
+const mapDispatchToProps = {
+   showModal
+}
+
+export default connect(null, mapDispatchToProps)(Header)

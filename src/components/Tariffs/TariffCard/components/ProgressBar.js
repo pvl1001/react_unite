@@ -6,8 +6,8 @@ export default function ProgressBar(props) {
       <div className="block-progress__progress-bar info-progress-bar">
 
          <div className="info-progress-bar__text card__info-title">
-            <p className="info-progress-bar__text-name">{props.pb.title}</p>
-            <p className="info-progress-bar__text-value">{props.pb.value}</p>
+            <p className="info-progress-bar__text-name" dangerouslySetInnerHTML={{__html: props.pb.title}}/>
+            <p className="info-progress-bar__text-value" dangerouslySetInnerHTML={{__html: props.pb.value}}/>
          </div>
 
          <div className="info-progress-bar__line">

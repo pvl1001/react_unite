@@ -1,14 +1,10 @@
 import {Modal} from "react-bootstrap";
-import PropTypes from "prop-types";
-import ModalEquipment from "../ModalEquipment/ModalEquipment";
 import './ModalCity.scss'
+import {connect} from "react-redux";
+import showModal from "../../../redux/actions/showModal";
 
 
-ModalEquipment.propTypes = {
-   status: PropTypes.object,
-}
-
-export default function ModalCity(props) {
+function ModalCity(props) {
 
    const cities = [
       {
@@ -415,18 +411,17 @@ export default function ModalCity(props) {
       }
    ]
 
-   const handleHide = () => props.status.setStatusModalCity( false )
-
+   const onHide = () => props.showModal({modal: 'cities', bool: false})
 
    return (
       <Modal centered
              animation={false}
              className="city-selection"
-             show={props.status.statusModalCity}
-             onHide={handleHide}
+             show={props.show}
+             onHide={onHide}
       >
          <Modal.Body>
-            <button type="button" className="modal-close" onClick={handleHide}/>
+            <button type="button" className="modal-close" onClick={onHide}/>
             <div className="city-selection-wrapper">
                <div className="city-selection__header header-city">
                   <div className="header-city__title">Выбор региона</div>
@@ -459,3 +454,16 @@ export default function ModalCity(props) {
       </Modal>
    )
 }
+
+
+const mapStateToProps = (state, ownProps) => {
+   return {
+      show: state.modals.cities.show
+   }
+}
+
+const mapDispatchToProps = {
+   showModal
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalCity)

@@ -10,16 +10,15 @@ import Support from "../components/Support/Support";
 import Equipments from "../components/Equipments/Equipments";
 import CheckAddress from "../components/CheckAddress/CheckAddress";
 import ModalOrder from "../components/modals/ModalOrder/ModalOrder";
-
-export const Context = createContext()
+import ModalCity from "../components/modals/ModalCity/ModalCity";
+import ModalMftv from "../components/modals/ModalMftv/ModalMftv";
+import ModalEquipment from "../components/modals/ModalEquipment/ModalEquipment";
+import ModalTariff from "../components/modals/ModalTariff/ModalTariff";
 
 export default function App() {
-   const [cxt, setState] = useState( {
-      showModalOrder: false
-   } )
 
    return (
-      <Context.Provider value={{cxt, setState}}>
+      <>
          <Support/>
          <Nav/>
          <Header/>
@@ -33,7 +32,11 @@ export default function App() {
          </main>
          <Footer/>
 
+         <ModalEquipment/>
+         <ModalCity/>
          <ModalOrder/>
-      </Context.Provider>
+         <ModalMftv/>
+         <ModalTariff/>
+      </>
    )
 }

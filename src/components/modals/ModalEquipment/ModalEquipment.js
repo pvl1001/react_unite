@@ -1,38 +1,27 @@
 import './Perfomance.scss'
 import {Modal} from "react-bootstrap";
 import download_pdf from '../../../img/svg/download-pdf.svg'
-import PropTypes from 'prop-types'
-import {useContext} from "react";
 import Plan from "./components/Plan";
-import {Context} from "../../../pages/App";
+import {connect} from "react-redux";
+import showModal from "../../../redux/actions/showModal";
 
 
-ModalEquipment.propTypes = {
-   status: PropTypes.object,
-   eq: PropTypes.object,
-   handleChangePlan: PropTypes.func,
-}
+function ModalEquipment(props) {
+
+   // const price = state.props?.plan?.find( el => el.checked ).value
+   const onHide = () => props.showModal( {modal: 'equipment', bool: false} )
 
 
-export default function ModalEquipment(props) {
-   const {cxt, setState} = useContext(Context)
-
-   const price = props.eq.plan?.find(el => el.checked).value
-
-   const handleHide = () => props.status.setStatusModalEquipment( false )
-
-   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
-
-   return (
+   if (props.eq) return (
       <Modal centered
              animation={false}
              className="performance"
-             show={props.status.statusModalEquipment}
-             onHide={handleHide}>
+             show={props.show}
+             onHide={onHide}
+      >
          <Modal.Body>
 
-            <button type="button" className="modal-close" onClick={handleHide}/>
-
+            <button type="button" className="modal-close" onClick={onHide}/>
             <h1 className="performance__title">
                {props.eq.name === 'Android TV' && <>Приставка</>} {props.eq.name}
             </h1>
@@ -52,8 +41,7 @@ export default function ModalEquipment(props) {
                   <ul>
                      {props.eq.params.map( (param, i) => (
                         <li key={i}>
-                           {param.icon && (
-                              <img src={param.icon} alt="icon"/>)}
+                           {param.icon && <img src={param.icon} height={32} alt="icon"/>}
                            <p dangerouslySetInnerHTML={{__html: param.text}}/>
                         </li>)
                      )}
@@ -75,13 +63,27 @@ export default function ModalEquipment(props) {
 
             <Plan eq={props.eq} handleChange={props.handleChangePlan}/>
 
-            <div className="modal-order">
-               <div className="modal-order__text"><p><span>{price}</span> ₽ в месяц</p></div>
-               <button className="btn" onClick={openModalOrder}>Заказать</button>
+            <div className="modal-showOrder">
+               {/*<div className="modal-order__text"><p><span>{price}</span> ₽ в месяц</p></div>*/}
+               <button className="btn" onClick={() => props.showModal( {modal: 'order', bool: true} )}>Заказать</button>
             </div>
 
          </Modal.Body>
 
       </Modal>
    )
+   return null
+
 }
+
+
+const mapStateToProps = state => ({
+   show: state.modals.equipment.show,
+   eq: state.modals.equipment.props
+})
+
+const mapDispatchToProps = {
+   showModal
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( ModalEquipment )

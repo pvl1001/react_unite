@@ -1,7 +1,8 @@
 import * as PropTypes from "prop-types";
 import {useContext, useState} from "react";
-import ModalEquipment from "../../modals/ModalEquipment/ModalEquipment";
-import {Context} from "../../../pages/App";
+// import ModalEquipment from "../../modals/ModalEquipment/ModalEquipment";
+import {connect} from "react-redux";
+import showModal from "../../../redux/actions/showModal";
 
 
 EqCard.propTypes = {
@@ -9,13 +10,13 @@ EqCard.propTypes = {
 }
 
 
-export default function EqCard(props) {
-   const {cxt, setState} = useContext(Context)
-   const [statusModalEquipment, setStatusModalEquipment] = useState(false)
+function EqCard(props) {
 
    const styleMark = (mark) => mark === 'ГОД СЕРИАЛОВ В ПОДАРОК' && "var(--mf-orange)"
 
-   const openModalOrder = () => setState( {...cxt, showModalOrder: true} )
+   const handleOpenModalOrder = () => {}
+   const handleOpenModalEq = () => {}
+
 
 
    return (
@@ -52,19 +53,25 @@ export default function EqCard(props) {
 
                <span>в месяц</span>
             </div>
-            <button className="price-card__btn btn" onClick={openModalOrder}>Заказать</button>
+            <button className="price-card__btn btn" onClick={() => props.showModal({modal: 'order', bool: true})}>Заказать</button>
 
             {props.eq.id === "eq-almond"
                ? <div className="link almond">Подробнее</div>
-               : <div className="link" onClick={()=> setStatusModalEquipment(true)}>Подробнее</div>
+               : <div className="link" onClick={() => props.showModal({modal: 'equipment', bool: true, props: props.eq})}>Подробнее</div>
             }
 
          </div>
 
 
-         <ModalEquipment status={{statusModalEquipment, setStatusModalEquipment}}
-                         eq={props.eq}
-                         handleChangePlan={props.handleChangePlan}/>
+         {/*<ModalEquipment status={{statusModalEquipment, setStatusModalEquipment}}*/}
+         {/*                eq={props.eq}*/}
+         {/*                handleChangePlan={props.handleChangePlan}/>*/}
       </div>
    )
 }
+
+const mapDispatchToProps = {
+   showModal
+}
+
+export default connect(null, mapDispatchToProps)(EqCard)
