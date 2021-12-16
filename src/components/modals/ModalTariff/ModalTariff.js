@@ -5,6 +5,8 @@ import CardOption from "./components/CardOption";
 import CardOptionSim from "./components/CardOptionSim";
 import {sumTotalPrice} from "../../../redux/actions/sumTotalPrice";
 import {useEffect} from "react";
+import BlockInfo from "./components/BlockInfo";
+import ModalTariffFooter from "./components/ModalTariffFooter";
 
 function ModalTariff(props) {
    useEffect(() => props.tariff && props.sumTotalPrice({id: props.tariff.id}))
@@ -31,38 +33,7 @@ function ModalTariff(props) {
 
                <ul className="tariff-modal__items">
                   {props.tariff.infoModal.map( info =>
-                     <li key={info.title} className="tariff-modal__item item-modal wrapp">
-                        <div className="item-modal__title">
-                           <div className="item-modal__title-icon">
-                              <img src={require( `../../../img/svg/${info.icon}` ).default} alt={info.icon}/>
-                           </div>
-                           <h2>{info.title}</h2>
-                        </div>
-
-                        <ul className="item-modal__options">
-                           {info.options.map( option =>
-                              <li key={option.name} className="item-modal__option option-item">
-                                 <div className="option-item__text">
-                                    <p className="option-item__text-name">
-                                       {option.name}
-                                    </p>
-                                    {option.description &&
-                                       <p className="option-item__text-desc">
-                                          {option.description}
-                                       </p>
-                                    }
-                                 </div>
-                                 <p className="option-item__value">
-                                    {option.value}
-                                    {(option.name === 'Мегафон ТВ' && props.tariff.mftv) &&
-                                       props.tariff.mftv.map( el => <span key={el.name}>, <br/> {el.name}</span> )
-                                    }
-                                 </p>
-                              </li>
-                           )}
-                        </ul>
-                     </li>
-                  )}
+                     <BlockInfo key={info.title} info={info} tariff={props.tariff}/>)}
                </ul>
 
                {/*{{#h-if mftv.length '===' 2}}{{> BannerMFTVStart}}{{/h-if}}*/}
@@ -72,14 +43,11 @@ function ModalTariff(props) {
                   <h2 className="tariff-modal__dop-options-title">Дополнительные опции:</h2>
 
                   <ul className="tariff-modal__dop-options-cards">
-
                      {props.tariff.equipments.map( (equipment, idx) =>
                         equipment.id !== 'equipment-sim'
                            ? <CardOption key={equipment.id} equipment={equipment} idx={idx} id={props.tariff.id}/>
                            : <CardOptionSim key={equipment.id} equipment={equipment} idx={idx} id={props.tariff.id}/>
                      )}
-
-
                   </ul>
 
                   <div className="tariff-modal__download-pdf download-pdf">
@@ -96,30 +64,7 @@ function ModalTariff(props) {
 
             </div>
 
-            <div className="tariff-modal__footer wrapp">
-               <div className="tariff-modal__price price">
-
-                  {props.tariff.oldPrice &&
-                     <span className="price__old">{props.tariff.oldPrice} ₽</span>}
-
-                  <span className="price__current">{props.tariff.totalPrice}</span>
-
-                  <span className="price__month"> ₽ в месяц</span>
-
-                  {/*{props.tariff.iconInfo &&*/}
-                  {/*   <div className="price__icon price__icon_all" aria-expanded="false"/>}*/}
-               </div>
-
-               <button type="button"
-                       className="tariff-modal__price-btn btn"
-                       onClick={() => props.showModal( {modal: 'order', bool: true} )}
-               >Заказать
-               </button>
-
-               <p className="tariff-modal__price-desc"
-                  style={{visibility: props.tariff.equipments.find( eq => eq.switch ) ? 'visible' : 'hidden'}}>
-                  с учетом выбранных опций</p>
-            </div>
+            <ModalTariffFooter tariff={props.tariff}/>
 
          </Modal.Body>
       </Modal>
