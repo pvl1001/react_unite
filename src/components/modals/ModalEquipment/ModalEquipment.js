@@ -12,9 +12,7 @@ function ModalEquipment(props) {
    // const price = state.props?.plan?.find( el => el.checked ).value
    const onHide = () => props.showModal( {modal: 'equipment', bool: false} )
 
-   const handleChangePlan = (id) => {
-      props.changePlan(id)
-   }
+   const handleChangePlan = (id) => props.changePlan(id)
 
 
    if (props.eq) return (

@@ -9,16 +9,10 @@ import {sumTotalPrice} from "../../../../redux/actions/sumTotalPrice";
 function CardOption(props) {
    const payload = {id: props.id, index: props.idx}
 
+   const handleSwitch = () => props.optionSwitch( payload )
 
-   const handleSwitch = () => {
-      props.optionSwitch( payload )
-      props.sumTotalPrice( payload )
-   }
+   const handleRadio = () => props.tariffRadioPlan( payload )
 
-   const handleRadio = () => {
-      props.tariffRadioPlan( payload )
-      props.sumTotalPrice( payload )
-   }
 
    const price = (id) => {
       if (id === 'eq-almond') {

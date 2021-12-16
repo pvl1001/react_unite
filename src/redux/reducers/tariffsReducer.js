@@ -6426,7 +6426,7 @@ export function tariffsReducer(state = initialState, action) {
                .map( eq => {
                   if (eq.switch) {
                      if (typeof eq.price === 'string') return parseInt( eq.price.match( /\d+/ ) )
-                     if (eq.id === 'equipment-sim') return eq.sumPrice
+                     if (eq.id === 'equipment-sim') return eq.sumPrice || eq.price
                      if (eq.plan) return eq.plan.find( p => p.checked ).value
                      return eq.price
                   }

@@ -17,7 +17,7 @@ import ModalTariff from "../components/modals/ModalTariff/ModalTariff";
 import ModalTariffAll from "../components/modals/ModalTariffAll/ModalTariffAll";
 
 export default function App() {
-
+   console.log('APP')
    return (
       <>
          <Support/>

@@ -2,27 +2,23 @@ import optionSwitch from "../../../../redux/actions/optionSwitch";
 import {connect} from "react-redux";
 import {counterMinus, counterPlus} from "../../../../redux/actions/counterSim";
 import showModal from "../../../../redux/actions/showModal";
-import {sumTotalPrice} from "../../../../redux/actions/sumTotalPrice";
 
 function CardOptionSim(props) {
+
    const payload = {id: props.id, index: props.idx}
    const payloadCounter = {id: props.id, index: props.idx, cnt: props.equipment.cnt}
    const showModalTariffAll = () => props.showModal( {modal: 'tariffAll', bool: true} )
 
-   const handleSwitch = () => {
-      props.optionSwitch( payload )
-      props.sumTotalPrice( payload )
-   }
+   const handleSwitch = () => props.optionSwitch( payload )
+
    const handlePlus = () => {
       if (props.equipment.cnt < 10) {
          props.counterPlus( payloadCounter )
-         props.sumTotalPrice( payload )
       }
    }
    const handleMinus = () => {
       if (props.equipment.cnt > 1) {
          props.counterMinus( payloadCounter )
-         props.sumTotalPrice( payload )
       }
    }
 
@@ -69,7 +65,6 @@ const mapDispatchToProps = {
    optionSwitch,
    counterPlus,
    counterMinus,
-   sumTotalPrice
 }
 
 export default connect( null, mapDispatchToProps )( CardOptionSim )
