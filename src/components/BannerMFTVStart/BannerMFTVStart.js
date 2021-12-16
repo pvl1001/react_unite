@@ -1,6 +1,6 @@
 import './BannerMFTVStart.scss'
-import mob_start from '../../img/pic/mob_start.png'
-import desc_start from '../../img/pic/1640_start.png'
+import mob_start from '../../img/pic/mob_start.webp'
+import desc_start from '../../img/pic/1640_start.webp'
 
 export default function BannerMFTVStart() {
    return (

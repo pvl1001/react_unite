@@ -14,6 +14,7 @@ import ModalCity from "../components/modals/ModalCity/ModalCity";
 import ModalMftv from "../components/modals/ModalMftv/ModalMftv";
 import ModalEquipment from "../components/modals/ModalEquipment/ModalEquipment";
 import ModalTariff from "../components/modals/ModalTariff/ModalTariff";
+import ModalTariffAll from "../components/modals/ModalTariffAll/ModalTariffAll";
 
 export default function App() {
 
@@ -37,6 +38,7 @@ export default function App() {
          <ModalOrder/>
          <ModalMftv/>
          <ModalTariff/>
+         <ModalTariffAll/>
       </>
    )
 }

@@ -7,7 +7,6 @@ import CardOptionSim from "./components/CardOptionSim";
 function ModalTariff(props) {
    const onHide = () => props.showModal( {modal: 'tariff', bool: false} )
 
-
    if (props.tariff) return (
       <Modal centered
              animation={false}
@@ -72,9 +71,9 @@ function ModalTariff(props) {
                   <ul className="tariff-modal__dop-options-cards">
 
                      {props.tariff.equipments.map( (equipment, idx) =>
-                           equipment.id !== 'equipment-sim'
-                              ? <CardOption key={equipment.id} equipment={equipment} idx={idx} id={props.tariff.id}/>
-                              : <CardOptionSim key={equipment.id} equipment={equipment}/>
+                        equipment.id !== 'equipment-sim'
+                           ? <CardOption key={equipment.id} equipment={equipment} idx={idx} id={props.tariff.id}/>
+                           : <CardOptionSim key={equipment.id} equipment={equipment} idx={idx} id={props.tariff.id}/>
                      )}
 
 
@@ -100,21 +99,23 @@ function ModalTariff(props) {
                   {props.tariff.oldPrice &&
                      <span className="price__old">{props.tariff.oldPrice} ₽</span>}
 
-                  <span className="price__current">{props.tariff.price}</span>
+                  <span className="price__current">{props.tariff.totalPrice}</span>
 
                   <span className="price__month"> ₽ в месяц</span>
 
-                  {props.tariff.iconInfo &&
-                     <div className="price__icon price__icon_all" aria-expanded="false"/>}
+                  {/*{props.tariff.iconInfo &&*/}
+                  {/*   <div className="price__icon price__icon_all" aria-expanded="false"/>}*/}
                </div>
 
                <button type="button"
                        className="tariff-modal__price-btn btn"
-                       data-toggle="modal"
-                       data-target="#showOrder"
-                       data-view="modal_{{dataView}}"
-               >Заказать</button>
-               <p className="tariff-modal__price-desc">с учетом выбранных опций</p>
+                       onClick={() => props.showModal( {modal: 'order', bool: true} )}
+               >Заказать
+               </button>
+
+               <p className="tariff-modal__price-desc"
+                  style={{visibility: props.tariff.equipments.find( eq => eq.switch ) ? 'visible' : 'hidden'}}>
+                  с учетом выбранных опций</p>
             </div>
 
          </Modal.Body>
@@ -128,7 +129,7 @@ function ModalTariff(props) {
 
 const mapStateToProps = state => ({
    show: state.modals.tariff.show,
-   tariff: state.tariffs.find(tariff => tariff.id === state.modals.tariff.props),
+   tariff: state.tariffs.find( tariff => tariff.id === state.modals.tariff.props ),
 })
 
 const mapDispatchToProps = {

@@ -4,7 +4,7 @@ import wiFi from '../../img/svg/wi-fi.svg'
 import tv from '../../img/svg/tv.svg'
 import mobile from '../../img/svg/mobile.svg'
 import web_4g from '../../img/svg/4g.svg'
-import router_info_2x from '../../img/pic/router_info_2x.png'
+import router_info_2x from '../../img/pic/router_info_2x.webp'
 
 
 export default function CheckAddress() {

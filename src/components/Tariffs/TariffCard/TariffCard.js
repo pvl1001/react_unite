@@ -17,8 +17,7 @@ TariffCard.propTypes = {
 
 function TariffCard(props) {
 
-   function activeProgress(title, n) {
-      // debugger
+   const activeProgress = (title, n) => {
       if (title === 'Мобильный интернет') return n === 30 ? 50 : 100
       if (title === 'Домашний&nbsp;<br>интернет') return n.split( ' ' )[0] / 5
       if (title === 'Звонки') return n.split( ' ' )[0] / 30
@@ -29,7 +28,10 @@ function TariffCard(props) {
    return (
       <div className={`card slider__card slider__card_${props.tariff.id}`}>
          <div className="card__title card-wrapper">
-            <h2>{props.tariff.name}</h2>
+
+            <h2 onClick={() => props.showModal({modal: 'tariff', bool: true, props: props.tariff.id})}>
+               {props.tariff.name}
+            </h2>
 
             {props.tariff.mark && (
                <Mark mark={props.tariff.mark}/>)}
@@ -68,7 +70,7 @@ function TariffCard(props) {
                <span className="always"> ₽</span>
                <span>в месяц</span>
 
-               <div className="price__icon {{#if (iconInfo @index)}}price__icon_all{{/if}}"/>
+               {/*<div className="price__icon {{#if (iconInfo @index)}}price__icon_all{{/if}}"/>*/}
 
             </div>
             <button className="price-card__btn btn"

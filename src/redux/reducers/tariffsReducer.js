@@ -1,4 +1,4 @@
-import {HANDLE_SWITCH} from "../types";
+import {COUNTER_MINUS, COUNTER_PLUS, TARIFF_RADIO_PLAN, HANDLE_SWITCH, SUM_TOTAL_PRICE} from "../types";
 import produce from "immer";
 
 const initialState = [
@@ -42,6 +42,7 @@ const initialState = [
       tvLength: "188 каналов",
       oldPrice: 1300,
       price: 650,
+      totalPrice: 650,
       iconInfo: true,
       rentDevice: [
          {
@@ -146,15 +147,14 @@ const initialState = [
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.png",
+            img: "pristavka.webp",
             price: 199,
             dataView: "androidtv",
             switch: false,
-            plan: {
-               "24": 249,
-               "36": 169
-            },
-
+            plan: [
+               {name: '36 мес', value: 169, checked: true},
+               {name: '24 мес', value: 249, checked: false}
+            ],
          },
          {
             id: "eq-FR100-1",
@@ -188,10 +188,10 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.png",
+            img: "fr100.webp",
             price: "0",
             dataView: "fr100",
-            switch: false,
+            switch: true,
             plan: null
          },
          {
@@ -226,10 +226,10 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.png",
+            img: "fr1000-2.webp",
             price: "0",
             dataView: "fr1000",
-            switch: false,
+            switch: true,
             plan: null
          },
          {
@@ -255,10 +255,10 @@ const initialState = [
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.png",
+            img: "tv_new.webp",
             price: "0",
             dataView: "mftv",
-            switch: false,
+            switch: true,
             plan: null
          },
          {
@@ -271,7 +271,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.png",
+            img: "almond.webp",
             price: "от 229",
             icons: [
                {
@@ -292,11 +292,12 @@ const initialState = [
                }
             ],
             dataView: "almond",
+            switch: false,
             routers: [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.png",
+                  img: "Almond-3_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -319,7 +320,7 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.png",
+                  img: "Almond-3S_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -352,7 +353,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.png",
+                  img: "Wi-Fi-kamera_about.webp",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -362,7 +363,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.png",
+                  img: "Datchik-dvizheniya_about.webp",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -372,7 +373,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.png",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -382,7 +383,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.png",
+                  img: "Datchik-protechki-vody_about.webp",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -394,7 +395,9 @@ const initialState = [
          {
             id: "equipment-sim",
             oldPrice: 600,
-            price: 360
+            price: 360,
+            cnt: 1,
+            switch: false
          }
       ],
       tvChannels: [
@@ -1396,6 +1399,7 @@ const initialState = [
       tvId: null,
       oldPrice: null,
       price: 700,
+      totalPrice: 700,
       iconInfo: false,
       rentDevice: [
          {
@@ -1480,14 +1484,14 @@ const initialState = [
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.png",
+            img: "pristavka.webp",
             price: 199,
             dataView: "androidtv",
             switch: false,
-            plan: {
-               "24": 249,
-               "36": 169
-            }
+            plan: [
+               {name: '36 мес', value: 169, checked: true},
+               {name: '24 мес', value: 249, checked: false}
+            ],
          },
          {
             id: "eq-FR100-1",
@@ -1521,14 +1525,14 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.png",
+            img: "fr100.webp",
             price: 55,
             dataView: "fr100",
             switch: false,
-            plan: {
-               "24": 149,
-               "36": 99
-            }
+            plan: [
+               {name: '36 мес', value: 99, checked: true},
+               {name: '24 мес', value: 149, checked: false}
+            ],
          },
          {
             id: "eq-FR1000-2",
@@ -1562,14 +1566,14 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.png",
+            img: "fr1000-2.webp",
             price: 88,
             dataView: "fr1000",
             switch: false,
-            plan: {
-               "24": 199,
-               "36": 129
-            }
+            plan: [
+               {name: '36 мес', value: 129, checked: true},
+               {name: '24 мес', value: 199, checked: false}
+            ],
          },
          {
             id: "eq-almond",
@@ -1581,7 +1585,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.png",
+            img: "almond.webp",
             price: "от 229",
             icons: [
                {
@@ -1602,11 +1606,12 @@ const initialState = [
                }
             ],
             dataView: "almond",
+            switch: false,
             routers: [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.png",
+                  img: "Almond-3_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -1629,7 +1634,7 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.png",
+                  img: "Almond-3S_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -1662,7 +1667,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.png",
+                  img: "Wi-Fi-kamera_about.webp",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -1672,7 +1677,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.png",
+                  img: "Datchik-dvizheniya_about.webp",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -1682,7 +1687,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.png",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -1692,7 +1697,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.png",
+                  img: "Datchik-protechki-vody_about.webp",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -1704,7 +1709,9 @@ const initialState = [
          {
             id: "equipment-sim",
             oldPrice: 600,
-            price: 360
+            price: 360,
+            cnt: 1,
+            switch: false
          }
       ],
    },
@@ -1736,6 +1743,7 @@ const initialState = [
       tvLength: "188 каналов",
       oldPrice: null,
       price: 850,
+      totalPrice: 850,
       iconInfo: false,
       rentDevice: [
          {
@@ -1840,14 +1848,14 @@ const initialState = [
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.png",
+            img: "pristavka.webp",
             price: 199,
             dataView: "androidtv",
             switch: false,
-            plan: {
-               "24": 249,
-               "36": 169
-            }
+            plan: [
+               {name: '36 мес', value: 169, checked: true},
+               {name: '24 мес', value: 249, checked: false}
+            ],
          },
          {
             id: "eq-FR100-1",
@@ -1881,14 +1889,14 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.png",
+            img: "fr100.webp",
             price: 55,
             dataView: "fr100",
             switch: false,
-            plan: {
-               "24": 149,
-               "36": 99
-            }
+            plan: [
+               {name: '36 мес', value: 99, checked: true},
+               {name: '24 мес', value: 149, checked: false}
+            ],
          },
          {
             id: "eq-FR1000-2",
@@ -1922,14 +1930,14 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.png",
+            img: "fr1000-2.webp",
             price: 88,
             dataView: "fr1000",
             switch: false,
-            plan: {
-               "24": 199,
-               "36": 129
-            }
+            plan: [
+               {name: '36 мес', value: 129, checked: true},
+               {name: '24 мес', value: 199, checked: false}
+            ],
          },
          {
             id: "eq-MFTV",
@@ -1954,14 +1962,14 @@ const initialState = [
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.png",
+            img: "tv_new.webp",
             price: 99,
             dataView: "mftv",
             switch: false,
-            plan: {
-               "24": 239,
-               "36": 159
-            }
+            plan: [
+               {name: '36 мес', value: 159, checked: true},
+               {name: '24 мес', value: 239, checked: false}
+            ],
          },
          {
             id: "eq-almond",
@@ -1973,7 +1981,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.png",
+            img: "almond.webp",
             price: "от 229",
             icons: [
                {
@@ -1994,11 +2002,12 @@ const initialState = [
                }
             ],
             dataView: "almond",
+            switch: false,
             routers: [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.png",
+                  img: "Almond-3_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -2021,7 +2030,7 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.png",
+                  img: "Almond-3S_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -2054,7 +2063,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.png",
+                  img: "Wi-Fi-kamera_about.webp",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -2064,7 +2073,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.png",
+                  img: "Datchik-dvizheniya_about.webp",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -2074,7 +2083,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.png",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -2084,7 +2093,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.png",
+                  img: "Datchik-protechki-vody_about.webp",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -2096,7 +2105,9 @@ const initialState = [
          {
             id: "equipment-sim",
             oldPrice: 600,
-            price: 360
+            price: 360,
+            cnt: 1,
+            switch: false
          }
       ],
       tvChannels: [
@@ -3110,6 +3121,7 @@ const initialState = [
       tvLength: null,
       oldPrice: null,
       price: 850,
+      totalPrice: 850,
       iconInfo: false,
       rentDevice: [
          {
@@ -3198,14 +3210,14 @@ const initialState = [
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.png",
+            img: "pristavka.webp",
             price: 199,
             dataView: "androidtv",
             switch: false,
-            plan: {
-               "24": 249,
-               "36": 169
-            }
+            plan: [
+               {name: '36 мес', value: 169, checked: true},
+               {name: '24 мес', value: 249, checked: false}
+            ],
          },
          {
             id: "eq-FR100-1",
@@ -3239,14 +3251,14 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.png",
+            img: "fr100.webp",
             price: 55,
             dataView: "fr100",
             switch: false,
-            plan: {
-               "24": 149,
-               "36": 99
-            }
+            plan: [
+               {name: '36 мес', value: 99, checked: true},
+               {name: '24 мес', value: 149, checked: false}
+            ],
          },
          {
             id: "eq-FR1000-2",
@@ -3280,14 +3292,14 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.png",
+            img: "fr1000-2.webp",
             price: 88,
             dataView: "fr1000",
             switch: false,
-            plan: {
-               "24": 199,
-               "36": 129
-            }
+            plan: [
+               {name: '36 мес', value: 129, checked: true},
+               {name: '24 мес', value: 199, checked: false}
+            ],
          },
          {
             id: "eq-MFTV",
@@ -3312,14 +3324,14 @@ const initialState = [
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.png",
+            img: "tv_new.webp",
             price: 99,
             dataView: "mftv",
             switch: false,
-            plan: {
-               "24": 239,
-               "36": 159
-            }
+            plan: [
+               {name: '36 мес', value: 159, checked: true},
+               {name: '24 мес', value: 239, checked: false}
+            ],
          },
          {
             id: "eq-almond",
@@ -3331,7 +3343,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.png",
+            img: "almond.webp",
             price: "от 229",
             icons: [
                {
@@ -3352,11 +3364,12 @@ const initialState = [
                }
             ],
             dataView: "almond",
+            switch: false,
             routers: [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.png",
+                  img: "Almond-3_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -3379,7 +3392,7 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.png",
+                  img: "Almond-3S_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -3412,7 +3425,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.png",
+                  img: "Wi-Fi-kamera_about.webp",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -3422,7 +3435,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.png",
+                  img: "Datchik-dvizheniya_about.webp",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -3432,7 +3445,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.png",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -3442,7 +3455,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.png",
+                  img: "Datchik-protechki-vody_about.webp",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -3454,7 +3467,9 @@ const initialState = [
          {
             id: "equipment-sim",
             oldPrice: 600,
-            price: 360
+            price: 360,
+            cnt: 1,
+            switch: false
          }
       ]
    },
@@ -3507,6 +3522,7 @@ const initialState = [
       tvLength: "250 каналов",
       oldPrice: null,
       price: 1900,
+      totalPrice: 1900,
       iconInfo: false,
       rentDevice: [
          {
@@ -3611,14 +3627,14 @@ const initialState = [
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.png",
+            img: "pristavka.webp",
             price: 199,
             dataView: "androidtv",
             switch: false,
-            plan: {
-               "24": 249,
-               "36": 169
-            }
+            plan: [
+               {name: '36 мес', value: 169, checked: true},
+               {name: '24 мес', value: 249, checked: false}
+            ],
          },
          {
             id: "eq-FR100-1",
@@ -3652,10 +3668,10 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.png",
+            img: "fr100.webp",
             price: "0",
             dataView: "fr100",
-            switch: false,
+            switch: true,
             plan: null
          },
          {
@@ -3690,10 +3706,10 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.png",
+            img: "fr1000-2.webp",
             price: "0",
             dataView: "fr1000",
-            switch: false,
+            switch: true,
             plan: null
          },
          {
@@ -3719,10 +3735,10 @@ const initialState = [
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.png",
+            img: "tv_new.webp",
             price: "0",
             dataView: "mftv",
-            switch: false,
+            switch: true,
             plan: null
          },
          {
@@ -3735,7 +3751,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.png",
+            img: "almond.webp",
             price: "от 229",
             icons: [
                {
@@ -3756,11 +3772,12 @@ const initialState = [
                }
             ],
             dataView: "almond",
+            switch: false,
             routers: [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.png",
+                  img: "Almond-3_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -3783,7 +3800,7 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.png",
+                  img: "Almond-3S_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -3816,7 +3833,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.png",
+                  img: "Wi-Fi-kamera_about.webp",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -3826,7 +3843,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.png",
+                  img: "Datchik-dvizheniya_about.webp",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -3836,7 +3853,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.png",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -3846,7 +3863,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.png",
+                  img: "Datchik-protechki-vody_about.webp",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -3858,7 +3875,9 @@ const initialState = [
          {
             id: "equipment-sim",
             oldPrice: 600,
-            price: 360
+            price: 360,
+            cnt: 1,
+            switch: false
          }
       ],
       tvChannels: [
@@ -5206,6 +5225,7 @@ const initialState = [
       tvLength: "61 канал",
       oldPrice: null,
       price: 650,
+      totalPrice: 650,
       iconInfo: false,
       rentDevice: [
          {
@@ -5310,14 +5330,14 @@ const initialState = [
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.png",
+            img: "pristavka.webp",
             price: 199,
             dataView: "androidtv",
             switch: false,
-            plan: {
-               "24": 249,
-               "36": 169
-            }
+            plan: [
+               {name: '36 мес', value: 169, checked: true},
+               {name: '24 мес', value: 249, checked: false}
+            ],
          },
          {
             id: "eq-FR100-1",
@@ -5351,14 +5371,14 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.png",
+            img: "fr100.webp",
             price: 55,
             dataView: "fr100",
             switch: false,
-            plan: {
-               "24": 149,
-               "36": 99
-            }
+            plan: [
+               {name: '36 мес', value: 99, checked: true},
+               {name: '24 мес', value: 149, checked: false}
+            ],
          },
          {
             id: "eq-FR1000-2",
@@ -5392,14 +5412,14 @@ const initialState = [
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.png",
+            img: "fr1000-2.webp",
             price: 88,
             dataView: "fr1000",
             switch: false,
-            plan: {
-               "24": 199,
-               "36": 129
-            }
+            plan: [
+               {name: '36 мес', value: 129, checked: true},
+               {name: '24 мес', value: 199, checked: false}
+            ],
          },
          {
             id: "eq-MFTV",
@@ -5424,14 +5444,14 @@ const initialState = [
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.png",
+            img: "tv_new.webp",
             price: 99,
             dataView: "mftv",
             switch: false,
-            plan: {
-               "24": 239,
-               "36": 159
-            }
+            plan: [
+               {name: '36 мес', value: 159, checked: true},
+               {name: '24 мес', value: 239, checked: false}
+            ],
          },
          {
             id: "eq-almond",
@@ -5443,7 +5463,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.png",
+            img: "almond.webp",
             price: "от 229",
             icons: [
                {
@@ -5464,11 +5484,12 @@ const initialState = [
                }
             ],
             dataView: "almond",
+            switch: false,
             routers: [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.png",
+                  img: "Almond-3_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -5491,7 +5512,7 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.png",
+                  img: "Almond-3S_about.webp",
                   params: [
                      {
                         icon: "speed-2_w.svg",
@@ -5524,7 +5545,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.png",
+                  img: "Wi-Fi-kamera_about.webp",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -5534,7 +5555,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.png",
+                  img: "Datchik-dvizheniya_about.webp",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -5544,7 +5565,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.png",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -5554,7 +5575,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.png",
+                  img: "Datchik-protechki-vody_about.webp",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -5566,7 +5587,9 @@ const initialState = [
          {
             id: "equipment-sim",
             oldPrice: 600,
-            price: 360
+            price: 360,
+            cnt: 1,
+            switch: false
          }
       ],
       tvChannels: [
@@ -5892,7 +5915,6 @@ const initialState = [
             ]
          }
       ],
-
    },
    {
       id: 'around',
@@ -5921,6 +5943,7 @@ const initialState = [
       tvLength: "61 канал",
       oldPrice: null,
       price: 1400,
+      totalPrice: 1400,
       iconInfo: false,
       rentDevice: [
          {
@@ -6019,9 +6042,10 @@ const initialState = [
                   text: "Компактные размеры"
                }
             ],
-            img: "router_info.png",
+            img: "router_info.webp",
             price: 200,
-            dataView: "router-4g"
+            dataView: "router-4g",
+            switch: true,
          }
       ],
       tvChannels: [
@@ -6353,14 +6377,64 @@ const initialState = [
 export function tariffsReducer(state = initialState, action) {
 
    switch (action.type) {
-      case HANDLE_SWITCH :
-         const id = action.payload.id
-         const i = action.payload.index
 
-         return produce(state, setState => {
-            const stateSwitch = setState.find(tariff => tariff.id === id).equipments[i].switch
-            setState.find(tariff => tariff.id === id).equipments[i].switch = !stateSwitch
-      })
-      default: return state
+      case HANDLE_SWITCH :
+         return produce( state, setState => {
+            const id = action.payload.id
+            const i = action.payload.index
+            const currentTariff = setState.find( tariff => tariff.id === id )
+            const optionCard = currentTariff.equipments[i]
+            optionCard.switch = !optionCard.switch
+         } )
+
+      case COUNTER_PLUS :
+         return produce( state, setState => {
+            const id = action.payload.id
+            const i = action.payload.index
+            const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
+            optionCard.cnt++
+            optionCard.switch = true
+            optionCard.sumPrice = optionCard.price * optionCard.cnt
+            optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
+         } )
+
+      case COUNTER_MINUS :
+         return produce( state, setState => {
+            const id = action.payload.id
+            const i = action.payload.index
+            const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
+            optionCard.cnt--
+            optionCard.sumPrice = optionCard.price * optionCard.cnt
+            optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
+         } )
+
+      case TARIFF_RADIO_PLAN:
+         return produce( state, setState => {
+            const id = action.payload.id
+            const i = action.payload.index
+            const cardOption = setState.find( tariff => tariff.id === id ).equipments[i]
+            cardOption.plan.map( p => p.checked = !p.checked )
+            cardOption.price = cardOption.plan.find( p => p.checked ).value
+         } )
+
+      case SUM_TOTAL_PRICE:
+         return produce( state, setState => {
+            const id = action.payload.id
+            const currentTariff = setState.find( tariff => tariff.id === id )
+
+            currentTariff.totalPrice = currentTariff.equipments
+               .map( eq => {
+                  if (eq.switch) {
+                     if (typeof eq.price === 'string') return parseInt( eq.price.match( /\d+/ ) )
+                     if (eq.id === 'equipment-sim') return eq.sumPrice
+                     if (eq.plan) return eq.plan.find( p => p.checked ).value
+                     return eq.price
+                  }
+                  return 0
+               } )
+               .reduce( (a, b) => a + b, currentTariff.price )
+         } )
+      default:
+         return state
    }
 }

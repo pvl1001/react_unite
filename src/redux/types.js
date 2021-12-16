@@ -1,2 +1,7 @@
 export const SHOW_MODAL = 'SHOW_MODAL'
 export const HANDLE_SWITCH = 'HANDLE_SWITCH'
+export const COUNTER_PLUS = 'COUNTER_PLUS'
+export const COUNTER_MINUS = 'COUNTER_MINUS'
+export const TARIFF_RADIO_PLAN = 'TARIFF_RADIO_PLAN'
+export const CHANGE_PLAN = 'CHANGE_PLAN'
+export const SUM_TOTAL_PRICE = 'SUM_TOTAL_PRICE'

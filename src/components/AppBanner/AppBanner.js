@@ -1,8 +1,8 @@
 import './AppBanner.scss'
-import mob_lk_320 from '../../img/pic/mob_lk_320.png'
-import mob_lk_768 from '../../img/pic/mob_lk_768.png'
-import mob_lk_1024 from '../../img/pic/mob_lk_1024.png'
-import mob_lk_1280 from '../../img/pic/mob_lk_1280.png'
+import mob_lk_320 from '../../img/pic/mob_lk_320.webp'
+import mob_lk_768 from '../../img/pic/mob_lk_768.webp'
+import mob_lk_1024 from '../../img/pic/mob_lk_1024.webp'
+import mob_lk_1280 from '../../img/pic/mob_lk_1280.webp'
 
 
 export default function AppBanner () {

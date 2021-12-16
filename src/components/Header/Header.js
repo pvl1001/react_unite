@@ -1,9 +1,9 @@
 import React from 'react'
 import './Header.scss'
 import {connect} from 'react-redux'
-import head_banner_mob from '../../img/pic/head_banner_mob.png'
-import head_banner_tap from '../../img/pic/head_banner_tap.png'
-import head_banner_desctop from '../../img/pic/head_banner_desctop.png'
+import head_banner_mob from '../../img/pic/head_banner_mob.webp'
+import head_banner_tap from '../../img/pic/head_banner_tap.webp'
+import head_banner_desctop from '../../img/pic/head_banner_desctop.webp'
 import showModal from "../../redux/actions/showModal";
 
 function Header(props) {
@@ -26,7 +26,9 @@ function Header(props) {
                      >Подключить
                      </button>
                      <span data-target="#for-their" data-toggle="modal"
-                           className="header__about">Подробнее</span>
+                           className="header__about"
+                           onClick={() => props.showModal( {modal: 'tariff', bool: true, props: 'for-their'} )}
+                     >Подробнее</span>
                   </div>
                </div>
                <div className="header__img-wrapp">

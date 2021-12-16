@@ -2,21 +2,23 @@ import fiolet_googleplay from "../../img/svg/fiolet_googleplay.svg";
 import fiolet_4k from "../../img/svg/fiolet_4k.svg";
 import fiolet_voice_message from "../../img/svg/fiolet_voice-message.svg";
 import fiolet_video from "../../img/svg/fiolet_video.svg";
-import pristavka from "../../img/pic/pristavka.png";
+import pristavka from "../../img/pic/pristavka.webp";
 import fiolet_speed from "../../img/svg/fiolet_speed.svg";
 import fiolet_hertz from "../../img/svg/fiolet_hertz.svg";
 import fiolet_mobile_internet from "../../img/svg/fiolet_mobile-internet.svg";
 import fiolet_zone from "../../img/svg/fiolet_zone.svg";
 import fiolet_settings from "../../img/svg/fiolet_settings.svg";
 import fiolet_block from "../../img/svg/fiolet_block.svg";
-import fr100 from "../../img/pic/fr100.png";
+import fr100 from "../../img/pic/fr100.webp";
 import fiolet_router from "../../img/svg/fiolet_router.svg";
-import fr1000_2 from "../../img/pic/fr1000-2.png";
+import fr1000_2 from "../../img/pic/fr1000-2.webp";
 import fiolet_umnyj_dom from "../../img/svg/fiolet_umnyj-dom.svg";
 import fiolet_wi_fi from "../../img/svg/fiolet_wi-fi.svg";
 import fiolet_pult from "../../img/svg/fiolet_pult.svg";
-import tv_new from "../../img/pic/tv_new.png";
-import almond from "../../img/pic/almond.png";
+import tv_new from "../../img/pic/tv_new.webp";
+import almond from "../../img/pic/almond.webp";
+import produce from "immer";
+import {CHANGE_PLAN} from "../types";
 
 const initialState = [
    {
@@ -195,7 +197,7 @@ const initialState = [
          {
             "id": "almond-0",
             "name": "Роутер Almond 3",
-            "img": "Almond-3_about.png",
+            "img": "Almond-3_about.webp",
             "params": [
                {
                   "icon": "speed-2_w.svg",
@@ -218,7 +220,7 @@ const initialState = [
          {
             "id": "almond-1",
             "name": "Роутер Almond 3S",
-            "img": "Almond-3S_about.png",
+            "img": "Almond-3S_about.webp",
             "params": [
                {
                   "icon": "speed-2_w.svg",
@@ -251,7 +253,7 @@ const initialState = [
          {
             "id": "sensor-0",
             "name": "Wi-Fi камера",
-            "img": "Wi-Fi-kamera_about.png",
+            "img": "Wi-Fi-kamera_about.webp",
             "desc": "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
             "price": 120,
             "totalPrice": 0,
@@ -261,7 +263,7 @@ const initialState = [
          {
             "id": "sensor-1",
             "name": "Датчик движения",
-            "img": "Datchik-dvizheniya_about.png",
+            "img": "Datchik-dvizheniya_about.webp",
             "desc": "Будьте в курсе любых передвижений в доме",
             "price": 50,
             "totalPrice": 0,
@@ -271,7 +273,7 @@ const initialState = [
          {
             "id": "sensor-2",
             "name": "Датчик открытия и закрытия",
-            "img": "Datchik-otkrytiya-i-zakrytiya_about.png",
+            "img": "Datchik-otkrytiya-i-zakrytiya_about.webp",
             "desc": "Будьте в курсе всех незваных гостей",
             "price": 50,
             "totalPrice": 0,
@@ -281,7 +283,7 @@ const initialState = [
          {
             "id": "sensor-3",
             "name": "Датчик протечки воды",
-            "img": "Datchik-protechki-vody_about.png",
+            "img": "Datchik-protechki-vody_about.webp",
             "desc": "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
             "price": 50,
             "totalPrice": 0,
@@ -293,7 +295,16 @@ const initialState = [
 ]
 
 export function equipmentsReducer(state = initialState, action) {
-   switch(action.type) {
-      default: return state
+   switch (action.type) {
+
+      case CHANGE_PLAN:
+         return produce( state, setState => {
+            setState
+               .find( eq => eq.id === action.payload ).plan
+               .map( p => p.checked = !p.checked )
+         } )
+
+      default:
+         return state
    }
 }

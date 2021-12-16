@@ -1,10 +1,35 @@
 import {connect} from "react-redux";
 import optionSwitch from "../../../../redux/actions/optionSwitch";
+import {tariffRadioPlan} from "../../../../redux/actions/counterSim";
+import {useEffect} from "react";
+import {SUM_TOTAL_PRICE} from "../../../../redux/types";
+import {sumTotalPrice} from "../../../../redux/actions/sumTotalPrice";
 
 
 function CardOption(props) {
+   const payload = {id: props.id, index: props.idx}
 
-   const handleSwitch = () => props.optionSwitch({id: props.id, index: props.idx})
+
+   const handleSwitch = () => {
+      props.optionSwitch( payload )
+      props.sumTotalPrice( payload )
+   }
+
+   const handleRadio = () => {
+      props.tariffRadioPlan( payload )
+      props.sumTotalPrice( payload )
+   }
+
+   const price = (id) => {
+      if (id === 'eq-almond') {
+         const sortRouters = [...props.equipment.routers].sort( (a, b) => a.price - b.price )
+         return 'от ' + sortRouters[0].price
+      }
+      if (props.equipment.plan) {
+         return props.equipment.plan.find( p => p.checked ).value
+      }
+      return props.equipment.price
+   }
 
 
    return (
@@ -26,7 +51,8 @@ function CardOption(props) {
                    dangerouslySetInnerHTML={{
                       __html: props.equipment.name + (props.equipment.speed
                          ? ` <nobr>${props.equipment.speed}</nobr>`
-                         : '')}}/>
+                         : '')
+                   }}/>
             </div>
 
             {props.equipment.plan ? <p>Рассрочка</p> : <p>Аренда</p>}
@@ -34,30 +60,25 @@ function CardOption(props) {
             {props.equipment.plan &&
                <div className="dop-options-card__option-radio option-radio">
 
-                  <label className="option-radio__radio-btn">
-                     <input name={`radio-${props.equipment.id}-${props.idx}`}
-                            id={`radio36-${props.equipment.id}-${props.idx}`}
-                            type="radio" value={props.equipment.plan[36]}
-                            defaultChecked disabled={!props.equipment.switch}/>
-                     <label htmlFor={`radio36-${props.equipment.id}-${props.idx}`}/>
-                     <span>36 мес</span>
-                  </label>
-
-                  <label className="option-radio__radio-btn">
-                     <input name={`radio-${props.equipment.id}-${props.idx}`}
-                            id={`radio24-${props.equipment.id}-${props.idx}`}
-                            type="radio" value={props.equipment.plan[24]}
-                            disabled={!props.equipment.switch}/>
-                     <label htmlFor={`radio24-${props.equipment.id}-${props.idx}`}/>
-                     <span>24 мес</span>
-                  </label>
+                  {props.equipment.plan.map( (p, i) => (
+                     <label key={p.name} className="option-radio__radio-btn">
+                        <input name={`radio-${props.equipment.id}-${props.idx}`}
+                               id={`plan-${i}-${props.equipment.id}-${props.idx}`}
+                               type="radio" value={p.value}
+                               onChange={handleRadio}
+                               checked={p.checked}
+                               disabled={!props.equipment.switch}/>
+                        <label htmlFor={`plan-${i}-${props.equipment.id}-${props.idx}`}/>
+                        <span>{p.name}</span>
+                     </label>
+                  ) )}
                </div>}
          </div>
 
          <div className="dop-options-card__price">
             <div className="price">
                <span className="price__current">
-                  {props.equipment.plan ? props.equipment.plan[36] : props.equipment.price}
+                  {price( props.equipment.id )}
                </span> <span> ₽</span>
                <span className="price__month"> в месяц</span>
             </div>
@@ -65,8 +86,7 @@ function CardOption(props) {
             <label className="switch">
                <input type="checkbox"
                       onChange={handleSwitch}
-                      defaultChecked={props.equipment.switch}
-               />
+                      checked={props.equipment.switch}/>
                <span className="round"/>
             </label>
          </div>
@@ -76,7 +96,9 @@ function CardOption(props) {
 
 
 const mapDispatchToProps = {
-   optionSwitch
+   optionSwitch,
+   tariffRadioPlan,
+   sumTotalPrice
 }
 
-export default connect(null, mapDispatchToProps)(CardOption)
+export default connect( null, mapDispatchToProps )( CardOption )

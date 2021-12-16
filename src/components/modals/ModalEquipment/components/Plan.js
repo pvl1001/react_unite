@@ -24,7 +24,7 @@ export default function Plan(props) {
                          type="radio"
                          onChange={() => props.handleChange(props.eq.id)}
                          value={el.value}
-                         checked={el.checked}
+                         defaultChecked={el.checked}
                   />
 
                   <label htmlFor={`plan-${i}`}/><span>{el.name}</span>

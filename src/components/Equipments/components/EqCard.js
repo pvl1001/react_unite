@@ -62,10 +62,6 @@ function EqCard(props) {
 
          </div>
 
-
-         {/*<ModalEquipment status={{statusModalEquipment, setStatusModalEquipment}}*/}
-         {/*                eq={props.eq}*/}
-         {/*                handleChangePlan={props.handleChangePlan}/>*/}
       </div>
    )
 }

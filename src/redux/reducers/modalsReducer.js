@@ -6,7 +6,8 @@ const initialState = {
    cities: {show: false},
    mftv: {show: false},
    equipment: {show: false},
-   tariff: {show: false}
+   tariff: {show: false},
+   tariffAll: {show: false},
 }
 
 export function modalsReducer(state = initialState, action) {

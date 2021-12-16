@@ -1,9 +1,10 @@
 import '../ModalTariff/ModalTariff.scss'
 import './ModalTariffAll.scss'
 import {Modal} from "react-bootstrap";
-import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import showModal from "../../../redux/actions/showModal";
 
-export default function ModalTariffAll(props) {
+function ModalTariffAll(props) {
 
    const data = [
       {
@@ -38,15 +39,18 @@ export default function ModalTariffAll(props) {
       }
    ]
 
+   const onHide = () => props.showModal({modal: 'tariffAll', bool: false})
+
+
    return (
       <Modal centered
              animation={false}
              show={props.show}
-             onHide={props.onHide}
+             onHide={onHide}
              className="tariff-modal tariff-all">
 
          <div className="tariff-modal__btn-close">
-            <button type="button" className="modal-close" onClick={props.onHide}/>
+            <button type="button" className="modal-close" onClick={onHide}/>
          </div>
 
          <Modal.Body >
@@ -90,7 +94,12 @@ export default function ModalTariffAll(props) {
 
 }
 
-ModalTariffAll.propTypes = {
-   show: PropTypes.bool,
-   onHide: PropTypes.func
+
+const mapStateToProps = state => ({
+   show: state.modals.tariffAll.show
+})
+
+const mapDispatchToProps = {
+   showModal
 }
+export default connect(mapStateToProps, mapDispatchToProps)(ModalTariffAll)

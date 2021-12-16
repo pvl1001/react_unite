@@ -1,7 +1,7 @@
 import './WhatElse.scss'
-import megaDisk from '../../img/pic/megaDisk.png'
-import films from '../../img/pic/films.png'
-import sales from '../../img/pic/sales.png'
+import megaDisk from '../../img/pic/megaDisk.webp'
+import films from '../../img/pic/films.webp'
+import sales from '../../img/pic/sales.webp'
 import {useState} from "react";
 import ModalTariffAll from "../modals/ModalTariffAll/ModalTariffAll";
 import {connect} from "react-redux";
@@ -60,26 +60,25 @@ function WhatElse(props) {
                            ? <p className="card-what-else__text" dangerouslySetInnerHTML={{__html: el.text}}/>
                            : <p className="card-what-else__text">
                               {el.text} <span className='link'
-                                              onClick={() => setShowModalWhatElse( true )}>акции</span>.
+                                              onClick={() => props.showModal( {modal: 'tariffAll', bool: true} )}>акции</span>.
                            </p>
                      }
 
 
                      <span className="card-what-else__link link"
-                           onClick={() => props.showOrder({modal: 'order', bool: true})}>Подключить</span>
+                           onClick={() => props.showModal({modal: 'order', bool: true})}>Подключить</span>
                   </div>
 
                ) )}
             </div>
          </div>
 
-         <ModalTariffAll show={showModalWhatElse} onHide={() => setShowModalWhatElse( false )}/>
       </section>
    )
 }
 
 const mapDispatchToProps = {
-   showOrder: showModal
+   showModal
 }
 
 export default connect(null, mapDispatchToProps)(WhatElse)

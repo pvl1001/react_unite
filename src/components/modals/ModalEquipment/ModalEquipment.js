@@ -4,12 +4,17 @@ import download_pdf from '../../../img/svg/download-pdf.svg'
 import Plan from "./components/Plan";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
+import {changePlan} from "../../../redux/actions/equpment";
 
 
 function ModalEquipment(props) {
 
    // const price = state.props?.plan?.find( el => el.checked ).value
    const onHide = () => props.showModal( {modal: 'equipment', bool: false} )
+
+   const handleChangePlan = (id) => {
+      props.changePlan(id)
+   }
 
 
    if (props.eq) return (
@@ -61,7 +66,7 @@ function ModalEquipment(props) {
                </picture>
             </div>
 
-            <Plan eq={props.eq} handleChange={props.handleChangePlan}/>
+            <Plan eq={props.eq} handleChange={handleChangePlan}/>
 
             <div className="modal-showOrder">
                {/*<div className="modal-order__text"><p><span>{price}</span> ₽ в месяц</p></div>*/}
@@ -83,7 +88,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-   showModal
+   showModal, changePlan
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( ModalEquipment )
