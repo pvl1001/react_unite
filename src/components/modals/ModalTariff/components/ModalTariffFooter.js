@@ -22,7 +22,9 @@ export default function ModalTariffFooter(props) {
 
          <p className="tariff-modal__price-desc"
             style={{visibility: props.tariff.equipments.find( eq => eq.switch ) ? 'visible' : 'hidden'}}>
-            с учетом выбранных опций</p>
+            с учетом выбранных опций
+         </p>
+
       </div>
    )
 }

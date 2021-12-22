@@ -3,13 +3,10 @@ import {Modal} from "react-bootstrap";
 import showModal from "../../../redux/actions/showModal";
 import CardOption from "./components/CardOption";
 import CardOptionSim from "./components/CardOptionSim";
-import {sumTotalPrice} from "../../../redux/actions/sumTotalPrice";
-import {useEffect} from "react";
 import BlockInfo from "./components/BlockInfo";
 import ModalTariffFooter from "./components/ModalTariffFooter";
 
 function ModalTariff(props) {
-   useEffect(() => props.tariff && props.sumTotalPrice({id: props.tariff.id}))
    const onHide = () => props.showModal( {modal: 'tariff', bool: false} )
 
    if (props.tariff) return (
@@ -82,7 +79,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
    showModal,
-   sumTotalPrice,
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( ModalTariff )

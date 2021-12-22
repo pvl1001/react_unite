@@ -1,17 +1,21 @@
 import {connect} from "react-redux";
 import optionSwitch from "../../../../redux/actions/optionSwitch";
 import {tariffRadioPlan} from "../../../../redux/actions/counterSim";
-import {useEffect} from "react";
-import {SUM_TOTAL_PRICE} from "../../../../redux/types";
 import {sumTotalPrice} from "../../../../redux/actions/sumTotalPrice";
 
 
 function CardOption(props) {
    const payload = {id: props.id, index: props.idx}
 
-   const handleSwitch = () => props.optionSwitch( payload )
+   const handleSwitch = () => {
+      props.optionSwitch( payload )
+      props.sumTotalPrice( payload )
+   }
 
-   const handleRadio = () => props.tariffRadioPlan( payload )
+   const handleRadio = () => {
+      props.tariffRadioPlan( payload )
+      props.sumTotalPrice( payload )
+   }
 
 
    const price = (id) => {
