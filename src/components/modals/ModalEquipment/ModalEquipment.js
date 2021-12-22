@@ -9,7 +9,6 @@ import {changePlan} from "../../../redux/actions/equpment";
 
 function ModalEquipment(props) {
 
-   // const price = state.props?.plan?.find( el => el.checked ).value
    const onHide = () => props.showModal( {modal: 'equipment', bool: false} )
 
    const handleChangePlan = (id) => props.changePlan(id)
@@ -44,7 +43,8 @@ function ModalEquipment(props) {
                   <ul>
                      {props.eq.params.map( (param, i) => (
                         <li key={i}>
-                           {param.icon && <img src={param.icon} height={32} alt="icon"/>}
+                           {param.icon &&
+                              <img src={require(`../../../img/svg/${param.icon}.svg`).default} height={32} alt="icon"/>}
                            <p dangerouslySetInnerHTML={{__html: param.text}}/>
                         </li>)
                      )}
@@ -60,16 +60,22 @@ function ModalEquipment(props) {
                </div>
 
                <picture className="performance__img">
-                  <img src={props.eq.img} alt={props.eq.name}/>
+                  <img  src={require(`../../../img/pic/${props.eq.img}.webp`).default} alt={props.eq.name}/>
                </picture>
             </div>
 
-            <Plan eq={props.eq} handleChange={handleChangePlan}/>
+            {!props.showModalTariff &&
+               <>
+                  <Plan eq={props.eq} handleChange={handleChangePlan}/>
 
-            <div className="modal-showOrder">
-               {/*<div className="modal-order__text"><p><span>{price}</span> ₽ в месяц</p></div>*/}
-               <button className="btn" onClick={() => props.showModal( {modal: 'order', bool: true} )}>Заказать</button>
-            </div>
+                  <div className="modal-showOrder">
+                     {/*<div className="modal-order__text"><p><span>{price}</span> ₽ в месяц</p></div>*/}
+                     <button className="btn" onClick={() => props.showModal( {modal: 'order', bool: true} )}>Заказать</button>
+                  </div>
+               </>
+            }
+
+
 
          </Modal.Body>
 
@@ -82,6 +88,7 @@ function ModalEquipment(props) {
 
 const mapStateToProps = state => ({
    show: state.modals.equipment.show,
+   showModalTariff: state.modals.tariff.show,
    eq: state.modals.equipment.props
 })
 

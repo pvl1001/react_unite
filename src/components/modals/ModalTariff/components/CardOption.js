@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import optionSwitch from "../../../../redux/actions/optionSwitch";
 import {tariffRadioPlan} from "../../../../redux/actions/counterSim";
 import {sumTotalPrice} from "../../../../redux/actions/sumTotalPrice";
+import showModal from "../../../../redux/actions/showModal";
 
 
 function CardOption(props) {
@@ -17,7 +18,6 @@ function CardOption(props) {
       props.sumTotalPrice( payload )
    }
 
-
    const price = (id) => {
       if (id === 'eq-almond') {
          const sortRouters = [...props.equipment.routers].sort( (a, b) => a.price - b.price )
@@ -27,6 +27,11 @@ function CardOption(props) {
          return props.equipment.plan.find( p => p.checked ).value
       }
       return props.equipment.price
+   }
+
+   const openModalEquipment = () => {
+      console.log(props)
+      props.showModal({modal: 'equipment', bool: true, props: props.equipment})
    }
 
 
@@ -39,13 +44,14 @@ function CardOption(props) {
             {props.equipment.name === 'Android TV' &&
                <div className="dop-options-card__mark mark">Акция</div>}
 
-            <img src={require( `../../../../img/pic/${props.equipment.img}` ).default} alt={props.equipment.img}/>
+            <img src={require( `../../../../img/pic/${props.equipment.img}.webp` ).default} alt={props.equipment.img}/>
 
          </div>
 
          <div className="dop-options-card__option">
             <div>
                <h3 className="dop-options-card__option-title"
+                   onClick={openModalEquipment}
                    dangerouslySetInnerHTML={{
                       __html: props.equipment.name + (props.equipment.speed
                          ? ` <nobr>${props.equipment.speed}</nobr>`
@@ -96,7 +102,8 @@ function CardOption(props) {
 const mapDispatchToProps = {
    optionSwitch,
    tariffRadioPlan,
-   sumTotalPrice
+   sumTotalPrice,
+   showModal
 }
 
 export default connect( null, mapDispatchToProps )( CardOption )

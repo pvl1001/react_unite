@@ -1,6 +1,4 @@
 import * as PropTypes from "prop-types";
-import {useContext, useState} from "react";
-// import ModalEquipment from "../../modals/ModalEquipment/ModalEquipment";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
 
@@ -33,7 +31,7 @@ function EqCard(props) {
          <div className="equipments-card__info info-card">
 
             <div className="info-card__img">
-               <img src={props.eq.img} alt={props.eq.name}/>
+               <img src={require( `../../../img/pic/${props.eq.img}.webp`).default} alt={props.eq.name}/>
             </div>
             <h2 className="info-card__title">{props.eq.name}</h2>
             <p className="info-card__text">{props.eq.text}</p>

@@ -3,7 +3,7 @@ export default function BlockInfo(props) {
       <li className="tariff-modal__item item-modal wrapp">
          <div className="item-modal__title">
             <div className="item-modal__title-icon">
-               <img src={require( `../../../../img/svg/${props.info.icon}` ).default} alt={props.info.icon}/>
+               <img src={require( `../../../../img/svg/${props.info.icon}.svg` ).default} alt={props.info.icon}/>
             </div>
             <h2>{props.info.title}</h2>
          </div>

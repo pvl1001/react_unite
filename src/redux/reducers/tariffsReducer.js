@@ -61,7 +61,7 @@ const initialState = [
       infoModal: [
          {
             title: "Мобильная связь",
-            icon: "mob_bold.svg",
+            icon: "mob_bold",
             options: [
                {
                   name: "Мобильный интернет",
@@ -92,7 +92,7 @@ const initialState = [
          },
          {
             title: "Интернет",
-            icon: "wi-fi_bold.svg",
+            icon: "wi-fi_bold",
             options: [
                {
                   name: "Скорость",
@@ -108,7 +108,7 @@ const initialState = [
          },
          {
             title: "ТВ",
-            icon: "TV_bold.svg",
+            icon: "TV_bold",
             options: [
                {
                   name: "Мегафон ТВ",
@@ -131,23 +131,23 @@ const initialState = [
             text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
             params: [
                {
-                  icon: "fiolet_googleplay.svg",
+                  icon: "fiolet_googleplay",
                   text: "1000+ приложений в Google Play"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддержка 4K UHD и HDR"
                },
                {
-                  icon: "fiolet_voice-message.svg",
+                  icon: "fiolet_voice-message",
                   text: "Голосовое управление"
                },
                {
-                  icon: "fiolet_video.svg",
+                  icon: "fiolet_video",
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.webp",
+            img: "pristavka",
             price: 199,
             dataView: "androidtv",
             switch: false,
@@ -164,31 +164,31 @@ const initialState = [
             text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 100 Мбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия до 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_settings.svg",
+                  icon: "fiolet_settings",
                   text: "Лёгкость настройки"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.webp",
+            img: "fr100",
             price: "0",
             dataView: "fr100",
             switch: true,
@@ -202,31 +202,31 @@ const initialState = [
             text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 1 Гбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия более 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_router.svg",
+                  icon: "fiolet_router",
                   text: "4 внешние антенны MU‑MIMO"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.webp",
+            img: "fr1000-2",
             price: "0",
             dataView: "fr1000",
             switch: true,
@@ -239,23 +239,23 @@ const initialState = [
             text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
             params: [
                {
-                  icon: "fiolet_umnyj-dom.svg",
+                  icon: "fiolet_umnyj-dom",
                   text: "Работает везде, где есть интернет"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддерживает видео UHD и HD"
                },
                {
-                  icon: "fiolet_wi-fi.svg",
+                  icon: "fiolet_wi-fi",
                   text: "Подключается через Wi‑Fi"
                },
                {
-                  icon: "fiolet_pult.svg",
+                  icon: "fiolet_pult",
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.webp",
+            img: "tv_new",
             price: "0",
             dataView: "mftv",
             switch: true,
@@ -271,7 +271,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.webp",
+            img: "almond",
             price: "от 229",
             icons: [
                {
@@ -297,18 +297,18 @@ const initialState = [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.webp",
+                  img: "Almond-3_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -320,26 +320,26 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.webp",
+                  img: "Almond-3S_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "Whats-left_24.svg",
+                        icon: "Whats-left_24",
                         text: "Встроенный <br> аккумулятор"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "Sim-card_24.svg",
+                        icon: "Sim-card_24",
                         text: "LTE <br> резервирование"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -353,7 +353,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.webp",
+                  img: "Wi-Fi-kamera_about",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -363,7 +363,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.webp",
+                  img: "Datchik-dvizheniya_about",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -373,7 +373,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -383,7 +383,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.webp",
+                  img: "Datchik-protechki-vody_about",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -1414,7 +1414,7 @@ const initialState = [
       infoModal: [
          {
             title: "Мобильная связь",
-            icon: "mob_bold.svg",
+            icon: "mob_bold",
             options: [
                {
                   name: "Мобильный интернет",
@@ -1445,7 +1445,7 @@ const initialState = [
          },
          {
             title: "Интернет",
-            icon: "wi-fi_bold.svg",
+            icon: "wi-fi_bold",
             options: [
                {
                   name: "Скорость",
@@ -1468,23 +1468,23 @@ const initialState = [
             text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
             params: [
                {
-                  icon: "fiolet_googleplay.svg",
+                  icon: "fiolet_googleplay",
                   text: "1000+ приложений в Google Play"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддержка 4K UHD и HDR"
                },
                {
-                  icon: "fiolet_voice-message.svg",
+                  icon: "fiolet_voice-message",
                   text: "Голосовое управление"
                },
                {
-                  icon: "fiolet_video.svg",
+                  icon: "fiolet_video",
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.webp",
+            img: "pristavka",
             price: 199,
             dataView: "androidtv",
             switch: false,
@@ -1501,31 +1501,31 @@ const initialState = [
             text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 100 Мбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия до 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_settings.svg",
+                  icon: "fiolet_settings",
                   text: "Лёгкость настройки"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.webp",
+            img: "fr100",
             price: 55,
             dataView: "fr100",
             switch: false,
@@ -1542,31 +1542,31 @@ const initialState = [
             text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 1 Гбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия более 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_router.svg",
+                  icon: "fiolet_router",
                   text: "4 внешние антенны MU‑MIMO"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.webp",
+            img: "fr1000-2",
             price: 88,
             dataView: "fr1000",
             switch: false,
@@ -1585,7 +1585,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.webp",
+            img: "almond",
             price: "от 229",
             icons: [
                {
@@ -1611,18 +1611,18 @@ const initialState = [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.webp",
+                  img: "Almond-3_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -1634,26 +1634,26 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.webp",
+                  img: "Almond-3S_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "Whats-left_24.svg",
+                        icon: "Whats-left_24",
                         text: "Встроенный <br> аккумулятор"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "Sim-card_24.svg",
+                        icon: "Sim-card_24",
                         text: "LTE <br> резервирование"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -1667,7 +1667,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.webp",
+                  img: "Wi-Fi-kamera_about",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -1677,7 +1677,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.webp",
+                  img: "Datchik-dvizheniya_about",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -1687,7 +1687,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -1697,7 +1697,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.webp",
+                  img: "Datchik-protechki-vody_about",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -1762,7 +1762,7 @@ const initialState = [
       infoModal: [
          {
             title: "Мобильная связь",
-            icon: "mob_bold.svg",
+            icon: "mob_bold",
             options: [
                {
                   name: "Мобильный интернет",
@@ -1793,7 +1793,7 @@ const initialState = [
          },
          {
             title: "Интернет",
-            icon: "wi-fi_bold.svg",
+            icon: "wi-fi_bold",
             options: [
                {
                   name: "Скорость",
@@ -1809,7 +1809,7 @@ const initialState = [
          },
          {
             title: "ТВ",
-            icon: "TV_bold.svg",
+            icon: "TV_bold",
             options: [
                {
                   name: "Мегафон ТВ",
@@ -1832,23 +1832,23 @@ const initialState = [
             text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
             params: [
                {
-                  icon: "fiolet_googleplay.svg",
+                  icon: "fiolet_googleplay",
                   text: "1000+ приложений в Google Play"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддержка 4K UHD и HDR"
                },
                {
-                  icon: "fiolet_voice-message.svg",
+                  icon: "fiolet_voice-message",
                   text: "Голосовое управление"
                },
                {
-                  icon: "fiolet_video.svg",
+                  icon: "fiolet_video",
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.webp",
+            img: "pristavka",
             price: 199,
             dataView: "androidtv",
             switch: false,
@@ -1865,31 +1865,31 @@ const initialState = [
             text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 100 Мбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия до 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_settings.svg",
+                  icon: "fiolet_settings",
                   text: "Лёгкость настройки"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.webp",
+            img: "fr100",
             price: 55,
             dataView: "fr100",
             switch: false,
@@ -1906,31 +1906,31 @@ const initialState = [
             text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 1 Гбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия более 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_router.svg",
+                  icon: "fiolet_router",
                   text: "4 внешние антенны MU‑MIMO"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.webp",
+            img: "fr1000-2",
             price: 88,
             dataView: "fr1000",
             switch: false,
@@ -1946,23 +1946,23 @@ const initialState = [
             text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
             params: [
                {
-                  icon: "fiolet_umnyj-dom.svg",
+                  icon: "fiolet_umnyj-dom",
                   text: "Работает везде, где есть интернет"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддерживает видео UHD и HD"
                },
                {
-                  icon: "fiolet_wi-fi.svg",
+                  icon: "fiolet_wi-fi",
                   text: "Подключается через Wi‑Fi"
                },
                {
-                  icon: "fiolet_pult.svg",
+                  icon: "fiolet_pult",
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.webp",
+            img: "tv_new",
             price: 99,
             dataView: "mftv",
             switch: false,
@@ -1981,7 +1981,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.webp",
+            img: "almond",
             price: "от 229",
             icons: [
                {
@@ -2007,18 +2007,18 @@ const initialState = [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.webp",
+                  img: "Almond-3_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -2030,26 +2030,26 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.webp",
+                  img: "Almond-3S_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "Whats-left_24.svg",
+                        icon: "Whats-left_24",
                         text: "Встроенный <br> аккумулятор"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "Sim-card_24.svg",
+                        icon: "Sim-card_24",
                         text: "LTE <br> резервирование"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -2063,7 +2063,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.webp",
+                  img: "Wi-Fi-kamera_about",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -2073,7 +2073,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.webp",
+                  img: "Datchik-dvizheniya_about",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -2083,7 +2083,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -2093,7 +2093,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.webp",
+                  img: "Datchik-protechki-vody_about",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -3140,7 +3140,7 @@ const initialState = [
       infoModal: [
          {
             title: "Мобильная связь",
-            icon: "mob_bold.svg",
+            icon: "mob_bold",
             options: [
                {
                   name: "Мобильный интернет",
@@ -3171,7 +3171,7 @@ const initialState = [
          },
          {
             title: "Интернет",
-            icon: "wi-fi_bold.svg",
+            icon: "wi-fi_bold",
             options: [
                {
                   name: "Скорость",
@@ -3194,23 +3194,23 @@ const initialState = [
             text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
             params: [
                {
-                  icon: "fiolet_googleplay.svg",
+                  icon: "fiolet_googleplay",
                   text: "1000+ приложений в Google Play"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддержка 4K UHD и HDR"
                },
                {
-                  icon: "fiolet_voice-message.svg",
+                  icon: "fiolet_voice-message",
                   text: "Голосовое управление"
                },
                {
-                  icon: "fiolet_video.svg",
+                  icon: "fiolet_video",
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.webp",
+            img: "pristavka",
             price: 199,
             dataView: "androidtv",
             switch: false,
@@ -3227,31 +3227,31 @@ const initialState = [
             text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 100 Мбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия до 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_settings.svg",
+                  icon: "fiolet_settings",
                   text: "Лёгкость настройки"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.webp",
+            img: "fr100",
             price: 55,
             dataView: "fr100",
             switch: false,
@@ -3268,31 +3268,31 @@ const initialState = [
             text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 1 Гбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия более 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_router.svg",
+                  icon: "fiolet_router",
                   text: "4 внешние антенны MU‑MIMO"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.webp",
+            img: "fr1000-2",
             price: 88,
             dataView: "fr1000",
             switch: false,
@@ -3308,23 +3308,23 @@ const initialState = [
             text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
             params: [
                {
-                  icon: "fiolet_umnyj-dom.svg",
+                  icon: "fiolet_umnyj-dom",
                   text: "Работает везде, где есть интернет"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддерживает видео UHD и HD"
                },
                {
-                  icon: "fiolet_wi-fi.svg",
+                  icon: "fiolet_wi-fi",
                   text: "Подключается через Wi‑Fi"
                },
                {
-                  icon: "fiolet_pult.svg",
+                  icon: "fiolet_pult",
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.webp",
+            img: "tv_new",
             price: 99,
             dataView: "mftv",
             switch: false,
@@ -3343,7 +3343,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.webp",
+            img: "almond",
             price: "от 229",
             icons: [
                {
@@ -3369,18 +3369,18 @@ const initialState = [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.webp",
+                  img: "Almond-3_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -3392,26 +3392,26 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.webp",
+                  img: "Almond-3S_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "Whats-left_24.svg",
+                        icon: "Whats-left_24",
                         text: "Встроенный <br> аккумулятор"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "Sim-card_24.svg",
+                        icon: "Sim-card_24",
                         text: "LTE <br> резервирование"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -3425,7 +3425,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.webp",
+                  img: "Wi-Fi-kamera_about",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -3435,7 +3435,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.webp",
+                  img: "Datchik-dvizheniya_about",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -3445,7 +3445,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -3455,7 +3455,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.webp",
+                  img: "Datchik-protechki-vody_about",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -3541,7 +3541,7 @@ const initialState = [
       infoModal: [
          {
             title: "Мобильная связь",
-            icon: "mob_bold.svg",
+            icon: "mob_bold",
             options: [
                {
                   name: "Мобильный интернет",
@@ -3572,7 +3572,7 @@ const initialState = [
          },
          {
             title: "Интернет",
-            icon: "wi-fi_bold.svg",
+            icon: "wi-fi_bold",
             options: [
                {
                   name: "Скорость",
@@ -3588,7 +3588,7 @@ const initialState = [
          },
          {
             title: "ТВ",
-            icon: "TV_bold.svg",
+            icon: "TV_bold",
             options: [
                {
                   name: "Мегафон ТВ",
@@ -3611,23 +3611,23 @@ const initialState = [
             text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
             params: [
                {
-                  icon: "fiolet_googleplay.svg",
+                  icon: "fiolet_googleplay",
                   text: "1000+ приложений в Google Play"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддержка 4K UHD и HDR"
                },
                {
-                  icon: "fiolet_voice-message.svg",
+                  icon: "fiolet_voice-message",
                   text: "Голосовое управление"
                },
                {
-                  icon: "fiolet_video.svg",
+                  icon: "fiolet_video",
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.webp",
+            img: "pristavka",
             price: 199,
             dataView: "androidtv",
             switch: false,
@@ -3644,31 +3644,31 @@ const initialState = [
             text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 100 Мбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия до 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_settings.svg",
+                  icon: "fiolet_settings",
                   text: "Лёгкость настройки"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.webp",
+            img: "fr100",
             price: "0",
             dataView: "fr100",
             switch: true,
@@ -3682,31 +3682,31 @@ const initialState = [
             text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 1 Гбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия более 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_router.svg",
+                  icon: "fiolet_router",
                   text: "4 внешние антенны MU‑MIMO"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.webp",
+            img: "fr1000-2",
             price: "0",
             dataView: "fr1000",
             switch: true,
@@ -3719,23 +3719,23 @@ const initialState = [
             text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
             params: [
                {
-                  icon: "fiolet_umnyj-dom.svg",
+                  icon: "fiolet_umnyj-dom",
                   text: "Работает везде, где есть интернет"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддерживает видео UHD и HD"
                },
                {
-                  icon: "fiolet_wi-fi.svg",
+                  icon: "fiolet_wi-fi",
                   text: "Подключается через Wi‑Fi"
                },
                {
-                  icon: "fiolet_pult.svg",
+                  icon: "fiolet_pult",
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.webp",
+            img: "tv_new",
             price: "0",
             dataView: "mftv",
             switch: true,
@@ -3751,7 +3751,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.webp",
+            img: "almond",
             price: "от 229",
             icons: [
                {
@@ -3777,18 +3777,18 @@ const initialState = [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.webp",
+                  img: "Almond-3_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -3800,26 +3800,26 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.webp",
+                  img: "Almond-3S_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "Whats-left_24.svg",
+                        icon: "Whats-left_24",
                         text: "Встроенный <br> аккумулятор"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "Sim-card_24.svg",
+                        icon: "Sim-card_24",
                         text: "LTE <br> резервирование"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -3833,7 +3833,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.webp",
+                  img: "Wi-Fi-kamera_about",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -3843,7 +3843,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.webp",
+                  img: "Datchik-dvizheniya_about",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -3853,7 +3853,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -3863,7 +3863,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.webp",
+                  img: "Datchik-protechki-vody_about",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -5244,7 +5244,7 @@ const initialState = [
       infoModal: [
          {
             title: "Мобильная связь",
-            icon: "mob_bold.svg",
+            icon: "mob_bold",
             options: [
                {
                   name: "Мобильный интернет",
@@ -5275,7 +5275,7 @@ const initialState = [
          },
          {
             title: "Интернет",
-            icon: "wi-fi_bold.svg",
+            icon: "wi-fi_bold",
             options: [
                {
                   name: "Скорость",
@@ -5291,7 +5291,7 @@ const initialState = [
          },
          {
             title: "ТВ",
-            icon: "TV_bold.svg",
+            icon: "TV_bold",
             options: [
                {
                   name: "Мегафон ТВ",
@@ -5314,23 +5314,23 @@ const initialState = [
             text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
             params: [
                {
-                  icon: "fiolet_googleplay.svg",
+                  icon: "fiolet_googleplay",
                   text: "1000+ приложений в Google Play"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддержка 4K UHD и HDR"
                },
                {
-                  icon: "fiolet_voice-message.svg",
+                  icon: "fiolet_voice-message",
                   text: "Голосовое управление"
                },
                {
-                  icon: "fiolet_video.svg",
+                  icon: "fiolet_video",
                   text: "Google Chromecast"
                }
             ],
-            img: "pristavka.webp",
+            img: "pristavka",
             price: 199,
             dataView: "androidtv",
             switch: false,
@@ -5347,31 +5347,31 @@ const initialState = [
             text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 100 Мбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия до 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_settings.svg",
+                  icon: "fiolet_settings",
                   text: "Лёгкость настройки"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr100.webp",
+            img: "fr100",
             price: 55,
             dataView: "fr100",
             switch: false,
@@ -5388,31 +5388,31 @@ const initialState = [
             text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 1 Гбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Диапазон частот 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_mobile-internet.svg",
+                  icon: "fiolet_mobile-internet",
                   text: "Возможность подключения 4G"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Зона покрытия более 70 м<sup>2</sup>"
                },
                {
-                  icon: "fiolet_router.svg",
+                  icon: "fiolet_router",
                   text: "4 внешние антенны MU‑MIMO"
                },
                {
-                  icon: "fiolet_block.svg",
+                  icon: "fiolet_block",
                   text: "Родительский контроль"
                }
             ],
-            img: "fr1000-2.webp",
+            img: "fr1000-2",
             price: 88,
             dataView: "fr1000",
             switch: false,
@@ -5428,23 +5428,23 @@ const initialState = [
             text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
             params: [
                {
-                  icon: "fiolet_umnyj-dom.svg",
+                  icon: "fiolet_umnyj-dom",
                   text: "Работает везде, где есть интернет"
                },
                {
-                  icon: "fiolet_4k.svg",
+                  icon: "fiolet_4k",
                   text: "Поддерживает видео UHD и HD"
                },
                {
-                  icon: "fiolet_wi-fi.svg",
+                  icon: "fiolet_wi-fi",
                   text: "Подключается через Wi‑Fi"
                },
                {
-                  icon: "fiolet_pult.svg",
+                  icon: "fiolet_pult",
                   text: "Управляется Bluetooth‑пультом"
                }
             ],
-            img: "tv_new.webp",
+            img: "tv_new",
             price: 99,
             dataView: "mftv",
             switch: false,
@@ -5463,7 +5463,7 @@ const initialState = [
                "Объедините устройства в умный дом",
                "Получайте сигналы, если в дом кто-то проникнет"
             ],
-            img: "almond.webp",
+            img: "almond",
             price: "от 229",
             icons: [
                {
@@ -5489,18 +5489,18 @@ const initialState = [
                {
                   id: "almond-0",
                   name: "Роутер Almond 3",
-                  img: "Almond-3_about.webp",
+                  img: "Almond-3_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -5512,26 +5512,26 @@ const initialState = [
                {
                   id: "almond-1",
                   name: "Роутер Almond 3S",
-                  img: "Almond-3S_about.webp",
+                  img: "Almond-3S_about",
                   params: [
                      {
-                        icon: "speed-2_w.svg",
+                        icon: "speed-2_w",
                         text: "Скорость <br> до 300 Мбит/с"
                      },
                      {
-                        icon: "Whats-left_24.svg",
+                        icon: "Whats-left_24",
                         text: "Встроенный <br> аккумулятор"
                      },
                      {
-                        icon: "zone-24_w.svg",
+                        icon: "zone-24_w",
                         text: "Зона покрытия <br> до 120 м<sup>2</sup>"
                      },
                      {
-                        icon: "Sim-card_24.svg",
+                        icon: "Sim-card_24",
                         text: "LTE <br> резервирование"
                      },
                      {
-                        icon: "hertz_24_w.svg",
+                        icon: "hertz_24_w",
                         text: "Диапазоны частот <br> 2,4 и 5 Ггц"
                      }
                   ],
@@ -5545,7 +5545,7 @@ const initialState = [
                {
                   id: "sensor-0",
                   name: "Wi-Fi камера",
-                  img: "Wi-Fi-kamera_about.webp",
+                  img: "Wi-Fi-kamera_about",
                   desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
                   price: 120,
                   totalPrice: 0,
@@ -5555,7 +5555,7 @@ const initialState = [
                {
                   id: "sensor-1",
                   name: "Датчик движения",
-                  img: "Datchik-dvizheniya_about.webp",
+                  img: "Datchik-dvizheniya_about",
                   desc: "Будьте в курсе любых передвижений в доме",
                   price: 50,
                   totalPrice: 0,
@@ -5565,7 +5565,7 @@ const initialState = [
                {
                   id: "sensor-2",
                   name: "Датчик открытия и закрытия",
-                  img: "Datchik-otkrytiya-i-zakrytiya_about.webp",
+                  img: "Datchik-otkrytiya-i-zakrytiya_about",
                   desc: "Будьте в курсе всех незваных гостей",
                   price: 50,
                   totalPrice: 0,
@@ -5575,7 +5575,7 @@ const initialState = [
                {
                   id: "sensor-3",
                   name: "Датчик протечки воды",
-                  img: "Datchik-protechki-vody_about.webp",
+                  img: "Datchik-protechki-vody_about",
                   desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
                   price: 50,
                   totalPrice: 0,
@@ -5954,7 +5954,7 @@ const initialState = [
       infoModal: [
          {
             title: "Мобильная связь",
-            icon: "mob_bold.svg",
+            icon: "mob_bold",
             options: [
                {
                   name: "Мобильный интернет",
@@ -5985,7 +5985,7 @@ const initialState = [
          },
          {
             title: "Интернет",
-            icon: "wi-fi_bold.svg",
+            icon: "wi-fi_bold",
             options: [
                {
                   name: "Скорость",
@@ -6001,7 +6001,7 @@ const initialState = [
          },
          {
             title: "ТВ",
-            icon: "TV_bold.svg",
+            icon: "TV_bold",
             options: [
                {
                   name: "Мегафон ТВ",
@@ -6022,27 +6022,27 @@ const initialState = [
             name: "4G Wi-Fi роутер",
             params: [
                {
-                  icon: "fiolet_speed.svg",
+                  icon: "fiolet_speed",
                   text: "Скорость до 150 Мбит/с"
                },
                {
-                  icon: "fiolet_hertz.svg",
+                  icon: "fiolet_hertz",
                   text: "Wi-Fi 2,4 и 5 ГГц"
                },
                {
-                  icon: "fiolet_zone.svg",
+                  icon: "fiolet_zone",
                   text: "Уверенный сигнал и большая зона покрытия"
                },
                {
-                  icon: "fiolet_settings.svg",
+                  icon: "fiolet_settings",
                   text: "Простое подключение до 50 пользователей"
                },
                {
-                  icon: "fiolet_razmer.svg",
+                  icon: "fiolet_razmer",
                   text: "Компактные размеры"
                }
             ],
-            img: "router_info.webp",
+            img: "router_info",
             price: 200,
             dataView: "router-4g",
             switch: true,
