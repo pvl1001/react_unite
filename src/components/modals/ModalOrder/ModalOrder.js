@@ -19,7 +19,7 @@ function ModalOrder (props) {
              show={props.show}
              onHide={onHide}
              className="order-modal">
-            <Modal.Body className="requisition" >
+            <div className="requisition" >
                <button type="button" className="modal-close" onClick={onHide}/>
 
                <h2>Заявка на подключение</h2>
@@ -45,13 +45,13 @@ function ModalOrder (props) {
 
                   <button type="submit" className="order-modal__btn btn" data-view="modal_order" >Отправить</button>
                </form>
-            </Modal.Body>
-            <Modal.Body className="showModal-thx" hidden>
+            </div>
+            <div className="showModal-thx" hidden>
                <button type="button" className="modal-close" onClick={onHide}/>
 
                <h2 className="order-thx__title">Спасибо за заявку!</h2>
                <p className="order-thx__text">Наш оператор свяжется с вами в рабочее время с 9 до 21 часов</p>
-            </Modal.Body>
+            </div>
       </Modal>
    )
 

@@ -4,7 +4,7 @@
       justify-content: center;
    }
 
-   .modal-body {
+   .modal-content {
       padding: 81px 125px 73px;
 
       &__title {
@@ -231,7 +231,7 @@
    @media (max-width: 1279px) {
       background-color: #fff;
 
-      .modal-body {
+      .modal-content {
          padding: 60px 275px;
          height: 100vh;
          display: flex;
@@ -275,7 +275,7 @@
    }
 
    @media (max-width: 1023px) {
-      .modal-body {
+      .modal-content {
          padding: 60px 122px;
       }
 
@@ -323,7 +323,7 @@
 
    @media (max-width: 767px) {
 
-      .modal-body {
+      .modal-content {
          padding: 95px 30px 80px;
       }
 

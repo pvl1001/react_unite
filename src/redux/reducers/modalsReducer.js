@@ -8,6 +8,8 @@ const initialState = {
    equipment: {show: false},
    tariff: {show: false},
    tariffAll: {show: false},
+   almond: {show: false},
+   aboutAlmond: {show: false},
 }
 
 export function modalsReducer(state = initialState, action) {

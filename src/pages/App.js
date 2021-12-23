@@ -15,6 +15,8 @@ import ModalMftv from "../components/modals/ModalMftv/ModalMftv";
 import ModalEquipment from "../components/modals/ModalEquipment/ModalEquipment";
 import ModalTariff from "../components/modals/ModalTariff/ModalTariff";
 import ModalTariffAll from "../components/modals/ModalTariffAll/ModalTariffAll";
+import ModalAlmond from "../components/modals/ModalAlmond/ModalAlmond";
+import ModalAboutAlmond from "../components/modals/AboutAlmond/ModalAboutAlmond";
 
 export default function App() {
    console.log('APP')
@@ -39,6 +41,8 @@ export default function App() {
          <ModalMftv/>
          <ModalTariff/>
          <ModalTariffAll/>
+         <ModalAlmond/>
+         <ModalAboutAlmond/>
       </>
    )
 }

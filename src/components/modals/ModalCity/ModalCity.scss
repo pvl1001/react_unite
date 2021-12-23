@@ -3,7 +3,7 @@
       max-width: 1088px;
    }
 
-   .modal-body {
+   .modal-content {
       padding: 60px 115px 60px 138px;
       font-size: 15px;
       line-height: 20px;
@@ -107,7 +107,7 @@
          width: 100%;
       }
 
-      .modal-body {
+      .modal-content {
          font-size: 15px;
          font-weight: 500;
          height: 100vh;
@@ -119,7 +119,7 @@
    }
 
    @media (max-width: 1024px) {
-      .modal-body {
+      .modal-content {
          padding: 60px 30px;
       }
    }

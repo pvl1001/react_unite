@@ -4,7 +4,8 @@
       height: auto;
    }
 
-   .modal-body {
+   .modal-content {
+      display: flex;
       height: auto;
       padding: 45px 75px 45px;
       max-height: 825px;
@@ -318,7 +319,7 @@
          width: 100%;
       }
 
-      .modal-body {
+      .modal-content {
          padding: 45px 24px 45px;
          height: 100%;
          justify-content: center;
@@ -327,7 +328,7 @@
       }
    }
    @media (max-width: 1023px) {
-      .modal-body {
+      .modal-content {
          flex-wrap: wrap;
          max-height: none;
       }
@@ -407,7 +408,7 @@
    }
    @media (max-width: 767px) {
 
-      .modal-body {
+      .modal-content {
          padding: 45px 16px 45px;
 
       }

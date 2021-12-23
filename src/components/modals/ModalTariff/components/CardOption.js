@@ -30,9 +30,13 @@ function CardOption(props) {
    }
 
    const openModalEquipment = () => {
-      console.log(props)
-      props.showModal({modal: 'equipment', bool: true, props: props.equipment})
+      props.showModal( {modal: 'equipment', bool: true, props: props.equipment} )
    }
+
+   const openModalAlmond = () => {
+      props.showModal( {modal: 'almond', bool: true, props: ''} )
+   }
+
 
 
    return (
@@ -50,13 +54,19 @@ function CardOption(props) {
 
          <div className="dop-options-card__option">
             <div>
-               <h3 className="dop-options-card__option-title"
-                   onClick={openModalEquipment}
-                   dangerouslySetInnerHTML={{
-                      __html: props.equipment.name + (props.equipment.speed
-                         ? ` <nobr>${props.equipment.speed}</nobr>`
-                         : '')
-                   }}/>
+               {props.equipment.id === 'eq-almond'
+                  ? <h3 className="dop-options-card__option-title"
+                        onClick={openModalAlmond}
+                        dangerouslySetInnerHTML={{
+                           __html: props.equipment.name + (props.equipment.speed
+                              ? ` <nobr>${props.equipment.speed}</nobr>`
+                              : '')
+                        }}/>
+                  : <h3 className="dop-options-card__option-title"
+                        onClick={openModalEquipment}>
+                     {props.equipment.name}</h3>}
+
+
             </div>
 
             {props.equipment.plan ? <p>Рассрочка</p> : <p>Аренда</p>}

@@ -20,7 +20,6 @@ function ModalTariff(props) {
             <button type="button" className="modal-close" onClick={onHide}/>
          </div>
 
-         <Modal.Body>
 
             <div className="tariff-modal__title wrapp">
                <h1>Объединяй! {props.tariff.name}</h1>
@@ -63,7 +62,6 @@ function ModalTariff(props) {
 
             <ModalTariffFooter tariff={props.tariff}/>
 
-         </Modal.Body>
       </Modal>
 
    )

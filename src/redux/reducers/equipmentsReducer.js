@@ -146,7 +146,7 @@ const initialState = [
    {
       "id": "eq-almond",
       "name": "Умный дом",
-      "text": "Wi-Fi роутер Almond с системой охраны дома.",
+      "text": "Wi-Fi роутер ModalAlmond с системой охраны дома.",
       "params": [
          "Настройте за несколько секунд",
          "Управляйте Wi-Fi через приложение",
@@ -177,8 +177,8 @@ const initialState = [
       "routers": [
          {
             "id": "almond-0",
-            "name": "Роутер Almond 3",
-            "img": "Almond-3_about",
+            "name": "Роутер ModalAlmond 3",
+            "img": "ModalAlmond-3_about",
             "params": [
                {
                   "icon": "speed-2_w",
@@ -200,8 +200,8 @@ const initialState = [
          },
          {
             "id": "almond-1",
-            "name": "Роутер Almond 3S",
-            "img": "Almond-3S_about",
+            "name": "Роутер ModalAlmond 3S",
+            "img": "ModalAlmond-3S_about",
             "params": [
                {
                   "icon": "speed-2_w",

@@ -21,7 +21,6 @@ function ModalEquipment(props) {
              show={props.show}
              onHide={onHide}
       >
-         <Modal.Body>
 
             <button type="button" className="modal-close" onClick={onHide}/>
             <h1 className="performance__title">
@@ -74,10 +73,6 @@ function ModalEquipment(props) {
                   </div>
                </>
             }
-
-
-
-         </Modal.Body>
 
       </Modal>
    )

@@ -39,7 +39,7 @@ function ModalTariffAll(props) {
       }
    ]
 
-   const onHide = () => props.showModal({modal: 'tariffAll', bool: false})
+   const onHide = () => props.showModal( {modal: 'tariffAll', bool: false} )
 
 
    return (
@@ -53,42 +53,40 @@ function ModalTariffAll(props) {
             <button type="button" className="modal-close" onClick={onHide}/>
          </div>
 
-         <Modal.Body >
 
-            <h1 className="tariff-modal__title wrapp">Без переплат. Всё</h1>
+         <h1 className="tariff-modal__title wrapp">Без переплат. Всё</h1>
 
-            <div className="tariff-modal__container">
+         <div className="tariff-modal__container">
 
-               <ul className="tariff-modal__items">
-                  <li className="tariff-modal__item item-modal wrapp">
-                     <ul className="item-modal__options">
+            <ul className="tariff-modal__items">
+               <li className="tariff-modal__item item-modal wrapp">
+                  <ul className="item-modal__options">
 
-                        {data.map( el => (
-                           <li key={el.name} className="item-modal__option option-item">
-                              <div className="option-item__text">
+                     {data.map( el => (
+                        <li key={el.name} className="item-modal__option option-item">
+                           <div className="option-item__text">
 
-                                 <p className="option-item__text-name">
-                                    {el.name}
-                                 </p>
-
-                                 {el.description && (
-                                    <p className="option-item__text-desc">
-                                       {el.description}</p>
-                                 )}
-
-                              </div>
-                              <p className="option-item__value">
-                                 {el.value}
+                              <p className="option-item__text-name">
+                                 {el.name}
                               </p>
-                           </li>
-                        ) )}
 
-                     </ul>
-                  </li>
-               </ul>
+                              {el.description && (
+                                 <p className="option-item__text-desc">
+                                    {el.description}</p>
+                              )}
 
-            </div>
-         </Modal.Body>
+                           </div>
+                           <p className="option-item__value">
+                              {el.value}
+                           </p>
+                        </li>
+                     ) )}
+
+                  </ul>
+               </li>
+            </ul>
+
+         </div>
       </Modal>
    )
 
@@ -102,4 +100,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
    showModal
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ModalTariffAll)
+export default connect( mapStateToProps, mapDispatchToProps )( ModalTariffAll )

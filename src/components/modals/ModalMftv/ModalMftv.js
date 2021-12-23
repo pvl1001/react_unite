@@ -21,31 +21,29 @@ function ModalMftv(props) {
             <button type="button" className="modal-close" onClick={onHide}/>
          </div>
 
-         <Modal.Body>
-            <div className="tariff-modal__title wrapp" data-view="mftv_{{id}}_start">
-               <h1>МегаФон ТВ</h1>
-            </div>
+         <div className="tariff-modal__title wrapp" data-view="mftv_{{id}}_start">
+            <h1>МегаФон ТВ</h1>
+         </div>
 
-            <div className="tariff-modal__container">
+         <div className="tariff-modal__container">
 
-               <ul className="tariff-modal__items">
-                  {props.mftv.map( el => (
-                     <li key={el.name} className="tariff-modal__item item-modal wrapp">
+            <ul className="tariff-modal__items">
+               {props.mftv.map( el => (
+                  <li key={el.name} className="tariff-modal__item item-modal wrapp">
 
-                        <img src={require( `../../../img/svg/mftv_${el.icon}.svg` ).default}
-                             className={`item-modal__logo item-modal__logo_${el.icon}`} height={40} alt={el.icon}/>
+                     <img src={require( `../../../img/svg/mftv_${el.icon}.svg` ).default}
+                          className={`item-modal__logo item-modal__logo_${el.icon}`} height={40} alt={el.icon}/>
 
-                        <p className="item-modal__desc">{el.desc}</p>
+                     <p className="item-modal__desc">{el.desc}</p>
 
-                     </li>
-                  ) )}
-               </ul>
+                  </li>
+               ) )}
+            </ul>
 
-               <FaqMftv faq={props.mftv.faq}/>
-            </div>
+            <FaqMftv faq={props.mftv.faq}/>
+         </div>
 
 
-         </Modal.Body>
       </Modal>
    )
 

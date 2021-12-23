@@ -420,7 +420,6 @@ function ModalCity(props) {
              show={props.show}
              onHide={onHide}
       >
-         <Modal.Body>
             <button type="button" className="modal-close" onClick={onHide}/>
             <div className="city-selection-wrapper">
                <div className="city-selection__header header-city">
@@ -450,7 +449,6 @@ function ModalCity(props) {
 
                </div>
             </div>
-         </Modal.Body>
       </Modal>
    )
 }

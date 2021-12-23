@@ -4,7 +4,7 @@
       padding: 0 16px;
    }
 
-   .modal-body {
+   .modal-content {
       padding: 105px 90px;
       flex-direction: row;
    }
@@ -71,7 +71,7 @@
          margin: 0 auto;
       }
 
-      .modal-body {
+      .modal-content {
          min-height: 0;
          height: auto;
          justify-content: flex-start;
@@ -80,7 +80,7 @@
    }
 
    @media (max-width: 1023px) {
-      .modal-body {
+      .modal-content {
          justify-content: flex-start;
          padding: 105px 50px;
       }
@@ -98,7 +98,7 @@
          align-items: flex-start;
       }
 
-      .modal-body {
+      .modal-content {
          padding: 88px 0;
       }
 
