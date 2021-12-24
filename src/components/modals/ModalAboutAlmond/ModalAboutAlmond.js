@@ -1,26 +1,29 @@
-import './AboutAlmond.scss'
+import './ModalAboutAlmond.scss'
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
-import {switchAlmond} from "../../../redux/actions/almond";
+import {counterAlmond, switchAlmond} from "../../../redux/actions/almond";
 
 
 function ModalAboutAlmond(props) {
 
    const onHide = () => props.showModal( {modal: 'aboutAlmond', bool: false} )
-   const handleSwitchAlmond = (e) => props.switchAlmond( {props, checked: e.target.checked} )
-
-
-   const switchStatus = () => {
+   const handleSwitchAlmond = (e) => props.switchAlmond( {...props, checked: e.target.checked} )
+   const handlerCounter = (name) => props.counterAlmond( {...props, name, cnt} )
+   const getData = (name) => {
       if (props.data) {
          const almond = props
             .tariffs.find( tariff => tariff.id === props.tariffID )
             .equipments.find( eq => eq.id === 'eq-almond' )
 
          return props.data.id.split( '-' )[0] === 'almond'
-            ? almond.routers.find( router => router.id === props.data.id ).checked
-            : almond.sensors.find( sensor => sensor.id === props.data.id ).checked
+            ? almond.routers.find( router => router.id === props.data.id )[name]
+            : almond.sensors.find( sensor => sensor.id === props.data.id )[name]
       }
+   }
+   if (props.data) {
+      var checked = getData( 'checked' ) || false
+      var cnt = getData( 'cnt' ) || 1
    }
 
 
@@ -66,7 +69,9 @@ function ModalAboutAlmond(props) {
                   <div className="aboutAlmond__switch item-option">
                      <label>
                         <div className="switch">
-                           <input type="checkbox" defaultChecked={switchStatus()} onChange={(e) => handleSwitchAlmond(e)}/>
+                           <input type="checkbox"
+                                  checked={checked}
+                                  onChange={(e) => handleSwitchAlmond( e )}/>
                            <span className="round"/>
                         </div>
                         <div className="item-option__text">
@@ -76,11 +81,16 @@ function ModalAboutAlmond(props) {
                      </label>
 
                      <div className="aboutAlmond__counter counter">
-                        <div className="counter__minus">-
-                        </div>
-                        <input type="text" readOnly value="1"/>
-                        <div className="counter__plus">+
-                        </div>
+                        <button className="counter__minus"
+                                disabled={cnt === 1}
+                                onClick={() => handlerCounter( 'minus' )}>
+                           &minus;
+                        </button>
+                        <input type="text" readOnly value={cnt}/>
+                        <button className="counter__plus"
+                                onClick={() => handlerCounter( 'plus' )}>
+                           +
+                        </button>
                      </div>
 
                   </div>
@@ -110,7 +120,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-   showModal, switchAlmond
+   showModal,
+   switchAlmond,
+   counterAlmond,
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( ModalAboutAlmond )

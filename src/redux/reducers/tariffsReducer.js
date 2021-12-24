@@ -1,10 +1,9 @@
 import {
-   COUNTER_MINUS,
-   COUNTER_PLUS,
+   COUNTER_SIM,
    TARIFF_RADIO_PLAN,
    HANDLE_SWITCH,
    SUM_TOTAL_PRICE,
-   HANDLE_SWITCH_ALMOND
+   HANDLE_SWITCH_ALMOND, HANDLER_COUNTER_ALMOND
 } from "../types";
 import produce from "immer";
 
@@ -6010,41 +6009,21 @@ export function tariffsReducer(state = initialState, action) {
             optionCard.switch = !optionCard.switch
          } )
 
-      case HANDLE_SWITCH_ALMOND:
+      case COUNTER_SIM:
          return produce( state, setState => {
-            const data = action.payload.props.data
-            const checked = action.payload.checked
-            const id = action.payload.props.tariffID
-            const currentTariff = setState.find( tariff => tariff.id === id )
-            const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
+            const id = action.payload.id
+            const i = action.payload.index
+            const cnt = action.payload.cnt
+            const name = action.payload.name
+            const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
 
-            if (data.id.split( '-' )[0] === 'almond') {
-               const router = almond.routers.find( router => router.id === data.id )
-               router.checked = checked
-            } else {
-               const sensor = almond.sensors.find( sensor => sensor.id === data.id )
-               sensor.checked = checked
+            if (name === 'plus') {
+               optionCard.cnt++
+               optionCard.switch = true
             }
-
-         } )
-
-      case COUNTER_PLUS :
-         return produce( state, setState => {
-            const id = action.payload.id
-            const i = action.payload.index
-            const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
-            optionCard.cnt++
-            optionCard.switch = true
-            optionCard.sumPrice = optionCard.price * optionCard.cnt
-            optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
-         } )
-
-      case COUNTER_MINUS :
-         return produce( state, setState => {
-            const id = action.payload.id
-            const i = action.payload.index
-            const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
-            optionCard.cnt--
+            if (name === 'minus') {
+               optionCard.cnt--
+            }
             optionCard.sumPrice = optionCard.price * optionCard.cnt
             optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
          } )
@@ -6075,6 +6054,51 @@ export function tariffsReducer(state = initialState, action) {
                } )
                .reduce( (a, b) => a + b, currentTariff.price )
          } )
+
+      case HANDLE_SWITCH_ALMOND:
+         return produce( state, setState => {
+            const data = action.payload.data
+            const checked = action.payload.checked
+            const id = action.payload.tariffID
+            const currentTariff = setState.find( tariff => tariff.id === id )
+            const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
+
+            if (data.id.split( '-' )[0] === 'almond') {
+               const router = almond.routers.find( router => router.id === data.id )
+               router.checked = checked
+            } else {
+               const sensor = almond.sensors.find( sensor => sensor.id === data.id )
+               sensor.checked = checked
+            }
+
+         } )
+
+      case HANDLER_COUNTER_ALMOND:
+         return produce( state, setState => {
+            let cnt = action.payload.cnt
+            const name = action.payload.name
+            const data = action.payload.data
+            const id = action.payload.tariffID
+            const currentTariff = setState.find( tariff => tariff.id === id )
+            const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
+
+            if (data.id.split( '-' )[0] === 'almond') {
+               const router = almond.routers.find( router => router.id === data.id )
+               if (name === 'plus') {
+                  router.cnt = ++cnt
+                  router.checked = true
+               }
+               if (name === 'minus') router.cnt = --cnt
+            } else {
+               const sensor = almond.sensors.find( sensor => sensor.id === data.id )
+               if (name === 'plus') {
+                  sensor.cnt = ++cnt
+                  sensor.checked = true
+               }
+               if (name === 'minus') sensor.cnt = --cnt
+            }
+         } )
+
       default:
          return state
    }
