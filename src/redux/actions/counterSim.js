@@ -1,11 +1,7 @@
-import {COUNTER_MINUS, COUNTER_PLUS, TARIFF_RADIO_PLAN} from "../types";
+import {COUNTER_SIM, TARIFF_RADIO_PLAN} from "../types";
 
-export function counterPlus(payload) {
-   return {type: COUNTER_PLUS, payload}
-}
-
-export function counterMinus(payload) {
-   return {type: COUNTER_MINUS, payload}
+export function counterSim(payload) {
+   return {type: COUNTER_SIM, payload}
 }
 
 export function tariffRadioPlan(payload) {

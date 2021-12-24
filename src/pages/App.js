@@ -16,7 +16,7 @@ import ModalEquipment from "../components/modals/ModalEquipment/ModalEquipment";
 import ModalTariff from "../components/modals/ModalTariff/ModalTariff";
 import ModalTariffAll from "../components/modals/ModalTariffAll/ModalTariffAll";
 import ModalAlmond from "../components/modals/ModalAlmond/ModalAlmond";
-import ModalAboutAlmond from "../components/modals/AboutAlmond/ModalAboutAlmond";
+import ModalAboutAlmond from "../components/modals/ModalAboutAlmond/ModalAboutAlmond";
 
 export default function App() {
    console.log('APP')

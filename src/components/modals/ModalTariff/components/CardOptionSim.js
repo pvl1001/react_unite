@@ -1,13 +1,12 @@
 import optionSwitch from "../../../../redux/actions/optionSwitch";
 import {connect} from "react-redux";
-import {counterMinus, counterPlus} from "../../../../redux/actions/counterSim";
+import {counterSim} from "../../../../redux/actions/counterSim";
 import showModal from "../../../../redux/actions/showModal";
 import {sumTotalPrice} from "../../../../redux/actions/sumTotalPrice";
 
 function CardOptionSim(props) {
 
    const payload = {id: props.id, index: props.idx}
-   const payloadCounter = {id: props.id, index: props.idx, cnt: props.equipment.cnt}
    const showModalTariffAll = () => props.showModal( {modal: 'tariffAll', bool: true} )
 
    const handleSwitch = () => {
@@ -15,18 +14,9 @@ function CardOptionSim(props) {
       props.sumTotalPrice( payload )
    }
 
-   const handlePlus = () => {
-      if (props.equipment.cnt < 10) {
-         props.counterPlus( payloadCounter )
-         props.sumTotalPrice( payload )
-      }
-   }
-
-   const handleMinus = () => {
-      if (props.equipment.cnt > 1) {
-         props.counterMinus( payloadCounter )
-         props.sumTotalPrice( payload )
-      }
+   const handlerCounter = (name) => {
+      props.counterSim( {id: props.id, index: props.idx, cnt: props.equipment.cnt, name} )
+      props.sumTotalPrice( payload )
    }
 
 
@@ -38,9 +28,9 @@ function CardOptionSim(props) {
                <span onClick={showModalTariffAll}> «Без переплат. Всё»</span> Скидка 40% на абонентскую плату
             </p>
             <div className="tariff-modal__counter counter">
-               <div className="counter__minus" onClick={handleMinus}>&minus;</div>
+               <div className="counter__minus" onClick={() => handlerCounter( 'minus' )}>&minus;</div>
                <input type="text" readOnly value={props.equipment.cnt}/>
-               <div className="counter__plus" onClick={handlePlus}>+</div>
+               <div className="counter__plus" onClick={() => handlerCounter( 'plus' )}>+</div>
             </div>
          </div>
 
@@ -70,8 +60,7 @@ function CardOptionSim(props) {
 const mapDispatchToProps = {
    showModal,
    optionSwitch,
-   counterPlus,
-   counterMinus,
+   counterSim,
    sumTotalPrice
 }
 
