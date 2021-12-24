@@ -2,11 +2,27 @@ import './AboutAlmond.scss'
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
+import {switchAlmond} from "../../../redux/actions/almond";
 
 
 function ModalAboutAlmond(props) {
 
    const onHide = () => props.showModal( {modal: 'aboutAlmond', bool: false} )
+   const handleSwitchAlmond = (e) => props.switchAlmond( {props, checked: e.target.checked} )
+
+
+   const switchStatus = () => {
+      if (props.data) {
+         const almond = props
+            .tariffs.find( tariff => tariff.id === props.tariffID )
+            .equipments.find( eq => eq.id === 'eq-almond' )
+
+         return props.data.id.split( '-' )[0] === 'almond'
+            ? almond.routers.find( router => router.id === props.data.id ).status
+            : almond.sensors.find( sensor => sensor.id === props.data.id ).status
+      }
+   }
+
 
    return (
       props.data ?
@@ -50,7 +66,7 @@ function ModalAboutAlmond(props) {
                   <div className="aboutAlmond__switch item-option">
                      <label>
                         <div className="switch">
-                           <input type="checkbox"/>
+                           <input type="checkbox" defaultChecked={switchStatus()} onChange={(e) => handleSwitchAlmond(e)}/>
                            <span className="round"/>
                         </div>
                         <div className="item-option__text">
@@ -88,11 +104,13 @@ function ModalAboutAlmond(props) {
 
 const mapStateToProps = (state) => ({
    show: state.modals.aboutAlmond.show,
-   data: state.modals.aboutAlmond.props
+   data: state.modals.aboutAlmond.props,
+   tariffID: state.modals.tariff.props,
+   tariffs: state.tariffs
 })
 
 const mapDispatchToProps = {
-   showModal
+   showModal, switchAlmond
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( ModalAboutAlmond )

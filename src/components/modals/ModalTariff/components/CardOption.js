@@ -34,7 +34,7 @@ function CardOption(props) {
    }
 
    const openModalAlmond = () => {
-      props.showModal( {modal: 'almond', bool: true, props: ''} )
+      props.showModal( {modal: 'almond', bool: true} )
    }
 
 

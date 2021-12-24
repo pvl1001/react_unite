@@ -44,7 +44,6 @@ function ModalAlmond(props) {
          "text": "Если в доме начнутся перебои с электричеством, роутер Almond 3S продолжит работать благодаря\n                     встроенному аккумулятору и сохранит доступ в интернет, подключившись к мобильной сети LTE."
       }
    ]
-
    const routers = [
       {
          id: "almond-0",
@@ -101,7 +100,6 @@ function ModalAlmond(props) {
          status: false
       }
    ]
-
    const sensors = [
       {
          id: "sensor-0",
@@ -210,7 +208,7 @@ function ModalAlmond(props) {
 }
 
 const mapStateToProps = state => ({
-   show: state.modals.almond.show
+   show: state.modals.almond.show,
 })
 
 const mapDispatchToProps = {

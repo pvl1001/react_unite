@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
 import showModal from "../../../../redux/actions/showModal";
-import {ABOUT_ALMOND} from "../../../../redux/types";
 
 function almondCard(props) {
 
