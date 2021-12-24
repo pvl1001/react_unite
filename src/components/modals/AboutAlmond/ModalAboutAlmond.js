@@ -18,8 +18,8 @@ function ModalAboutAlmond(props) {
             .equipments.find( eq => eq.id === 'eq-almond' )
 
          return props.data.id.split( '-' )[0] === 'almond'
-            ? almond.routers.find( router => router.id === props.data.id ).status
-            : almond.sensors.find( sensor => sensor.id === props.data.id ).status
+            ? almond.routers.find( router => router.id === props.data.id ).checked
+            : almond.sensors.find( sensor => sensor.id === props.data.id ).checked
       }
    }
 

@@ -6020,10 +6020,10 @@ export function tariffsReducer(state = initialState, action) {
 
             if (data.id.split( '-' )[0] === 'almond') {
                const router = almond.routers.find( router => router.id === data.id )
-               router.status = checked
+               router.checked = checked
             } else {
                const sensor = almond.sensors.find( sensor => sensor.id === data.id )
-               sensor.status = checked
+               sensor.checked = checked
             }
 
          } )
