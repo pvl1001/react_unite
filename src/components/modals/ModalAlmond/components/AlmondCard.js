@@ -2,10 +2,11 @@ import {connect} from "react-redux";
 import showModal from "../../../../redux/actions/showModal";
 
 function almondCard(props) {
+   const classActive = () => props.data.checked ? ' active' : ''
 
    const showModalAbout = () => props.showModal({modal: 'aboutAlmond', bool: true, props: props.card})
    return (
-      <div className="modalAlmond__price-card card-price"
+      <div className={"modalAlmond__price-card card-price" + classActive()}
            onClick={showModalAbout}
       >
          <div className="card-price__img">
@@ -16,7 +17,7 @@ function almondCard(props) {
             <p className="card-price__text-name">{props.card.name}</p>
             <div className="card-price__text-price">
                <p>{props.card.price} ₽ в месяц</p>
-               <p className="card-price__cnt"><span>1</span> шт.</p>
+               <p className="card-price__cnt"><span>{props.data.cnt || 1}</span> шт.</p>
             </div>
          </div>
       </div>

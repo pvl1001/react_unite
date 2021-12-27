@@ -6013,7 +6013,6 @@ export function tariffsReducer(state = initialState, action) {
          return produce( state, setState => {
             const id = action.payload.id
             const i = action.payload.index
-            const cnt = action.payload.cnt
             const name = action.payload.name
             const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
 

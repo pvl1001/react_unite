@@ -63,10 +63,7 @@ function ModalAlmond(props) {
                text: "Диапазоны частот <br> 2,4 и 5 Ггц"
             }
          ],
-         price: 229,
-         totalPrice: 0,
-         cnt: 1,
-         status: false
+         price: 229
       },
       {
          id: "almond-1",
@@ -94,10 +91,7 @@ function ModalAlmond(props) {
                text: "Диапазоны частот <br> 2,4 и 5 Ггц"
             }
          ],
-         price: 339,
-         totalPrice: 0,
-         cnt: 1,
-         status: false
+         price: 339
       }
    ]
    const sensors = [
@@ -106,48 +100,42 @@ function ModalAlmond(props) {
          name: "Wi-Fi камера",
          img: "Wi-Fi-kamera_about",
          desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
-         price: 120,
-         totalPrice: 0,
-         cnt: 1,
-         status: false
+         price: 120
       },
       {
          id: "sensor-1",
          name: "Датчик движения",
          img: "Datchik-dvizheniya_about",
          desc: "Будьте в курсе любых передвижений в доме",
-         price: 50,
-         totalPrice: 0,
-         cnt: 1,
-         status: false
+         price: 50
       },
       {
          id: "sensor-2",
          name: "Датчик открытия и закрытия",
          img: "Datchik-otkrytiya-i-zakrytiya_about",
          desc: "Будьте в курсе всех незваных гостей",
-         price: 50,
-         totalPrice: 0,
-         cnt: 1,
-         status: false
+         price: 50
       },
       {
          id: "sensor-3",
          name: "Датчик протечки воды",
          img: "Datchik-protechki-vody_about",
          desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
-         price: 50,
-         totalPrice: 0,
-         cnt: 1,
-         status: false
+         price: 50
       }
    ]
 
    const onHide = () => props.showModal( {modal: 'almond', bool: false} )
+   if (props.tariff) {
+      var almond = props
+         .tariffs.find( tariff => tariff.id === props.tariff )
+         .equipments.find( eq => eq.id === 'eq-almond' )
+   }
 
 
    return (
-      <Modal centered
+      props.tariff
+         ? <Modal centered
              animation={false}
              className="modalAlmond"
              show={props.show}
@@ -174,8 +162,8 @@ function ModalAlmond(props) {
                <span className="modalAlmond__price-link"
                      data-toggle="modal" data-target="#choiceRouter">Какой роутер мне подойдет?</span>
                <div className="modalAlmond__price-cards">
-                  {routers.map(router =>
-                     <AlmondCard key={router.id} card={router} />
+                  {routers.map( (router, i) =>
+                     <AlmondCard key={router.id} card={router} data={almond.routers[i]}/>
                   )}
                </div>
 
@@ -185,8 +173,8 @@ function ModalAlmond(props) {
                <h4 className="modalAlmond__price-device-title">Выберите устройство</h4>
 
                <div className="modalAlmond__price-cards">
-                  {sensors.map(sensor =>
-                     <AlmondCard key={sensor.id} card={sensor}/>
+                  {sensors.map( (sensor, i) =>
+                     <AlmondCard key={sensor.id} card={sensor} data={almond.sensors[i]}/>
                   )}
                </div>
             </div>
@@ -203,12 +191,15 @@ function ModalAlmond(props) {
             {/*<button className="modalAlmond__price-btn btn js-modalAlmond-btn" hidden>Отправить заявку</button>*/}
          </div>
       </Modal>
+         : null
 
    )
 }
 
 const mapStateToProps = state => ({
    show: state.modals.almond.show,
+   tariff: state.modals.tariff.props,
+   tariffs: state.tariffs,
 })
 
 const mapDispatchToProps = {
