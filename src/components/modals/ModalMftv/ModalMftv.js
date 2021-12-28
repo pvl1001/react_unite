@@ -1,6 +1,5 @@
 import './ModalMftv.scss'
 import {Modal} from "react-bootstrap";
-import PropTypes from "prop-types";
 import FaqMftv from "./components/FaqMftv";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";

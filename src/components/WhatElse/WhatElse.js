@@ -2,14 +2,11 @@ import './WhatElse.scss'
 import megaDisk from '../../img/pic/megaDisk.webp'
 import films from '../../img/pic/films.webp'
 import sales from '../../img/pic/sales.webp'
-import {useState} from "react";
-import ModalTariffAll from "../modals/ModalTariffAll/ModalTariffAll";
 import {connect} from "react-redux";
 import showModal from "../../redux/actions/showModal";
 
 
 function WhatElse(props) {
-   const [showModalWhatElse, setShowModalWhatElse] = useState( false )
 
    const data = [
       {
@@ -34,8 +31,6 @@ function WhatElse(props) {
          "text": "Общайтесь выгодно: подключите до 10 человек к тарифу «Без переплат. Всё» со скидкой 40 % по"
       }
    ]
-
-   const openModalOrder = () => {}
 
 
    return (

@@ -26,9 +26,8 @@ export default function AppBanner () {
                   </p>
 
                   <div className="text-app__icons" data-view="block_mobilelk">
-                     <a href="https://trk.mail.ru/c/uo37z4" className="google-play"/>
-                     <a href="https://trk.mail.ru/c/sa6p65"
-                        className="apple-store"/>
+                     <a href="https://trk.mail.ru/c/uo37z4" className="google-play"> </a>
+                     <a href="https://trk.mail.ru/c/sa6p65" className="apple-store"> </a>
                   </div>
                </div>
 

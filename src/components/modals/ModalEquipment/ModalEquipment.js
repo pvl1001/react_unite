@@ -1,6 +1,5 @@
 import './Perfomance.scss'
 import {Modal} from "react-bootstrap";
-import download_pdf from '../../../img/svg/download-pdf.svg'
 import Plan from "./components/Plan";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
@@ -49,11 +48,13 @@ function ModalEquipment(props) {
                      )}
                   </ul>
 
-                  <div className="performance__download-info download-info">
-                     <img src={download_pdf} className="download-info__icon" alt="Скачать pdf"/>
-                     <div>
-                        <a href="#" className="download-info__link">Скачать подробную информацию</a>
-                        <p className="download-info__size">(PDF, 0.4 MB)</p>
+                  <div className="tariff-modal__download-pdf download-pdf">
+                     <button className="download-pdf__icon">
+                        <img src={require( '../../../img/svg/download-pdf.svg' ).default} alt="download-pdf"/>
+                     </button>
+                     <div className="download-pdf__text">
+                        <button className="download-pdf__text-link">Скачать подробную информацию о тарифе</button>
+                        <span className="download-pdf__text-pdf">(PDF, 0.4 MB)</span>
                      </div>
                   </div>
                </div>

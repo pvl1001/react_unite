@@ -1,6 +1,5 @@
 import * as PropTypes from "prop-types"
-import ModalMftv from "../../../modals/ModalMftv/ModalMftv";
-import React, {useState} from "react";
+import React from "react";
 import {connect} from "react-redux";
 import showModal from "../../../../redux/actions/showModal";
 

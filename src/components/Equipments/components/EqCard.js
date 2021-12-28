@@ -12,10 +12,6 @@ function EqCard(props) {
 
    const styleMark = (mark) => mark === 'ГОД СЕРИАЛОВ В ПОДАРОК' && "var(--mf-orange)"
 
-   const handleOpenModalOrder = () => {}
-   const handleOpenModalEq = () => {}
-
-
 
    return (
       <div className="slider__card equipments-card card">

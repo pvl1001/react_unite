@@ -16,7 +16,7 @@ export default function Footer() {
             </p>
             <p className="footer__policy">
                Продолжая использовать наш сайт, вы даете согласие на обработку файлов Cookies и других пользовательских
-               данных, в соответствии с <a href="https://www.megafon.ru/ad/politika" target="_blank">Политикой
+               данных, в соответствии с <a href="https://www.megafon.ru/ad/politika" target="_blank" rel="noreferrer">Политикой
                конфиденциальности</a>.
             </p>
             <div className="footer__speedtest">

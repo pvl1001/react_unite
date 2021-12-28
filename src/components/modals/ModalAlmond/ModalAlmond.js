@@ -4,6 +4,7 @@ import {Modal} from "react-bootstrap";
 import showModal from "../../../redux/actions/showModal";
 import Banner from "./components/Banner";
 import AlmondCard from "./components/AlmondCard";
+import templateEqAlmond from "../../../redux/reducers/tariffsReducer";
 
 function ModalAlmond(props) {
    const banners = [
@@ -44,86 +45,6 @@ function ModalAlmond(props) {
          "text": "Если в доме начнутся перебои с электричеством, роутер Almond 3S продолжит работать благодаря\n                     встроенному аккумулятору и сохранит доступ в интернет, подключившись к мобильной сети LTE."
       }
    ]
-   const routers = [
-      {
-         id: "almond-0",
-         name: "Роутер Almond 3",
-         img: "Almond-3_about",
-         params: [
-            {
-               icon: "speed-2_w",
-               text: "Скорость <br> до 300 Мбит/с"
-            },
-            {
-               icon: "zone-24_w",
-               text: "Зона покрытия <br> до 120 м<sup>2</sup>"
-            },
-            {
-               icon: "hertz_24_w",
-               text: "Диапазоны частот <br> 2,4 и 5 Ггц"
-            }
-         ],
-         price: 229
-      },
-      {
-         id: "almond-1",
-         name: "Роутер Almond 3S",
-         img: "Almond-3S_about",
-         params: [
-            {
-               icon: "speed-2_w",
-               text: "Скорость <br> до 300 Мбит/с"
-            },
-            {
-               icon: "Whats-left_24",
-               text: "Встроенный <br> аккумулятор"
-            },
-            {
-               icon: "zone-24_w",
-               text: "Зона покрытия <br> до 120 м<sup>2</sup>"
-            },
-            {
-               icon: "Sim-card_24",
-               text: "LTE <br> резервирование"
-            },
-            {
-               icon: "hertz_24_w",
-               text: "Диапазоны частот <br> 2,4 и 5 Ггц"
-            }
-         ],
-         price: 339
-      }
-   ]
-   const sensors = [
-      {
-         id: "sensor-0",
-         name: "Wi-Fi камера",
-         img: "Wi-Fi-kamera_about",
-         desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
-         price: 120
-      },
-      {
-         id: "sensor-1",
-         name: "Датчик движения",
-         img: "Datchik-dvizheniya_about",
-         desc: "Будьте в курсе любых передвижений в доме",
-         price: 50
-      },
-      {
-         id: "sensor-2",
-         name: "Датчик открытия и закрытия",
-         img: "Datchik-otkrytiya-i-zakrytiya_about",
-         desc: "Будьте в курсе всех незваных гостей",
-         price: 50
-      },
-      {
-         id: "sensor-3",
-         name: "Датчик протечки воды",
-         img: "Datchik-protechki-vody_about",
-         desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
-         price: 50
-      }
-   ]
 
    const onHide = () => props.showModal( {modal: 'almond', bool: false} )
    if (props.tariff) {
@@ -162,8 +83,8 @@ function ModalAlmond(props) {
                <span className="modalAlmond__price-link"
                      data-toggle="modal" data-target="#choiceRouter">Какой роутер мне подойдет?</span>
                <div className="modalAlmond__price-cards">
-                  {routers.map( (router, i) =>
-                     <AlmondCard key={router.id} card={router} data={almond.routers[i]}/>
+                  {templateEqAlmond.map( (router, i) =>
+                     i <= 1 && <AlmondCard key={router.id} card={router} index={i}/>
                   )}
                </div>
 
@@ -173,8 +94,8 @@ function ModalAlmond(props) {
                <h4 className="modalAlmond__price-device-title">Выберите устройство</h4>
 
                <div className="modalAlmond__price-cards">
-                  {sensors.map( (sensor, i) =>
-                     <AlmondCard key={sensor.id} card={sensor} data={almond.sensors[i]}/>
+                  {templateEqAlmond.map( (sensor, i) =>
+                     i >= 2 &&<AlmondCard key={sensor.id} card={sensor} index={i}/>
                   )}
                </div>
             </div>
@@ -184,7 +105,7 @@ function ModalAlmond(props) {
                   <span className="new-price">{almond.totalPrice}</span>
                   <span>₽</span>
                   <span>в месяц</span>
-                  {/*<div className="price__icon" aria-expanded="false"></div>*/}
+                  {/*<div className="price__icon"/>*/}
                </div>
             }
             <button className="modalAlmond__price-btn btn" disabled={!almond.totalPrice}>Добавить к тарифу</button>

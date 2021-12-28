@@ -7,6 +7,86 @@ import {
 } from "../types";
 import produce from "immer";
 
+const templateEqAlmond = [
+   {
+      id: "almond-0",
+      name: "Роутер Almond 3",
+      img: "Almond-3_about",
+      params: [
+         {
+            icon: "speed-2_w",
+            text: "Скорость <br> до 300 Мбит/с"
+         },
+         {
+            icon: "zone-24_w",
+            text: "Зона покрытия <br> до 120 м<sup>2</sup>"
+         },
+         {
+            icon: "hertz_24_w",
+            text: "Диапазоны частот <br> 2,4 и 5 Ггц"
+         }
+      ],
+      price: 229
+   },
+   {
+      id: "almond-1",
+      name: "Роутер Almond 3S",
+      img: "Almond-3S_about",
+      params: [
+         {
+            icon: "speed-2_w",
+            text: "Скорость <br> до 300 Мбит/с"
+         },
+         {
+            icon: "Whats-left_24",
+            text: "Встроенный <br> аккумулятор"
+         },
+         {
+            icon: "zone-24_w",
+            text: "Зона покрытия <br> до 120 м<sup>2</sup>"
+         },
+         {
+            icon: "Sim-card_24",
+            text: "LTE <br> резервирование"
+         },
+         {
+            icon: "hertz_24_w",
+            text: "Диапазоны частот <br> 2,4 и 5 Ггц"
+         }
+      ],
+      price: 339
+   },
+   {
+      id: "sensor-0",
+      name: "Wi-Fi камера",
+      img: "Wi-Fi-kamera_about",
+      desc: "Наблюдайте за происходящим дома в реальном времени, где бы вы ни были",
+      price: 120
+   },
+   {
+      id: "sensor-1",
+      name: "Датчик движения",
+      img: "Datchik-dvizheniya_about",
+      desc: "Будьте в курсе любых передвижений в доме",
+      price: 50
+   },
+   {
+      id: "sensor-2",
+      name: "Датчик открытия и закрытия",
+      img: "Datchik-otkrytiya-i-zakrytiya_about",
+      desc: "Будьте в курсе всех незваных гостей",
+      price: 50
+   },
+   {
+      id: "sensor-3",
+      name: "Датчик протечки воды",
+      img: "Datchik-protechki-vody_about",
+      desc: "Узнавайте даже о незаметных протечках, чтобы вовремя их устранять",
+      price: 50
+   }
+]
+export default templateEqAlmond
+
 const initialState = [
    {
       id: 'for-their',
@@ -299,34 +379,7 @@ const initialState = [
             ],
             dataView: "almond",
             switch: false,
-            routers: [
-               {
-                  id: "almond-0",
-                  price: 229
-               },
-               {
-                  id: "almond-1",
-                  price: 339
-               }
-            ],
-            sensors: [
-               {
-                  id: "sensor-0",
-                  price: 120
-               },
-               {
-                  id: "sensor-1",
-                  price: 50
-               },
-               {
-                  id: "sensor-2",
-                  price: 50
-               },
-               {
-                  id: "sensor-3",
-                  price: 50
-               }
-            ]
+            equipments: []
          },
          {
             id: "equipment-sim",
@@ -1543,34 +1596,7 @@ const initialState = [
             ],
             dataView: "almond",
             switch: false,
-            routers: [
-               {
-                  id: "almond-0",
-                  price: 229
-               },
-               {
-                  id: "almond-1",
-                  price: 339
-               }
-            ],
-            sensors: [
-               {
-                  id: "sensor-0",
-                  price: 120
-               },
-               {
-                  id: "sensor-1",
-                  price: 50
-               },
-               {
-                  id: "sensor-2",
-                  price: 50
-               },
-               {
-                  id: "sensor-3",
-                  price: 50
-               }
-            ]
+            equipments: []
          },
          {
             id: "equipment-sim",
@@ -1869,34 +1895,7 @@ const initialState = [
             ],
             dataView: "almond",
             switch: false,
-            routers: [
-               {
-                  id: "almond-0",
-                  price: 229
-               },
-               {
-                  id: "almond-1",
-                  price: 339
-               }
-            ],
-            sensors: [
-               {
-                  id: "sensor-0",
-                  price: 120
-               },
-               {
-                  id: "sensor-1",
-                  price: 50
-               },
-               {
-                  id: "sensor-2",
-                  price: 50
-               },
-               {
-                  id: "sensor-3",
-                  price: 50
-               }
-            ]
+            equipments: []
          },
          {
             id: "equipment-sim",
@@ -3161,34 +3160,7 @@ const initialState = [
             ],
             dataView: "almond",
             switch: false,
-            routers: [
-               {
-                  id: "almond-0",
-                  price: 229
-               },
-               {
-                  id: "almond-1",
-                  price: 339
-               }
-            ],
-            sensors: [
-               {
-                  id: "sensor-0",
-                  price: 120
-               },
-               {
-                  id: "sensor-1",
-                  price: 50
-               },
-               {
-                  id: "sensor-2",
-                  price: 50
-               },
-               {
-                  id: "sensor-3",
-                  price: 50
-               }
-            ]
+            equipments: []
          },
          {
             id: "equipment-sim",
@@ -3499,34 +3471,7 @@ const initialState = [
             ],
             dataView: "almond",
             switch: false,
-            routers: [
-               {
-                  id: "almond-0",
-                  price: 229
-               },
-               {
-                  id: "almond-1",
-                  price: 339
-               }
-            ],
-            sensors: [
-               {
-                  id: "sensor-0",
-                  price: 120
-               },
-               {
-                  id: "sensor-1",
-                  price: 50
-               },
-               {
-                  id: "sensor-2",
-                  price: 50
-               },
-               {
-                  id: "sensor-3",
-                  price: 50
-               }
-            ]
+            equipments: []
          },
          {
             id: "equipment-sim",
@@ -5141,34 +5086,7 @@ const initialState = [
             ],
             dataView: "almond",
             switch: false,
-            routers: [
-               {
-                  id: "almond-0",
-                  price: 229
-               },
-               {
-                  id: "almond-1",
-                  price: 339
-               }
-            ],
-            sensors: [
-               {
-                  id: "sensor-0",
-                  price: 120
-               },
-               {
-                  id: "sensor-1",
-                  price: 50
-               },
-               {
-                  id: "sensor-2",
-                  price: 50
-               },
-               {
-                  id: "sensor-3",
-                  price: 50
-               }
-            ]
+            equipments: []
          },
          {
             id: "equipment-sim",
@@ -6022,20 +5940,12 @@ export function tariffsReducer(state = initialState, action) {
          return produce( state, setState => {
             const data = action.payload.data
             const checked = action.payload.checked
+            const cnt = action.payload.cnt
             const id = action.payload.tariffID
             const currentTariff = setState.find( tariff => tariff.id === id )
             const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
-
-            if (data.id.split( '-' )[0] === 'almond') {
-               const router = almond.routers.find( router => router.id === data.id )
-               router.checked = checked
-               router.cnt = router.cnt || 1
-            } else {
-               const sensor = almond.sensors.find( sensor => sensor.id === data.id )
-               sensor.checked = checked
-               sensor.cnt = sensor.cnt || 1
-            }
-
+            debugger
+            almond.equipments[data.index] = {...data, checked, cnt}
          } )
 
       case HANDLER_COUNTER_ALMOND:
@@ -6046,28 +5956,17 @@ export function tariffsReducer(state = initialState, action) {
             const id = action.payload.tariffID
             const currentTariff = setState.find( tariff => tariff.id === id )
             const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
-
-            if (data.id.split( '-' )[0] === 'almond') {
-               const router = almond.routers.find( router => router.id === data.id )
-               if (name === 'plus') {
-                  router.cnt = ++cnt
-                  router.checked = true
-               }
-               if (name === 'minus') router.cnt = --cnt
-            } else {
-               const sensor = almond.sensors.find( sensor => sensor.id === data.id )
-               if (name === 'plus') {
-                  sensor.cnt = ++cnt
-                  sensor.checked = true
-               }
-               if (name === 'minus') sensor.cnt = --cnt
+debugger
+            if (name === 'plus') {
+               almond.equipments[data.index] = {...data, cnt: ++cnt, checked: true}
             }
+            if (name === 'minus') almond.equipments[data.index] = {...data, cnt: --cnt}
          } )
 
       case SUM_ALMOND_TOTAL_PRICE:
          return produce( state, setState => {
             const almond = setState.find( tariff => tariff.id === action.payload ).equipments.find( eq => eq.id === 'eq-almond' )
-            const arrPrices = [...almond.routers, ...almond.sensors]
+            const arrPrices = almond.equipments
                .filter( alEq => alEq.checked )
                .map( alEq => alEq.price * alEq.cnt )
             almond.totalPrice = arrPrices.length ? arrPrices.reduce( (a, b) => a + b ) : null

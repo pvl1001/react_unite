@@ -432,8 +432,8 @@ function ModalCity(props) {
 
                <div className="city-selection__body select-region">
                   <div className="select-region__top">
-                     <a href="#">Москва и область</a>
-                     <a href="#">Санкт-Петербург и область</a>
+                     <button className="link">Москва и область</button>
+                     <button className="link">Санкт-Петербург и область</button>
                   </div>
 
                   {cities.map( el => (

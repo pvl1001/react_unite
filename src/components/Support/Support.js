@@ -22,7 +22,7 @@ export default function Support() {
             </div>
 
             <div className="support__link">
-               <a target="_blank" href="https://help.home.megafon.ru">Поддержка
+               <a target="_blank" rel="noreferrer" href="https://help.home.megafon.ru">Поддержка
                   <svg xmlns="http://www.w3.org/2000/svg" width="9.9" height="15.55" viewBox="0 0 9.9 15.55">
                      <g id="Сгруппировать_378" data-name="Сгруппировать 378" transform="translate(-12521 -1887.9)">
                         <rect id="Прямоугольник_156" data-name="Прямоугольник 156" width="11" height="3"

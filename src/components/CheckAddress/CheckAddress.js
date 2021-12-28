@@ -81,9 +81,9 @@ export default function CheckAddress() {
                                  <div className="unite-info__desc_icon">
                                     <img src={tv} alt="tv"/>
                                  </div>
-                                 <a href="#">
-                                    {/*{{tvLength}}*/}
-                                 </a>
+                                 {/*<a href="#">*/}
+                                 {/*   /!*{{tvLength}}*!/*/}
+                                 {/*</a>*/}
                               </div>
                            </div>
                            <div className="unite-info">
@@ -126,7 +126,7 @@ export default function CheckAddress() {
                         </div>
 
                         <div className="unite__links">
-                           <a href="#">Скачать подробную информацию</a>
+                           {/*<a href="#">Скачать подробную информацию</a>*/}
                            <span data-target="#{{../unite.id}}"
                                  data-toggle="modal"
                            >Технические характеристики</span>

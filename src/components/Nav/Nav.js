@@ -10,7 +10,7 @@ function Nav(props) {
       <nav className="nav">
          <div className="wrapper">
             <div className="nav__logo">
-               <a href='/'/>
+               <a href='/'> </a>
             </div>
             <div className="nav__phone">
                <a href="tel:88005500001">8 800 55-00-001</a>

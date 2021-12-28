@@ -26,10 +26,10 @@ export default function TvChannels(props) {
 
                   <div className="block-progress__desc_icon tv"/>
 
-                  <a onClick={handleCollapseChannels}
+                  <button onClick={handleCollapseChannels}
                      aria-controls="tv-group"
                      aria-expanded={props.collapse.collapseGroup}>
-                     {props.tvLength}</a>
+                     {props.tvLength}</button>
 
                </div>
             </div>

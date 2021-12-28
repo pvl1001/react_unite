@@ -3,7 +3,6 @@ import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
 import {counterAlmond, sumAlmondTotalPrice, switchAlmond} from "../../../redux/actions/almond";
-import {useEffect} from "react";
 
 
 function ModalAboutAlmond(props) {
@@ -12,7 +11,7 @@ function ModalAboutAlmond(props) {
       props.sumAlmondTotalPrice(props.tariffID)
       props.showModal( {modal: 'aboutAlmond', bool: false} )
    }
-   const handleSwitchAlmond = (e) => props.switchAlmond( {...props, checked: e.target.checked} )
+   const handleSwitchAlmond = (e) => props.switchAlmond( {...props, cnt, checked: e.target.checked} )
    const handlerCounter = (name) => props.counterAlmond( {...props, name, cnt} )
    const getData = (name) => {
       if (props.data) {
@@ -20,9 +19,7 @@ function ModalAboutAlmond(props) {
             .tariffs.find( tariff => tariff.id === props.tariffID )
             .equipments.find( eq => eq.id === 'eq-almond' )
 
-         return props.data.id.split( '-' )[0] === 'almond'
-            ? almond.routers.find( router => router.id === props.data.id )[name]
-            : almond.sensors.find( sensor => sensor.id === props.data.id )[name]
+         return almond.equipments[props.data.index]?.[name]
       }
    }
    if (props.data) {
@@ -99,12 +96,13 @@ function ModalAboutAlmond(props) {
 
                   </div>
 
-                  <div className="download-pdf">
-                     <a href="#" className="download-pdf__icon">
+                  <div className="tariff-modal__download-pdf download-pdf">
+                     <button className="download-pdf__icon">
                         <img src={require( '../../../img/svg/download-pdf.svg' ).default} alt="download-pdf"/>
-                     </a>
+                     </button>
                      <div className="download-pdf__text">
-                        <a href="#">Скачать подробную информацию</a><br/> <span>(PDF, 0.4 MB)</span>
+                        <button className="download-pdf__text-link">Скачать подробную информацию о тарифе</button>
+                        <span className="download-pdf__text-pdf">(PDF, 0.4 MB)</span>
                      </div>
                   </div>
                </div>

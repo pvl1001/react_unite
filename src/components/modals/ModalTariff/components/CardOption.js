@@ -20,8 +20,8 @@ function CardOption(props) {
 
    const price = (id) => {
       if (id === 'eq-almond') {
-         const sortRouters = [...props.equipment.routers].sort( (a, b) => a.price - b.price )
-         return 'от ' + sortRouters[0].price
+         // const sortRouters = [...props.equipment.routers].sort( (a, b) => a.price - b.price )
+         // return 'от ' + sortRouters[0].price
       }
       if (props.equipment.plan) {
          return props.equipment.plan.find( p => p.checked ).value
