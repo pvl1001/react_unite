@@ -2,12 +2,16 @@ import './ModalAboutAlmond.scss'
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
-import {counterAlmond, switchAlmond} from "../../../redux/actions/almond";
+import {counterAlmond, sumAlmondTotalPrice, switchAlmond} from "../../../redux/actions/almond";
+import {useEffect} from "react";
 
 
 function ModalAboutAlmond(props) {
 
-   const onHide = () => props.showModal( {modal: 'aboutAlmond', bool: false} )
+   const onHide = () => {
+      props.sumAlmondTotalPrice(props.tariffID)
+      props.showModal( {modal: 'aboutAlmond', bool: false} )
+   }
    const handleSwitchAlmond = (e) => props.switchAlmond( {...props, checked: e.target.checked} )
    const handlerCounter = (name) => props.counterAlmond( {...props, name, cnt} )
    const getData = (name) => {
@@ -123,6 +127,7 @@ const mapDispatchToProps = {
    showModal,
    switchAlmond,
    counterAlmond,
+   sumAlmondTotalPrice,
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( ModalAboutAlmond )

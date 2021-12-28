@@ -3,7 +3,7 @@ import {
    TARIFF_RADIO_PLAN,
    HANDLE_SWITCH,
    SUM_TOTAL_PRICE,
-   HANDLE_SWITCH_ALMOND, HANDLER_COUNTER_ALMOND
+   HANDLE_SWITCH_ALMOND, HANDLER_COUNTER_ALMOND, SUM_ALMOND_TOTAL_PRICE
 } from "../types";
 import produce from "immer";
 
@@ -302,35 +302,29 @@ const initialState = [
             routers: [
                {
                   id: "almond-0",
-                  price: 229,
-                  totalPrice: 0,
+                  price: 229
                },
                {
                   id: "almond-1",
-                  price: 339,
-                  totalPrice: 0,
+                  price: 339
                }
             ],
             sensors: [
                {
                   id: "sensor-0",
-                  price: 120,
-                  totalPrice: 0,
+                  price: 120
                },
                {
                   id: "sensor-1",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-2",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-3",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                }
             ]
          },
@@ -1552,35 +1546,29 @@ const initialState = [
             routers: [
                {
                   id: "almond-0",
-                  price: 229,
-                  totalPrice: 0,
+                  price: 229
                },
                {
                   id: "almond-1",
-                  price: 339,
-                  totalPrice: 0,
+                  price: 339
                }
             ],
             sensors: [
                {
                   id: "sensor-0",
-                  price: 120,
-                  totalPrice: 0,
+                  price: 120
                },
                {
                   id: "sensor-1",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-2",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-3",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                }
             ]
          },
@@ -1884,35 +1872,29 @@ const initialState = [
             routers: [
                {
                   id: "almond-0",
-                  price: 229,
-                  totalPrice: 0,
+                  price: 229
                },
                {
                   id: "almond-1",
-                  price: 339,
-                  totalPrice: 0,
+                  price: 339
                }
             ],
             sensors: [
                {
                   id: "sensor-0",
-                  price: 120,
-                  totalPrice: 0,
+                  price: 120
                },
                {
                   id: "sensor-1",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-2",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-3",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                }
             ]
          },
@@ -3182,35 +3164,29 @@ const initialState = [
             routers: [
                {
                   id: "almond-0",
-                  price: 229,
-                  totalPrice: 0,
+                  price: 229
                },
                {
                   id: "almond-1",
-                  price: 339,
-                  totalPrice: 0,
+                  price: 339
                }
             ],
             sensors: [
                {
                   id: "sensor-0",
-                  price: 120,
-                  totalPrice: 0,
+                  price: 120
                },
                {
                   id: "sensor-1",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-2",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-3",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                }
             ]
          },
@@ -3526,35 +3502,29 @@ const initialState = [
             routers: [
                {
                   id: "almond-0",
-                  price: 229,
-                  totalPrice: 0,
+                  price: 229
                },
                {
                   id: "almond-1",
-                  price: 339,
-                  totalPrice: 0,
+                  price: 339
                }
             ],
             sensors: [
                {
                   id: "sensor-0",
-                  price: 120,
-                  totalPrice: 0,
+                  price: 120
                },
                {
                   id: "sensor-1",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-2",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-3",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                }
             ]
          },
@@ -5174,35 +5144,29 @@ const initialState = [
             routers: [
                {
                   id: "almond-0",
-                  price: 229,
-                  totalPrice: 0,
+                  price: 229
                },
                {
                   id: "almond-1",
-                  price: 339,
-                  totalPrice: 0,
+                  price: 339
                }
             ],
             sensors: [
                {
                   id: "sensor-0",
-                  price: 120,
-                  totalPrice: 0,
+                  price: 120
                },
                {
                   id: "sensor-1",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-2",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                },
                {
                   id: "sensor-3",
-                  price: 50,
-                  totalPrice: 0,
+                  price: 50
                }
             ]
          },
@@ -6065,9 +6029,11 @@ export function tariffsReducer(state = initialState, action) {
             if (data.id.split( '-' )[0] === 'almond') {
                const router = almond.routers.find( router => router.id === data.id )
                router.checked = checked
+               router.cnt = router.cnt || 1
             } else {
                const sensor = almond.sensors.find( sensor => sensor.id === data.id )
                sensor.checked = checked
+               sensor.cnt = sensor.cnt || 1
             }
 
          } )
@@ -6096,6 +6062,15 @@ export function tariffsReducer(state = initialState, action) {
                }
                if (name === 'minus') sensor.cnt = --cnt
             }
+         } )
+
+      case SUM_ALMOND_TOTAL_PRICE:
+         return produce( state, setState => {
+            const almond = setState.find( tariff => tariff.id === action.payload ).equipments.find( eq => eq.id === 'eq-almond' )
+            const arrPrices = [...almond.routers, ...almond.sensors]
+               .filter( alEq => alEq.checked )
+               .map( alEq => alEq.price * alEq.cnt )
+            almond.totalPrice = arrPrices.length ? arrPrices.reduce( (a, b) => a + b ) : null
          } )
 
       default:

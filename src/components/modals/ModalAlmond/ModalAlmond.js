@@ -179,15 +179,15 @@ function ModalAlmond(props) {
                </div>
             </div>
 
-            <div className="modalAlmond__price-price price" hidden>
-                  <span className="new-price">
-                        {/*{{price}}*/}
-                  </span>
-               <span>₽</span>
-               <span>в месяц</span>
-               {/*<div className="price__icon" aria-expanded="false"></div>*/}
-            </div>
-            <button className="modalAlmond__price-btn btn" disabled>Добавить к тарифу</button>
+            {almond.totalPrice &&
+               <div className="modalAlmond__price-price price">
+                  <span className="new-price">{almond.totalPrice}</span>
+                  <span>₽</span>
+                  <span>в месяц</span>
+                  {/*<div className="price__icon" aria-expanded="false"></div>*/}
+               </div>
+            }
+            <button className="modalAlmond__price-btn btn" disabled={!almond.totalPrice}>Добавить к тарифу</button>
             {/*<button className="modalAlmond__price-btn btn js-modalAlmond-btn" hidden>Отправить заявку</button>*/}
          </div>
       </Modal>
