@@ -101,7 +101,7 @@ function ModalAboutAlmond(props) {
                         <img src={require( '../../../img/svg/download-pdf.svg' ).default} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
-                        <button className="download-pdf__text-link">Скачать подробную информацию о тарифе</button>
+                        <button className="download-pdf__text-link">Скачать подробную информацию</button><br/>
                         <span className="download-pdf__text-pdf">(PDF, 0.4 MB)</span>
                      </div>
                   </div>

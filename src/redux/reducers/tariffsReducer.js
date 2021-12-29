@@ -3,7 +3,10 @@ import {
    TARIFF_RADIO_PLAN,
    HANDLE_SWITCH,
    SUM_TOTAL_PRICE,
-   HANDLE_SWITCH_ALMOND, HANDLER_COUNTER_ALMOND, SUM_ALMOND_TOTAL_PRICE
+   HANDLE_SWITCH_ALMOND,
+   HANDLER_COUNTER_ALMOND,
+   SUM_ALMOND_TOTAL_PRICE,
+   CHANGE_ALMOND_TOTAL_PRICE,
 } from "../types";
 import produce from "immer";
 
@@ -5878,6 +5881,7 @@ const initialState = [
    },
 ]
 
+
 export function tariffsReducer(state = initialState, action) {
 
    switch (action.type) {
@@ -5886,9 +5890,10 @@ export function tariffsReducer(state = initialState, action) {
          return produce( state, setState => {
             const id = action.payload.id
             const i = action.payload.index
+            const checked = action.payload.checked
             const currentTariff = setState.find( tariff => tariff.id === id )
             const optionCard = currentTariff.equipments[i]
-            optionCard.switch = !optionCard.switch
+            optionCard.switch = checked
          } )
 
       case COUNTER_SIM:
@@ -5938,14 +5943,17 @@ export function tariffsReducer(state = initialState, action) {
 
       case HANDLE_SWITCH_ALMOND:
          return produce( state, setState => {
+
             const data = action.payload.data
             const checked = action.payload.checked
             const cnt = action.payload.cnt
             const id = action.payload.tariffID
-            const currentTariff = setState.find( tariff => tariff.id === id )
-            const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
-            debugger
-            almond.equipments[data.index] = {...data, checked, cnt}
+
+            const almond = setState
+               .find( tariff => tariff.id === id ).equipments
+               .find( eq => eq.id === 'eq-almond' )
+
+            almond.equipments[data.index] = {...data, cnt, checked}
          } )
 
       case HANDLER_COUNTER_ALMOND:
@@ -5956,7 +5964,7 @@ export function tariffsReducer(state = initialState, action) {
             const id = action.payload.tariffID
             const currentTariff = setState.find( tariff => tariff.id === id )
             const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
-debugger
+
             if (name === 'plus') {
                almond.equipments[data.index] = {...data, cnt: ++cnt, checked: true}
             }
@@ -5965,12 +5973,25 @@ debugger
 
       case SUM_ALMOND_TOTAL_PRICE:
          return produce( state, setState => {
-            const almond = setState.find( tariff => tariff.id === action.payload ).equipments.find( eq => eq.id === 'eq-almond' )
+
+            const almond = setState
+               .find( tariff => tariff.id === action.payload ).equipments
+               .find( eq => eq.id === 'eq-almond' )
+
             const arrPrices = almond.equipments
                .filter( alEq => alEq.checked )
                .map( alEq => alEq.price * alEq.cnt )
+
             almond.totalPrice = arrPrices.length ? arrPrices.reduce( (a, b) => a + b ) : null
          } )
+
+      case CHANGE_ALMOND_TOTAL_PRICE:
+         return produce(state, setState => {
+            const id = action.payload.id
+            const i = action.payload.index
+            const almond = setState.find( tariff => tariff.id === id ).equipments[i]
+            almond.currentPrice = almond.totalPrice || almond.price
+         })
 
       default:
          return state

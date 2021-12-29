@@ -5,6 +5,9 @@ import showModal from "../../../redux/actions/showModal";
 import Banner from "./components/Banner";
 import AlmondCard from "./components/AlmondCard";
 import templateEqAlmond from "../../../redux/reducers/tariffsReducer";
+import optionSwitch from "../../../redux/actions/optionSwitch";
+import {sumTotalPrice} from "../../../redux/actions/sumTotalPrice";
+import {changeAlmondTotalPrice} from "../../../redux/actions/almond";
 
 function ModalAlmond(props) {
    const banners = [
@@ -46,7 +49,30 @@ function ModalAlmond(props) {
       }
    ]
 
-   const onHide = () => props.showModal( {modal: 'almond', bool: false} )
+   if (props.tariff) {
+      var i = props.tariffs
+         .find( tariff => tariff.id === props.tariff ).equipments
+         .map( eq => eq.id )
+         .indexOf( 'eq-almond' )
+
+      var payload = {id: props.tariff, index: i}
+   }
+
+
+   const onHide = () => {
+      isEquipments() && props.changeAlmondTotalPrice( payload )
+      props.showModal( {modal: 'almond', bool: false} )
+   }
+
+   const isEquipments = () => !props.tariffs.find( tariff => tariff.id === props.tariff ).equipments[i].totalPrice
+
+   const addToTariff = () => {
+      props.optionSwitch( {...payload, checked: true} )
+      props.sumTotalPrice( payload )
+      props.changeAlmondTotalPrice( payload )
+      props.showModal( {modal: 'almond', bool: false} )
+   }
+
    if (props.tariff) {
       var almond = props
          .tariffs.find( tariff => tariff.id === props.tariff )
@@ -57,61 +83,71 @@ function ModalAlmond(props) {
    return (
       props.tariff
          ? <Modal centered
-             animation={false}
-             className="modalAlmond"
-             show={props.show}
-             onHide={onHide}
-      >
-         <button type="button" className="modal-close" onClick={onHide}/>
-         <h2 className="modalAlmond__banners-title modalAlmond__banners-title_head d-mobile">
-            Роутер Almond
-         </h2>
+                  animation={false}
+                  className="modalAlmond"
+                  show={props.show}
+                  onHide={onHide}
+         >
+            <button type="button" className="modal-close" onClick={onHide}/>
+            <h2 className="modalAlmond__banners-title modalAlmond__banners-title_head d-mobile">
+               Роутер Almond
+            </h2>
 
-         <div className="modalAlmond__banners">
-            <h2 className="modalAlmond__banners-title modalAlmond__banners-title_head">Роутер Almond</h2>
+            <div className="modalAlmond__banners">
+               <h2 className="modalAlmond__banners-title modalAlmond__banners-title_head">Роутер Almond</h2>
 
-            {banners.map( banner =>
-               <Banner key={banner.id} banner={banner}/>
-            )}
-
-         </div>
-         <div className="modalAlmond__price">
-            <h3 className="modalAlmond__price-title">Купить Almond</h3>
-
-            <div className="modalAlmond__price-router">
-               <h4 className="modalAlmond__price-router-title">Выберите роутер</h4>
-               <span className="modalAlmond__price-link"
-                     data-toggle="modal" data-target="#choiceRouter">Какой роутер мне подойдет?</span>
-               <div className="modalAlmond__price-cards">
-                  {templateEqAlmond.map( (router, i) =>
-                     i <= 1 && <AlmondCard key={router.id} card={router} index={i}/>
-                  )}
-               </div>
+               {banners.map( banner =>
+                  <Banner key={banner.id} banner={banner}/>
+               )}
 
             </div>
+            <div className="modalAlmond__price">
+               <h3 className="modalAlmond__price-title">Купить Almond</h3>
 
-            <div className="modalAlmond__price-device">
-               <h4 className="modalAlmond__price-device-title">Выберите устройство</h4>
+               <div className="modalAlmond__price-router">
+                  <h4 className="modalAlmond__price-router-title">Выберите роутер</h4>
+                  <span className="modalAlmond__price-link"
+                        data-toggle="modal" data-target="#choiceRouter">Какой роутер мне подойдет?</span>
+                  <div className="modalAlmond__price-cards">
+                     {templateEqAlmond.map( (router, i) =>
+                        i <= 1 && <AlmondCard key={router.id}
+                                              card={router}
+                                              almond={almond}
+                                              index={i}/>
+                     )}
+                  </div>
 
-               <div className="modalAlmond__price-cards">
-                  {templateEqAlmond.map( (sensor, i) =>
-                     i >= 2 &&<AlmondCard key={sensor.id} card={sensor} index={i}/>
-                  )}
                </div>
+
+               <div className="modalAlmond__price-device">
+                  <h4 className="modalAlmond__price-device-title">Выберите устройство</h4>
+
+                  <div className="modalAlmond__price-cards">
+                     {templateEqAlmond.map( (sensor, i) =>
+                        i >= 2 && <AlmondCard key={sensor.id}
+                                              card={sensor}
+                                              almond={almond}
+                                              index={i}/>
+                     )}
+                  </div>
+               </div>
+
+               {almond.totalPrice &&
+                  <div className="modalAlmond__price-price price">
+                     <span className="new-price">{almond.totalPrice}</span>
+                     <span>₽</span>
+                     <span>в месяц</span>
+                     {/*<div className="price__icon"/>*/}
+                  </div>
+               }
+               <button className="modalAlmond__price-btn btn"
+                       disabled={!almond.totalPrice}
+                       onClick={addToTariff}
+               >Добавить к тарифу
+               </button>
+               {/*<button className="modalAlmond__price-btn btn js-modalAlmond-btn" hidden>Отправить заявку</button>*/}
             </div>
-
-            {almond.totalPrice &&
-               <div className="modalAlmond__price-price price">
-                  <span className="new-price">{almond.totalPrice}</span>
-                  <span>₽</span>
-                  <span>в месяц</span>
-                  {/*<div className="price__icon"/>*/}
-               </div>
-            }
-            <button className="modalAlmond__price-btn btn" disabled={!almond.totalPrice}>Добавить к тарифу</button>
-            {/*<button className="modalAlmond__price-btn btn js-modalAlmond-btn" hidden>Отправить заявку</button>*/}
-         </div>
-      </Modal>
+         </Modal>
          : null
 
    )
@@ -124,7 +160,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-   showModal
+   showModal,
+   optionSwitch,
+   sumTotalPrice,
+   changeAlmondTotalPrice,
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( ModalAlmond )

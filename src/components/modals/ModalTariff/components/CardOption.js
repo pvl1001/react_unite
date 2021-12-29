@@ -8,8 +8,8 @@ import showModal from "../../../../redux/actions/showModal";
 function CardOption(props) {
    const payload = {id: props.id, index: props.idx}
 
-   const handleSwitch = () => {
-      props.optionSwitch( payload )
+   const handleSwitch = (e) => {
+      props.optionSwitch( {...payload, checked: e.target.checked} )
       props.sumTotalPrice( payload )
    }
 
@@ -20,8 +20,7 @@ function CardOption(props) {
 
    const price = (id) => {
       if (id === 'eq-almond') {
-         // const sortRouters = [...props.equipment.routers].sort( (a, b) => a.price - b.price )
-         // return 'от ' + sortRouters[0].price
+        return props.equipment.currentPrice || props.equipment.price
       }
       if (props.equipment.plan) {
          return props.equipment.plan.find( p => p.checked ).value
@@ -36,7 +35,6 @@ function CardOption(props) {
    const openModalAlmond = () => {
       props.showModal( {modal: 'almond', bool: true} )
    }
-
 
 
    return (
@@ -99,7 +97,7 @@ function CardOption(props) {
 
             <label className="switch">
                <input type="checkbox"
-                      onChange={handleSwitch}
+                      onChange={(e) => handleSwitch(e)}
                       checked={props.equipment.switch}/>
                <span className="round"/>
             </label>

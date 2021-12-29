@@ -9,13 +9,13 @@ function CardOptionSim(props) {
    const payload = {id: props.id, index: props.idx}
    const showModalTariffAll = () => props.showModal( {modal: 'tariffAll', bool: true} )
 
-   const handleSwitch = () => {
-      props.optionSwitch( payload )
+   const handleSwitch = (e) => {
+      props.optionSwitch( {...payload, checked: e.target.checked} )
       props.sumTotalPrice( payload )
    }
 
    const handlerCounter = (name) => {
-      props.counterSim( {id: props.id, index: props.idx, cnt: props.equipment.cnt, name} )
+      props.counterSim( {...payload, cnt: props.equipment.cnt, name} )
       props.sumTotalPrice( payload )
    }
 
@@ -55,7 +55,7 @@ function CardOptionSim(props) {
 
             <label className="switch">
                <input type="checkbox"
-                      onChange={handleSwitch}
+                      onChange={(e) => handleSwitch(e)}
                       checked={props.equipment.switch}/>
                <span className="round"/>
             </label>
