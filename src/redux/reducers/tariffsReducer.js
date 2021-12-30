@@ -5931,6 +5931,7 @@ export function tariffsReducer(state = initialState, action) {
             currentTariff.totalPrice = currentTariff.equipments
                .map( eq => {
                   if (eq.switch) {
+                     if (eq.id === 'eq-almond' && eq.currentPrice) return eq.currentPrice
                      if (typeof eq.price === 'string') return parseInt( eq.price.match( /\d+/ ) )
                      if (eq.id === 'equipment-sim') return eq.sumPrice || eq.price
                      if (eq.plan) return eq.plan.find( p => p.checked ).value
@@ -5986,12 +5987,12 @@ export function tariffsReducer(state = initialState, action) {
          } )
 
       case CHANGE_ALMOND_TOTAL_PRICE:
-         return produce(state, setState => {
+         return produce( state, setState => {
             const id = action.payload.id
             const i = action.payload.index
             const almond = setState.find( tariff => tariff.id === id ).equipments[i]
             almond.currentPrice = almond.totalPrice || almond.price
-         })
+         } )
 
       default:
          return state

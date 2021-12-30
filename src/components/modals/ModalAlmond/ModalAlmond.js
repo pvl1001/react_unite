@@ -68,8 +68,8 @@ function ModalAlmond(props) {
 
    const addToTariff = () => {
       props.optionSwitch( {...payload, checked: true} )
-      props.sumTotalPrice( payload )
       props.changeAlmondTotalPrice( payload )
+      props.sumTotalPrice( payload )
       props.showModal( {modal: 'almond', bool: false} )
    }
 
