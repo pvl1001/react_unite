@@ -12,7 +12,7 @@ function ModalAboutAlmond(props) {
       props.showModal( {modal: 'aboutAlmond', bool: false} )
    }
    const handleSwitchAlmond = (e) => props.switchAlmond( {...props, cnt, checked: e.target.checked} )
-   const handlerCounter = (name) => props.counterAlmond( {...props, name, cnt} )
+   const handlerCounter = (name, checked) => props.counterAlmond( {...props, name, cnt, checked} )
    const getData = (name) => {
       if (props.data) {
          const almond = props
@@ -84,7 +84,7 @@ function ModalAboutAlmond(props) {
                      <div className="aboutAlmond__counter counter">
                         <button className="counter__minus"
                                 disabled={cnt === 1}
-                                onClick={() => handlerCounter( 'minus' )}>
+                                onClick={() => handlerCounter( 'minus', checked )}>
                            &minus;
                         </button>
                         <input type="text" readOnly value={cnt}/>

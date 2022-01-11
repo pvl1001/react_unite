@@ -5931,7 +5931,11 @@ export function tariffsReducer(state = initialState, action) {
             currentTariff.totalPrice = currentTariff.equipments
                .map( eq => {
                   if (eq.switch) {
-                     if (eq.id === 'eq-almond' && eq.currentPrice) return eq.currentPrice
+                     if (eq.id === 'eq-almond' && eq.currentPrice) {
+                        return typeof eq.currentPrice === 'string'
+                           ? parseInt( eq.currentPrice.match( /\d+/ ) )
+                           : eq.currentPrice
+                     }
                      if (typeof eq.price === 'string') return parseInt( eq.price.match( /\d+/ ) )
                      if (eq.id === 'equipment-sim') return eq.sumPrice || eq.price
                      if (eq.plan) return eq.plan.find( p => p.checked ).value
@@ -5969,7 +5973,9 @@ export function tariffsReducer(state = initialState, action) {
             if (name === 'plus') {
                almond.equipments[data.index] = {...data, cnt: ++cnt, checked: true}
             }
-            if (name === 'minus') almond.equipments[data.index] = {...data, cnt: --cnt}
+            if (name === 'minus') {
+               almond.equipments[data.index] = {...almond.equipments[data.index], cnt: --cnt}
+            }
          } )
 
       case SUM_ALMOND_TOTAL_PRICE:

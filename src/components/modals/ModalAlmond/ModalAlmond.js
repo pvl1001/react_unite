@@ -49,7 +49,7 @@ function ModalAlmond(props) {
       }
    ]
 
-   if (props.tariff) {
+   if (props.show) {
       var i = props.tariffs
          .find( tariff => tariff.id === props.tariff ).equipments
          .map( eq => eq.id )
@@ -60,7 +60,12 @@ function ModalAlmond(props) {
 
 
    const onHide = () => {
-      isEquipments() && props.changeAlmondTotalPrice( payload )
+      if (isEquipments()) {
+         props.changeAlmondTotalPrice( payload )
+         props.optionSwitch( {...payload, checked: false} )
+         props.sumTotalPrice( payload )
+      }
+
       props.showModal( {modal: 'almond', bool: false} )
    }
 
@@ -81,7 +86,7 @@ function ModalAlmond(props) {
 
 
    return (
-      props.tariff
+      props.show
          ? <Modal centered
                   animation={false}
                   className="modalAlmond"
