@@ -2,29 +2,47 @@ import './ModalAboutAlmond.scss'
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
-import {counterAlmond, sumAlmondTotalPrice, switchAlmond} from "../../../redux/actions/almond";
+import {
+   counterAlmond,
+   counterAlmondEq,
+   sumAlmondTotalPrice,
+   sumAlmondTotalPriceEq,
+   switchAlmond, switchAlmondEq
+} from "../../../redux/actions/almond";
 
 
 function ModalAboutAlmond(props) {
-
-   const onHide = () => {
-      props.sumAlmondTotalPrice(props.tariffID)
-      props.showModal( {modal: 'aboutAlmond', bool: false} )
-   }
-   const handleSwitchAlmond = (e) => props.switchAlmond( {...props, cnt, checked: e.target.checked} )
-   const handlerCounter = (name, checked) => props.counterAlmond( {...props, name, cnt, checked} )
-   const getData = (name) => {
-      if (props.data) {
-         const almond = props
-            .tariffs.find( tariff => tariff.id === props.tariffID )
-            .equipments.find( eq => eq.id === 'eq-almond' )
-
-         return almond.equipments[props.data.index]?.[name]
-      }
-   }
    if (props.data) {
+      var handleSwitchAlmond = (e) => props.showModalTariff
+         ? props.switchAlmond( {...props, cnt, checked: e.target.checked} )
+         : props.switchAlmondEq( {...props, cnt, checked: e.target.checked} )
+
+      var handlerCounter = (name, checked) => props.showModalTariff
+         ? props.counterAlmond( {...props, name, cnt, checked} )
+         : props.counterAlmondEq( {...props, name, cnt, checked} )
+
+      var getData = (name) => {
+         if (props.showModalTariff) {
+            const almond = props
+               .tariffs.find( tariff => tariff.id === props.tariffID )
+               .equipments.find( eq => eq.id === 'eq-almond' )
+            return almond.equipments[props.data.index]?.[name]
+         } else {
+            const almond = props.equipments.find( eq => eq.id === 'eq-almond' )
+            return almond.equipments[props.data.index]?.[name]
+         }
+      }
+      var onHide = () => {
+         props.showModalTariff
+            ? props.sumAlmondTotalPrice( props.tariffID )
+            : props.sumAlmondTotalPriceEq()
+
+         props.showModal( {modal: 'aboutAlmond', bool: false} )
+      }
+
       var checked = getData( 'checked' ) || false
       var cnt = getData( 'cnt' ) || 1
+
    }
 
 
@@ -101,7 +119,8 @@ function ModalAboutAlmond(props) {
                         <img src={require( '../../../img/svg/download-pdf.svg' ).default} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
-                        <button className="download-pdf__text-link">Скачать подробную информацию</button><br/>
+                        <button className="download-pdf__text-link">Скачать подробную информацию</button>
+                        <br/>
                         <span className="download-pdf__text-pdf">(PDF, 0.4 MB)</span>
                      </div>
                   </div>
@@ -116,16 +135,21 @@ function ModalAboutAlmond(props) {
 
 const mapStateToProps = (state) => ({
    show: state.modals.aboutAlmond.show,
+   showModalTariff: state.modals.tariff.show,
    data: state.modals.aboutAlmond.props,
    tariffID: state.modals.tariff.props,
-   tariffs: state.tariffs
+   tariffs: state.tariffs,
+   equipments: state.equipments
 })
 
 const mapDispatchToProps = {
    showModal,
    switchAlmond,
+   switchAlmondEq,
    counterAlmond,
+   counterAlmondEq,
    sumAlmondTotalPrice,
+   sumAlmondTotalPriceEq
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( ModalAboutAlmond )

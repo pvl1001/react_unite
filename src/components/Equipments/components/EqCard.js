@@ -12,6 +12,10 @@ function EqCard(props) {
 
    const styleMark = (mark) => mark === 'ГОД СЕРИАЛОВ В ПОДАРОК' && "var(--mf-orange)"
 
+   const showModalAlmond = () => {
+      props.showModal( {modal: 'almond', bool: true})
+   }
+
 
    return (
       <div className="slider__card equipments-card card">
@@ -50,7 +54,7 @@ function EqCard(props) {
             <button className="price-card__btn btn" onClick={() => props.showModal({modal: 'order', bool: true})}>Заказать</button>
 
             {props.eq.id === "eq-almond"
-               ? <div className="link almond">Подробнее</div>
+               ? <div className="link almond" onClick={showModalAlmond}>Подробнее</div>
                : <div className="link" onClick={() => props.showModal({modal: 'equipment', bool: true, props: props.eq})}>Подробнее</div>
             }
 

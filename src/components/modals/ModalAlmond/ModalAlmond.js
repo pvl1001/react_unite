@@ -50,23 +50,28 @@ function ModalAlmond(props) {
    ]
 
    if (props.show) {
-      var i = props.tariffs
+
+      var i = props.showModalTariff && props.tariffs
          .find( tariff => tariff.id === props.tariff ).equipments
          .map( eq => eq.id )
          .indexOf( 'eq-almond' )
 
       var payload = {id: props.tariff, index: i}
-   }
 
+      var almond = props.showModalTariff
+         ? props.tariffs.find( tariff => tariff.id === props.tariff )
+            .equipments.find( eq => eq.id === 'eq-almond' )
+         : props.equipments.find( eq => eq.id === 'eq-almond' )
 
-   const onHide = () => {
-      if (isEquipments()) {
-         props.changeAlmondTotalPrice( payload )
-         props.optionSwitch( {...payload, checked: false} )
-         props.sumTotalPrice( payload )
+      var onHide = () => {
+         if (props.showModalTariff && isEquipments()) {
+            props.changeAlmondTotalPrice( payload )
+            props.optionSwitch( {...payload, checked: false} )
+            props.sumTotalPrice( payload )
+         }
+
+         props.showModal( {modal: 'almond', bool: false} )
       }
-
-      props.showModal( {modal: 'almond', bool: false} )
    }
 
    const isEquipments = () => !props.tariffs.find( tariff => tariff.id === props.tariff ).equipments[i].totalPrice
@@ -79,9 +84,7 @@ function ModalAlmond(props) {
    }
 
    if (props.tariff) {
-      var almond = props
-         .tariffs.find( tariff => tariff.id === props.tariff )
-         .equipments.find( eq => eq.id === 'eq-almond' )
+
    }
 
 
@@ -145,12 +148,18 @@ function ModalAlmond(props) {
                      {/*<div className="price__icon"/>*/}
                   </div>
                }
-               <button className="modalAlmond__price-btn btn"
-                       disabled={!almond.totalPrice}
-                       onClick={addToTariff}
-               >Добавить к тарифу
-               </button>
-               {/*<button className="modalAlmond__price-btn btn js-modalAlmond-btn" hidden>Отправить заявку</button>*/}
+
+               {props.showModalTariff
+                  ? <button className="modalAlmond__price-btn btn"
+                            disabled={!almond.totalPrice}
+                            onClick={addToTariff}
+                  >Добавить к тарифу</button>
+
+                  : <button className="modalAlmond__price-btn btn"
+                            onClick={() => props.showModal( {modal: 'order', bool: true} )}
+                  >Отправить заявку</button>
+               }
+
             </div>
          </Modal>
          : null
@@ -160,8 +169,10 @@ function ModalAlmond(props) {
 
 const mapStateToProps = state => ({
    show: state.modals.almond.show,
+   showModalTariff: state.modals.tariff.show,
    tariff: state.modals.tariff.props,
    tariffs: state.tariffs,
+   equipments: state.equipments
 })
 
 const mapDispatchToProps = {

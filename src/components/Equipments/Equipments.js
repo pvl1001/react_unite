@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 
 function Equipments(props) {
 
-
    const settingsSlider = {
       infinite: false,
       slidesToShow: 4,
@@ -36,13 +35,6 @@ function Equipments(props) {
       ]
    }
 
-   const handleChangePlan = (id) => {
-      // setData( data.map( item => {
-      //    if (item.id === id) item.plan.forEach( p => p.checked = !p.checked )
-      //    return item
-      // } ) )
-   }
-
    return (
       <section className="equipments">
          <div className="wrapper">
@@ -51,7 +43,7 @@ function Equipments(props) {
             <Slider {...settingsSlider} className="equipments__slider slider">
 
                {props.data.map( eq => (
-                  <EqCard key={eq.id} eq={eq} handleChangePlan={handleChangePlan}/>
+                  <EqCard key={eq.id} eq={eq}/>
                ) )}
 
             </Slider>
