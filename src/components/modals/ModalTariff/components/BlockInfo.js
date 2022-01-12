@@ -16,9 +16,8 @@ export default function BlockInfo(props) {
                         {option.name}
                      </p>
                      {option.description &&
-                        <p className="option-item__text-desc">
-                           {option.description}
-                        </p>
+                        <p className="option-item__text-desc"
+                           dangerouslySetInnerHTML={{__html: option.description}}/>
                      }
                   </div>
                   <p className="option-item__value">

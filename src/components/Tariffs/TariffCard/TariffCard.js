@@ -29,7 +29,7 @@ function TariffCard(props) {
       <div className={`card slider__card slider__card_${props.tariff.id}`}>
          <div className="card__title card-wrapper">
 
-            <h2 onClick={() => props.showModal({modal: 'tariff', bool: true, props: props.tariff.id})}>
+            <h2 onClick={() => props.showModal( {modal: 'tariff', bool: true, props: props.tariff.id} )}>
                {props.tariff.name}
             </h2>
 
@@ -55,7 +55,17 @@ function TariffCard(props) {
                )}
 
             </div>
-
+            {props.tariff.youtube &&
+               <div className="card__youtube card__option-icon">
+                  <div className="card__icon">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="33">
+                        <path
+                           d="M16 16H4a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2zM4 5a1 1 0 00-1 1v8a1 1 0 001 1h12a1 1 0 001-1V6a1 1 0 00-1-1zm8.5 5.1l-4.5 2V8l4.5 2zM7.59 6.71L7 7.17v5.68l.59.46 5.91-2.57V9.28z"/>
+                     </svg>
+                  </div>
+                  <p>Безлимитный мобильный интернет на соцсети и YouTube</p>
+               </div>
+            }
             {props.tariff.mftv && <MfTv mftv={props.tariff.mftv} id={props.tariff.id}/>}
 
          </div>
@@ -76,7 +86,9 @@ function TariffCard(props) {
             <button className="price-card__btn btn"
                     onClick={() => props.showModal( {modal: 'order', bool: true} )}>Подключить
             </button>
-            <div className="link"  onClick={() => props.showModal( {modal: 'tariff', bool: true, props: props.tariff.id} )}>Подробнее</div>
+            <div className="link"
+                 onClick={() => props.showModal( {modal: 'tariff', bool: true, props: props.tariff.id} )}>Подробнее
+            </div>
          </div>
 
       </div>

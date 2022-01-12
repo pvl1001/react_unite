@@ -133,6 +133,7 @@ const initialState = [
       price: 650,
       totalPrice: 650,
       iconInfo: true,
+      youtube: true,
       rentDevice: [
          {
             text: "Аренда ТВ-приставки",
@@ -155,7 +156,7 @@ const initialState = [
                {
                   name: "Мобильный интернет",
                   description: "",
-                  value: "Безлимитно"
+                  value: "50 ГБ"
                },
                {
                   name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
@@ -173,9 +174,13 @@ const initialState = [
                   value: "2100 минут"
                },
                {
-                  name: "МегаДиск",
-                  description: "Облачное хранилище для ваших фотографий и файлов",
-                  value: "1 ТБ"
+                  name: "Интернет на социальные сети и YouTube",
+                  description: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе. <br>Эти приложения не расходуют интернет по тарифу: WhatsApp, Viber, Telegram, eMotion, Facebook Messenger, ТамТам, Snapchat.",
+                  value: "Безлимитно"
+               },
+               {
+                  name: "SMS на номера России",
+                  value: "50 сообщений"
                }
             ]
          },
@@ -3225,6 +3230,7 @@ const initialState = [
       price: 1900,
       totalPrice: 1900,
       iconInfo: false,
+      youtube: true,
       rentDevice: [
          {
             text: "Аренда ТВ-приставки",
@@ -3247,7 +3253,7 @@ const initialState = [
                {
                   name: "Мобильный интернет",
                   description: "",
-                  value: "Безлимитно"
+                  value: "50 ГБ"
                },
                {
                   name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
@@ -3265,9 +3271,13 @@ const initialState = [
                   value: "3000 минут"
                },
                {
-                  name: "МегаДиск",
-                  description: "Облачное хранилище для ваших фотографий и файлов",
-                  value: "1 ТБ"
+                  name: "Интернет на социальные сети и YouTube",
+                  description: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе. <br>Эти приложения не расходуют интернет по тарифу: WhatsApp, Viber, Telegram, eMotion, Facebook Messenger, ТамТам, Snapchat.",
+                  value: "Безлимитно"
+               },
+               {
+                  name: "SMS на номера России",
+                  value: "300 сообщений"
                }
             ]
          },
