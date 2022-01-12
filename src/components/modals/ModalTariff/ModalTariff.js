@@ -5,6 +5,7 @@ import CardOption from "./components/CardOption";
 import CardOptionSim from "./components/CardOptionSim";
 import BlockInfo from "./components/BlockInfo";
 import ModalTariffFooter from "./components/ModalTariffFooter";
+import BannerMfTv from "./components/BannerMfTv/BannerMfTv";
 
 function ModalTariff(props) {
    const onHide = () => props.showModal( {modal: 'tariff', bool: false} )
@@ -32,8 +33,7 @@ function ModalTariff(props) {
                      <BlockInfo key={info.title} info={info} tariff={props.tariff}/>)}
                </ul>
 
-               {/*{{#h-if mftv.length '===' 2}}{{> BannerMFTVStart}}{{/h-if}}*/}
-               {/*{{#h-if mftv.length '===' 4}}{{> BannerMFTVAll}}{{/h-if}}*/}
+               {props.tariff.mftv && <BannerMfTv mftv={props.tariff.mftv}/>}
 
                <div className="tariff-modal__dop-options wrapp">
                   <h2 className="tariff-modal__dop-options-title">Дополнительные опции:</h2>
