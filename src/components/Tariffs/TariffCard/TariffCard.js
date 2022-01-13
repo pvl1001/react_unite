@@ -6,6 +6,8 @@ import ProgressBar from "./components/ProgressBar"
 import MfTv from "./components/MfTv"
 import TvChannels from "./components/TvChannels"
 import showModal from "../../../redux/actions/showModal";
+import Tippy from "@tippyjs/react";
+import {tippyAttrs} from "../../../plugins_config";
 
 
 TariffCard.propTypes = {
@@ -80,7 +82,11 @@ function TariffCard(props) {
                <span className="always"> ₽</span>
                <span>в месяц</span>
 
-               {/*<div className="price__icon {{#if (iconInfo @index)}}price__icon_all{{/if}}"/>*/}
+
+               {props.tariff.iconInfo &&
+                  <Tippy {...tippyAttrs} content={props.tariff.iconInfo}>
+                     <div className="price__icon"/>
+                  </Tippy>}
 
             </div>
             <button className="price-card__btn btn"

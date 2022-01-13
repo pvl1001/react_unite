@@ -1,4 +1,10 @@
+import Tippy from "@tippyjs/react";
+import React from "react";
+import {tippyAttrs} from "../../../../plugins_config";
+
+
 export default function ModalTariffFooter(props) {
+
    return (
       <div className="tariff-modal__footer wrapp">
          <div className="tariff-modal__price price">
@@ -10,8 +16,10 @@ export default function ModalTariffFooter(props) {
 
             <span className="price__month"> ₽ в месяц</span>
 
-            {/*{props.tariff.iconInfo &&*/}
-            {/*   <div className="price__icon price__icon_all" aria-expanded="false"/>}*/}
+            {props.tariff.iconInfo &&
+               <Tippy {...tippyAttrs} content={props.tariff.iconInfo}>
+                  <div className="price__icon"/>
+               </Tippy>}
          </div>
 
          <button type="button"

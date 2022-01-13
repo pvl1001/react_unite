@@ -68,7 +68,7 @@ export default function FAQ() {
                   <div key={i}>
 
                      {el.col.map( (item, idx, arr) => (
-                        <div key={item.question}>
+                        <div id={`faq-${i}-${idx}`} key={item.question}>
                            <Accordion.Item eventKey={i + '-' + idx}
                                            bsPrefix="accordion__item">
                               <Accordion.Header bsPrefix="accordion__header">

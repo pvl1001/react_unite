@@ -9,6 +9,8 @@ import {
    CHANGE_ALMOND_TOTAL_PRICE,
 } from "../types";
 import produce from "immer";
+import showModal from "../actions/showModal";
+import {store} from "../../index";
 
 const templateEqAlmond = [
    {
@@ -90,6 +92,37 @@ const templateEqAlmond = [
 ]
 export default templateEqAlmond
 
+const closeModal = (modal) => {
+   store.getState().modals[modal].show && store.dispatch( showModal( {modal, bool: false} ) )
+}
+
+const toPlug = (id) => {
+   closeModal( 'tariff' )
+
+   const element = document.querySelector( `#${id} button` )
+
+   const handleClick = () => element.classList.contains( 'collapsed' ) && element.click()
+
+   const scrollTo = (offset, callback) => {
+      const fixedOffset = +offset.toFixed()
+      const maxScroll = document.body.scrollHeight - window.innerHeight
+      const onScroll = () => {
+         if (window.scrollY === fixedOffset || window.scrollY === maxScroll) {
+            callback()
+            window.removeEventListener( 'scroll', onScroll )
+         }
+      }
+
+      window.addEventListener( 'scroll', onScroll )
+
+      onScroll()
+
+      window.scrollTo( 0, offset )
+   }
+
+   scrollTo( element.offsetTop, handleClick )
+}
+
 const initialState = [
    {
       id: 'for-their',
@@ -132,7 +165,8 @@ const initialState = [
       oldPrice: 1300,
       price: 650,
       totalPrice: 650,
-      iconInfo: true,
+      iconInfo: <><span onClick={() => toPlug( 'faq-0-0' )} className="link">Скидка</span> на абонентскую плату
+         действует 3 месяца после подключения</>,
       youtube: true,
       rentDevice: [
          {
@@ -1397,7 +1431,8 @@ const initialState = [
       oldPrice: null,
       price: 700,
       totalPrice: 700,
-      iconInfo: false,
+      iconInfo: <><span onClick={() => toPlug( 'faq-0-1' )} className="link">Скидка</span> на абонентскую плату
+         действует 3 месяца после подключения</>,
       rentDevice: [
          {
             text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",

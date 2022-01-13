@@ -1,8 +1,9 @@
-@import '~normalize.css';
-@import './fonts/fonts.css';
+@import '~bootstrap/dist/css/bootstrap.min';
+@import '~tippy.js/dist/tippy';
+@import '~tippy.js/themes/light';
+@import './fonts/fonts';
 @import './scss/null';
 @import './scss/colors';
-@import '~bootstrap/dist/css/bootstrap.min.css';
 
 
 body {
