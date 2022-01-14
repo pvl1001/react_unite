@@ -104,10 +104,9 @@ const toPlug = (id) => {
    const handleClick = () => element.classList.contains( 'collapsed' ) && element.click()
 
    const scrollTo = (offset, callback) => {
-      const fixedOffset = +offset.toFixed()
       const maxScroll = document.body.scrollHeight - window.innerHeight
       const onScroll = () => {
-         if (window.scrollY === fixedOffset || window.scrollY === maxScroll) {
+         if (window.scrollY === offset || window.scrollY === maxScroll) {
             callback()
             window.removeEventListener( 'scroll', onScroll )
          }
@@ -117,7 +116,7 @@ const toPlug = (id) => {
 
       onScroll()
 
-      window.scrollTo( 0, offset )
+      setTimeout(() => window.scrollTo( 0, offset ), 0)
    }
 
    scrollTo( element.offsetTop, handleClick )
