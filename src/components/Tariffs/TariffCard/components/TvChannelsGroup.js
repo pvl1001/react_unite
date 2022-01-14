@@ -1,14 +1,15 @@
 import Collapse from "react-bootstrap/Collapse";
 import React from "react";
-import * as PropTypes from "prop-types";
 
 
 export default function TvChannelsGroup(props) {
 
    function isChannelGreen(premiumGroup, premiumChannel) {
-      const findGroup = props.tvChannels.find( tvGroup => tvGroup.group === premiumGroup )
+      const findGroup = props.channels[premiumGroup]
       if (findGroup) {
-         return findGroup.groupData.find( el => el.name === premiumChannel ) ? ' text-green' : ''
+         return findGroup.find( el => el.name === premiumChannel )
+            ? ' text-green'
+            : ''
       }
    }
 
@@ -22,9 +23,9 @@ export default function TvChannelsGroup(props) {
                  aria-controls={`tv-channels-${props.i}`}
                  aria-expanded={props.collapse.collapseChannels[props.i]}
                  className="collapse-channel__group-wrapper">
-               <span className="collapse-channel__group-name">{props.tv.group}</span>
+               <span className="collapse-channel__group-name">{props.groupName}</span>
                <span className="collapse-channel__group-count">
-                  {props.tvChannels[props.i] ? props.tvChannels[props.i].groupData.length : 0}
+                  {props.channels[props.groupName] ? props.channels[props.groupName].length : 0}
                </span>
             </div>
 
@@ -34,9 +35,9 @@ export default function TvChannelsGroup(props) {
 
             <ul id={`tv-channels-${props.i}`} className="collapse-channel__group-list">
 
-               {props.tv.groupData.map( channel => (
+               {props.premium.channels[props.groupName].map( channel => (
                   <li key={channel.id}
-                      className={"collapse-channel__group-channelName" + isChannelGreen( props.tv.group, channel.name )}>
+                      className={"collapse-channel__group-channelName" + isChannelGreen( props.groupName, channel.name )}>
                      {channel.name}
                   </li>
                ) )}
@@ -46,13 +47,4 @@ export default function TvChannelsGroup(props) {
          </Collapse>
 
       </li>)
-}
-
-
-TvChannelsGroup.propTypes = {
-   onClick: PropTypes.func,
-   i: PropTypes.number,
-   tv: PropTypes.object,
-   collapse: PropTypes.object,
-   tvChannels: PropTypes.array,
 }

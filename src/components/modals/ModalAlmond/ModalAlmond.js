@@ -4,7 +4,7 @@ import {Modal} from "react-bootstrap";
 import showModal from "../../../redux/actions/showModal";
 import Banner from "./components/Banner";
 import AlmondCard from "./components/AlmondCard";
-import templateEqAlmond from "../../../redux/reducers/tariffsReducer";
+import {templateEqAlmond} from "../../../redux/reducers/tariffsReducer";
 import optionSwitch from "../../../redux/actions/optionSwitch";
 import {sumTotalPrice} from "../../../redux/actions/sumTotalPrice";
 import {changeAlmondTotalPrice} from "../../../redux/actions/almond";

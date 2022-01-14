@@ -1,19 +1,28 @@
-import * as PropTypes from "prop-types"
 import Collapse from 'react-bootstrap/Collapse'
 import React from 'react'
 import TvChannelsGroup from "./TvChannelsGroup";
+import {connect} from "react-redux";
+import {getChannels} from "../../../../redux/reducers/tariffsReducer";
 
 
-export default function TvChannels(props) {
+function TvChannels(props) {
 
    function isCollapseChannels(i) {
-      const newArr = Object.assign( [], props.collapse.collapseChannels )
-      newArr[i] = !newArr[i]
-      props.collapse.setCollapseChannels( newArr )
+      const collapseChannels = [...props.collapse.collapseChannels]
+      collapseChannels[i] = !collapseChannels[i]
+      props.collapse.setCollapseChannels( collapseChannels )
    }
 
    function handleCollapseChannels() {
+      if(!props.premium.channels) {
+         const allTvId = Array.from( new Set(
+            [...props.tariffs.filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
+            ] ) )
+         allTvId.forEach((id, i) => props.getChannels( id ) )
+      }
+
       props.collapse.setCollapseGroup( !props.collapse.collapseGroup )
+
    }
 
 
@@ -27,8 +36,8 @@ export default function TvChannels(props) {
                   <div className="block-progress__desc_icon tv"/>
 
                   <button onClick={handleCollapseChannels}
-                     aria-controls="tv-group"
-                     aria-expanded={props.collapse.collapseGroup}>
+                          aria-controls="tv-group"
+                          aria-expanded={props.collapse.collapseGroup}>
                      {props.tvLength}</button>
 
                </div>
@@ -39,26 +48,36 @@ export default function TvChannels(props) {
             <div style={{width: props.activeProgress + "%"}}
                  className="info-progress-bar__line_active"/>
          </div>
+         <br/>
 
-         <Collapse in={props.collapse.collapseGroup}
-                   className="multi-collapse collapse-channel">
+         {props.premium.channels &&
+            <Collapse in={props.collapse.collapseGroup}
+                      className="multi-collapse collapse-channel">
 
-            <ul className="collapse-channel__channels">
-               {props.premium.tvChannels.map( (tv, i) => (
-                  <TvChannelsGroup key={tv.group}
-                                   onClick={() => isCollapseChannels( i )}
-                                   tv={tv}
-                                   i={i}
-                                   collapse={props.collapse}
-                                   tvChannels={props.tvChannels}/>
-               ) )}
-            </ul>
-         </Collapse>
+               <ul className="collapse-channel__channels">
+                  {Object.keys( props.premium.channels ).map( (groupName, i) => (
+                     <TvChannelsGroup key={groupName}
+                                      onClick={() => isCollapseChannels( i )}
+                                      groupName={groupName}
+                                      i={i}
+                                      collapse={props.collapse}
+                                      channels={props.channels}
+                                      premium={props.premium}/>
+                  ) )}
+               </ul>
+
+            </Collapse>
+         }
+
       </div>)
 }
 
-TvChannels.propTypes = {
-   tvLength: PropTypes.string,
-   activeProgress: PropTypes.number,
-   tvChannels: PropTypes.array,
-}
+
+const mapStateToProps = state => ({
+   tariffs: state.tariffs
+})
+
+export default connect(
+   mapStateToProps,
+   {getChannels}
+)( TvChannels )

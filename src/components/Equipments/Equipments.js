@@ -7,10 +7,9 @@ import {connect} from "react-redux";
 function Equipments(props) {
 
    const settingsSlider = {
+      dots: true,
       infinite: false,
       slidesToShow: 4,
-      slidesToScroll: 1,
-      dots: true,
       responsive: [
          {
             breakpoint: 1280,

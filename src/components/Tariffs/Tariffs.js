@@ -15,9 +15,7 @@ function Tariffs(props) {
    const settingsSlider = {
       dots: true,
       infinite: false,
-      speed: 500,
       slidesToShow: 4,
-      slidesToScroll: 1,
       responsive: [
          {
             breakpoint: 1280,
@@ -70,4 +68,4 @@ const mapStateToProps = state => ({
    tariffs: state.tariffs
 })
 
-export default connect(mapStateToProps)(Tariffs)
+export default connect( mapStateToProps )( Tariffs )

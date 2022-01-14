@@ -52,7 +52,9 @@ function TariffCard(props) {
                   <TvChannels collapse={props.collapse}
                               premium={props.premium}
                               tvLength={props.tariff.tvLength}
-                              tvChannels={props.tariff.tvChannels}
+                              // tvChannels={props.tariff.tvChannels}
+                              tvId={props.tariff.tvId}
+                              channels={props.tariff.channels}
                               activeProgress={activeProgress( 'ТВ', props.tariff.tvLength )}/>
                )}
 
