@@ -93,33 +93,33 @@ export const templateEqAlmond = [
 ]
 
 const closeModal = (modal) => {
-   store.getState().modals[modal].show && store.dispatch( showModal( {modal, bool: false} ) )
+   store.getState().modals[modal].show && store.dispatch(showModal({modal, bool: false}))
 }
 
 const toPlug = (id) => {
-   closeModal( 'tariff' )
+   closeModal('tariff')
 
-   const element = document.querySelector( `#${id} button` )
+   const element = document.querySelector(`#${id} button`)
 
-   const handleClick = () => element.classList.contains( 'collapsed' ) && element.click()
+   const handleClick = () => element.classList.contains('collapsed') && element.click()
 
    const scrollTo = (offset, callback) => {
       const maxScroll = document.body.scrollHeight - window.innerHeight
       const onScroll = () => {
          if (window.scrollY === offset || window.scrollY === maxScroll) {
             callback()
-            window.removeEventListener( 'scroll', onScroll )
+            window.removeEventListener('scroll', onScroll)
          }
       }
 
-      window.addEventListener( 'scroll', onScroll )
+      window.addEventListener('scroll', onScroll)
 
       onScroll()
 
-      setTimeout( () => window.scrollTo( 0, offset ), 0 )
+      setTimeout(() => window.scrollTo(0, offset), 0)
    }
 
-   scrollTo( element.offsetTop, handleClick )
+   scrollTo(element.offsetTop, handleClick)
 }
 
 const initialState = [
@@ -164,7 +164,7 @@ const initialState = [
       oldPrice: 1300,
       price: 650,
       totalPrice: 650,
-      iconInfo: <><span onClick={() => toPlug( 'faq-0-0' )} className="link">Скидка</span> на абонентскую плату
+      iconInfo: <><span onClick={() => toPlug('faq-0-0')} className="link">Скидка</span> на абонентскую плату
          действует 3 месяца после подключения</>,
       youtube: true,
       rentDevice: [
@@ -459,7 +459,7 @@ const initialState = [
       oldPrice: null,
       price: 700,
       totalPrice: 700,
-      iconInfo: <><span onClick={() => toPlug( 'faq-0-1' )} className="link">Скидка</span> на абонентскую плату
+      iconInfo: <><span onClick={() => toPlug('faq-0-1')} className="link">Скидка</span> на абонентскую плату
          действует 3 месяца после подключения</>,
       rentDevice: [
          {
@@ -2026,21 +2026,21 @@ export function tariffsReducer(state = initialState, action) {
    switch (action.type) {
 
       case HANDLE_SWITCH :
-         return produce( state, setState => {
+         return produce(state, setState => {
             const id = action.payload.id
             const i = action.payload.index
             const checked = action.payload.checked
-            const currentTariff = setState.find( tariff => tariff.id === id )
+            const currentTariff = setState.find(tariff => tariff.id === id)
             const optionCard = currentTariff.equipments[i]
             optionCard.switch = checked
-         } )
+         })
 
       case COUNTER_SIM:
-         return produce( state, setState => {
+         return produce(state, setState => {
             const id = action.payload.id
             const i = action.payload.index
             const name = action.payload.name
-            const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
+            const optionCard = setState.find(tariff => tariff.id === id).equipments[i]
 
             if (name === 'plus') {
                optionCard.cnt++
@@ -2051,42 +2051,42 @@ export function tariffsReducer(state = initialState, action) {
             }
             optionCard.sumPrice = optionCard.price * optionCard.cnt
             optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
-         } )
+         })
 
       case TARIFF_RADIO_PLAN:
-         return produce( state, setState => {
+         return produce(state, setState => {
             const id = action.payload.id
             const i = action.payload.index
-            const cardOption = setState.find( tariff => tariff.id === id ).equipments[i]
-            cardOption.plan.map( p => p.checked = !p.checked )
-            cardOption.price = cardOption.plan.find( p => p.checked ).value
-         } )
+            const cardOption = setState.find(tariff => tariff.id === id).equipments[i]
+            cardOption.plan.map(p => p.checked = !p.checked)
+            cardOption.price = cardOption.plan.find(p => p.checked).value
+         })
 
       case SUM_TOTAL_PRICE:
-         return produce( state, setState => {
+         return produce(state, setState => {
             const id = action.payload.id
-            const currentTariff = setState.find( tariff => tariff.id === id )
+            const currentTariff = setState.find(tariff => tariff.id === id)
 
             currentTariff.totalPrice = currentTariff.equipments
-               .map( eq => {
+               .map(eq => {
                   if (eq.switch) {
                      if (eq.id === 'eq-almond' && eq.currentPrice) {
                         return typeof eq.currentPrice === 'string'
-                           ? parseInt( eq.currentPrice.match( /\d+/ ) )
+                           ? parseInt(eq.currentPrice.match(/\d+/))
                            : eq.currentPrice
                      }
-                     if (typeof eq.price === 'string') return parseInt( eq.price.match( /\d+/ ) )
+                     if (typeof eq.price === 'string') return parseInt(eq.price.match(/\d+/))
                      if (eq.id === 'equipment-sim') return eq.sumPrice || eq.price
-                     if (eq.plan) return eq.plan.find( p => p.checked ).value
+                     if (eq.plan) return eq.plan.find(p => p.checked).value
                      return eq.price
                   }
                   return 0
-               } )
-               .reduce( (a, b) => a + b, currentTariff.price )
-         } )
+               })
+               .reduce((a, b) => a + b, currentTariff.price)
+         })
 
       case HANDLE_SWITCH_ALMOND:
-         return produce( state, setState => {
+         return produce(state, setState => {
 
             const data = action.payload.data
             const checked = action.payload.checked
@@ -2094,20 +2094,20 @@ export function tariffsReducer(state = initialState, action) {
             const id = action.payload.tariffID
 
             const almond = setState
-               .find( tariff => tariff.id === id ).equipments
-               .find( eq => eq.id === 'eq-almond' )
+               .find(tariff => tariff.id === id).equipments
+               .find(eq => eq.id === 'eq-almond')
 
             almond.equipments[data.index] = {...data, cnt, checked}
-         } )
+         })
 
       case HANDLER_COUNTER_ALMOND:
-         return produce( state, setState => {
+         return produce(state, setState => {
             let cnt = action.payload.cnt
             const name = action.payload.name
             const data = action.payload.data
             const id = action.payload.tariffID
-            const currentTariff = setState.find( tariff => tariff.id === id )
-            const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
+            const currentTariff = setState.find(tariff => tariff.id === id)
+            const almond = currentTariff.equipments.find(eq => eq.id === 'eq-almond')
 
             if (name === 'plus') {
                almond.equipments[data.index] = {...data, cnt: ++cnt, checked: true}
@@ -2115,40 +2115,40 @@ export function tariffsReducer(state = initialState, action) {
             if (name === 'minus') {
                almond.equipments[data.index] = {...almond.equipments[data.index], cnt: --cnt}
             }
-         } )
+         })
 
       case SUM_ALMOND_TOTAL_PRICE:
-         return produce( state, setState => {
+         return produce(state, setState => {
 
             const almond = setState
-               .find( tariff => tariff.id === action.payload ).equipments
-               .find( eq => eq.id === 'eq-almond' )
+               .find(tariff => tariff.id === action.payload).equipments
+               .find(eq => eq.id === 'eq-almond')
 
             const arrPrices = almond.equipments
-               .filter( alEq => alEq.checked )
-               .map( alEq => alEq.price * alEq.cnt )
+               .filter(alEq => alEq.checked)
+               .map(alEq => alEq.price * alEq.cnt)
 
-            almond.totalPrice = arrPrices.length ? arrPrices.reduce( (a, b) => a + b ) : null
-         } )
+            almond.totalPrice = arrPrices.length ? arrPrices.reduce((a, b) => a + b) : null
+         })
 
       case CHANGE_ALMOND_TOTAL_PRICE:
-         return produce( state, setState => {
+         return produce(state, setState => {
             const id = action.payload.id
             const i = action.payload.index
-            const almond = setState.find( tariff => tariff.id === id ).equipments[i]
+            const almond = setState.find(tariff => tariff.id === id).equipments[i]
             almond.currentPrice = almond.totalPrice || almond.price
-         } )
+         })
 
       case SET_CHANNELS:
-         return produce( state, setState => {
+         return produce(state, setState => {
             const id = action.payload.id
             const channels = action.payload.channels
-            setState.forEach( tariff => {
+            setState.forEach(tariff => {
                if (tariff.tvId === id) {
                   tariff.channels = channels
                }
-            } )
-         } )
+            })
+         })
 
       // case 'IS_COLLAPSED_GROUP':
       //    return produce(state, setState => {
@@ -2162,12 +2162,11 @@ export function tariffsReducer(state = initialState, action) {
 
 
 const setChannels = (payload) => ({type: SET_CHANNELS, payload})
-const isCollapsedGroupChannels = payload => ({type: 'IS_COLLAPSED_GROUP', payload})
 
 export const getChannels = (tvId) => {
    return dispatch =>
-      fetch( `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${tvId}` )
-         .then( res => res.json() )
-         .then( data => dispatch( setChannels( data.packages[tvId] ) ) )
-         .catch( err => console.log( 'Ошибка загрузки тв-каналов (getChannels)', err ) )
+      fetch(`https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${tvId}`)
+         .then(res => res.json())
+         .then(data => dispatch(setChannels(data.packages[tvId])))
+         .catch(err => console.log('Ошибка загрузки тв-каналов (getChannels)', err))
 }

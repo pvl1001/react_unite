@@ -10,18 +10,24 @@ function TvChannels(props) {
    function isCollapseChannels(i) {
       const collapseChannels = [...props.collapse.collapseChannels]
       collapseChannels[i] = !collapseChannels[i]
-      props.collapse.setCollapseChannels( collapseChannels )
+      props.collapse.setCollapseChannels(collapseChannels)
+   }
+
+   function collapseGroup() {
+      props.collapse.setCollapseGroup(!props.collapse.collapseGroup)
    }
 
    function handleCollapseChannels() {
-      if(!props.premium.channels) {
-         const allTvId = Array.from( new Set(
-            [...props.tariffs.filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
-            ] ) )
-         allTvId.forEach((id, i) => props.getChannels( id ) )
+      if (!props.premium.channels) {
+         const allTvId = Array.from(new Set(
+            [...props.tariffs.filter(tariff => tariff.tvId).map(tariff => tariff.tvId)
+            ]))
+         const allPromise = []
+         allTvId.forEach((id) => allPromise.push(props.getChannels(id)))
+         return Promise.all(allPromise).then(collapseGroup)
       }
 
-      props.collapse.setCollapseGroup( !props.collapse.collapseGroup )
+      collapseGroup()
 
    }
 
@@ -55,15 +61,15 @@ function TvChannels(props) {
                       className="multi-collapse collapse-channel">
 
                <ul className="collapse-channel__channels">
-                  {Object.keys( props.premium.channels ).map( (groupName, i) => (
+                  {Object.keys(props.premium.channels).map((groupName, i) => (
                      <TvChannelsGroup key={groupName}
-                                      onClick={() => isCollapseChannels( i )}
+                                      onClick={() => isCollapseChannels(i)}
                                       groupName={groupName}
                                       i={i}
                                       collapse={props.collapse}
                                       channels={props.channels}
                                       premium={props.premium}/>
-                  ) )}
+                  ))}
                </ul>
 
             </Collapse>
@@ -80,4 +86,4 @@ const mapStateToProps = state => ({
 export default connect(
    mapStateToProps,
    {getChannels}
-)( TvChannels )
+)(TvChannels)
