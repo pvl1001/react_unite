@@ -7,7 +7,7 @@ import {
    HANDLER_COUNTER_ALMOND,
    SUM_ALMOND_TOTAL_PRICE,
    CHANGE_ALMOND_TOTAL_PRICE,
-   SET_CHANNELS,
+   SET_CHANNELS, UNITE_SWITCH,
 } from "../types";
 import produce from "immer";
 import showModal from "../actions/showModal";
@@ -103,24 +103,25 @@ const toPlug = (id) => {
 
    const handleClick = () => element.classList.contains('collapsed') && element.click()
 
-   const scrollTo = (offset, callback) => {
-      const maxScroll = document.body.scrollHeight - window.innerHeight
-      const onScroll = () => {
-         if (window.scrollY === offset || window.scrollY === maxScroll) {
-            callback()
-            window.removeEventListener('scroll', onScroll)
-         }
+   scrollTo(element, handleClick)
+}
+
+export const scrollTo = (element, callback = null) => {
+   const maxScroll = document.body.scrollHeight - window.innerHeight
+   const onScroll = () => {
+      if (Math.ceil(window.scrollY) >= element.offsetTop || Math.ceil(window.scrollY) === maxScroll) {
+         callback && callback()
+         window.removeEventListener('scroll', onScroll)
       }
-
-      window.addEventListener('scroll', onScroll)
-
-      onScroll()
-
-      setTimeout(() => window.scrollTo(0, offset), 0)
    }
 
-   scrollTo(element.offsetTop, handleClick)
+   window.addEventListener('scroll', onScroll)
+
+   onScroll()
+
+   setTimeout(() => window.scrollTo(0, element.offsetTop), 0)
 }
+
 
 const initialState = [
    {
@@ -1913,6 +1914,7 @@ const initialState = [
       oldPrice: null,
       price: 1400,
       totalPrice: 1400,
+      priceSale: 960,
       iconInfo: false,
       rentDevice: [
          {
@@ -2015,6 +2017,7 @@ const initialState = [
             price: 200,
             dataView: "router-4g",
             switch: true,
+            plan: null
          }
       ],
    },
@@ -2150,10 +2153,14 @@ export function tariffsReducer(state = initialState, action) {
             })
          })
 
-      // case 'IS_COLLAPSED_GROUP':
-      //    return produce(state, setState => {
-      //       setState.isCollapsedGroup = !setState.isCollapsedGroup
-      // })
+      case UNITE_SWITCH:
+         return produce(state, setState => {
+            const tariff = setState.find(tariff => tariff.id === 'around')
+            tariff.routerSwitch = action.payload
+            const priceReduce = [tariff.priceSale, tariff.routerSwitch && tariff.equipments[0].price]
+
+            tariff.calcPriceSale = priceReduce.reduce((a, b) => a + b)
+         })
 
       default:
          return state
@@ -2162,7 +2169,6 @@ export function tariffsReducer(state = initialState, action) {
 
 
 const setChannels = (payload) => ({type: SET_CHANNELS, payload})
-
 export const getChannels = (tvId) => {
    return dispatch =>
       fetch(`https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${tvId}`)
@@ -2170,3 +2176,5 @@ export const getChannels = (tvId) => {
          .then(data => dispatch(setChannels(data.packages[tvId])))
          .catch(err => console.log('Ошибка загрузки тв-каналов (getChannels)', err))
 }
+
+export const onUniteSwitch = payload => ({type: UNITE_SWITCH, payload})

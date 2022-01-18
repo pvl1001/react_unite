@@ -8,18 +8,28 @@ import ModalTariffFooter from "./components/ModalTariffFooter";
 import BannerMfTv from "./components/BannerMfTv/BannerMfTv";
 
 function ModalTariff(props) {
-   const onHide = () => props.showModal( {modal: 'tariff', bool: false} )
+   if (props.tariff) {
 
-   if (props.tariff) return (
-      <Modal centered
-             animation={false}
-             show={props.show}
-             onHide={onHide}
-             className="tariff-modal about-tariff-modal">
+      function onHide() {
+         props.showModal({modal: 'tariff', bool: false})
+      }
 
-         <div className="tariff-modal__btn-close">
-            <button type="button" className="modal-close" onClick={onHide}/>
-         </div>
+
+      return (
+         <Modal
+            centered
+            animation={false}
+            show={props.show}
+            onHide={onHide}
+            className="tariff-modal about-tariff-modal">
+
+            <div className="tariff-modal__btn-close">
+               <button
+                  type="button"
+                  className="modal-close"
+                  onClick={onHide}
+               />
+            </div>
 
 
             <div className="tariff-modal__title wrapp">
@@ -29,17 +39,18 @@ function ModalTariff(props) {
             <div className="tariff-modal__container">
 
                <ul className="tariff-modal__items">
-                  {props.tariff.infoModal.map( info =>
+                  {props.tariff.infoModal.map(info =>
                      <BlockInfo key={info.title} info={info} tariff={props.tariff}/>)}
                </ul>
 
-               {props.tariff.mftv && <BannerMfTv mftv={props.tariff.mftv}/>}
+               {props.tariff.mftv &&
+                  <BannerMfTv mftv={props.tariff.mftv}/>}
 
                <div className="tariff-modal__dop-options wrapp">
                   <h2 className="tariff-modal__dop-options-title">Дополнительные опции:</h2>
 
                   <ul className="tariff-modal__dop-options-cards">
-                     {props.tariff.equipments.map( (equipment, idx) =>
+                     {props.tariff.equipments.map((equipment, idx) =>
                         equipment.id !== 'equipment-sim'
                            ? <CardOption key={equipment.id} equipment={equipment} idx={idx} id={props.tariff.id}/>
                            : <CardOptionSim key={equipment.id} equipment={equipment} idx={idx} id={props.tariff.id}/>
@@ -48,7 +59,7 @@ function ModalTariff(props) {
 
                   <div className="tariff-modal__download-pdf download-pdf">
                      <button className="download-pdf__icon">
-                        <img src={require( '../../../img/svg/download-pdf.svg' ).default} alt="download-pdf"/>
+                        <img src={require('../../../img/svg/download-pdf.svg').default} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
                         <button className="download-pdf__text-link">Скачать подробную информацию о тарифе</button>
@@ -62,21 +73,21 @@ function ModalTariff(props) {
 
             <ModalTariffFooter tariff={props.tariff}/>
 
-      </Modal>
+         </Modal>
 
-   )
+      )
+   }
 
    return null
 }
 
 
-const mapStateToProps = state => ({
-   show: state.modals.tariff.show,
-   tariff: state.tariffs.find( tariff => tariff.id === state.modals.tariff.props ),
-})
-
-const mapDispatchToProps = {
-   showModal,
-}
-
-export default connect( mapStateToProps, mapDispatchToProps )( ModalTariff )
+export default connect(
+   state => ({
+      show: state.modals.tariff.show,
+      tariff: state.tariffs.find(tariff => tariff.id === state.modals.tariff.props),
+   }),
+   {
+      showModal,
+   }
+)(ModalTariff)

@@ -2,7 +2,6 @@
    display: block;
 
    .success-check {
-      display: none;
       text-align: center;
       padding-bottom: 40px;
       color: #fff;
@@ -116,7 +115,6 @@
          font-size: 15px;
          line-height: 24px;
          padding-bottom: 40px;
-         display: none;
          font-weight: 400;
          border-bottom: 1px solid rgba(255, 255, 255, .2);
          text-align: center;
@@ -222,7 +220,6 @@
    }
 
    &__router {
-      display: none;
       padding-bottom: 48px;
 
       .unite-row {

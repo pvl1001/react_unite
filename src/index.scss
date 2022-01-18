@@ -532,18 +532,10 @@ input[data-provide="datepicker"] {
       }
    }
 
-   .new-price,
-   .new-price + span {
+   .new-price {
       font-size: 20px;
       line-height: 18px;
       font-weight: 500;
-   }
-
-   .new-price {
-
-      + span {
-
-      }
    }
 
    &__icon {
@@ -560,8 +552,6 @@ input[data-provide="datepicker"] {
 }
 
 .slider {
-   //transition: .2s;
-   //opacity: 0;
 
    .card {
       .price-card__btn {
@@ -720,7 +710,7 @@ form {
 
       + label,
       + label + label {
-         display: none;
+         //display: none;
          position: absolute;
          font-size: 12px;
          font-weight: 400;

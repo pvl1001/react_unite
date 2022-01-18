@@ -7,19 +7,19 @@ import {changePlan} from "../../../redux/actions/equpment";
 
 
 function ModalEquipment(props) {
+   if (props.eq) {
+      const onHide = () => props.showModal({modal: 'equipment', bool: false})
 
-   const onHide = () => props.showModal( {modal: 'equipment', bool: false} )
-
-   const handleChangePlan = (id) => props.changePlan(id)
+      const handleChangePlan = (id) => props.changePlan(id)
 
 
-   if (props.eq) return (
-      <Modal centered
-             animation={false}
-             className="performance"
-             show={props.show}
-             onHide={onHide}
-      >
+      return (
+         <Modal centered
+                  animation={false}
+                  className="performance"
+                  show={props.show}
+                  onHide={onHide}
+         >
 
             <button type="button" className="modal-close" onClick={onHide}/>
             <h1 className="performance__title">
@@ -34,12 +34,14 @@ function ModalEquipment(props) {
                </div>)
             }
 
-            <div className="performance__container">
+            <div className="performance__container"
+                 style={props.eq.style}
+            >
                <div className="performance__text">
-                  <h3>Характеристики {props.eq.name.split( ' ' )[0] === 'Роутер' ? <>роутера</> : <>приставки</>}:</h3>
+                  <h3>Характеристики {props.eq.name.split(' ')[0] === 'Роутер' ? <>роутера</> : <>приставки</>}:</h3>
 
                   <ul>
-                     {props.eq.params.map( (param, i) => (
+                     {props.eq.params.map((param, i) => (
                         <li key={i}>
                            {param.icon &&
                               <img src={require(`../../../img/svg/${param.icon}.svg`).default} height={32} alt="icon"/>}
@@ -50,7 +52,7 @@ function ModalEquipment(props) {
 
                   <div className="tariff-modal__download-pdf download-pdf">
                      <button className="download-pdf__icon">
-                        <img src={require( '../../../img/svg/download-pdf.svg' ).default} alt="download-pdf"/>
+                        <img src={require('../../../img/svg/download-pdf.svg').default} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
                         <button className="download-pdf__text-link">Скачать подробную информацию о тарифе</button>
@@ -60,25 +62,37 @@ function ModalEquipment(props) {
                </div>
 
                <picture className="performance__img">
-                  <img  src={require(`../../../img/pic/${props.eq.img}.webp`).default} alt={props.eq.name}/>
+                  <img src={require(`../../../img/pic/${props.eq.img}.webp`).default} alt={props.eq.name}/>
                </picture>
             </div>
 
             {!props.showModalTariff &&
                <>
-                  <Plan eq={props.eq} handleChange={handleChangePlan}/>
+                  {props.eq.plan &&
+                     <Plan
+                        eq={props.eq}
+                        handleChange={handleChangePlan}
+                     />
+                  }
 
-                  <div className="modal-showOrder">
-                     {/*<div className="modal-order__text"><p><span>{price}</span> ₽ в месяц</p></div>*/}
-                     <button className="btn" onClick={() => props.showModal( {modal: 'order', bool: true} )}>Заказать</button>
+                  <div className="modal-order">
+                     <div className="modal-order__text"><p><span>{props.eq.price}</span> ₽ в месяц</p></div>
+                     <button
+                        className="btn"
+                        onClick={() => props.showModal({modal: 'order', bool: true})}
+                     >
+                        Заказать
+                     </button>
                   </div>
                </>
             }
 
-      </Modal>
-   )
-   return null
+         </Modal>
+      )
 
+   }
+
+   return null
 }
 
 
@@ -92,4 +106,4 @@ const mapDispatchToProps = {
    showModal, changePlan
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( ModalEquipment )
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEquipment)

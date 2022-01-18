@@ -13,41 +13,39 @@ import {
 
 function ModalAboutAlmond(props) {
    if (props.data) {
-      var handleSwitchAlmond = (e) => props.showModalTariff
-         ? props.switchAlmond( {...props, cnt, checked: e.target.checked} )
-         : props.switchAlmondEq( {...props, cnt, checked: e.target.checked} )
+      const handleSwitchAlmond = (e) => props.showModalTariff
+         ? props.switchAlmond({...props, cnt, checked: e.target.checked})
+         : props.switchAlmondEq({...props, cnt, checked: e.target.checked})
 
-      var handlerCounter = (name, checked) => props.showModalTariff
-         ? props.counterAlmond( {...props, name, cnt, checked} )
-         : props.counterAlmondEq( {...props, name, cnt, checked} )
+      const handlerCounter = (name, checked) => props.showModalTariff
+         ? props.counterAlmond({...props, name, cnt, checked})
+         : props.counterAlmondEq({...props, name, cnt, checked})
 
-      var getData = (name) => {
+      const getData = (name) => {
          if (props.showModalTariff) {
             const almond = props
-               .tariffs.find( tariff => tariff.id === props.tariffID )
-               .equipments.find( eq => eq.id === 'eq-almond' )
+               .tariffs.find(tariff => tariff.id === props.tariffID)
+               .equipments.find(eq => eq.id === 'eq-almond')
             return almond.equipments[props.data.index]?.[name]
          } else {
-            const almond = props.equipments.find( eq => eq.id === 'eq-almond' )
+            const almond = props.equipments.find(eq => eq.id === 'eq-almond')
             return almond.equipments[props.data.index]?.[name]
          }
       }
-      var onHide = () => {
+
+      const onHide = () => {
          props.showModalTariff
-            ? props.sumAlmondTotalPrice( props.tariffID )
+            ? props.sumAlmondTotalPrice(props.tariffID)
             : props.sumAlmondTotalPriceEq()
 
-         props.showModal( {modal: 'aboutAlmond', bool: false} )
+         props.showModal({modal: 'aboutAlmond', bool: false})
       }
 
-      var checked = getData( 'checked' ) || false
-      var cnt = getData( 'cnt' ) || 1
-
-   }
+      const checked = getData('checked') || false
+      const cnt = getData('cnt') || 1
 
 
-   return (
-      props.data ?
+      return (
          <Modal centered
                 animation={false}
                 show={props.show}
@@ -62,7 +60,7 @@ function ModalAboutAlmond(props) {
                   ? 'aboutAlmond__img-router'
                   : 'aboutAlmond__img-sensor'}
                >
-                  <img src={require( `../../../img/pic/${props.data.img}.webp` ).default}
+                  <img src={require(`../../../img/pic/${props.data.img}.webp`).default}
                        alt={props.data.img}/>
                </div>
 
@@ -71,10 +69,10 @@ function ModalAboutAlmond(props) {
 
                   {props.data.params
                      ? <div className="aboutAlmond__params">
-                        {props.data.params.map( param =>
+                        {props.data.params.map(param =>
                            <div key={param.icon} className="aboutAlmond__param">
                               <div className="aboutAlmond__param-img">
-                                 <img src={require( `../../../img/svg/${param.icon}.svg` ).default}
+                                 <img src={require(`../../../img/svg/${param.icon}.svg`).default}
                                       alt={param.icon}/>
                               </div>
                               <div className="aboutAlmond__param-text"
@@ -90,7 +88,7 @@ function ModalAboutAlmond(props) {
                         <div className="switch">
                            <input type="checkbox"
                                   checked={checked}
-                                  onChange={(e) => handleSwitchAlmond( e )}/>
+                                  onChange={(e) => handleSwitchAlmond(e)}/>
                            <span className="round"/>
                         </div>
                         <div className="item-option__text">
@@ -102,12 +100,12 @@ function ModalAboutAlmond(props) {
                      <div className="aboutAlmond__counter counter">
                         <button className="counter__minus"
                                 disabled={cnt === 1}
-                                onClick={() => handlerCounter( 'minus', checked )}>
+                                onClick={() => handlerCounter('minus', checked)}>
                            &minus;
                         </button>
                         <input type="text" readOnly value={cnt}/>
                         <button className="counter__plus"
-                                onClick={() => handlerCounter( 'plus' )}>
+                                onClick={() => handlerCounter('plus')}>
                            +
                         </button>
                      </div>
@@ -116,7 +114,7 @@ function ModalAboutAlmond(props) {
 
                   <div className="tariff-modal__download-pdf download-pdf">
                      <button className="download-pdf__icon">
-                        <img src={require( '../../../img/svg/download-pdf.svg' ).default} alt="download-pdf"/>
+                        <img src={require('../../../img/svg/download-pdf.svg').default} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
                         <button className="download-pdf__text-link">Скачать подробную информацию</button>
@@ -128,8 +126,11 @@ function ModalAboutAlmond(props) {
             </div>
 
          </Modal>
-         : null
-   )
+      )
+
+   }
+
+   return null
 }
 
 
@@ -152,4 +153,4 @@ const mapDispatchToProps = {
    sumAlmondTotalPriceEq
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( ModalAboutAlmond )
+export default connect(mapStateToProps, mapDispatchToProps)(ModalAboutAlmond)

@@ -70,19 +70,22 @@ function TariffCard(props) {
                   <p>Безлимитный мобильный интернет на соцсети и YouTube</p>
                </div>
             }
-            {props.tariff.mftv && <MfTv mftv={props.tariff.mftv} id={props.tariff.id}/>}
 
+            {props.tariff.mftv &&
+               <MfTv
+                  mftv={props.tariff.mftv}
+                  id={props.tariff.id}
+               />
+            }
          </div>
 
          <div className="card__price price-card card-wrapper">
             <div className="price">
 
                {props.tariff.oldPrice && <span className="old-price">{props.tariff.oldPrice} ₽</span>}
-
-
-               <span className="new-price">{props.tariff.price}</span>
-               <span className="always"> ₽</span>
-               <span>в месяц</span>
+               <span className="new-price"> {props.tariff.price} ₽</span>
+               <span className="always"/>
+               <span> в месяц</span>
 
 
                {props.tariff.iconInfo &&
@@ -104,6 +107,7 @@ function TariffCard(props) {
 }
 
 
-const mapDispatchToProps = {showModal}
-
-export default connect( null, mapDispatchToProps )( TariffCard )
+export default connect(
+   null,
+   {showModal}
+)( TariffCard )
