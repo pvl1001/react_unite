@@ -62,6 +62,7 @@ function TvChannels(props) {
 
                <ul className="collapse-channel__channels">
                   {Object.keys(props.premium.channels).map((groupName, i) => (
+                     props.channels &&
                      <TvChannelsGroup key={groupName}
                                       onClick={() => isCollapseChannels(i)}
                                       groupName={groupName}
