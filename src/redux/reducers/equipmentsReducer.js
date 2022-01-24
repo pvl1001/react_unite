@@ -190,7 +190,7 @@ export function equipmentsReducer(state = initialState, action) {
       case CHANGE_PLAN:
          return produce( state, setState => {
             setState
-               .find( eq => eq.id === action.payload ).plan
+               .find( eq => eq.id === action.payload.id ).plan
                .map( p => p.checked = !p.checked )
          } )
 

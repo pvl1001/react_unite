@@ -1,17 +1,14 @@
-import * as PropTypes from "prop-types"
 import React from "react";
 import {connect} from "react-redux";
 import showModal from "../../../../redux/actions/showModal";
 
 
-MfTv.propTypes = {
-   mftv: PropTypes.array,
-}
-
-
 function MfTv(props) {
 
-   const showModalMfTv = () => props.showModal( {modal: 'mftv', bool: true, props: props.mftv} )
+   function showModalMfTv() {
+      props.showModal({modal: 'mftv', bool: true, props: {mftv: props.mftv, tariff: props.tariff}})
+   }
+
 
    return (
       <div className="card__mf-tv card__option-icon">
@@ -26,12 +23,14 @@ function MfTv(props) {
                   d="M16 4A12 12 0 0 0 4.41 19.11l1.93-.52a10 10 0 1 1 7.07 7.07l-.52 1.93A12 12 0 1 0 16 4z"/>
             </svg>
          </div>
+
          <p>
-            Фильмы и сериалы: {props.mftv.map( (el, i) =>
-            <span key={el.name}
-                  className="card__mf-tv-item"
-                  dangerouslySetInnerHTML={{__html: el.name + (i !== props.mftv.length -1 ? ',&nbsp' : '')}}
-                  onClick={showModalMfTv}
+            Фильмы и сериалы: {props.mftv.map((el, i) =>
+            <span
+               key={el.name}
+               className="card__mf-tv-item"
+               dangerouslySetInnerHTML={{__html: el.name + (i !== props.mftv.length - 1 ? ',&nbsp' : '')}}
+               onClick={showModalMfTv}
             />
          )}
          </p>
@@ -42,6 +41,7 @@ function MfTv(props) {
 }
 
 
-const mapDispatchToProps = {showModal}
-
-export default connect( null, mapDispatchToProps )( MfTv )
+export default connect(
+   null,
+   {showModal}
+)(MfTv)

@@ -7,6 +7,8 @@ import Success from "./components/Success";
 import {connect} from "react-redux";
 import showModal from "../../redux/actions/showModal";
 import {onUniteSwitch} from "../../redux/reducers/tariffsReducer";
+import {setDataOrder} from "../../redux/reducers/orderReducer";
+import {api} from "../../api";
 
 
 function CheckAddress(props) {
@@ -48,22 +50,25 @@ function CheckAddress(props) {
       clearInput()
    }
 
-   function checkAddress() {
-      return $.ajax({
-         url: 'https://api.wifire.ru/api/address/check_dadata_address',
-         method: 'POST',
-         data: address
-      })
-   }
-
    function submit(e) {
       e.preventDefault()
-      !address.house_guid && setIsShowLabel(true)
-      address.house_guid && checkAddress().then(data => setResult(data.result))
+
+      if (address.house_guid) {
+         props.setDataOrder({clientAddress: address.address, house_guid: address.house_guid})
+         return api('https://api.wifire.ru/api/address/check_dadata_address', address)
+            .then(data => setResult(data.result))
+      }
+
+      setIsShowLabel(true)
    }
 
    function showModalOrder() {
       props.showModal({modal: 'order', bool: true})
+      props.setDataOrder({
+         tariffName: props.tariff.name,
+         tariffId: props.tariff.tariffId,
+         equipments: props.tariff.equipments
+      })
    }
 
 
@@ -90,11 +95,11 @@ function CheckAddress(props) {
                }
 
                {result === 0 &&
-               <Offer
-                  resultNull={resultNull}
-                  showModalOrder={showModalOrder}
-                  address={address.address}
-               />
+                  <Offer
+                     resultNull={resultNull}
+                     showModalOrder={showModalOrder}
+                     address={address.address}
+                  />
                }
 
             </div>
@@ -106,9 +111,12 @@ function CheckAddress(props) {
 
 
 export default connect(
-   null,
+   state => ({
+      tariff: state.tariffs.find(tariff => tariff.id === 'around')
+   }),
    {
       showModal,
-      onUniteSwitch
+      onUniteSwitch,
+      setDataOrder,
    }
 )(CheckAddress)

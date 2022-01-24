@@ -1,7 +1,8 @@
 import {Accordion} from "react-bootstrap";
+import {connect} from "react-redux";
 
 
-export default function FaqMftv() {
+function FaqMftv(props) {
    const faq = [
       {
          "question": "Как смотреть фильмы и сериалы из пакетов и сервисов, включённых в тариф «Объединяй!»?",
@@ -21,6 +22,11 @@ export default function FaqMftv() {
       }
    ]
 
+   function showModalOrder() {
+      props.showModal({modal: 'order', bool: true})
+      props.setDataOrder({tariffName: props.tariff.name, tariffId: props.tariff.tariffId})
+   }
+
 
    return (
       <div className="mftv__faq wrapp">
@@ -28,17 +34,28 @@ export default function FaqMftv() {
 
          <Accordion>
 
-            {faq.map( (el, i) => (
+            {faq.map((el, i) => (
                <Accordion.Item key={el.question} eventKey={i} bsPrefix="accordion__item">
                   <Accordion.Header bsPrefix="accordion__header">{el.question}</Accordion.Header>
                   <Accordion.Body bsPrefix="card-body" dangerouslySetInnerHTML={{__html: el.answer}}/>
                </Accordion.Item>
-            ) )}
+            ))}
 
          </Accordion>
 
-         <button type="button" className="mftv__faq-btn btn">Подключить</button>
+         <button
+            type="button"
+            className="mftv__faq-btn btn"
+            onClick={showModalOrder}>
+            Подключить
+         </button>
 
       </div>
    )
 }
+
+
+export default connect(
+   null,
+   {}
+)(FaqMftv)

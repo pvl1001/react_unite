@@ -425,6 +425,7 @@ const initialState = [
          },
          {
             id: "equipment-sim",
+            dataView: 'sim',
             oldPrice: 600,
             price: 360,
             cnt: 1,
@@ -672,6 +673,7 @@ const initialState = [
          },
          {
             id: "equipment-sim",
+            dataView: 'sim',
             oldPrice: 600,
             price: 360,
             cnt: 1,
@@ -971,6 +973,7 @@ const initialState = [
          },
          {
             id: "equipment-sim",
+            dataView: 'sim',
             oldPrice: 600,
             price: 360,
             cnt: 1,
@@ -1265,6 +1268,7 @@ const initialState = [
          },
          {
             id: "equipment-sim",
+            dataView: 'sim',
             oldPrice: 600,
             price: 360,
             cnt: 1,
@@ -1581,6 +1585,7 @@ const initialState = [
          },
          {
             id: "equipment-sim",
+            dataView: 'sim',
             oldPrice: 600,
             price: 360,
             cnt: 1,
@@ -1879,6 +1884,7 @@ const initialState = [
          },
          {
             id: "equipment-sim",
+            dataView: 'sim',
             oldPrice: 600,
             price: 360,
             cnt: 1,

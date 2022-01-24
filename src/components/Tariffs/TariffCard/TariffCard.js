@@ -8,6 +8,7 @@ import TvChannels from "./components/TvChannels"
 import showModal from "../../../redux/actions/showModal";
 import Tippy from "@tippyjs/react";
 import {tippyAttrs} from "../../../plugins_config";
+import {setDataOrder} from "../../../redux/reducers/orderReducer";
 
 
 TariffCard.propTypes = {
@@ -19,11 +20,24 @@ TariffCard.propTypes = {
 
 function TariffCard(props) {
 
-   const activeProgress = (title, n) => {
+   function activeProgress(title, n) {
       if (title === 'Мобильный интернет') return n === 30 ? 50 : 100
-      if (title === 'Домашний&nbsp;<br>интернет') return n.split( ' ' )[0] / 5
-      if (title === 'Звонки') return n.split( ' ' )[0] / 30
-      return title === 'ТВ' && n.split( ' ' )[0] / 2.5
+      if (title === 'Домашний&nbsp;<br>интернет') return n.split(' ')[0] / 5
+      if (title === 'Звонки') return n.split(' ')[0] / 30
+      return title === 'ТВ' && n.split(' ')[0] / 2.5
+   }
+
+   function showModalOrder() {
+      props.showModal({modal: 'order', bool: true})
+      props.setDataOrder({
+         tariffName: props.tariff.name,
+         tariffId: props.tariff.tariffId,
+         price: props.tariff.price
+      })
+   }
+
+   function showModalTariff() {
+      props.showModal({modal: 'tariff', bool: true, props: props.tariff.id})
    }
 
 
@@ -31,7 +45,7 @@ function TariffCard(props) {
       <div className={`card slider__card slider__card_${props.tariff.id}`}>
          <div className="card__title card-wrapper">
 
-            <h2 onClick={() => props.showModal( {modal: 'tariff', bool: true, props: props.tariff.id} )}>
+            <h2 onClick={showModalTariff}>
                {props.tariff.name}
             </h2>
 
@@ -43,19 +57,18 @@ function TariffCard(props) {
          <div className="card__info card-wrapper">
             <div className="card__block-progress block-progress">
 
-               {props.tariff.infoProgress.map( pb => (
-                  <ProgressBar key={pb.title} pb={pb} activeProgress={activeProgress( pb.title, pb.value )}/>
-               ) )}
+               {props.tariff.infoProgress.map(pb => (
+                  <ProgressBar key={pb.title} pb={pb} activeProgress={activeProgress(pb.title, pb.value)}/>
+               ))}
 
 
                {props.tariff.tvLength && (
                   <TvChannels collapse={props.collapse}
                               premium={props.premium}
                               tvLength={props.tariff.tvLength}
-                              // tvChannels={props.tariff.tvChannels}
                               tvId={props.tariff.tvId}
                               channels={props.tariff.channels}
-                              activeProgress={activeProgress( 'ТВ', props.tariff.tvLength )}/>
+                              activeProgress={activeProgress('ТВ', props.tariff.tvLength)}/>
                )}
 
             </div>
@@ -73,6 +86,7 @@ function TariffCard(props) {
 
             {props.tariff.mftv &&
                <MfTv
+                  tariff={props.tariff}
                   mftv={props.tariff.mftv}
                   id={props.tariff.id}
                />
@@ -94,11 +108,15 @@ function TariffCard(props) {
                   </Tippy>}
 
             </div>
-            <button className="price-card__btn btn"
-                    onClick={() => props.showModal( {modal: 'order', bool: true} )}>Подключить
+            <button
+               className="price-card__btn btn"
+               onClick={showModalOrder}>
+               Подключить
             </button>
-            <div className="link"
-                 onClick={() => props.showModal( {modal: 'tariff', bool: true, props: props.tariff.id} )}>Подробнее
+            <div
+               className="link"
+               onClick={showModalTariff}>
+               Подробнее
             </div>
          </div>
 
@@ -109,5 +127,8 @@ function TariffCard(props) {
 
 export default connect(
    null,
-   {showModal}
-)( TariffCard )
+   {
+      showModal,
+      setDataOrder
+   }
+)(TariffCard)

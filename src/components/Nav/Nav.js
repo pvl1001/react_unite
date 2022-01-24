@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import './Nav.scss'
 import {connect} from "react-redux";
 import showModal from "../../redux/actions/showModal";
+import {setDataOrder} from "../../redux/reducers/orderReducer";
 
 
 function Nav(props) {
+   const refCity = useRef(null)
+   useEffect(() => {
+      props.setDataOrder({city: refCity.current.textContent})
+   })
 
    return (
       <nav className="nav">
@@ -16,7 +21,7 @@ function Nav(props) {
                <a href="tel:88005500001">8 800 55-00-001</a>
             </div>
             <div className="nav__city" onClick={() => props.showModal({modal: 'cities', bool: true})}>
-               <span>Москва и область</span>
+               <span ref={refCity}>Москва и область</span>
             </div>
          </div>
       </nav>
@@ -25,7 +30,8 @@ function Nav(props) {
 
 
 const mapDispatchToProps = {
-   showModal
+   showModal,
+   setDataOrder
 }
 
 export default connect(null, mapDispatchToProps)(Nav)

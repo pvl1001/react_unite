@@ -1,12 +1,14 @@
 import './ModalOrder.scss'
 import {Modal} from "react-bootstrap";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {connect} from 'react-redux'
 import showModal from "../../../redux/actions/showModal";
 import '../../../plugins/jquery.mask'
 import $ from 'jquery'
 import {Formik} from 'formik'
 import {string, object} from 'yup'
+import {setDataOrder} from "../../../redux/reducers/orderReducer";
+import {api} from "../../../api";
 
 function ModalOrder(props) {
    useEffect(() => {
@@ -16,7 +18,7 @@ function ModalOrder(props) {
       )
    })
 
-   const onHide = () => props.showModal({modal: 'order', bool: false})
+   const [apiResponse, setApiResponse] = useState(null)
 
    const errorMessage = 'Заполните поле!'
 
@@ -25,102 +27,130 @@ function ModalOrder(props) {
       name: string().min(2, errorMessage).required(errorMessage),
    })
 
+   function onHide() {
+      props.showModal({modal: 'order', bool: false})
+      setApiResponse(null)
+   }
+
    function valid(errors, touch, dirty) {
-      if(errors && touch) return 'error'
-      if(!errors && dirty) return 'valid'
+      if (errors && touch) return 'error'
+      if (!errors && dirty) return 'valid'
+   }
+
+   function submit(data) {
+      props.setDataOrder({
+         ...props.dataOrder,
+         clientName: data.name,
+         clientPhone: data.phone,
+      })
+
+      const dataOrder = {...props.dataOrder, clientName: data.name, clientPhone: data.phone}
+      delete dataOrder.price
+      delete dataOrder.equipments
+
+      api('https://home.megafon.ru/form/mail-sender', dataOrder)
+         .then(data => setApiResponse(data))
+         .catch(err => console.log(err))
    }
 
 
    return (
-      <Modal centered
-             animation={false}
-             show={props.show}
-             onHide={onHide}
-             className="order-modal">
-         <div className="requisition">
+      <Modal
+         centered
+         animation={false}
+         show={props.show}
+         onHide={onHide}
+         className="order-modal"
+      >
+         {!apiResponse
+            ? <div className="requisition">
 
-            <button
-               type="button"
-               className="modal-close"
-               onClick={onHide}
-            />
+               <button
+                  type="button"
+                  className="modal-close"
+                  onClick={onHide}
+               />
 
-            <h2>Заявка на подключение</h2>
+               <h2>Заявка на подключение</h2>
 
-            <Formik
-               initialValues={{
-                  phone: '',
-                  name: '',
-               }}
-               validateOnBlur
-               validationSchema={validationSchema}
-               onSubmit={(values) => console.log(values)}
-            >
-               {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    isValid,
-                    dirty,
-                    handleSubmit
-                 }) => (
-                  <form onSubmit={handleSubmit}>
+               <Formik
+                  initialValues={{
+                     phone: '',
+                     name: '',
+                  }}
+                  validateOnBlur
+                  validationSchema={validationSchema}
+                  onSubmit={(data) => submit(data)}
+               >
+                  {({
+                       values,
+                       errors,
+                       touched,
+                       dirty,
+                       handleChange,
+                       handleBlur,
+                       handleSubmit
+                    }) => (
+                     <form onSubmit={handleSubmit}>
 
-                     <div className="order-modal__inputs">
-                        <div className="order-modal__input">
-                           <div className="order-modal__input-title">Контактный номер</div>
-                           <input
-                              name="phone"
-                              value={values.phone}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              className={valid(errors.phone, touched.phone, dirty)}
-                           />
-                           {errors.phone && touched.phone &&
-                              <label className="error">{errors.phone}</label>
-                           }
+                        <div className="order-modal__inputs">
+                           <div className="order-modal__input">
+                              <div className="order-modal__input-title">Контактный номер</div>
+                              <input
+                                 type="text"
+                                 name="phone"
+                                 value={values.phone}
+                                 onChange={handleChange}
+                                 onBlur={handleBlur}
+                                 className={valid(errors.phone, touched.phone, dirty)}
+                              />
+                              {errors.phone && touched.phone &&
+                                 <label className="error">{errors.phone}</label>
+                              }
+                           </div>
+
+                           <div className="order-modal__input">
+                              <div className="order-modal__input-title">Имя</div>
+                              <input
+                                 type="text"
+                                 name="name"
+                                 value={values.name}
+                                 onChange={handleChange}
+                                 onBlur={handleBlur}
+                                 className={valid(errors.name, touched.name, dirty)}
+                              />
+                              {errors.name && touched.name &&
+                                 <label className='error'>{errors.name}</label>}
+                           </div>
                         </div>
 
-                        <div className="order-modal__input">
-                           <div className="order-modal__input-title">Имя</div>
-                           <input
-                              name="name"
-                              value={values.name}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              className={valid(errors.name, touched.name, dirty)}
-                           />
-                           {errors.name && touched.name &&
-                              <label className='error'>{errors.name}</label>}
-                        </div>
-                     </div>
+                        <button type="submit" className="order-modal__btn btn">Отправить</button>
+                     </form>
+                  )}
+               </Formik>
+            </div>
+            : <div className="order-thx">
+               <button type="button" className="modal-close" onClick={onHide}/>
 
-                     <button type="submit" className="order-modal__btn btn">Отправить</button>
-                  </form>
-               )}
-            </Formik>
+               <h2 className="order-thx__title">{apiResponse.response_head}</h2>
+               <p className="order-thx__text">{apiResponse.response}</p>
+            </div>
+         }
 
-         </div>
-         <div className="showModal-thx" hidden>
-            <button type="button" className="modal-close" onClick={onHide}/>
 
-            <h2 className="order-thx__title">Спасибо за заявку!</h2>
-            <p className="order-thx__text">Наш оператор свяжется с вами в рабочее время с 9 до 21 часов</p>
-         </div>
       </Modal>
    )
 
 }
 
 
-const mapStateToProps = state => ({
-   show: state.modals.order.show
-})
-
-const mapDispatchToProps = {
-   showModal
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModalOrder)
+export default connect(
+   state => ({
+      show: state.modals.order.show,
+      dataOrder: state.order,
+   }),
+   {
+      showModal,
+      setDataOrder,
+   }
+)(ModalOrder)

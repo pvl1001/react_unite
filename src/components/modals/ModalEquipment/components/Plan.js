@@ -9,6 +9,10 @@ Plan.propTypes = {
 
 export default function Plan(props) {
 
+   function handleChangePlan(value) {
+      props.handleChange({id: props.eq.id, value})
+   }
+
    return (
       <div className="performance__radio">
          <p className="performance__radio-title">
@@ -22,7 +26,7 @@ export default function Plan(props) {
                   <input name="radio-plan"
                          id={`plan-${i}`}
                          type="radio"
-                         onChange={() => props.handleChange(props.eq.id)}
+                         onChange={() => handleChangePlan(el.value)}
                          value={el.value}
                          defaultChecked={el.checked}
                   />

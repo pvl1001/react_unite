@@ -8,6 +8,7 @@ import {templateEqAlmond} from "../../../redux/reducers/tariffsReducer";
 import optionSwitch from "../../../redux/actions/optionSwitch";
 import {sumTotalPrice} from "../../../redux/actions/sumTotalPrice";
 import {changeAlmondTotalPrice} from "../../../redux/actions/almond";
+import {setDataOrder} from "../../../redux/reducers/orderReducer";
 
 function ModalAlmond(props) {
    if (props.show) {
@@ -84,13 +85,23 @@ function ModalAlmond(props) {
          props.showModal({modal: 'almond', bool: false})
       }
 
+      function showModalOrder() {
+         props.showModal({modal: 'order', bool: true})
+         props.setDataOrder({
+            tariffName: props.tariffForTheir.name,
+            tariffId: props.tariffForTheir.tariffId,
+            equipments: almond.dataView
+         })
+      }
+
 
       return (
-         <Modal centered
-                animation={false}
-                className="modalAlmond"
-                show={props.show}
-                onHide={onHide}
+         <Modal
+            centered
+            animation={false}
+            className="modalAlmond"
+            show={props.show}
+            onHide={onHide}
          >
             <button type="button" className="modal-close" onClick={onHide}/>
             <h2 className="modalAlmond__banners-title modalAlmond__banners-title_head d-mobile">
@@ -146,14 +157,18 @@ function ModalAlmond(props) {
                }
 
                {props.showModalTariff
-                  ? <button className="modalAlmond__price-btn btn"
-                            disabled={!almond.totalPrice}
-                            onClick={addToTariff}
-                  >Добавить к тарифу</button>
+                  ? <button
+                     className="modalAlmond__price-btn btn"
+                     disabled={!almond.totalPrice}
+                     onClick={addToTariff}>
+                     Добавить к тарифу
+                  </button>
 
-                  : <button className="modalAlmond__price-btn btn"
-                            onClick={() => props.showModal({modal: 'order', bool: true})}
-                  >Отправить заявку</button>
+                  : <button
+                     className="modalAlmond__price-btn btn"
+                     onClick={showModalOrder}>
+                     Отправить заявку
+                  </button>
                }
 
             </div>
@@ -165,19 +180,21 @@ function ModalAlmond(props) {
    return null
 }
 
-const mapStateToProps = state => ({
-   show: state.modals.almond.show,
-   showModalTariff: state.modals.tariff.show,
-   tariff: state.modals.tariff.props,
-   tariffs: state.tariffs,
-   equipments: state.equipments
-})
 
-const mapDispatchToProps = {
-   showModal,
-   optionSwitch,
-   sumTotalPrice,
-   changeAlmondTotalPrice,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModalAlmond)
+export default connect(
+   state => ({
+      show: state.modals.almond.show,
+      showModalTariff: state.modals.tariff.show,
+      tariff: state.modals.tariff.props,
+      tariffs: state.tariffs,
+      equipments: state.equipments,
+      tariffForTheir: state.tariffs.find(tariff => tariff.id === 'for-their')
+   }),
+   {
+      showModal,
+      optionSwitch,
+      sumTotalPrice,
+      changeAlmondTotalPrice,
+      setDataOrder
+   }
+)(ModalAlmond)

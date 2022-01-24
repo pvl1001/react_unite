@@ -5,8 +5,18 @@ import head_banner_mob from '../../img/pic/head_banner_mob.webp'
 import head_banner_tap from '../../img/pic/head_banner_tap.webp'
 import head_banner_desctop from '../../img/pic/head_banner_desctop.webp'
 import showModal from "../../redux/actions/showModal";
+import {setDataOrder} from "../../redux/reducers/orderReducer";
 
 function Header(props) {
+
+   function showModalOrder() {
+      props.showModal({modal: 'order', bool: true})
+      props.setDataOrder({tariffName: props.tariff.name, tariffId: props.tariff.tariffId})
+   }
+
+   function showModalTariff() {
+      props.showModal({modal: 'tariff', bool: true, props: props.tariff.name})
+   }
 
    return (
       <header className="header">
@@ -19,15 +29,15 @@ function Header(props) {
                   </h1>
                   <p>В тарифах «Объединяй!»</p>
                   <div className="header__btns">
-                     <button onClick={ () => props.showModal( {modal: 'order', bool: true}) }
+                     <button onClick={showModalOrder}
                              type="button"
                              className="btn btn-fiolet"
                              data-view="first_banner"
                      >Подключить
                      </button>
-                     <span data-target="#for-their" data-toggle="modal"
-                           className="header__about"
-                           onClick={() => props.showModal( {modal: 'tariff', bool: true, props: 'for-their'} )}
+                     <span
+                        className="header__about"
+                        onClick={showModalTariff}
                      >Подробнее</span>
                   </div>
                </div>
@@ -44,8 +54,13 @@ function Header(props) {
    )
 }
 
-const mapDispatchToProps = {
-   showModal
-}
 
-export default connect(null, mapDispatchToProps)(Header)
+export default connect(
+   state => ({
+      tariff: state.tariffs.find(tariff => tariff.id === 'for-their')
+   }),
+   {
+      showModal,
+      setDataOrder
+   }
+)(Header)
