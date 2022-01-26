@@ -23,12 +23,13 @@ export default function Plan(props) {
             {props.eq.plan.map((el, i) => (
                <label key={i} className="option-radio__radio-btn">
 
-                  <input name="radio-plan"
-                         id={`plan-${i}`}
-                         type="radio"
-                         onChange={() => handleChangePlan(el.value)}
-                         value={el.value}
-                         defaultChecked={el.checked}
+                  <input
+                     name="radio-plan"
+                     id={`plan-${i}`}
+                     type="radio"
+                     onChange={() => handleChangePlan(el.value)}
+                     value={el.value}
+                     defaultChecked={el.checked}
                   />
 
                   <label htmlFor={`plan-${i}`}/><span>{el.name}</span>

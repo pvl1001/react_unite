@@ -16,6 +16,7 @@ import ModalTariff from "../components/modals/ModalTariff/ModalTariff";
 import ModalTariffAll from "../components/modals/ModalTariffAll/ModalTariffAll";
 import ModalAlmond from "../components/modals/ModalAlmond/ModalAlmond";
 import ModalAboutAlmond from "../components/modals/ModalAboutAlmond/ModalAboutAlmond";
+import ChoiceRouter from "../components/modals/ChoiceRouter/ChoiceRouter";
 // import '../analytics'
 
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
          <ModalTariffAll/>
          <ModalAlmond/>
          <ModalAboutAlmond/>
+         <ChoiceRouter/>
       </>
    )
 }

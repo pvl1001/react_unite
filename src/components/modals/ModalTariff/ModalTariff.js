@@ -6,9 +6,16 @@ import CardOptionSim from "./components/CardOptionSim";
 import BlockInfo from "./components/BlockInfo";
 import ModalTariffFooter from "./components/ModalTariffFooter";
 import BannerMfTv from "./components/BannerMfTv/BannerMfTv";
+import {useEffect} from "react";
+import {sumTotalPrice} from "../../../redux/actions/sumTotalPrice";
 
 function ModalTariff(props) {
-   if (props.tariff) {
+   useEffect(() => {
+      props.show && props.sumTotalPrice(props.tariff)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   },[props.show])
+
+   if (props.show) {
 
       function onHide() {
          props.showModal({modal: 'tariff', bool: false})
@@ -62,7 +69,7 @@ function ModalTariff(props) {
                         <img src={require('../../../img/svg/download-pdf.svg').default} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
-                        <button className="download-pdf__text-link">Скачать подробную информацию о тарифе</button>
+                        <a href=" " className="download-pdf__text-link">Скачать подробную информацию о тарифе</a>
                         <span className="download-pdf__text-pdf">(PDF, 0.4 MB)</span>
                      </div>
                   </div>
@@ -74,7 +81,6 @@ function ModalTariff(props) {
             <ModalTariffFooter tariff={props.tariff}/>
 
          </Modal>
-
       )
    }
 
@@ -89,5 +95,6 @@ export default connect(
    }),
    {
       showModal,
+      sumTotalPrice
    }
 )(ModalTariff)

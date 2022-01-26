@@ -22,7 +22,6 @@ function EqCard(props) {
    function showModalOrder() {
       props.showModal({modal: 'order', bool: true})
       props.setDataOrder({tariffName: props.tariff.name, tariffId: props.tariff.tariffId, equipments: props.eq.dataView})
-      console.log(props.eq.dataView)
    }
 
 
@@ -52,12 +51,12 @@ function EqCard(props) {
 
                <span className="new-price">
                   {props.eq.plan
-                     ? <>от {props.eq.plan[0].value}</>
-                     : <>{props.eq.price}</>
+                     ? <>от {props.eq.plan[0].value} ₽</>
+                     : <>{props.eq.price} ₽</>
                   }
-               </span><span className="always">₽</span>
-
-               <span>в месяц</span>
+               </span>
+               <span className="always"/>
+               <span> в месяц</span>
             </div>
             <button
                className="price-card__btn btn"

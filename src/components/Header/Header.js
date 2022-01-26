@@ -1,5 +1,5 @@
-import React from 'react'
 import './Header.scss'
+import React from 'react'
 import {connect} from 'react-redux'
 import head_banner_mob from '../../img/pic/head_banner_mob.webp'
 import head_banner_tap from '../../img/pic/head_banner_tap.webp'
@@ -15,7 +15,7 @@ function Header(props) {
    }
 
    function showModalTariff() {
-      props.showModal({modal: 'tariff', bool: true, props: props.tariff.name})
+      props.showModal({modal: 'tariff', bool: true, props: props.tariff.id})
    }
 
    return (
@@ -25,22 +25,28 @@ function Header(props) {
                <div className="header__text">
                   <h1>
                      Домашний интернет,
-                     <nobr>ТВ и связь</nobr>
+                     <nobr> ТВ и связь</nobr>
                   </h1>
+
                   <p>В тарифах «Объединяй!»</p>
+
                   <div className="header__btns">
-                     <button onClick={showModalOrder}
-                             type="button"
-                             className="btn btn-fiolet"
-                             data-view="first_banner"
-                     >Подключить
+                     <button
+                        type="button"
+                        onClick={showModalOrder}
+                        className="btn btn-fiolet"
+                        data-view="first_banner">
+                        Подключить
                      </button>
+
                      <span
                         className="header__about"
-                        onClick={showModalTariff}
-                     >Подробнее</span>
+                        onClick={showModalTariff}>
+                        Подробнее
+                     </span>
                   </div>
                </div>
+
                <div className="header__img-wrapp">
                   <picture>
                      <source srcSet={head_banner_mob} media="(max-width: 602px)"/>

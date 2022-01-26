@@ -61,6 +61,11 @@
 
    @media (max-width: 767px) {
 
+      .modal-dialog {
+         margin: 0 auto;
+         padding: 0;
+      }
+
       &__wrapp {
          max-width: 268px;
       }

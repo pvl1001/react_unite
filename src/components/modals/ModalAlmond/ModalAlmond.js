@@ -94,6 +94,10 @@ function ModalAlmond(props) {
          })
       }
 
+      function showModalChoiceRouter() {
+         props.showModal({modal: 'choiceRouter', bool: true})
+      }
+
 
       return (
          <Modal
@@ -121,8 +125,13 @@ function ModalAlmond(props) {
 
                <div className="modalAlmond__price-router">
                   <h4 className="modalAlmond__price-router-title">Выберите роутер</h4>
-                  <span className="modalAlmond__price-link"
-                        data-toggle="modal" data-target="#choiceRouter">Какой роутер мне подойдет?</span>
+
+                  <span
+                     className="modalAlmond__price-link"
+                     onClick={showModalChoiceRouter}>
+                     Какой роутер мне подойдет?
+                  </span>
+
                   <div className="modalAlmond__price-cards">
                      {templateEqAlmond.map((router, i) =>
                         i <= 1 && <AlmondCard key={router.id}

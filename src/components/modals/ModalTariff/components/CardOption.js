@@ -9,31 +9,31 @@ function CardOption(props) {
    const payload = {id: props.id, index: props.idx}
 
    const handleSwitch = (e) => {
-      props.optionSwitch( {...payload, checked: e.target.checked} )
-      props.sumTotalPrice( payload )
+      props.optionSwitch({...payload, checked: e.target.checked})
+      props.sumTotalPrice(payload)
    }
 
    const handleRadio = () => {
-      props.tariffRadioPlan( payload )
-      props.sumTotalPrice( payload )
+      props.tariffRadioPlan(payload)
+      props.sumTotalPrice(payload)
    }
 
    const price = (id) => {
       if (id === 'eq-almond') {
-        return props.equipment.currentPrice || props.equipment.price
+         return props.equipment.currentPrice || props.equipment.price
       }
       if (props.equipment.plan) {
-         return props.equipment.plan.find( p => p.checked ).value
+         return props.equipment.plan.find(p => p.checked).value
       }
       return props.equipment.price
    }
 
    const openModalEquipment = () => {
-      props.showModal( {modal: 'equipment', bool: true, props: props.equipment} )
+      props.showModal({modal: 'equipment', bool: true, props: props.equipment})
    }
 
    const openModalAlmond = () => {
-      props.showModal( {modal: 'almond', bool: true} )
+      props.showModal({modal: 'almond', bool: true})
    }
 
 
@@ -46,7 +46,7 @@ function CardOption(props) {
             {props.equipment.name === 'Android TV' &&
                <div className="dop-options-card__mark mark">Акция</div>}
 
-            <img src={require( `../../../../img/pic/${props.equipment.img}.webp` ).default} alt={props.equipment.img}/>
+            <img src={require(`../../../../img/pic/${props.equipment.img}.webp`).default} alt={props.equipment.img}/>
 
          </div>
 
@@ -72,25 +72,28 @@ function CardOption(props) {
             {props.equipment.plan &&
                <div className="dop-options-card__option-radio option-radio">
 
-                  {props.equipment.plan.map( (p, i) => (
+                  {props.equipment.plan.map((p, i) => (
                      <label key={p.name} className="option-radio__radio-btn">
-                        <input name={`radio-${props.equipment.id}-${props.idx}`}
-                               id={`plan-${i}-${props.equipment.id}-${props.idx}`}
-                               type="radio" value={p.value}
-                               onChange={handleRadio}
-                               checked={p.checked}
-                               disabled={!props.equipment.switch}/>
+                        <input
+                           name={`radio-${props.equipment.id}-${props.idx}`}
+                           id={`plan-${i}-${props.equipment.id}-${props.idx}`}
+                           type="radio"
+                           value={p.value}
+                           onChange={handleRadio}
+                           checked={p.checked}
+                           disabled={!props.equipment.switch}
+                        />
                         <label htmlFor={`plan-${i}-${props.equipment.id}-${props.idx}`}/>
                         <span>{p.name}</span>
                      </label>
-                  ) )}
+                  ))}
                </div>}
          </div>
 
          <div className="dop-options-card__price">
             <div className="price">
                <span className="price__current">
-                  {price( props.equipment.id )}
+                  {price(props.equipment.id)}
                </span> <span> ₽</span>
                <span className="price__month"> в месяц</span>
             </div>
@@ -114,4 +117,4 @@ const mapDispatchToProps = {
    showModal
 }
 
-export default connect( null, mapDispatchToProps )( CardOption )
+export default connect(null, mapDispatchToProps)(CardOption)

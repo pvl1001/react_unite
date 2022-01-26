@@ -5,7 +5,6 @@
    }
 
    .modal-content {
-      display: flex;
       height: auto;
       padding: 45px 75px 45px;
       max-height: 825px;
@@ -328,9 +327,17 @@
       }
    }
    @media (max-width: 1023px) {
+      &__banners,
+      &__banners-title,
+      &__price {
+         padding-left: 24px;
+         padding-right: 24px;
+      }
+
       .modal-content {
          flex-wrap: wrap;
          max-height: none;
+         padding: 45px 0;
       }
 
       &__banners-title_head.d-mobile {
@@ -344,6 +351,7 @@
          position: relative;
          margin-bottom: 25px;
          overflow-y: hidden;
+         max-width: none;
 
          .modalAlmond__banners-title_head {
             display: none;
@@ -387,10 +395,6 @@
          }
       }
 
-      &__price {
-         padding-left: 0;
-      }
-
       &__price-cards {
          display: grid;
          grid: auto / 1fr 1fr;
@@ -408,9 +412,11 @@
    }
    @media (max-width: 767px) {
 
-      .modal-content {
-         padding: 45px 16px 45px;
-
+      &__banners,
+      &__banners-title,
+      &__price {
+         padding-left: 16px;
+         padding-right: 16px;
       }
 
       &__price-cards {

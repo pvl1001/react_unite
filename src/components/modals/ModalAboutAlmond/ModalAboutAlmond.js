@@ -12,7 +12,11 @@ import {
 
 
 function ModalAboutAlmond(props) {
+
    if (props.data) {
+
+      const almondOrSensor = props.data.params ? 'Almond' : 'Sensor'
+
       const handleSwitchAlmond = (e) => props.showModalTariff
          ? props.switchAlmond({...props, cnt, checked: e.target.checked})
          : props.switchAlmondEq({...props, cnt, checked: e.target.checked})
@@ -46,44 +50,43 @@ function ModalAboutAlmond(props) {
 
 
       return (
-         <Modal centered
-                animation={false}
-                show={props.show}
-                onHide={onHide}
-                className="modalAboutAlmond aboutAlmond"
+         <Modal
+            centered
+            animation={false}
+            show={props.show}
+            onHide={onHide}
+            className={`modalAboutAlmond about${almondOrSensor}`}
 
          >
             <button type="button" className="modal-close" onClick={onHide}/>
-            <div className="aboutAlmond__wrapp">
+            <div className={`about${almondOrSensor}__wrapp`}>
 
-               <div className={props.data.params
-                  ? 'aboutAlmond__img-router'
-                  : 'aboutAlmond__img-sensor'}
+               <div className={`about${almondOrSensor}__img`}
                >
                   <img src={require(`../../../img/pic/${props.data.img}.webp`).default}
                        alt={props.data.img}/>
                </div>
 
-               <div className="aboutAlmond__text">
-                  <h2 className="aboutAlmond__title">{props.data.name}</h2>
+               <div className={`about${almondOrSensor}__text`}>
+                  <h2 className={`about${almondOrSensor}__title`}>{props.data.name}</h2>
 
                   {props.data.params
-                     ? <div className="aboutAlmond__params">
+                     ? <div className={`about${almondOrSensor}__params`}>
                         {props.data.params.map(param =>
-                           <div key={param.icon} className="aboutAlmond__param">
-                              <div className="aboutAlmond__param-img">
+                           <div key={param.icon} className={`about${almondOrSensor}__param`}>
+                              <div className={`about${almondOrSensor}__param-img`}>
                                  <img src={require(`../../../img/svg/${param.icon}.svg`).default}
                                       alt={param.icon}/>
                               </div>
-                              <div className="aboutAlmond__param-text"
+                              <div className={`about${almondOrSensor}__param-text`}
                                    dangerouslySetInnerHTML={{__html: param.text}}/>
                            </div>
                         )}
                      </div>
-                     : <p className="aboutAlmond__desc">{props.data.desc}</p>
+                     : <p className={`about${almondOrSensor}__desc`}>{props.data.desc}</p>
                   }
 
-                  <div className="aboutAlmond__switch item-option">
+                  <div className={`about${almondOrSensor}__switch item-option`}>
                      <label>
                         <div className="switch">
                            <input type="checkbox"
@@ -91,21 +94,26 @@ function ModalAboutAlmond(props) {
                                   onChange={(e) => handleSwitchAlmond(e)}/>
                            <span className="round"/>
                         </div>
+
                         <div className="item-option__text">
                            <p>Аренда Wi-Fi роутера</p>
                            <span className="item-option__num">{props.data.price}</span><span> ₽ в месяц</span>
                         </div>
                      </label>
 
-                     <div className="aboutAlmond__counter counter">
-                        <button className="counter__minus"
-                                disabled={cnt === 1}
-                                onClick={() => handlerCounter('minus', checked)}>
+                     <div className={`about${almondOrSensor}__counter counter`}>
+                        <button
+                           className="counter__minus"
+                           disabled={cnt === 1}
+                           onClick={() => handlerCounter('minus', checked)}>
                            &minus;
                         </button>
+
                         <input type="text" readOnly value={cnt}/>
-                        <button className="counter__plus"
-                                onClick={() => handlerCounter('plus')}>
+
+                        <button
+                           className="counter__plus"
+                           onClick={() => handlerCounter('plus')}>
                            +
                         </button>
                      </div>
@@ -117,7 +125,7 @@ function ModalAboutAlmond(props) {
                         <img src={require('../../../img/svg/download-pdf.svg').default} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
-                        <button className="download-pdf__text-link">Скачать подробную информацию</button>
+                        <a href=" " className="download-pdf__text-link">Скачать подробную информацию</a>
                         <br/>
                         <span className="download-pdf__text-pdf">(PDF, 0.4 MB)</span>
                      </div>

@@ -44,13 +44,24 @@ function ModalOrder(props) {
          clientPhone: data.phone,
       })
 
-      const dataOrder = {...props.dataOrder, clientName: data.name, clientPhone: data.phone}
-      delete dataOrder.price
-      delete dataOrder.equipments
+      const dataOrder = {
+         city: props.dataOrder.city,
+         clientName: data.name,
+         clientPhone: data.phone,
+         clientAddress: props.dataOrder.clientAddress,
+         house_guid: props.dataOrder.house_guid,
+         tariffId: props.dataOrder.tariffId,
+         tariffName: props.dataOrder.tariffName,
+         clientSite: props.dataOrder.clientSite,
+         comment: props.dataOrder.comment
+      }
 
       api('https://home.megafon.ru/form/mail-sender', dataOrder)
          .then(data => setApiResponse(data))
-         .catch(err => console.log(err))
+         .catch(() => setApiResponse({
+            response_head: 'Что-то пошло не так...',
+            response: 'Попробуйте повторить позже.'
+         }))
    }
 
 

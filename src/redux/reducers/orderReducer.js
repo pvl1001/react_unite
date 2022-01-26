@@ -43,17 +43,16 @@ export function orderReducer(state = initialState, action) {
             city: document.querySelector('.nav__city span').textContent,
             clientName: data.clientName || state.clientName,
             clientPhone: data.clientPhone || state.clientPhone,
-            clientAddress: data.clientAddress && state.clientAddress !== data.clientAddress
-               ? `По адресу ${data.clientAddress} `
-               : `${state.clientAddress}`,
+            clientAddress: data.clientAddress || state.clientAddress,
             house_guid: data.house_guid || state.house_guid,
             tariffId: data.tariffId || state.tariffId,
-            tariffName: data.tariffName || state.tariffName,
+            tariffName: data.tariffName && data.tariffName !== state.tariffName ? 'Объединяй! ' + data.tariffName : state.tariffName,
             clientSite: window.location.host + window.location.pathname,
             equipments: data.equipments ? arrEquipmentsChecked(data.equipments) : '',
             price: data.price ? isPrice(data.price) : '',
             get comment() {
-               return (this.clientAddress + this.tariffName + this.equipments + this.price).trim()
+               return (`${(this.clientAddress && 'По адресу ' + this.clientAddress)} ${this.tariffName} ${this.equipments} ${this.price}`)
+                  .replace(/\s+/g, ' ').trim()
             },
          }
          return {...state, ...orderData}

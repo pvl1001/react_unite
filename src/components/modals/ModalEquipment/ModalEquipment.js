@@ -79,7 +79,7 @@ function ModalEquipment(props) {
                         <img src={require('../../../img/svg/download-pdf.svg').default} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
-                        <button className="download-pdf__text-link">Скачать подробную информацию о тарифе</button>
+                        <a href=" " className="download-pdf__text-link">Скачать подробную информацию о тарифе</a>
                         <span className="download-pdf__text-pdf">(PDF, 0.4 MB)</span>
                      </div>
                   </div>

@@ -10,6 +10,7 @@ const initialState = {
    tariffAll: {show: false},
    almond: {show: false},
    aboutAlmond: {show: false},
+   choiceRouter: {show: false},
 }
 
 export function modalsReducer(state = initialState, action) {
