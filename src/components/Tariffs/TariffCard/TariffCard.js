@@ -9,6 +9,7 @@ import showModal from "../../../redux/actions/showModal";
 import Tippy from "@tippyjs/react";
 import {tippyAttrs} from "../../../plugins_config";
 import {setDataOrder} from "../../../redux/reducers/orderReducer";
+import {analyticsEvent} from "../../../analytics";
 
 
 TariffCard.propTypes = {
@@ -32,12 +33,17 @@ function TariffCard(props) {
       props.setDataOrder({
          tariffName: props.tariff.name,
          tariffId: props.tariff.tariffId,
-         price: props.tariff.price
+         price: props.tariff.price,
+         eventLabel: {
+            order: `click_button_order_${props.tariff.dataView}`,
+            send: `click_button_send_${props.tariff.dataView}`
+         }
       })
    }
 
    function showModalTariff() {
       props.showModal({modal: 'tariff', bool: true, props: props.tariff.id})
+      analyticsEvent(`click_button_details_${props.tariff.dataView}`)
    }
 
 
@@ -45,7 +51,9 @@ function TariffCard(props) {
       <div className={`card slider__card slider__card_${props.tariff.id}`}>
          <div className="card__title card-wrapper">
 
-            <h2 onClick={showModalTariff}>
+            <h2
+               data-view={`tariff_card_${props.tariff.dataView}_start`}
+               onClick={showModalTariff}>
                {props.tariff.name}
             </h2>
 
@@ -110,6 +118,7 @@ function TariffCard(props) {
             </div>
             <button
                className="price-card__btn btn"
+               data-view={`tariff_card_${props.tariff.dataView}_end`}
                onClick={showModalOrder}>
                Подключить
             </button>

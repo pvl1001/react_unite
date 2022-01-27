@@ -20,7 +20,13 @@ function Form(props) {
                }
             </div>
 
-            <button onClick={props.submit} type="submit" className="btn">Проверить</button>
+            <button
+               type="submit"
+               className="btn"
+               data-view="block_checkaddress"
+               onClick={props.submit}>
+               Проверить
+            </button>
          </form>
       </div>
    )

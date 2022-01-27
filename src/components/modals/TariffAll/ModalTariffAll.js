@@ -1,4 +1,4 @@
-import '../ModalTariff/ModalTariff.scss'
+import '../Tariff/ModalTariff.scss'
 import './ModalTariffAll.scss'
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";

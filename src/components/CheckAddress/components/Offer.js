@@ -7,13 +7,15 @@ import {onUniteSwitch, scrollTo} from "../../../redux/reducers/tariffsReducer";
 import {useRef} from "react";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
+import {analyticsEvent} from "../../../analytics";
+
 
 function Offer(props) {
+
    const refBlockRouter = useRef(null)
    const router = props.tariff.equipments[0]
    const oldPrice = props.tariff.price + props.tariff.equipments[0].price
    const priceSale = props.tariff.calcPriceSale
-
 
    function scroll() {
       scrollTo(refBlockRouter.current)
@@ -25,6 +27,7 @@ function Offer(props) {
 
    function showModalEq() {
       props.showModal({modal: 'equipment', bool: true, props: {...router, style: {marginBottom: 55}}})
+      analyticsEvent(`click_button_details_${props.tariff.dataView}_ntv`)
    }
 
 
@@ -119,7 +122,13 @@ function Offer(props) {
                   </div>
 
                   <div className="unite-order">
-                     <div onClick={props.showModalOrder} className="btn">Отправить заявку</div>
+                     <div
+                        className="btn"
+                        data-view="block_vezde_ntv"
+                        onClick={() => props.showModalOrder()}>
+                        Отправить заявку
+                     </div>
+
                      <div className="price">
                         <span className="old-price">{oldPrice} ₽</span>
                         <span className="new-price"> {priceSale} ₽</span>

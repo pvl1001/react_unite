@@ -51,7 +51,7 @@ function ModalTariff(props) {
                </ul>
 
                {props.tariff.mftv &&
-                  <BannerMfTv mftv={props.tariff.mftv}/>}
+                  <BannerMfTv mftv={props.tariff.mftv} tariff={props.tariff}/>}
 
                <div className="tariff-modal__dop-options wrapp">
                   <h2 className="tariff-modal__dop-options-title">Дополнительные опции:</h2>

@@ -1,19 +1,28 @@
 import Tippy from "@tippyjs/react";
-import React from "react";
+import React, {useEffect} from "react";
 import {tippyAttrs} from "../../../../plugins_config";
 import {connect} from "react-redux";
 import showModal from "../../../../redux/actions/showModal";
 import {setDataOrder} from "../../../../redux/reducers/orderReducer";
+import {analyticsView} from "../../../../analytics";
 
 
 function ModalTariffFooter(props) {
+
+   useEffect(() => {
+      analyticsView()
+   })
 
    function showModalOrder() {
       props.showModal({modal: 'order', bool: true})
       props.setDataOrder({
          tariffName: props.tariff.name,
          tariffId: props.tariff.tariffId,
-         equipments: props.tariff.equipments
+         equipments: props.tariff.equipments,
+         eventLabel: {
+            order: `click_button_order_${props.tariff.dataView}`,
+            send: `click_button_send_${props.tariff.dataView}`
+         }
       })
    }
 
@@ -38,6 +47,7 @@ function ModalTariffFooter(props) {
          <button
             type="button"
             className="tariff-modal__price-btn btn"
+            data-view={`modal_${props.tariff.dataView}`}
             onClick={showModalOrder}>
             Заказать
          </button>

@@ -8,9 +8,10 @@ import {setDataOrder} from "../../redux/reducers/orderReducer";
 
 
 function WhatElse(props) {
+
    const data = [
       {
-         "dataView": "megadisk",
+         "dataView": "megafonPlus",
          "img": megaDisk,
          "alt": "мегадиск",
          "title": "1 терабайт бесплатно <br> в облачном хранилище",
@@ -36,9 +37,16 @@ function WhatElse(props) {
       props.showModal({modal: 'tariffAll', bool: true})
    }
 
-   function showModalOrder() {
+   function showModalOrder(dataView) {
       props.showModal({modal: 'order', bool: true})
-      props.setDataOrder({tariffName: props.tariff.name, tariffId: props.tariff.tariffId})
+      props.setDataOrder({
+         tariffName: props.tariff.name,
+         tariffId: props.tariff.tariffId,
+         eventLabel: {
+            order: `click_button_order_${dataView}`,
+            send: `click_button_what-else_${dataView}_send_equipment`
+         }
+      })
    }
 
 
@@ -70,7 +78,7 @@ function WhatElse(props) {
 
                      <span
                         className="card-what-else__link link"
-                        onClick={showModalOrder}>
+                        onClick={() => showModalOrder(el.dataView)}>
                         Подключить
                      </span>
                   </div>

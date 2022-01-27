@@ -90,7 +90,11 @@ function ModalAlmond(props) {
          props.setDataOrder({
             tariffName: props.tariffForTheir.name,
             tariffId: props.tariffForTheir.tariffId,
-            equipments: almond.dataView
+            equipments: almond.dataView,
+            eventLabel: {
+               order: `click_button_order_${almond.dataView}`,
+               send: `click_button_${almond.dataView}_send_equipment`
+            }
          })
       }
 

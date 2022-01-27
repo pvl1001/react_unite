@@ -1,22 +1,30 @@
 import './ModalOrder.scss'
-import {Modal} from "react-bootstrap";
+import '../../../plugins/jquery.mask'
 import {useEffect, useState} from "react";
 import {connect} from 'react-redux'
-import showModal from "../../../redux/actions/showModal";
-import '../../../plugins/jquery.mask'
+import {Modal} from "react-bootstrap";
 import $ from 'jquery'
 import {Formik} from 'formik'
 import {string, object} from 'yup'
+import showModal from "../../../redux/actions/showModal";
 import {setDataOrder} from "../../../redux/reducers/orderReducer";
 import {api} from "../../../api";
+import {analyticsEvent, analyticsView, gtag} from "../../../analytics";
+
 
 function ModalOrder(props) {
    useEffect(() => {
-      $('input[name="phone"]').mask('+7(000)000-00-00', {
-            placeholder: "+7(   )   -  -  "
-         }
-      )
-   })
+      if (props.show) {
+         analyticsView()
+         analyticsEvent(props.dataOrder.eventLabel.order)
+
+         $('input[name="phone"]').mask('+7(000)000-00-00', {
+               placeholder: "+7(   )   -  -  "
+            }
+         )
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [props.show])
 
    const [apiResponse, setApiResponse] = useState(null)
 
@@ -57,10 +65,40 @@ function ModalOrder(props) {
       }
 
       api('https://home.megafon.ru/form/mail-sender', dataOrder)
-         .then(data => setApiResponse(data))
+         .then((data) => {
+            // console.log(props.dataOrder.eventLabel.send)
+            if (data.code === '200') {
+               gtag('event', 'click', {'event_category': 'EventFMC', 'event_label': props.dataOrder.eventLabel.send})
+               gtag('event', 'requestLandingSend', {'event_category': 'order'})
+
+               if (window.ym !== undefined) {
+                  window.ym(66149989, 'reachGoal', 'zayavka_megafon')
+                  window.ym(66149989, 'reachGoal', props.dataOrder.eventLabel.send)
+               }
+
+               if (props.dataOrder.calltracking_params) {
+                  const ct_site_id = '37410'
+                  const ct_data = {
+                     fio: props.dataOrder.clientName,
+                     phoneNumber: props.dataOrder.clientPhone,
+                     email: '',
+                     subject: 'Заявка с сайта ' + props.dataOrder.city,
+                     tags: 'id' + props.dataOrder.tariffId + ',' + props.dataOrder.tariffName,
+                     comment: props.dataOrder.comment,
+                     sessionId: props.dataOrder.calltracking_params
+                  }
+
+                  api(`https://api.calltouch.ru/calls-service/RestAPI/requests/'${ct_site_id}'/register/`, ct_data)
+                     .catch(err => console.log('Ошибка отправки запроса /register: ', err))
+               }
+               return
+            }
+
+            setApiResponse(data)
+         })
          .catch(() => setApiResponse({
-            response_head: 'Что-то пошло не так...',
-            response: 'Попробуйте повторить позже.'
+            response_head: 'Сервис временно не доступен',
+            response: 'Пожалуйста, свяжитесь с нами по телефону, либо попробуйте позднее'
          }))
    }
 
@@ -135,7 +173,12 @@ function ModalOrder(props) {
                            </div>
                         </div>
 
-                        <button type="submit" className="order-modal__btn btn">Отправить</button>
+                        <button
+                           type="submit"
+                           className="order-modal__btn btn"
+                           data-view="modal_order">
+                           Отправить
+                        </button>
                      </form>
                   )}
                </Formik>
@@ -147,8 +190,6 @@ function ModalOrder(props) {
                <p className="order-thx__text">{apiResponse.response}</p>
             </div>
          }
-
-
       </Modal>
    )
 

@@ -9,14 +9,10 @@ import showModal from "../../redux/actions/showModal";
 import {onUniteSwitch} from "../../redux/reducers/tariffsReducer";
 import {setDataOrder} from "../../redux/reducers/orderReducer";
 import {api} from "../../api";
+import {analyticsEvent} from "../../analytics";
 
 
 function CheckAddress(props) {
-
-   const inputAddress = '#addressCheck'
-   const [address, setAddress] = useState({})
-   const [result, setResult] = useState(null)
-   const [isShowLabel, setIsShowLabel] = useState(false)
 
    useEffect(() => {
       $(inputAddress).autocomplete({
@@ -40,6 +36,11 @@ function CheckAddress(props) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
 
+   const inputAddress = '#addressCheck'
+   const [address, setAddress] = useState({})
+   const [result, setResult] = useState(null)
+   const [isShowLabel, setIsShowLabel] = useState(false)
+
    function clearInput() {
       $(inputAddress).val('')
    }
@@ -52,9 +53,13 @@ function CheckAddress(props) {
 
    function submit(e) {
       e.preventDefault()
+      analyticsEvent('click_button_address')
 
       if (address.house_guid) {
-         props.setDataOrder({clientAddress: address.address, house_guid: address.house_guid})
+         props.setDataOrder({
+            clientAddress: address.address,
+            house_guid: address.house_guid
+         })
          return api('https://api.wifire.ru/api/address/check_dadata_address', address)
             .then(data => setResult(data.result))
       }
@@ -62,12 +67,18 @@ function CheckAddress(props) {
       setIsShowLabel(true)
    }
 
-   function showModalOrder() {
+   const eventLabelDefault = {
+      order: `click_button_order_${props.tariff.dataView}_ntv`,
+      send: `click_button_send_${props.tariff.dataView}_ntv`
+   }
+
+   function showModalOrder(eventLabel = eventLabelDefault) {
       props.showModal({modal: 'order', bool: true})
       props.setDataOrder({
          tariffName: props.tariff.name,
          tariffId: props.tariff.tariffId,
-         equipments: props.tariff.equipments
+         equipments: props.tariff.equipments,
+         eventLabel: eventLabel
       })
    }
 

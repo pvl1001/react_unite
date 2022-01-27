@@ -4,6 +4,7 @@ export const SET_DATA_ORDER = 'SET_DATA_ORDER'
 
 // reducer
 const initialState = {
+   eventLabel: {},
    form_name: 'express_form_ccmp_short',
    city: '',
    clientName: '',
@@ -16,8 +17,7 @@ const initialState = {
    comment: '',
    equipments: '',
    price: '',
-   calltracking_params: ''
-   // calltracking_params: ct('calltracking_params', 'g96m2c8n') ? ct('calltracking_params', 'g96m2c8n').sessionId : ''
+   calltracking_params: window.ct('calltracking_params', 'g96m2c8n')?.sessionId ?? '',
 }
 
 function arrEquipmentsChecked(value) {
@@ -50,6 +50,7 @@ export function orderReducer(state = initialState, action) {
             clientSite: window.location.host + window.location.pathname,
             equipments: data.equipments ? arrEquipmentsChecked(data.equipments) : '',
             price: data.price ? isPrice(data.price) : '',
+            eventLabel: data.eventLabel,
             get comment() {
                return (`${(this.clientAddress && 'По адресу ' + this.clientAddress)} ${this.tariffName} ${this.equipments} ${this.price}`)
                   .replace(/\s+/g, ' ').trim()

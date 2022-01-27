@@ -6,17 +6,27 @@ import head_banner_tap from '../../img/pic/head_banner_tap.webp'
 import head_banner_desctop from '../../img/pic/head_banner_desctop.webp'
 import showModal from "../../redux/actions/showModal";
 import {setDataOrder} from "../../redux/reducers/orderReducer";
+import {analyticsEvent} from "../../analytics";
 
 function Header(props) {
 
    function showModalOrder() {
       props.showModal({modal: 'order', bool: true})
-      props.setDataOrder({tariffName: props.tariff.name, tariffId: props.tariff.tariffId})
+      props.setDataOrder({
+         tariffName: props.tariff.name,
+         tariffId: props.tariff.tariffId,
+         eventLabel: {
+            order: `click_button_connect_${props.tariff.dataView}`,
+            send: `click_button_connect_send_${props.tariff.dataView}`
+         }
+      })
    }
 
    function showModalTariff() {
       props.showModal({modal: 'tariff', bool: true, props: props.tariff.id})
+      analyticsEvent(`click_button_connect_details_${props.tariff.dataView}`)
    }
+
 
    return (
       <header className="header">

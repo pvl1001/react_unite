@@ -5,9 +5,16 @@ import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
 import {setDataOrder} from "../../../redux/reducers/orderReducer";
 import ItemMftv from "./components/ItemMftv";
+import {useEffect} from "react";
+import {analyticsView} from "../../../analytics";
 
 
 function ModalMftv(props) {
+   useEffect(() => {
+      analyticsView()
+   })
+
+
    if (props.mftv) {
 
       function onHide() {
@@ -31,7 +38,9 @@ function ModalMftv(props) {
                />
             </div>
 
-            <div className="tariff-modal__title wrapp">
+            <div
+               className="tariff-modal__title wrapp"
+               data-view={`mftv_${props.tariff.id}_start`}>
                <h1>МегаФон ТВ</h1>
             </div>
 

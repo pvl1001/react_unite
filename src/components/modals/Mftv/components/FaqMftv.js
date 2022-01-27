@@ -24,7 +24,14 @@ function FaqMftv(props) {
 
    function showModalOrder() {
       props.showModal({modal: 'order', bool: true})
-      props.setDataOrder({tariffName: props.tariff.name, tariffId: props.tariff.tariffId})
+      props.setDataOrder({
+         tariffName: props.tariff.name,
+         tariffId: props.tariff.tariffId,
+         eventLabel: {
+            order: `click_button_order_${props.tariff.dataView}`,
+            send: `click_button_send_${props.tariff.dataView}`
+         }
+      })
    }
 
 
@@ -46,6 +53,7 @@ function FaqMftv(props) {
          <button
             type="button"
             className="mftv__faq-btn btn"
+            data-view={`mftv_${props.tariff.id}_end`}
             onClick={showModalOrder}>
             Подключить
          </button>

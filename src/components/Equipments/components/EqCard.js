@@ -2,6 +2,7 @@ import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import showModal from "../../../redux/actions/showModal";
 import {setDataOrder} from "../../../redux/reducers/orderReducer";
+import {analyticsEvent} from "../../../analytics";
 
 
 EqCard.propTypes = {
@@ -17,11 +18,25 @@ function EqCard(props) {
 
    function showModalAlmond() {
       props.showModal({modal: 'almond', bool: true})
+      analyticsEvent(`click_button_details_${props.eq.dataView}`)
    }
 
    function showModalOrder() {
       props.showModal({modal: 'order', bool: true})
-      props.setDataOrder({tariffName: props.tariff.name, tariffId: props.tariff.tariffId, equipments: props.eq.dataView})
+      props.setDataOrder({
+         tariffName: props.tariff.name,
+         tariffId: props.tariff.tariffId,
+         equipments: props.eq.dataView,
+         eventLabel: {
+            order: `click_button_order_${props.eq.dataView}`,
+            send: `click_button_${props.eq.dataView}_send_equipment`
+         }
+      })
+   }
+
+   function showModalEquipment() {
+      props.showModal({modal: 'equipment', bool: true, props: props.eq})
+      analyticsEvent(`click_button_details_${props.eq.dataView}`)
    }
 
 
@@ -60,14 +75,14 @@ function EqCard(props) {
             </div>
             <button
                className="price-card__btn btn"
+               data-view={`block_${props.eq.dataView}`}
                onClick={showModalOrder}>
                Заказать
             </button>
 
             {props.eq.id === "eq-almond"
                ? <div className="link almond" onClick={showModalAlmond}>Подробнее</div>
-               : <div className="link"
-                      onClick={() => props.showModal({modal: 'equipment', bool: true, props: props.eq})}>Подробнее</div>
+               : <div className="link" onClick={showModalEquipment}>Подробнее</div>
             }
 
          </div>

@@ -3,9 +3,11 @@ import mob_lk_320 from '../../img/pic/mob_lk_320.webp'
 import mob_lk_768 from '../../img/pic/mob_lk_768.webp'
 import mob_lk_1024 from '../../img/pic/mob_lk_1024.webp'
 import mob_lk_1280 from '../../img/pic/mob_lk_1280.webp'
+import {analyticsEvent} from "../../analytics";
 
 
 export default function AppBanner () {
+
    return (
       <section className="app">
          <div className="wrapper">
@@ -26,8 +28,16 @@ export default function AppBanner () {
                   </p>
 
                   <div className="text-app__icons" data-view="block_mobilelk">
-                     <a href="https://trk.mail.ru/c/uo37z4" className="google-play"> </a>
-                     <a href="https://trk.mail.ru/c/sa6p65" className="apple-store"> </a>
+                     <a
+                        href="https://trk.mail.ru/c/uo37z4"
+                        className="google-play"
+                        onClick={() => analyticsEvent('click_button_googleplay_lkmf')}
+                     > </a>
+                     <a
+                        href="https://trk.mail.ru/c/sa6p65"
+                        className="apple-store"
+                        onClick={() => analyticsEvent('click_button_appstore_lkmf')}
+                     > </a>
                   </div>
                </div>
 

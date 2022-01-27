@@ -20,6 +20,16 @@ function ModalEquipment(props) {
 
       const onHide = () => props.showModal({modal: 'equipment', bool: false})
 
+      const eventLabel = props.eq.dataView === 'router-4g'
+         ? {
+            order: `click_button_order_vezde_ntv`,
+            send: `click_button_send_vezde_ntv`
+         }
+         : {
+            order: `click_button_order_${props.eq.dataView}`,
+            send: `click_button_${props.eq.dataView}_send_equipment`
+         }
+
       function handleChangePlan(payload) {
          props.changePlan(payload)
          setPricePlan(payload.value)
@@ -31,7 +41,8 @@ function ModalEquipment(props) {
             tariffName: props.tariff.name,
             tariffId: props.tariff.tariffId,
             equipments: props.eq.dataView,
-            price: pricePlan
+            price: pricePlan,
+            eventLabel: eventLabel
          })
       }
 
