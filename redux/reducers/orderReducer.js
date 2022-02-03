@@ -2,24 +2,6 @@
 export const SET_DATA_ORDER = 'SET_DATA_ORDER'
 
 
-// reducer
-const initialState = {
-   eventLabel: {},
-   form_name: 'express_form_ccmp_short',
-   city: '',
-   clientName: '',
-   clientPhone: '',
-   clientAddress: '',
-   house_guid: '',
-   tariffId: '',
-   tariffName: '',
-   // clientSite: window.location.host + window.location.pathname,
-   comment: '',
-   equipments: '',
-   price: '',
-   // calltracking_params: window.ct('calltracking_params', 'g96m2c8n')?.sessionId ?? '',
-}
-
 function arrEquipmentsChecked(value) {
    if (Array.isArray(value)) {
       const arrEq = value.filter(eq => eq.switch).map(eq => eq.dataView)
@@ -30,6 +12,22 @@ function arrEquipmentsChecked(value) {
 
 function isPrice(value) {
    return typeof value === 'number' ? ` ${value}₽` : value
+}
+
+
+// reducer
+const initialState = {
+   eventLabel: {},
+   city: '',
+   clientName: '',
+   clientPhone: '',
+   clientAddress: '',
+   house_guid: '',
+   tariffId: '',
+   tariffName: '',
+   comment: '',
+   equipments: '',
+   price: '',
 }
 
 
@@ -47,7 +45,6 @@ export function orderReducer(state = initialState, action) {
             house_guid: data.house_guid || state.house_guid,
             tariffId: data.tariffId || state.tariffId,
             tariffName: data.tariffName && data.tariffName !== state.tariffName ? 'Объединяй! ' + data.tariffName : state.tariffName,
-            // clientSite: window.location.host + window.location.pathname,
             equipments: data.equipments ? arrEquipmentsChecked(data.equipments) : '',
             price: data.price ? isPrice(data.price) : '',
             eventLabel: data.eventLabel,

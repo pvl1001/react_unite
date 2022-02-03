@@ -51,6 +51,7 @@ function ModalOrder(props) {
       })
 
       const dataOrder = {
+         form_name: 'express_form_ccmp_short',
          city: props.dataOrder.city,
          clientName: data.name,
          clientPhone: data.phone,
@@ -58,32 +59,33 @@ function ModalOrder(props) {
          house_guid: props.dataOrder.house_guid,
          tariffId: props.dataOrder.tariffId,
          tariffName: props.dataOrder.tariffName,
-         clientSite: props.dataOrder.clientSite,
-         comment: props.dataOrder.comment
+         comment: props.dataOrder.comment,
+         clientSite: location.host + location.pathname,
+         calltracking_params: ct('calltracking_params', 'g96m2c8n')?.sessionId ?? '',
       }
 
       api('https://home.megafon.ru/form/mail-sender', dataOrder)
-         .then((data) => {
+         .then((resMailSender) => {
             // console.log(props.dataOrder.eventLabel.send)
-            if (data.code === '200') {
+            if (resMailSender.code === '200') {
                analyticsEvent(props.dataOrder.eventLabel.send)
                gtag('event', 'requestLandingSend', {'event_category': 'order'})
 
-               if (window.ym !== undefined) {
-                  window.ym(66149989, 'reachGoal', 'zayavka_megafon')
-                  window.ym(66149989, 'reachGoal', props.dataOrder.eventLabel.send)
+               if (ym !== undefined) {
+                  ym(66149989, 'reachGoal', 'zayavka_megafon')
+                  ym(66149989, 'reachGoal', props.dataOrder.eventLabel.send)
                }
 
-               if (props.dataOrder.calltracking_params) {
+               if (dataOrder.calltracking_params) {
                   const ct_site_id = '37410'
                   const ct_data = {
-                     fio: props.dataOrder.clientName,
-                     phoneNumber: props.dataOrder.clientPhone,
+                     fio: dataOrder.clientName,
+                     phoneNumber: dataOrder.clientPhone,
                      email: '',
-                     subject: 'Заявка с сайта ' + props.dataOrder.city,
-                     tags: 'id' + props.dataOrder.tariffId + ',' + props.dataOrder.tariffName,
-                     comment: props.dataOrder.comment,
-                     sessionId: props.dataOrder.calltracking_params
+                     subject: 'Заявка с сайта ' + dataOrder.city,
+                     tags: 'id' + dataOrder.tariffId + ',' + dataOrder.tariffName,
+                     comment: dataOrder.comment,
+                     sessionId: dataOrder.calltracking_params
                   }
 
                   api(`https://api.calltouch.ru/calls-service/RestAPI/requests/'${ct_site_id}'/register/`, ct_data)
@@ -92,7 +94,7 @@ function ModalOrder(props) {
                return
             }
 
-            setApiResponse(data)
+            setApiResponse(resMailSender)
          })
          .catch(() => setApiResponse({
             response_head: 'Сервис временно не доступен',
