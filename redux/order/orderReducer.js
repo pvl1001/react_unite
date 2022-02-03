@@ -1,5 +1,4 @@
-// types
-export const SET_DATA_ORDER = 'SET_DATA_ORDER'
+import {SET_DATA_ORDER} from "./orderAction"
 
 
 function arrEquipmentsChecked(value) {
@@ -15,7 +14,6 @@ function isPrice(value) {
 }
 
 
-// reducer
 const initialState = {
    eventLabel: {},
    city: '',
@@ -58,10 +56,4 @@ export function orderReducer(state = initialState, action) {
       default:
          return state
    }
-}
-
-
-// actions
-export function setDataOrder(payload) {
-   return {type: SET_DATA_ORDER, payload}
 }

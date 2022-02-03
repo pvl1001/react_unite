@@ -4,8 +4,8 @@ import {Modal} from "react-bootstrap";
 import $ from 'jquery'
 import {Formik} from 'formik'
 import {string, object} from 'yup'
-import showModal from "../../../redux/actions/showModal";
-import {setDataOrder} from "../../../redux/reducers/orderReducer";
+import {showModal} from "../../../redux/modals/modalsAction";
+import {setDataOrder} from "../../../redux/order/orderAction";
 import {api} from "../../../api";
 import {analyticsEvent, analyticsView} from "../../../analytics/events";
 

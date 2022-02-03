@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import showModal from "../../../../redux/actions/showModal";
+import {showModal} from "../../../../redux/modals/modalsAction";
 
 function almondCard(props) {
    const eqAlmond = props.almond.equipments[props.index]

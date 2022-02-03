@@ -1,6 +1,6 @@
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
-import showModal from "../../../redux/actions/showModal";
+import {showModal} from "../../../redux/modals/modalsAction";
 
 function ModalTariffAll(props) {
 

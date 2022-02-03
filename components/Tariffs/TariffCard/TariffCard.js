@@ -4,10 +4,10 @@ import Mark from "./components/Mark"
 import ProgressBar from "./components/ProgressBar"
 import MfTv from "./components/MfTv"
 import TvChannels from "./components/TvChannels"
-import showModal from "../../../redux/actions/showModal";
+import {showModal} from "../../../redux/modals/modalsAction";
 import Tippy from "@tippyjs/react";
 import {tippyAttrs} from "../../../plugins_config";
-import {setDataOrder} from "../../../redux/reducers/orderReducer";
+import {setDataOrder} from "../../../redux/order/orderAction";
 import {analyticsEvent} from "../../../analytics/events";
 
 

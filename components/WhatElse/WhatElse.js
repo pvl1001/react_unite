@@ -2,8 +2,8 @@ import megaDisk from '../../assets/img/pic/megaDisk.webp'
 import films from '../../assets/img/pic/films.webp'
 import sales from '../../assets/img/pic/sales.webp'
 import {connect} from "react-redux";
-import showModal from "../../redux/actions/showModal";
-import {setDataOrder} from "../../redux/reducers/orderReducer";
+import {showModal} from "../../redux/modals/modalsAction";
+import {setDataOrder} from "../../redux/order/orderAction";
 
 
 function WhatElse(props) {

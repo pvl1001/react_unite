@@ -1,8 +1,8 @@
-import optionSwitch from "../../../../redux/actions/optionSwitch";
+import {optionSwitch} from "../../../../redux/tariffs/tariffsAction";
 import {connect} from "react-redux";
-import {counterSim} from "../../../../redux/actions/counterSim";
-import showModal from "../../../../redux/actions/showModal";
-import {sumTotalPrice} from "../../../../redux/actions/sumTotalPrice";
+import {counterSim} from "../../../../redux/tariffs/tariffsAction";
+import {showModal} from "../../../../redux/modals/modalsAction";
+import {sumTotalPrice} from "../../../../redux/tariffs/tariffsAction";
 
 function CardOptionSim(props) {
 

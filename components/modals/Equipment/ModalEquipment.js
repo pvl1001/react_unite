@@ -1,9 +1,9 @@
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
 import Plan from "./components/Plan";
-import showModal from "../../../redux/actions/showModal";
-import {changePlan} from "../../../redux/actions/equpment";
-import {setDataOrder} from "../../../redux/reducers/orderReducer";
+import {showModal} from "../../../redux/modals/modalsAction";
+import {changePlan} from "../../../redux/equipments/equipmentsAction";
+import {setDataOrder} from "../../../redux/order/orderAction";
 import {useEffect, useState} from "react";
 
 

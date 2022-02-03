@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import showModal from "../../../../../redux/actions/showModal";
+import {showModal} from "../../../../../redux/modals/modalsAction";
 
 function BannerMfTv(props) {
    const img = props.mftv.length === 2 ? 'start' : 'all'

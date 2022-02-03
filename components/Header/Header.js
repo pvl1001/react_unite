@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import head_banner_mob from '../../assets/img/pic/head_banner_mob.webp'
 import head_banner_tap from '../../assets/img/pic/head_banner_tap.webp'
 import head_banner_desctop from '../../assets/img/pic/head_banner_desctop.webp'
-import showModal from "../../redux/actions/showModal";
-import {setDataOrder} from "../../redux/reducers/orderReducer";
+import {showModal} from "../../redux/modals/modalsAction";
+import {setDataOrder} from "../../redux/order/orderAction";
 import {analyticsEvent} from "../../analytics/events";
 
 function Header(props) {

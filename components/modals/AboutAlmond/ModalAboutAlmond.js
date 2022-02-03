@@ -1,13 +1,16 @@
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
-import showModal from "../../../redux/actions/showModal";
+import {showModal} from "../../../redux/modals/modalsAction";
 import {
    counterAlmond,
-   counterAlmondEq,
    sumAlmondTotalPrice,
+   switchAlmond,
+} from "../../../redux/tariffs/tariffsAction";
+import {
+   counterAlmondEq,
    sumAlmondTotalPriceEq,
-   switchAlmond, switchAlmondEq
-} from "../../../redux/actions/almond";
+   switchAlmondEq
+} from '../../../redux/equipments/equipmentsAction'
 
 
 function ModalAboutAlmond(props) {

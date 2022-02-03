@@ -1,6 +1,6 @@
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
-import showModal from "../../../redux/actions/showModal";
+import {showModal} from "../../../redux/modals/modalsAction";
 
 
 function ModalCity(props) {
@@ -453,14 +453,9 @@ function ModalCity(props) {
 }
 
 
-const mapStateToProps = (state, ownProps) => {
-   return {
-      show: state.modals.cities.show
-   }
-}
-
-const mapDispatchToProps = {
-   showModal
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModalCity)
+export default connect(
+   state => ({
+   show: state.modals.cities.show
+   }),
+   {showModal}
+)(ModalCity)

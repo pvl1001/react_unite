@@ -36,7 +36,7 @@ import {createStore, applyMiddleware} from "redux";
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {rootReducer} from "../redux/reducers/rootReducer";
+import {rootReducer} from "../redux/rootReducer";
 import Analytics from "../analytics/Analytics";
 import {analyticsView} from "../analytics/events";
 

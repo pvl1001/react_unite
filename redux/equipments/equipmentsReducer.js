@@ -4,7 +4,8 @@ import {
    HANDLE_SWITCH_ALMOND_EQ,
    HANDLER_COUNTER_ALMOND_EQ,
    SUM_ALMOND_TOTAL_PRICE_EQ
-} from "../types";
+} from "./equipmentsAction";
+
 
 const initialState = [
    {
@@ -225,7 +226,6 @@ export function equipmentsReducer(state = initialState, action) {
             const data = action.payload.data
             const checked = action.payload.checked
             const cnt = action.payload.cnt
-
             const almond = setState.find( eq => eq.id === 'eq-almond' )
 
             almond.equipments[data.index] = {...data, cnt, checked}

@@ -1,5 +1,5 @@
-import {SHOW_MODAL} from "../types";
 import produce from "immer";
+import {SHOW_MODAL} from "./modalsAction";
 
 const initialState = {
    order: {show: false},

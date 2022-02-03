@@ -2,8 +2,8 @@ import Tippy from "@tippyjs/react";
 import React, {useEffect} from "react";
 import {tippyAttrs} from "../../../../plugins_config";
 import {connect} from "react-redux";
-import showModal from "../../../../redux/actions/showModal";
-import {setDataOrder} from "../../../../redux/reducers/orderReducer";
+import {showModal} from "../../../../redux/modals/modalsAction";
+import {setDataOrder} from "../../../../redux/order/orderAction";
 import {analyticsView} from "../../../../analytics/events";
 
 

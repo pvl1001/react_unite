@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 import {connect} from "react-redux";
-import showModal from "../../redux/actions/showModal";
-import {setDataOrder} from "../../redux/reducers/orderReducer";
+import {showModal} from "../../redux/modals/modalsAction";
+import {setDataOrder} from "../../redux/order/orderAction";
 import {analyticsEvent} from "../../analytics/events";
 
 

@@ -2,7 +2,7 @@ import Collapse from 'react-bootstrap/Collapse'
 import React from 'react'
 import TvChannelsGroup from "./TvChannelsGroup";
 import {connect} from "react-redux";
-import {getChannels} from "../../../../redux/reducers/tariffsReducer";
+import {getChannels} from "../../../../redux/tariffs/tariffsAction";
 
 
 function TvChannels(props) {

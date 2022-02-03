@@ -4,11 +4,11 @@ import Offer from "./components/Offer";
 import $ from "jquery";
 import Success from "./components/Success";
 import {connect} from "react-redux";
-import showModal from "../../redux/actions/showModal";
-import {onUniteSwitch} from "../../redux/reducers/tariffsReducer";
-import {setDataOrder} from "../../redux/reducers/orderReducer";
+import {showModal} from "../../redux/modals/modalsAction";
 import {api} from "../../api";
 import {analyticsEvent} from "../../analytics/events";
+import {onUniteSwitch} from "../../redux/tariffs/tariffsAction";
+import {setDataOrder} from "../../redux/order/orderAction";
 
 
 function CheckAddress(props) {

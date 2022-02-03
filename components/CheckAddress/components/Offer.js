@@ -3,10 +3,10 @@ import tv from "../../../assets/img/svg/tv.svg";
 import mobile from "../../../assets/img/svg/mobile.svg";
 import web_4g from "../../../assets/img/svg/4g.svg";
 import router_info_2x from "../../../assets/img/pic/router_info_2x.webp";
-import {onUniteSwitch, scrollTo} from "../../../redux/reducers/tariffsReducer";
+import {onUniteSwitch, scrollTo} from "../../../redux/tariffs/tariffsReducer";
 import {useRef} from "react";
 import {connect} from "react-redux";
-import showModal from "../../../redux/actions/showModal";
+import {showModal} from "../../../redux/modals/modalsAction";
 import {analyticsEvent} from "../../../analytics/events";
 
 

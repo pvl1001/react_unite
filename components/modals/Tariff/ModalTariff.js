@@ -1,13 +1,13 @@
 import {connect} from "react-redux";
 import {Modal} from "react-bootstrap";
-import showModal from "../../../redux/actions/showModal";
+import {showModal} from "../../../redux/modals/modalsAction";
 import CardOption from "./components/CardOption";
 import CardOptionSim from "./components/CardOptionSim";
 import BlockInfo from "./components/BlockInfo";
 import ModalTariffFooter from "./components/ModalTariffFooter";
 import BannerMfTv from "./components/BannerMfTv/BannerMfTv";
 import {useEffect} from "react";
-import {sumTotalPrice} from "../../../redux/actions/sumTotalPrice";
+import {sumTotalPrice} from "../../../redux/tariffs/tariffsAction";
 
 function ModalTariff(props) {
    useEffect(() => {

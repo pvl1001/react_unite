@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import showModal from "../../../../redux/actions/showModal";
+import {showModal} from "../../../../redux/modals/modalsAction";
 
 
 function MfTv(props) {

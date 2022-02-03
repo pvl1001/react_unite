@@ -1,17 +1,18 @@
+import produce from "immer";
+import {showModal} from "../modals/modalsAction";
+import {store} from "../../pages/_app";
 import {
+   CHANGE_ALMOND_TOTAL_PRICE,
    COUNTER_SIM,
-   TARIFF_RADIO_PLAN,
    HANDLE_SWITCH,
-   SUM_TOTAL_PRICE,
    HANDLE_SWITCH_ALMOND,
    HANDLER_COUNTER_ALMOND,
+   SET_CHANNELS,
    SUM_ALMOND_TOTAL_PRICE,
-   CHANGE_ALMOND_TOTAL_PRICE,
-   SET_CHANNELS, UNITE_SWITCH,
-} from "../types";
-import produce from "immer";
-import showModal from "../actions/showModal";
-import {store} from "../../pages/_app";
+   SUM_TOTAL_PRICE,
+   TARIFF_RADIO_PLAN,
+   UNITE_SWITCH
+} from "./tariffsAction";
 
 export const templateEqAlmond = [
    {
@@ -2173,14 +2174,3 @@ export function tariffsReducer(state = initialState, action) {
    }
 }
 
-
-const setChannels = (payload) => ({type: SET_CHANNELS, payload})
-export const getChannels = (tvId) => {
-   return dispatch =>
-      fetch(`https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${tvId}`)
-         .then(res => res.json())
-         .then(data => dispatch(setChannels(data.packages[tvId])))
-         .catch(err => console.log('Ошибка загрузки тв-каналов (getChannels)', err))
-}
-
-export const onUniteSwitch = payload => ({type: UNITE_SWITCH, payload})
