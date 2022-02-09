@@ -1,7 +1,8 @@
 import {connect} from "react-redux";
-import {showModal} from "../../../redux/modals/modalsAction";
-import {setDataOrder} from "../../../redux/order/orderAction";
-import {analyticsEvent} from "../../../analytics/events";
+import {showModal} from "../../redux/modals/modalsAction";
+import {setDataOrder} from "../../redux/order/orderAction";
+import {analyticsEvent} from "../../analytics/events";
+import Image from 'next/image'
 
 
 function EqCard(props) {
@@ -48,8 +49,12 @@ function EqCard(props) {
          <div className="equipments-card__info info-card">
 
             <div className="info-card__img">
-               <img src={require(`/assets/img/pic/${props.eq.img}.webp`).default.src}
-                    alt={props.eq.name}/>
+               <Image
+                  alt={props.eq.name}
+                  src={`/images/equipments/${props.eq.img}.webp`}
+                  layout={'fill'}
+                  objectFit={'contain'}
+               />
             </div>
             <h2 className="info-card__title">{props.eq.name}</h2>
             <p className="info-card__text">{props.eq.text}</p>

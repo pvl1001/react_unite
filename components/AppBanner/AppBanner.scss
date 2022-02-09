@@ -5,7 +5,7 @@
       display: flex;
       justify-content: space-between;
       padding: 40px 56px;
-      background: transparent linear-gradient(90deg, #BD4EBF 0%, #731982 50%, #444189 79%, #444189 100%) 0% 0% no-repeat padding-box;
+      background: transparent linear-gradient(90deg, #BD4EBF 0%, #731982 50%, #444189 79%, #444189 100%) 0 0 no-repeat padding-box;
       border-radius: 10px;
       position: relative;
    }
@@ -127,6 +127,8 @@
       &__img {
          position: static;
          margin: 16px -16px 0;
+         width: 100%;
+         max-width: 480px;
       }
    }
 }

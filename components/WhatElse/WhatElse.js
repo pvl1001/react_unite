@@ -1,9 +1,10 @@
-import megaDisk from '../../assets/img/pic/megaDisk.webp'
-import films from '../../assets/img/pic/films.webp'
-import sales from '../../assets/img/pic/sales.webp'
+import films from '/public/images/what-else/films.webp'
+import sales from '/public/images/what-else/sales.webp'
+import Brus from '/public/images/what-else/Brus.webp'
 import {connect} from "react-redux";
-import {showModal} from "../../redux/modals/modalsAction";
-import {setDataOrder} from "../../redux/order/orderAction";
+import {showModal} from "/redux/modals/modalsAction";
+import {setDataOrder} from "/redux/order/orderAction";
+import CardWE from "./CardWE";
 
 
 function WhatElse(props) {
@@ -11,10 +12,10 @@ function WhatElse(props) {
    const data = [
       {
          "dataView": "megafonPlus",
-         "img": megaDisk,
-         "alt": "мегадиск",
-         "title": "1 терабайт бесплатно <br> в облачном хранилище",
-         "text": "Сохраняйте ваши фото и видео и обменивайтесь ими с друзьями на защищённом МегаДиске. Создавайте резервные копии контактов и документов."
+         "img": Brus,
+         "alt": "Брюс",
+         "title": "Мультиподписка <nobr>«МегаФон Плюс»</nobr> <br>30 дней бесплатно",
+         "text": "Безлимитный интернет на фильмы, сериалы, музыку и аудиокниги при подключении МегаФон Плюса. Выгодное комбо из популярных сервисов."
       },
       {
          "dataView": "mftv",
@@ -57,32 +58,14 @@ function WhatElse(props) {
 
             <div className="what-else__cards">
 
-               {data.map(el => (
-
-                  <div key={el.dataView} className="what-else__card card-what-else">
-
-                     <div className="card-what-else__img">
-                        <img src={el.img.src} alt={el.img}/>
-                     </div>
-
-                     <h2 className="card-what-else__title" dangerouslySetInnerHTML={{__html: el.title}}/>
-
-                     {el.dataView !== 'vse'
-                        ? <p className="card-what-else__text" dangerouslySetInnerHTML={{__html: el.text}}/>
-                        : <p className="card-what-else__text">
-                           {el.text} <span className='link'
-                                           onClick={showModalTariffAll}>акции</span>.
-                        </p>
-                     }
-
-                     <span
-                        className="card-what-else__link link"
-                        onClick={() => showModalOrder(el.dataView)}>
-                        Подключить
-                     </span>
-                  </div>
-
-               ))}
+               {data.map(el =>
+                  <CardWE
+                     key={el.dataView}
+                     card={el}
+                     showModalTariffAll={showModalTariffAll}
+                     showModalOrder={showModalOrder}
+                  />
+               )}
             </div>
          </div>
 

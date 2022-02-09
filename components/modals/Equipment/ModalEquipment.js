@@ -1,10 +1,11 @@
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
-import Plan from "./components/Plan";
+import Plan from "./Plan";
 import {showModal} from "../../../redux/modals/modalsAction";
 import {changePlan} from "../../../redux/equipments/equipmentsAction";
 import {setDataOrder} from "../../../redux/order/orderAction";
 import {useEffect, useState} from "react";
+import Image from 'next/image';
 
 
 function ModalEquipment(props) {
@@ -96,10 +97,14 @@ function ModalEquipment(props) {
                   </div>
                </div>
 
-               <picture className="performance__img">
-                  <img src={require(`/assets/img/pic/${props.eq.img}.webp`).default.src}
-                       alt={props.eq.name}/>
-               </picture>
+               <div className="performance__img">
+                  <Image
+                     alt={props.eq.name}
+                     src={`/images/equipments/${props.eq.img}.webp`}
+                     layout={'fill'}
+                     objectFit={'contain'}
+                  />
+               </div>
             </div>
 
             {!props.showModalTariff &&

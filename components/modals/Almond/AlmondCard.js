@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
-import {showModal} from "../../../../redux/modals/modalsAction";
+import {showModal} from "../../../redux/modals/modalsAction";
+import Image from 'next/image';
 
 function almondCard(props) {
    const eqAlmond = props.almond.equipments[props.index]
@@ -14,8 +15,12 @@ function almondCard(props) {
            onClick={showModalAbout}
       >
          <div className="card-price__img">
-            <img src={require(`/assets/img/pic/${props.card.img}.webp`).default.src}
-                 alt={props.card.img}/>
+            <Image
+               alt={props.card.img}
+               src={`/images/almond/${props.card.img}.webp`}
+               layout={'fill'}
+               objectFit={'contain'}
+            />
          </div>
          <div className="card-price__text">
             <p className="card-price__text-name">{props.card.name}</p>

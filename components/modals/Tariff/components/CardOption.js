@@ -3,6 +3,7 @@ import {optionSwitch} from "../../../../redux/tariffs/tariffsAction";
 import {tariffRadioPlan} from "../../../../redux/tariffs/tariffsAction";
 import {sumTotalPrice} from "../../../../redux/tariffs/tariffsAction";
 import {showModal} from "../../../../redux/modals/modalsAction";
+import Image from 'next/image';
 
 
 function CardOption(props) {
@@ -46,8 +47,12 @@ function CardOption(props) {
             {props.equipment.name === 'Android TV' &&
                <div className="dop-options-card__mark mark">Акция</div>}
 
-            <img src={require(`/assets/img/pic/${props.equipment.img}.webp`).default.src} alt={props.equipment.img}/>
-
+            <Image
+               alt={props.equipment.img}
+               src={`/images/equipments/${props.equipment.img}.webp`}
+               layout={'fill'}
+               objectFit={'contain'}
+            />
          </div>
 
          <div className="dop-options-card__option">

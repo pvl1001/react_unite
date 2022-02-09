@@ -19,10 +19,12 @@ pages:
     
 components - react компоненты
 
+public: 
+    images - картинки формата .webp
+
 assets:
     fonts - шрифт "MegaFon Graphik LC"
     img:
-        pic - картинки формата .webp
         svg - svg иконки
     style - scss стили. Используется БЭМ методология. Подключение в _app.js (глобальное подключние)
 

@@ -10,7 +10,7 @@ import {
    counterAlmondEq,
    sumAlmondTotalPriceEq,
    switchAlmondEq
-} from '../../../redux/equipments/equipmentsAction'
+} from '../../../redux/equipments/equipmentsAction';
 
 
 function ModalAboutAlmond(props) {
@@ -63,10 +63,8 @@ function ModalAboutAlmond(props) {
             <button type="button" className="modal-close" onClick={onHide}/>
             <div className={`about${almondOrSensor}__wrapp`}>
 
-               <div className={`about${almondOrSensor}__img`}
-               >
-                  <img src={require(`/assets/img/pic/${props.data.img}.webp`).default.src}
-                       alt={props.data.img}/>
+               <div className={`about${almondOrSensor}__img`}>
+                  <img src={`/images/almond/${props.data.img}.webp`} alt={props.data.img}/>
                </div>
 
                <div className={`about${almondOrSensor}__text`}>

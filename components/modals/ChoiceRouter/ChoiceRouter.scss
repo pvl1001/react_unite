@@ -28,13 +28,25 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 32px;
+
+      > div:first-child {
+         width: 192px;
+      }
+
+      > div:last-child {
+         width: 220px;
+      }
    }
 
    &__img {
-      img {
-         height: 171px;
-         margin-bottom: 10px;
-      }
+      position: relative;
+      width: 50%;
+   }
+
+   &__img-wrapp {
+      height: 171px;
+      position: relative;
+      margin-bottom: 10px;
    }
 
    &__name {
@@ -75,11 +87,18 @@
          line-height: 36px;
       }
 
-      &__img {
-         img {
-            height: 98px;
-            margin-bottom: 10px;
+      &__images {
+         > div:first-child {
+            width: 110px;
          }
+
+         > div:last-child {
+            width: 126px;
+         }
+      }
+
+      &__img-wrapp {
+         height: 98px;
       }
 
    }

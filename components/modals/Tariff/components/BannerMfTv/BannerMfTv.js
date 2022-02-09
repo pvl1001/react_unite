@@ -1,16 +1,38 @@
 import {connect} from "react-redux";
 import {showModal} from "../../../../../redux/modals/modalsAction";
+import Image from 'next/image'
+import {useEffect, useState} from "react";
+import images from '/public/images/mftv-banner'
 
 function BannerMfTv(props) {
-   const img = props.mftv.length === 2 ? 'start' : 'all'
+
+   const imgName = props.mftv.length === 2 ? 'start' : 'all'
+   const [img, setImg] = useState(images[imgName])
+
+   function resize() {
+      window.innerWidth < 768
+         ? setImg(images[imgName + '_mob'])
+         : setImg(images[imgName])
+   }
+
+   useEffect(() => {
+      resize()
+      window.addEventListener('resize', resize)
+
+      return () => {
+         window.removeEventListener('resize', resize)
+      }
+   })
+
    const showModalMfTv = () => props.showModal({
       modal: 'mftv',
       bool: true,
       props: {mftv: props.mftv, tariff: props.tariff}
    })
 
+
    return (
-      <div className="banner-MFTV banner-MFTV_all">
+      <div className="banner-MFTV">
          <div className="banner-MFTV__MF wrapp">
             <h1 className="banner-MFTV__title">МегаФон ТВ</h1>
 
@@ -27,16 +49,9 @@ function BannerMfTv(props) {
             </div>
          </div>
 
-         <picture className="banner-MFTV__img">
-            <source
-               srcSet={require(`/assets/img/pic/mob_${img}.webp`).default.src}
-               media="(max-width: 767px)"
-            />
-            <img
-               src={require(`/assets/img/pic/1640_${img}.webp`).default.src}
-               alt="баннер старт"
-            />
-         </picture>
+         <div className="banner-MFTV__img">
+            <Image {...img} layout="responsive"/>
+         </div>
       </div>
    )
 }

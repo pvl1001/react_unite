@@ -119,6 +119,10 @@
    }
 
    @media (max-width: 935px) {
+      .wrapper {
+         padding: 0;
+      }
+
       .section-row {
          align-items: flex-start;
          justify-content: center;
@@ -136,6 +140,7 @@
          min-width: 0;
          margin-bottom: 31px;
          z-index: 1;
+         padding: 0 20px;
 
          h1 {
             display: block;
@@ -149,7 +154,7 @@
       }
 
       &__img-wrapp {
-         width: auto;
+         width: 100%;
          height: auto;
          z-index: 0;
          margin-top: -163px;
@@ -157,7 +162,7 @@
 
       &__img {
          max-width: none;
-         width: auto;
+         width: 935px;
          height: 436px;
       }
 
@@ -196,7 +201,6 @@
 
       .section-row {
          padding-top: 33px;
-         margin: 0 -16px;
       }
 
       &__img-wrapp {

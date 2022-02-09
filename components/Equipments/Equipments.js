@@ -1,5 +1,5 @@
 import Slider from 'react-slick'
-import EqCard from "./components/EqCard";
+import EqCard from "./EqCard";
 import {connect} from "react-redux";
 
 

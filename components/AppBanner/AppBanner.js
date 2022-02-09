@@ -1,11 +1,25 @@
-import mob_lk_320 from '../../assets/img/pic/mob_lk_320.webp'
-import mob_lk_768 from '../../assets/img/pic/mob_lk_768.webp'
-import mob_lk_1024 from '../../assets/img/pic/mob_lk_1024.webp'
-import mob_lk_1280 from '../../assets/img/pic/mob_lk_1280.webp'
-import {analyticsEvent} from "../../analytics/events";
+import {analyticsEvent} from "/analytics/events";
+import Image from 'next/image';
+import images from '/public/images/app-banner'
+import {useEffect, useState} from "react";
 
 
 export default function AppBanner() {
+
+   const [img, setImg] = useState(images.desktop)
+
+   function resizeImg() {
+      window.innerWidth < 768 ? setImg(images.mob_320)
+         : window.innerWidth < 1024 ? setImg(images.mob_768)
+            : window.innerWidth < 1279 ? setImg(images.tap)
+               : setImg(images.desktop)
+   }
+
+   useEffect(() => {
+      resizeImg()
+      window.addEventListener('resize', resizeImg)
+   })
+
 
    return (
       <section className="app">
@@ -40,12 +54,9 @@ export default function AppBanner() {
                   </div>
                </div>
 
-               <picture className="app__img">
-                  <source srcSet={mob_lk_320.src} media="(max-width: 767px)"/>
-                  <source srcSet={mob_lk_768.src} media="(max-width: 1023px)"/>
-                  <source srcSet={mob_lk_1024.src} media="(max-width: 1279px)"/>
-                  <img src={mob_lk_1280.src} alt="смартфон"/>
-               </picture>
+               <div className="app__img">
+                  <Image {...img} alt="смартфон"/>
+               </div>
             </div>
          </div>
       </section>

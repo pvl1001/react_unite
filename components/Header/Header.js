@@ -1,13 +1,14 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import head_banner_mob from '../../assets/img/pic/head_banner_mob.webp'
-import head_banner_tap from '../../assets/img/pic/head_banner_tap.webp'
-import head_banner_desctop from '../../assets/img/pic/head_banner_desctop.webp'
 import {showModal} from "../../redux/modals/modalsAction";
 import {setDataOrder} from "../../redux/order/orderAction";
 import {analyticsEvent} from "../../analytics/events";
+import Image from 'next/image'
+import images from '/public/images/header'
 
 function Header(props) {
+
+   const [img, setImg] = useState(images.desktop)
 
    function showModalOrder() {
       props.showModal({modal: 'order', bool: true})
@@ -25,6 +26,21 @@ function Header(props) {
       props.showModal({modal: 'tariff', bool: true, props: props.tariff.id})
       analyticsEvent(`click_button_connect_details_${props.tariff.dataView}`)
    }
+
+   function resize() {
+      window.innerWidth < 603 ? setImg(images.mob)
+         : (window.innerWidth > 602 && window.innerWidth < 936) ? setImg(images.tap)
+            : setImg(images.desktop)
+   }
+
+   useEffect(() => {
+      resize()
+      window.addEventListener('resize', resize)
+
+      return () => {
+         window.removeEventListener('resize', resize)
+      }
+   })
 
 
    return (
@@ -57,11 +73,13 @@ function Header(props) {
                </div>
 
                <div className="header__img-wrapp">
-                  <picture>
-                     <source srcSet={head_banner_mob.src} media="(max-width: 602px)"/>
-                     <source srcSet={head_banner_tap.src} media="(max-width: 935px)"/>
-                     <img className="header__img" src={head_banner_desctop.src} alt="head_banner"/>
-                  </picture>
+                  <div className="header__img">
+                     <Image
+                        {...img}
+                        alt="баннер старт"
+                        priority
+                     />
+                  </div>
                </div>
             </div>
          </div>

@@ -1,6 +1,7 @@
 import {Modal} from "react-bootstrap";
 import {connect} from "react-redux";
-import {showModal} from '../../../redux/modals/modalsAction'
+import {showModal} from '../../../redux/modals/modalsAction';
+import Image from 'next/image';
 
 function ChoiceRouter(props) {
 
@@ -21,11 +22,26 @@ function ChoiceRouter(props) {
             <h2 className="choiceRouter__title">Какой роутер мне подойдет?</h2>
             <div className="choiceRouter__images">
                <div className="choiceRouter__img">
-                  <img src={require(`/assets/img/pic/Almond-3_about.webp`).default.src} alt="Almond-3"/>
+                  <div className="choiceRouter__img-wrapp">
+                     <Image
+                        alt="Almond-3"
+                        src={'/images/almond/Almond-3_about.webp'}
+                        layout={'fill'}
+                        objectFit={'contain'}
+                     />
+                  </div>
                   <p className="choiceRouter__name">Almond 3</p>
                </div>
                <div className="choiceRouter__img">
-                  <img src={require(`/assets/img/pic/Almond-3S_about.webp`).default.src} alt="Almond-3S"/>
+                  <div className="choiceRouter__img-wrapp">
+                     <Image
+                        alt="Almond-3S"
+                        src={'/images/almond/Almond-3S_about.webp'}
+                        layout={'fill'}
+                        objectFit={'contain'}
+                     />
+                  </div>
+
                   <p className="choiceRouter__name">Almond 3S</p>
                </div>
             </div>
