@@ -58,7 +58,6 @@ function ModalAboutAlmond(props) {
             show={props.show}
             onHide={onHide}
             className={`modalAboutAlmond about${almondOrSensor}`}
-
          >
             <button type="button" className="modal-close" onClick={onHide}/>
             <div className={`about${almondOrSensor}__wrapp`}>
@@ -75,8 +74,7 @@ function ModalAboutAlmond(props) {
                         {props.data.params.map(param =>
                            <div key={param.icon} className={`about${almondOrSensor}__param`}>
                               <div className={`about${almondOrSensor}__param-img`}>
-                                 <img src={require(`/assets/img/svg/${param.icon}.svg`).default.src}
-                                      alt={param.icon}/>
+                                 <img src={`/svg/${param.icon}.svg`} alt={param.icon}/>
                               </div>
                               <div className={`about${almondOrSensor}__param-text`}
                                    dangerouslySetInnerHTML={{__html: param.text}}/>
@@ -89,9 +87,11 @@ function ModalAboutAlmond(props) {
                   <div className={`about${almondOrSensor}__switch item-option`}>
                      <label>
                         <div className="switch">
-                           <input type="checkbox"
-                                  checked={checked}
-                                  onChange={(e) => handleSwitchAlmond(e)}/>
+                           <input
+                              type="checkbox"
+                              checked={checked}
+                              onChange={(e) => handleSwitchAlmond(e)}
+                           />
                            <span className="round"/>
                         </div>
 
@@ -122,7 +122,7 @@ function ModalAboutAlmond(props) {
 
                   <div className="tariff-modal__download-pdf download-pdf">
                      <button className="download-pdf__icon">
-                        <img src={require('../../../assets/img/svg/download-pdf.svg').default.src}
+                        <img src={'/svg/download-pdf.svg'}
                              alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">

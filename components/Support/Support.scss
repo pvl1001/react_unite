@@ -55,10 +55,11 @@
       }
 
       svg {
-         position: absolute;
-         right: -8px;
-         top: -1px;
          width: 5px;
+
+         * {
+            fill: var(--mf-blue);
+         }
       }
    }
 }

@@ -87,7 +87,7 @@
 
          input.valid {
             border: 1px solid var(--mf-green);
-            background: url('../../../assets/img/svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat;
+            background: url('../../../public/svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat;
 
             + label {
                display: block;
@@ -148,7 +148,7 @@
             display: flex;
             align-items: center;
             border-radius: 0;
-            background: url('../../../assets/img/svg/arrow-select.svg') calc(100% - 20px) 50% / 12px no-repeat;
+            background: url('../../../public/svg/arrow-select.svg') calc(100% - 20px) 50% / 12px no-repeat;
             border: 1px solid #ddd;
 
             &:hover {
@@ -197,7 +197,7 @@
                   right: 0;
                   left: auto;
                   height: 100%;
-                  background: url('../../../assets/img/svg/check.svg') center / 15px no-repeat;
+                  background: url('../../../public/svg/check.svg') center / 15px no-repeat;
                }
             }
 

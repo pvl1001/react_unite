@@ -24,6 +24,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "babel-plugin-inline-react-svg": "^2.0.1",
     "sass": "^1.49.5"
   }
 }

@@ -1,5 +1,3 @@
-import success from "../../../assets/img/svg/success.svg";
-
 function Success(props) {
 
    const eventLabel = {
@@ -10,7 +8,7 @@ function Success(props) {
 
    return (
       <div className="success-check">
-         <img src={success.src} alt="success"/>
+         <img src={'/svg/success.svg'} alt="success"/>
 
          <p>Подключение по адресу <b>{props.address}</b> Возможно!</p>
 

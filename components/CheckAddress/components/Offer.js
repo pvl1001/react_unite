@@ -1,10 +1,6 @@
 import {useRef} from "react";
 import {connect} from "react-redux";
 import Image from 'next/image'
-import wiFi from "../../../assets/img/svg/wi-fi.svg";
-import tv from "../../../assets/img/svg/tv.svg";
-import mobile from "../../../assets/img/svg/mobile.svg";
-import web_4g from "../../../assets/img/svg/4g.svg";
 import {scrollTo} from "../../../redux/tariffs/tariffsReducer";
 import {showModal} from "../../../redux/modals/modalsAction";
 import {analyticsEvent} from "../../../analytics/events";
@@ -66,13 +62,13 @@ function Offer(props) {
                         <p className="unite-info__title">Беспроводной интернет и ТВ</p>
                         <div className="unite-info__desc">
                            <div className="unite-info__desc_icon">
-                              <img src={wiFi.src} alt="wi-fi"/>
+                              <img src={'/svg/wi-fi.svg'} alt="wi-fi"/>
                            </div>
                            {props.tariff.speed} Мбит/с
                         </div>
                         <div className="unite-info__desc desk-channels">
                            <div className="unite-info__desc_icon">
-                              <img src={tv.src} alt="tv"/>
+                              <img src={'/svg/tv.svg'} alt="tv"/>
                            </div>
                            <a href=" ">{props.tariff.tvLength}</a>
                         </div>
@@ -81,7 +77,7 @@ function Offer(props) {
                         <p className="unite-info__title">Мобильная связь</p>
                         <div className="unite-info__desc desk-mobile">
                            <div className="unite-info__desc_icon">
-                              <img src={mobile.src} alt="mobile"/>
+                              <img src={'/svg/mobile.svg'} alt="mobile"/>
                            </div>
                            <div>
                               <p>{props.tariff.min} минут</p>
@@ -90,7 +86,7 @@ function Offer(props) {
                         </div>
                         <div className="unite-info__desc">
                            <div className="unite-info__desc_icon">
-                              <img src={web_4g.src} alt="4g"/>
+                              <img src={'/svg/4g.svg'} alt="4g"/>
                            </div>
                            Безлимитный интернет
                         </div>

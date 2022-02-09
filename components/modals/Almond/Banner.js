@@ -13,14 +13,6 @@ export default function Banner(props) {
                objectFit={'contain'}
                objectPosition={'bottom'}
             />
-            {/*<picture>*/}
-            {/*   /!*{props.banner.imgMob &&*!/*/}
-            {/*   /!*   <source srcSet={require( `/assets/img/pic/${props.banner.imgMob}.webp` ).default.src}*!/*/}
-            {/*   /!*           media="(max-width: 767px)"/>}*!/*/}
-            {/*   <img className="head-banner__img"*/}
-            {/*        src={`/images/almond/${props.banner.img}`}*/}
-            {/*        alt={props.banner.alt}/>*/}
-            {/*</picture>*/}
          </div>
 
 

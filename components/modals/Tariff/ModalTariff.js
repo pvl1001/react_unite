@@ -66,7 +66,7 @@ function ModalTariff(props) {
 
                   <div className="tariff-modal__download-pdf download-pdf">
                      <button className="download-pdf__icon">
-                        <img src={require('../../../assets/img/svg/download-pdf.svg').default.src} alt="download-pdf"/>
+                        <img src={'/svg/download-pdf.svg'} alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
                         <a href=" " className="download-pdf__text-link">Скачать подробную информацию о тарифе</a>

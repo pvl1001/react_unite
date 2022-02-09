@@ -3,10 +3,10 @@ import "slick-carousel/slick/slick.scss"
 import 'tippy.js/dist/tippy.css'
 import 'tippy.js/themes/light.css'
 
-import '../assets/fonts/fonts.css'
-import '../assets/style/null.scss'
-import '../assets/style/colors.scss'
-import '../assets/style/main.scss'
+import '../public/fonts/fonts.css'
+import '../public/styles/null.scss'
+import '../public/styles/colors.scss'
+import '../public/styles/main.scss'
 
 import '../components/Support/Support.scss'
 import '../components/Nav/Nav.scss'

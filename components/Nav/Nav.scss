@@ -27,7 +27,7 @@
       display: block;
       width: 178px;
       height: 31px;
-      background: url('../../assets/img/svg/mf_logo_full.svg') center / contain no-repeat;
+      background: url('../../public/svg/mf_logo_full.svg') center / contain no-repeat;
    }
 
    &__phone {
@@ -58,7 +58,7 @@
          position: relative;
 
          &:after {
-            content: url('../../assets/img/svg/location.svg');
+            content: url('../../public/svg/location.svg');
             display: inline-block;
             width: 6px;
             margin-left: 2px;
@@ -85,7 +85,7 @@
             font-size: 0;
             height: 32px;
             width: 32px;
-            background: url('../../assets/img/svg/tel.svg') center / contain no-repeat;
+            background: url('../../public/svg/tel.svg') center / contain no-repeat;
          }
       }
       &__city {
@@ -93,7 +93,7 @@
             font-size: 0;
             height: 32px;
             width: 24px;
-            background: url('../../assets/img/svg/geo.svg') center / contain no-repeat;
+            background: url('../../public/svg/geo.svg') center / contain no-repeat;
 
             &:after {
                display: none;

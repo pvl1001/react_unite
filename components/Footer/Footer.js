@@ -1,5 +1,3 @@
-import speedtest from '../../assets/img/svg/speedtest-awards.svg'
-
 export default function Footer() {
    return (
       <footer className="footer">
@@ -19,7 +17,7 @@ export default function Footer() {
                конфиденциальности</a>.
             </p>
             <div className="footer__speedtest">
-               <img src={speedtest.src} alt="speedtest"/>
+               <img src={'/svg/speedtest-awards.svg'} alt="speedtest"/>
             </div>
          </div>
       </footer>

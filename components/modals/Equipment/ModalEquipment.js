@@ -79,7 +79,7 @@ function ModalEquipment(props) {
                      {props.eq.params.map((param, i) => (
                         <li key={i}>
                            {param.icon &&
-                              <img src={require(`/assets/img/svg/${param.icon}.svg`).default.src} height={32} alt="icon"/>}
+                              <img src={`/svg/${param.icon}.svg`} height={32} alt="icon"/>}
                            <p dangerouslySetInnerHTML={{__html: param.text}}/>
                         </li>)
                      )}
@@ -87,7 +87,7 @@ function ModalEquipment(props) {
 
                   <div className="tariff-modal__download-pdf download-pdf">
                      <button className="download-pdf__icon">
-                        <img src={require('../../../assets/img/svg/download-pdf.svg').default.src}
+                        <img src={'/svg/download-pdf.svg'}
                              alt="download-pdf"/>
                      </button>
                      <div className="download-pdf__text">
