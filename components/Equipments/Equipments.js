@@ -1,9 +1,10 @@
+import s from './Equipments.module.sass';
 import Slider from 'react-slick'
-import EqCard from "./EqCard";
-import {connect} from "react-redux";
+import EqCard from "./EqCard/EqCard";
+import { connect } from "react-redux";
 
 
-function Equipments(props) {
+function Equipments( props ) {
 
    const settingsSlider = {
       dots: true,
@@ -34,15 +35,15 @@ function Equipments(props) {
    }
 
    return (
-      <section className="equipments">
+      <section className={ 'equipments ' + s.container }>
          <div className="wrapper">
-            <h1 className="equipments__title">Оборудование</h1>
+            <h1 className={ s.title }>Оборудование</h1>
 
-            <Slider {...settingsSlider} className="equipments__slider slider">
+            <Slider { ...settingsSlider } className={ 'slider' }>
 
-               {props.data.map( eq => (
-                  <EqCard key={eq.id} eq={eq}/>
-               ) )}
+               { props.data.map( eq => (
+                  <EqCard key={ eq.id } eq={ eq }/>
+               ) ) }
 
             </Slider>
 
@@ -55,4 +56,4 @@ function Equipments(props) {
 const mapStateToProps = state => ({
    data: state.equipments
 })
-export default connect(mapStateToProps, null)(Equipments)
+export default connect( mapStateToProps, null )( Equipments )

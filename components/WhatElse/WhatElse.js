@@ -1,13 +1,14 @@
+import s from './WhatElse.module.sass'
 import films from '/public/images/what-else/films.webp'
 import sales from '/public/images/what-else/sales.webp'
 import Brus from '/public/images/what-else/Brus.webp'
-import {connect} from "react-redux";
-import {showModal} from "/redux/modals/modalsAction";
-import {setDataOrder} from "/redux/order/orderAction";
-import CardWE from "./CardWE";
+import { connect } from "react-redux";
+import { showModal } from "/redux/modals/modalsAction";
+import { setDataOrder } from "/redux/order/orderAction";
+import CardWE from "./CardWE/CardWE";
 
 
-function WhatElse(props) {
+function WhatElse( props ) {
 
    const data = [
       {
@@ -34,38 +35,44 @@ function WhatElse(props) {
    ]
 
    function showModalTariffAll() {
-      props.showModal({modal: 'tariffAll', bool: true})
+      props.showModal( {
+         modal: 'tariffAll',
+         bool: true
+      } )
    }
 
-   function showModalOrder(dataView) {
-      props.showModal({modal: 'order', bool: true})
-      props.setDataOrder({
+   function showModalOrder( dataView ) {
+      props.showModal( {
+         modal: 'order',
+         bool: true
+      } )
+      props.setDataOrder( {
          tariffName: props.tariff.name,
          tariffId: props.tariff.tariffId,
          eventLabel: {
-            order: `click_button_order_${dataView}`,
-            send: `click_button_what-else_${dataView}_send_equipment`
+            order: `click_button_order_${ dataView }`,
+            send: `click_button_what_else_${ dataView }_send_equipment`
          }
-      })
+      } )
    }
 
 
    return (
-      <section className="what-else">
+      <section className={ s.container }>
          <div className="wrapper">
 
             <h1>Что еще доступно</h1>
 
-            <div className="what-else__cards">
+            <div className={ s.cards }>
 
-               {data.map(el =>
+               { data.map( el =>
                   <CardWE
-                     key={el.dataView}
-                     card={el}
-                     showModalTariffAll={showModalTariffAll}
-                     showModalOrder={showModalOrder}
+                     key={ el.dataView }
+                     card={ el }
+                     showModalTariffAll={ showModalTariffAll }
+                     showModalOrder={ showModalOrder }
                   />
-               )}
+               ) }
             </div>
          </div>
 
@@ -76,10 +83,10 @@ function WhatElse(props) {
 
 export default connect(
    state => ({
-      tariff: state.tariffs.find(tariff => tariff.id === 'for-their')
+      tariff: state.tariffs.find( tariff => tariff.id === 'for-their' )
    }),
    {
       showModal,
       setDataOrder,
    }
-)(WhatElse)
+)( WhatElse )

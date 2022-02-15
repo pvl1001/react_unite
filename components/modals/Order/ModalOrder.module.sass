@@ -1,0 +1,138 @@
+.modal
+   @media (max-width: 1279px)
+      background-color: #fff
+
+
+.modal_content
+   padding: 81px 125px 73px
+
+
+.form
+   &__inputs
+      display: flex
+      margin-bottom: 30px
+
+   &__input
+      margin-right: 20px
+
+      input
+         width: 230px
+
+   &__input_label
+      font-size: 15px
+      font-weight: 500
+      margin-bottom: 10px
+
+
+   &__btn
+      width: 170px
+      justify-content: center
+
+
+.modal_dialog
+   max-width: 812px
+
+
+.order_thx
+   min-height: auto
+   width: auto
+   margin: 0 auto
+   text-align: center
+
+   &__title
+      margin-bottom: 3px
+
+
+   &__text
+      font-size: 15px
+      font-weight: 400
+
+
+@media (max-width: 1279px)
+   .modal_content
+      padding: 60px 275px
+      height: 100vh
+      display: flex
+      flex-direction: column
+      justify-content: center
+
+
+   .modal_dialog
+      width: 100%
+      height: 100%
+      margin: 0
+      max-width: none
+
+
+   .form__input
+      width: 50%
+
+      input
+         width: 100%
+
+
+      &:last-child
+         margin-right: 0
+
+
+   .order_thx
+      width: 100%
+
+
+@media (max-width: 1023px)
+   .modal_content
+      padding: 60px 122px
+
+
+   .modal_dialog
+      width: 100%
+      height: 100%
+      margin: 0
+      max-width: none
+
+
+   .form__input
+      width: 50%
+
+      input
+         width: 100%
+
+
+      &:last-child
+         margin-right: 0
+
+
+   .order_thx
+      width: 100%
+
+
+@media (max-width: 767px)
+
+   .modal_content
+      padding: 95px 30px 80px
+
+
+   .form
+      &__inputs
+         flex-wrap: wrap
+
+
+      &__input
+         width: 100%
+
+         input
+            width: 100%
+
+
+         &:first-child
+            margin: 0 0 20px
+
+
+         &:last-child
+            margin-right: 0
+
+
+@media (max-width: 340px)
+
+   .order_thx h2
+      font-size: 28px

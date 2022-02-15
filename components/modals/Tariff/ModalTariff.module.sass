@@ -1,0 +1,138 @@
+.modal
+   font-size: 15px
+   line-height: 20px
+   font-weight: 500
+
+
+   ul
+      padding-left: 0
+
+
+   h2
+      font-weight: 600
+
+      @media (max-width: 1023px)
+         font-size: 26px
+
+
+      @media (max-width: 767px)
+         font-size: 22px
+
+
+.modal_dialog
+   max-width: calc(820px + 48px * 2)
+   padding: 0 48px
+   overflow: visible
+
+
+.modal_content
+   padding: 0
+   overflow: visible
+   background-color: transparent
+
+   // firefox
+   scrollbar-width: 0
+
+   &::-webkit-scrollbar-thumb,
+   &::-webkit-scrollbar
+      width: 0
+
+
+   > *
+      $br: 10px
+      overflow: hidden
+
+      &:nth-child(2)
+         border-radius: $br $br 0 0
+
+
+      &:last-child
+         border-radius: 0 0 $br $br
+
+
+.wrapp
+   padding-left: 78px
+   padding-right: 78px
+
+
+.title
+   height: 106px
+   background-color: var(--mf-green)
+   color: #fff
+   display: flex
+   align-items: center
+   font-weight: 700
+
+
+.container
+   background-color: #F1F1F1
+
+
+.items
+   margin-bottom: 0
+
+
+.dop_options
+   padding-top: 48px
+   padding-bottom: 54px
+
+
+   &__title
+      margin-bottom: 28px
+
+
+   &__cards
+      margin-bottom: 37px
+
+
+.download_pdf__text
+   line-height: 1
+   max-width: 256px
+
+
+.btn_close
+   position: sticky
+   position: -webkit-sticky
+   z-index: 100
+   top: 0
+   overflow: initial !important
+   pointer-events: auto
+
+
+.modal_close
+   top: 37px
+   right: 24px
+
+
+@media (max-width: 1023px)
+   .wrapp
+      padding-left: 48px
+      padding-right: 48px
+
+
+   .title
+      height: 86px
+
+
+   .modal_close
+      top: 27px
+      right: 17px
+
+
+@media (max-width: 767px)
+   .modal_dialog
+      margin: 54px 0
+
+
+   .wrapp
+      padding-left: 16px
+      padding-right: 16px
+
+
+@media (max-width: 510px)
+   .modal_dialog
+      padding: 0
+
+
+   .modal_close
+      right: 16px

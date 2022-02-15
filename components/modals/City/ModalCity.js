@@ -1,9 +1,10 @@
-import {Modal} from "react-bootstrap";
-import {connect} from "react-redux";
-import {showModal} from "../../../redux/modals/modalsAction";
+import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
+import { showModal } from "../../../redux/modals/modalsAction";
+import s from './ModalCity.module.sass'
 
 
-function ModalCity(props) {
+function ModalCity( props ) {
 
    const cities = [
       {
@@ -410,44 +411,62 @@ function ModalCity(props) {
       }
    ]
 
-   const onHide = () => props.showModal({modal: 'cities', bool: false})
+   const onHide = () => props.showModal( {
+      modal: 'cities',
+      bool: false
+   } )
+
 
    return (
-      <Modal centered
-             animation={false}
-             className="city-selection"
-             show={props.show}
-             onHide={onHide}
+      <Modal
+         centered
+         animation={ false }
+         className={ s.modal }
+         dialogClassName={ s.modal_dialog }
+         contentClassName={ s.modal_content }
+         show={ props.show }
+         onHide={ onHide }
       >
-            <button type="button" className="modal-close" onClick={onHide}/>
-            <div className="city-selection-wrapper">
-               <div className="city-selection__header header-city">
-                  <div className="header-city__title">Выбор региона</div>
-                  <input type="text" placeholder="Поиск региона"/>
-                  <div className="header-city__auto">
-                     Автоопределение местоположения: <span>Москва и область</span>
-                  </div>
-               </div>
+         <button
+            type="button"
+            className="modal-close"
+            onClick={ onHide }
+         />
+         <div className={ s.wrapper }>
+            <div className={ s.header }>
 
-               <div className="city-selection__body select-region">
-                  <div className="select-region__top">
-                     <button className="link">Москва и область</button>
-                     <button className="link">Санкт-Петербург и область</button>
-                  </div>
+               <div className={ s.header__title }>Выбор региона</div>
 
-                  {cities.map( el => (
-                     <div key={el.alph} className="select-region__regions-group">
-                        <div className="select-region__region-title">{el.alph}</div>
-                        {el.cities.map( city => (
-                           <div key={city.name} className="select-region__region">
-                              <a className="select-region__link" href={city.link}>{city.name}</a>
-                           </div>
-                        ) )}
-                     </div>
-                  ) )}
+               <input type="text" placeholder="Поиск региона"/>
 
+               <div className={ s.header__auto }>
+                  Автоопределение местоположения: <span>Москва и область</span>
                </div>
             </div>
+
+            <div className={ s.region }>
+               <div className={ s.region__top }>
+                  <button className={ "link " + s.region__link }>Москва и область</button>
+                  <button className={ "link " + s.region__link }>Санкт-Петербург и область</button>
+               </div>
+
+               { cities.map( el =>
+                  <div key={ el.alph } className={ s.region__group }>
+                     <div className={ s.region__title }>{ el.alph }</div>
+                     { el.cities.map( city =>
+                        <div key={ city.name } className={ s.region__region }>
+                           <a
+                              href={ city.link }
+                              className={ s.region__link }>
+                              { city.name }
+                           </a>
+                        </div>
+                     ) }
+                  </div>
+               ) }
+
+            </div>
+         </div>
       </Modal>
    )
 }
@@ -455,7 +474,7 @@ function ModalCity(props) {
 
 export default connect(
    state => ({
-   show: state.modals.cities.show
+      show: state.modals.cities.show
    }),
-   {showModal}
-)(ModalCity)
+   { showModal }
+)( ModalCity )

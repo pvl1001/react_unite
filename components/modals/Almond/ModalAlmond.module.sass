@@ -1,0 +1,226 @@
+.modal
+   @media (max-width: 1279px)
+      background-color: #fff
+
+
+.modal_dialog
+   max-width: 1130px
+   height: auto
+
+
+.modal_content
+   height: auto
+   padding: 45px 75px 45px
+   max-height: 825px
+   flex-direction: row
+
+
+.banners
+   width: 66%
+   max-width: 647px
+   overflow-y: auto
+   padding-right: 20px
+
+   @media (hover: hover)
+      // firefox
+      scrollbar-color: #DDDDDD #EDEDED
+      /* «цвет ползунка» «цвет полосы скроллбара»*/
+      scrollbar-width: thin
+      /* толщина */
+
+      &::-webkit-scrollbar
+         width: 6px
+         /* ширина для вертикального скролла */
+         background-color: #EDEDED
+         margin-right: -15px
+         position: absolute
+         right: 0
+
+
+      /* ползунок скроллбара */
+      &::-webkit-scrollbar-thumb
+         background-color: #DDDDDD
+         height: 350px
+         width: 6px
+         margin-right: -15px
+
+
+      &::-webkit-scrollbar-thumb:hover
+         background-color: #333333
+
+
+.banners_title
+   font-size: 32px
+   line-height: 40px
+   font-weight: 700
+   margin-bottom: 29px !important
+
+
+.prices
+   flex-grow: 1
+   padding-left: 39px
+   display: flex
+   flex-direction: column
+
+
+   &__title
+      font-size: 20px
+      font-weight: 700
+      margin-bottom: 15px !important
+
+
+   &__routers
+      margin-bottom: 24px
+
+
+   &__devices
+      margin-bottom: 29px
+      flex-grow: 1
+
+
+   &__title_routers
+      font-size: 15px
+      line-height: 20px
+      font-weight: 500
+      margin-bottom: 3px !important
+
+
+   &__title_devices
+      font-weight: 500
+      margin-bottom: 10px !important
+
+
+   &__link
+      display: inline-block
+      font-size: 12px
+      line-height: 20px
+      color: var(--mf-blue)
+      font-weight: 400
+      margin-bottom: 10px
+      cursor: pointer
+
+
+   &__total_price
+      margin: 0 auto
+
+      .new_price,
+      .new_price + span
+         font-size: 32px
+         font-weight: 600
+
+
+   &__btn
+      margin: 15px auto 0
+      width: 100%
+      justify-content: center
+
+
+.d_mobile
+   display: none
+
+
+@media (max-width: 1279px)
+
+   .modal_dialog
+      height: 100%
+      margin: 0
+      max-width: none
+      width: 100%
+
+
+   .modal_content
+      padding: 45px 24px 45px
+      height: 100%
+      justify-content: center
+      min-height: 100vh
+      width: 100%
+
+
+@media (max-width: 1023px)
+   .banners,
+   .banners_title,
+   .prices
+      padding-left: 24px
+      padding-right: 24px
+
+
+   .modal_content
+      flex-wrap: wrap
+      max-height: none
+      padding: 45px 0
+
+
+   .banners_title_head.d_mobile
+      display: block
+      width: 100%
+
+
+   .banners
+      width: 100%
+      display: flex
+      position: relative
+      margin-bottom: 25px
+      overflow-y: hidden
+      max-width: none
+
+      .banners_title_head
+         display: none
+
+
+      @media (hover: hover)
+         padding-right: 0
+         // firefox
+         scrollbar-color: #DDDDDD #EDEDED
+         /* «цвет ползунка» «цвет полосы скроллбара»*/
+         scrollbar-width: thin
+         /* толщина */
+
+         &::-webkit-scrollbar
+            height: 6px
+            /* ширина для вертикального скролла */
+            background-color: transparent
+            margin-top: 15px
+            position: absolute
+            right: 0
+
+
+         /* ползунок скроллбара */
+         &::-webkit-scrollbar-thumb
+            background-color: #DDDDDD
+            width: 30%
+            height: 6px
+            margin-top: 15px
+
+
+         &::-webkit-scrollbar-thumb:hover
+            background-color: #333333
+
+
+   .prices
+      &__cards
+         display: grid
+         grid: auto / 1fr 1fr
+         grid-gap: 10px
+
+
+      &__btn
+         max-width: 296px
+
+
+@media (max-width: 767px)
+
+   .banners,
+   .banners_title,
+   .prices
+      padding-left: 16px
+      padding-right: 16px
+
+
+   .prices__cards
+      grid: auto / 1fr
+
+
+   .banners_title:not(.banners_title_head)
+      font-size: 28px
+      line-height: 36px
+

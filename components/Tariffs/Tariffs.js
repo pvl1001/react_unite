@@ -1,13 +1,14 @@
+import s from './Tariffs.module.sass'
 import TariffCard from "./TariffCard/TariffCard";
 import Slider from "react-slick";
-import React, {useState} from "react";
-import {connect} from "react-redux";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
 
-function Tariffs(props) {
+function Tariffs( props ) {
    const premium = props.tariffs.find( el => el.id === 'premium' )
-   const [collapseGroup, setCollapseGroup] = useState( false )
-   const [collapseChannels, setCollapseChannels] = useState( [] )
+   const [ collapseGroup, setCollapseGroup ] = useState( false )
+   const [ collapseChannels, setCollapseChannels ] = useState( [] )
 
 
    const settingsSlider = {
@@ -36,25 +37,26 @@ function Tariffs(props) {
    }
 
    return (
-      <section className="tariffs">
+      <section className={ 'tariffs ' + s.container }>
          <div className="wrapper">
-            <h1 className="tariffs__title">Тарифы «Объединяй!»</h1>
+            <h1 className={ s.title }>Тарифы «Объединяй!»</h1>
 
-            <Slider className="slider" {...settingsSlider}>
-               {
-                  props.tariffs.map( (tariff, i) => (
-                     <TariffCard key={tariff.id}
-                                 tariff={tariff}
-                                 premium={premium}
-                                 collapse={{
-                                    collapseGroup,
-                                    setCollapseGroup,
-                                    collapseChannels,
-                                    setCollapseChannels
-                                 }}/>
-                  ) )
-               }
+            <Slider className="slider" { ...settingsSlider }>
+               { props.tariffs.map( tariff =>
+                  <TariffCard
+                     key={ tariff.id }
+                     tariff={ tariff }
+                     premium={ premium }
+                     collapse={ {
+                        collapseGroup,
+                        setCollapseGroup,
+                        collapseChannels,
+                        setCollapseChannels
+                     } }
+                  />
+               ) }
             </Slider>
+
          </div>
 
       </section>
@@ -62,8 +64,8 @@ function Tariffs(props) {
 }
 
 
-const mapStateToProps = state => ({
-   tariffs: state.tariffs
-})
-
-export default connect( mapStateToProps )( Tariffs )
+export default connect(
+   state => ({
+      tariffs: state.tariffs
+   })
+)( Tariffs )

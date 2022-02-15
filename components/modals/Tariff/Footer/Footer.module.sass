@@ -1,0 +1,83 @@
+.container
+   padding-top: 37px
+   padding-bottom: 30px
+   background-color: #fff
+
+
+.price
+   margin-bottom: 18px
+
+   > *
+      vertical-align: middle
+      margin-right: 4px
+
+
+   &__old
+      font-size: 20px
+      line-height: 28px
+      position: relative
+
+      &:before
+         content: ''
+         position: absolute
+         left: 0
+         top: 49%
+         height: 2px
+         width: 100%
+         background-color: #ff0000
+
+
+   &__current,
+   &__month
+      font-size: 32px
+      line-height: 28px
+      font-weight: 600
+
+
+   &__icon
+      width: 24px
+      height: 24px
+      transform: translateY(-2px)
+      margin-left: 8px
+
+
+   &__btn
+      padding: 0 67px
+      margin-bottom: 10px
+
+
+   &__desc
+      font-size: 12px
+      line-height: 16px
+      font-weight: 400
+      padding-left: 5px
+
+
+   @media (max-width: 1023px)
+      margin-bottom: 12px
+
+      > *
+         margin-right: 2px
+
+
+      &__old
+         font-size: 18px
+         line-height: 24px
+
+
+      &__current,
+      &__month
+         font-size: 26px
+
+
+      &__icon
+         width: 16px
+         height: 16px
+         transform: translateY(-1px)
+         margin-left: 6px
+
+
+   @media (max-width: 767px)
+      &__current,
+      &__month
+         font-size: 22px

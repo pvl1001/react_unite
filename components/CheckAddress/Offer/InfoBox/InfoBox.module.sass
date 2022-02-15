@@ -1,0 +1,199 @@
+.container
+   width: 52%
+   padding: 0 50px 43px
+   background-color: #fff
+   border-radius: 10px
+   overflow: hidden
+   box-shadow: 0 1px 4px #0000004D
+   color: #333
+
+
+.title
+   background-color: var(--mf-green)
+   color: #fff
+   margin: 0 -50px 35px
+   padding: 20px 50px 16px
+   display: flex
+   align-items: center
+
+
+.row
+   display: flex
+   margin-bottom: 40px
+
+
+.params
+   width: 49%
+
+   &:first-child
+      margin-right: 25px
+
+
+   &__title
+      color: #919191
+      font-size: 18px
+      line-height: 24px
+      margin-bottom: 13px
+      font-weight: 500
+
+
+   &__desc
+      font-size: 15px
+      font-weight: 500
+      margin-bottom: 12px
+      display: flex
+      align-items: flex-end
+
+      a
+         color: #333 !important
+         border-bottom: 1px dashed
+         pointer-events: none
+
+         &:hover
+            text-decoration: none
+            border-bottom-style: solid
+
+
+      &:last-child
+         margin-bottom: 0
+
+
+   &__icon
+      width: 32px
+      margin-right: 15px
+
+      img
+         display: block
+         margin: 0 auto
+
+
+.desk_mobile
+   align-items: flex-start
+
+   p:first-child
+      font-weight: 500
+      margin-bottom: 5px
+
+
+   p:last-child
+      font-size: 14px
+
+
+   + div
+      margin-bottom: 8px
+
+
+.checkbox
+   display: flex
+   margin-bottom: 5px
+
+   &__hire
+      display: flex
+      width: 50%
+
+
+   &__switch
+      margin-right: 18px
+      margin-top: 3px
+
+
+   &__text
+      font-size: 15px
+      line-height: 20px
+      font-weight: 500
+
+      span
+         color: var(--mf-green)
+
+
+.links
+   display: inline-flex
+   flex-direction: column
+   font-size: 12px
+   padding-left: 58px
+   margin-bottom: 37px
+
+   a
+      line-height: 16px
+      margin-bottom: 5px
+
+      &:hover
+         text-decoration: none
+
+
+   span
+      text-decoration: underline
+      color: var(--mf-blue)
+      cursor: pointer
+      line-height: 20px
+
+
+.order
+   display: flex
+   align-items: center
+
+   &__btn
+      margin-right: 50px
+      max-width: 230px
+      width: 100%
+      padding: 0
+
+
+@media (max-width: 1279px)
+
+   .params
+      width: 100%
+      margin-bottom: 32px
+
+      &:last-child
+         margin-bottom: 0
+
+
+   .links
+      padding-left: 63px
+
+
+   .row
+      flex-wrap: wrap
+
+
+   .checkbox
+      flex-wrap: wrap
+      padding-left: 5px
+
+      &__hire
+         width: 100%
+         margin-bottom: 13px
+
+         &:last-child
+            margin-bottom: 0
+
+
+   .order
+      flex-wrap: wrap
+      padding-left: 15px
+
+      &__btn
+         order: 1
+         margin: 10px 0 0
+
+
+      &__price
+         width: 100%
+         justify-content: flex-start
+
+
+@media (max-width: 767px)
+   .container
+      padding: 0 36px 43px
+
+
+   .checkbox
+
+      &__hire
+         margin-bottom: 20px
+
+
+   .order,
+   .order__price
+      justify-content: center

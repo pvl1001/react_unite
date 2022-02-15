@@ -36,7 +36,7 @@ export function orderReducer(state = initialState, action) {
          const data = action.payload
 
          const orderData = {
-            city: document.querySelector('.nav__city span').textContent,
+            city: data.city || state.city,
             clientName: data.clientName || state.clientName,
             clientPhone: data.clientPhone || state.clientPhone,
             clientAddress: data.clientAddress || state.clientAddress,

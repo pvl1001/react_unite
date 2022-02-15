@@ -1,0 +1,39 @@
+.container
+   margin-bottom: 18px
+
+   &:last-child
+      margin-bottom: 0
+
+
+.text
+   font-size: 15px
+   line-height: 1
+   margin-bottom: 5px
+   display: flex
+   justify-content: space-between
+
+   &__name
+      br
+         display: none
+
+         @media (min-width: 1280px) and (max-width: 1350px)
+            display: block
+
+
+   &__value
+      display: flex
+      align-items: flex-end
+      white-space: nowrap
+
+
+.line
+   height: 12px
+   border-radius: 6px
+   background-color: #EDEDED
+   overflow: hidden
+
+   &_active
+      width: 50%
+      height: 100%
+      background-color: var(--mf-green)
+      border-radius: 6px

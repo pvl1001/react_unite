@@ -1,0 +1,56 @@
+$cardWidth: 390px
+
+.container
+   display: flex
+   flex-direction: column
+   align-items: center
+   width: 33%
+   max-width: $cardWidth
+   text-align: center
+   padding: 0 10px
+   margin-bottom: 16px
+
+
+.img
+   height: 180px
+   width: 180px
+   margin-bottom: 33px
+
+   img
+      max-height: 100%
+      max-width: 100%
+
+
+.title
+   font-size: 20px
+   line-height: 28px
+   font-weight: 500
+   margin-bottom: 12px
+
+
+.text
+   line-height: 24px
+   font-weight: 400
+   margin-bottom: 29px
+
+
+.link
+   font-size: 15px
+   line-height: 24px
+
+
+@media (max-width: 1023px)
+   .container
+      width: 50%
+      max-width: 392px
+
+
+@media (max-width: 767px)
+   .container
+      width: 100%
+      max-width: none
+      padding: 0
+
+   .title
+      font-size: 18px
+      line-height: 24px

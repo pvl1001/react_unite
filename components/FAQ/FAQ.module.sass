@@ -1,0 +1,51 @@
+.container
+   padding: 70px 0 86px
+
+
+.title
+   margin-bottom: 30px
+
+
+.accordion
+   display: flex
+
+   > div
+      width: 50%
+      margin-right: 20px
+      border-top: 1px solid #DDDDDD
+
+      &:last-child
+         margin-right: 0
+
+
+@media (max-width: 1279px)
+
+   .container
+      padding: 70px 0 85px
+
+
+   .accordion
+      flex-wrap: wrap
+
+      > div
+         width: 100%
+         margin-right: 0
+
+         &:last-child
+            border-top: 0
+
+
+@media (max-width: 1023px)
+
+   .container
+      padding: 75px 0 86px
+
+
+@media (max-width: 767px)
+
+   .container
+      padding: 66px 0 81px
+
+
+   .title
+      margin-bottom: 33px

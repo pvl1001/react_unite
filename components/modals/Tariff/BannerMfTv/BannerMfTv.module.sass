@@ -1,0 +1,73 @@
+.container
+   position: relative
+   margin-bottom: 15px
+   display: flex
+   align-items: center
+
+
+.img
+   width: 100%
+   display: block
+
+
+.MF
+   color: #fff
+   position: absolute
+   left: 0
+   display: flex
+   flex-direction: column
+   z-index: 1
+   padding-left: 78px
+   padding-right: 78px
+
+
+.title
+   margin-bottom: 16px
+
+
+.desc
+   line-height: 24px
+   max-width: 205px
+   font-weight: 400
+   margin-bottom: 40px
+
+
+.link
+   color: #fff !important
+   font-weight: 400
+   text-decoration: underline
+
+
+@media (max-width: 1023px)
+   .container
+      margin-bottom: -9px
+
+   .MF
+      padding-left: 48px
+      padding-right: 48px
+
+   .desc
+      font-weight: 400
+      margin-bottom: 25px
+
+
+@media (max-width: 767px)
+   .container
+      height: auto
+      display: block
+      margin-bottom: 18px
+
+   .MF
+      position: static
+      display: block
+      background: #2D353F
+      padding: 36px 16px 38px
+
+
+   .title
+      margin-bottom: 14px
+
+
+   .desc
+      max-width: 100%
+      margin-bottom: 29px

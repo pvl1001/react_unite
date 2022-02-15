@@ -1,10 +1,15 @@
-import {Modal} from "react-bootstrap";
-import {connect} from "react-redux";
-import {showModal} from "../../../redux/modals/modalsAction";
+import s from './ModalTariffAll.module.sass'
+import s_tariff from '/components/modals/Tariff/ModalTariff.module.sass'
+import s_info from '/components/modals/Tariff/BlockInfo/BlockInfo.module.sass'
+import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
+import { showModal } from "../../../redux/modals/modalsAction";
+import ItemOption from "./ItemOption";
 
-function ModalTariffAll(props) {
 
-   const data = [
+function ModalTariffAll( props ) {
+
+   const options = [
       {
          "name": "Абонентская плата",
          "description": "",
@@ -37,48 +42,43 @@ function ModalTariffAll(props) {
       }
    ]
 
-   const onHide = () => props.showModal({modal: 'tariffAll', bool: false})
+   const onHide = () => props.showModal( { modal: 'tariffAll', bool: false } )
 
 
    return (
       <Modal
          centered
-         animation={false}
-         show={props.show}
-         onHide={onHide}
-         className="tariff-modal tariff-all"
+         animation={ false }
+         show={ props.show }
+         onHide={ onHide }
+         className={ s_tariff.modal }
+         dialogClassName={ s_tariff.modal_dialog }
+         contentClassName={ `${ s_tariff.modal_content } ${ s.modal_content }` }
       >
-         <div className="tariff-modal__btn-close">
-            <button type="button" className="modal-close" onClick={onHide}/>
+         <div className={ s_tariff.btn_close }>
+            <button
+               type="button"
+               className={ s_tariff.modal_close + " modal-close" }
+               onClick={ onHide }
+            />
          </div>
 
-         <h1 className="tariff-modal__title wrapp">Без переплат. Всё</h1>
+         <h1 className={ `${ s_tariff.title } ${ s_tariff.wrapp }` }>
+            Без переплат. Всё
+         </h1>
 
-         <div className="tariff-modal__container">
+         <div className={ s_tariff.container }>
 
-            <ul className="tariff-modal__items">
-               <li className="tariff-modal__item item-modal wrapp">
-                  <ul className="item-modal__options">
+            <ul className={ `${ s_tariff.items } ${ s.items }` }>
+               <li className={ `${ s_info.container } ${ s_tariff.wrapp } ${ s.item }` }>
+                  <ul className={ s.options }>
 
-                     {data.map(el => (
-                        <li key={el.name} className="item-modal__option option-item">
-                           <div className="option-item__text">
-
-                              <p className="option-item__text-name">
-                                 {el.name}
-                              </p>
-
-                              {el.description && (
-                                 <p className="option-item__text-desc">
-                                    {el.description}</p>
-                              )}
-
-                           </div>
-                           <p className="option-item__value">
-                              {el.value}
-                           </p>
-                        </li>
-                     ))}
+                     { options.map( option =>
+                        <ItemOption
+                           key={ option.name }
+                           option={ option }
+                        />
+                     ) }
 
                   </ul>
                </li>
@@ -91,11 +91,8 @@ function ModalTariffAll(props) {
 }
 
 
-const mapStateToProps = state => ({
+export default connect( state => ({
    show: state.modals.tariffAll.show
-})
-
-const mapDispatchToProps = {
+}), {
    showModal
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ModalTariffAll)
+} )( ModalTariffAll )

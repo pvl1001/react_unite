@@ -1,0 +1,29 @@
+$cardWidth: 390px
+
+.container
+   padding: 130px 0 94px
+
+   h1
+      margin-bottom: 53px
+      text-align: center
+
+
+.cards
+   display: flex
+   flex-wrap: wrap
+   justify-content: space-between
+
+
+@media (max-width: 1023px)
+   .container
+      padding: 112px 0 110px
+
+   .cards
+      justify-content: start
+      max-width: $cardWidth *2
+      margin: 0 auto -16px
+
+
+@media (max-width: 767px)
+   .container
+      padding: 103px 0 89px
