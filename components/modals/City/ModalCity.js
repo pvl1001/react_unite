@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
-import { showModal } from "../../../redux/modals/modalsAction";
+import { showModal } from "../../../redux/slices/modalsSlice";
 import s from './ModalCity.module.sass'
 
 

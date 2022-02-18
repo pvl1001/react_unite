@@ -1,17 +1,17 @@
 import s from './ModalAboutAlmond.module.sass'
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
-import { showModal } from "../../../redux/modals/modalsAction";
+import { showModal } from "../../../redux/slices/modalsSlice";
 import {
    counterAlmond,
    sumAlmondTotalPrice,
    switchAlmond,
-} from "../../../redux/tariffs/tariffsAction";
+} from "../../../redux/slices/tariffsSlice";
 import {
    counterAlmondEq,
    sumAlmondTotalPriceEq,
    switchAlmondEq
-} from '../../../redux/equipments/equipmentsAction';
+} from '../../../redux/slices/equipmentsSlice';
 
 
 function ModalAboutAlmond( props ) {

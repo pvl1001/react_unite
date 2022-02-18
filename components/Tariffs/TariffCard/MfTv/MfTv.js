@@ -1,8 +1,8 @@
-import s from '../../TariffCard.module.sass'
+import s from '../TariffCard.module.sass'
 import React from "react";
 import { connect } from "react-redux";
-import { showModal } from "../../../../../redux/modals/modalsAction";
-import MftvIcon from '../../../../../public/svg/mftv-round.svg'
+import { showModal } from "../../../../redux/slices/modalsSlice";
+import MftvIcon from '../../../../public/svg/mftv-round.svg'
 
 
 function MfTv( props ) {

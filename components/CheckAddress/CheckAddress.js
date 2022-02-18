@@ -5,11 +5,11 @@ import Offer from "./Offer/Offer";
 import $ from "jquery";
 import Success from "./Success/Success";
 import { connect } from "react-redux";
-import { showModal } from "../../redux/modals/modalsAction";
+import { showModal } from "../../redux/slices/modalsSlice";
 import { api } from "../../api";
 import { analyticsEvent } from "../../analytics/events";
-import { onUniteSwitch } from "../../redux/tariffs/tariffsAction";
-import { setDataOrder } from "../../redux/order/orderAction";
+import { onUniteSwitch } from "../../redux/slices/tariffsSlice";
+import { setDataOrder } from "../../redux/slices/orderSlice";
 
 
 function CheckAddress( props ) {

@@ -3,9 +3,9 @@ import s_tariff from '/components/modals/Tariff/ModalTariff.module.sass'
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import Plan from "./Plan/Plan";
-import { showModal } from "../../../redux/modals/modalsAction";
-import { changePlan } from "../../../redux/equipments/equipmentsAction";
-import { setDataOrder } from "../../../redux/order/orderAction";
+import { showModal } from "../../../redux/slices/modalsSlice";
+import { changePlan } from "../../../redux/slices/equipmentsSlice";
+import { setDataOrder } from "../../../redux/slices/orderSlice";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
 

@@ -2,11 +2,12 @@ import Tippy from "@tippyjs/react";
 import React, { useEffect } from "react";
 import { tippyAttrs } from "../../../../plugins_config";
 import { connect } from "react-redux";
-import { showModal } from "../../../../redux/modals/modalsAction";
-import { setDataOrder } from "../../../../redux/order/orderAction";
+import { showModal } from "../../../../redux/slices/modalsSlice";
+import { setDataOrder } from "../../../../redux/slices/orderSlice";
 import { analyticsView } from "../../../../analytics/events";
 import s from './Footer.module.sass'
 import { wrapp } from '../ModalTariff.module.sass'
+import { toPlug } from "../../../../redux/slices/tariffsSlice";
 
 function Footer( props ) {
 
@@ -40,7 +41,11 @@ function Footer( props ) {
             <span className={ s.price__month }> ₽ в месяц</span>
 
             { props.tariff.iconInfo &&
-               <Tippy { ...tippyAttrs } content={ props.tariff.iconInfo }>
+               <Tippy { ...tippyAttrs } content={
+                  <><span
+                     onClick={ () => toPlug( props.tariff.iconInfo ) }
+                     className="link">Скидка</span> на абонентскую плату действует 3 месяца после подключения
+                  </> }>
                   <div className={ s.price__icon + ' price__icon' }/>
                </Tippy>
             }

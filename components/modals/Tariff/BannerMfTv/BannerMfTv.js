@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { showModal } from "../../../../redux/modals/modalsAction";
+import { showModal } from "../../../../redux/slices/modalsSlice";
 import Image from 'next/image'
 import { useEffect, useState } from "react";
 import images from '/public/images/mftv-banner'

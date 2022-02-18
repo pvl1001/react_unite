@@ -3,7 +3,7 @@ import s_tariff from '/components/modals/Tariff/ModalTariff.module.sass'
 import s_info from '/components/modals/Tariff/BlockInfo/BlockInfo.module.sass'
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
-import { showModal } from "../../../redux/modals/modalsAction";
+import { showModal } from "../../../redux/slices/modalsSlice";
 import ItemOption from "./ItemOption";
 
 

@@ -1,8 +1,8 @@
 import s from './Nav.module.sass'
 import React, { useEffect, useRef } from 'react'
 import { connect } from "react-redux";
-import { showModal } from "../../redux/modals/modalsAction";
-import { setDataOrder } from "../../redux/order/orderAction";
+import { showModal } from "../../redux/slices/modalsSlice";
+import { setDataOrder } from "../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../analytics/events";
 
 

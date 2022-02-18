@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import FaqMftv from "./FaqMftv/FaqMftv";
 import { connect } from "react-redux";
-import { showModal } from "../../../redux/modals/modalsAction";
-import { setDataOrder } from "../../../redux/order/orderAction";
+import { showModal } from "../../../redux/slices/modalsSlice";
+import { setDataOrder } from "../../../redux/slices/orderSlice";
 import ItemMftv from "./ItemMftv/ItemMftv";
 import { analyticsView } from "../../../analytics/events";
 

@@ -1,8 +1,8 @@
 import s from './Header.module.sass'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { showModal } from "../../redux/modals/modalsAction";
-import { setDataOrder } from "../../redux/order/orderAction";
+import { showModal } from "../../redux/slices/modalsSlice";
+import { setDataOrder } from "../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../analytics/events";
 import Image from 'next/image'
 import images from '/public/images/header'
@@ -98,12 +98,9 @@ function Header( props ) {
 }
 
 
-export default connect(
-   state => ({
-      tariff: state.tariffs.find( tariff => tariff.id === 'for-their' )
-   }),
-   {
-      showModal,
-      setDataOrder
-   }
-)( Header )
+export default connect( state => ({
+   tariff: state.tariffs.find( tariff => tariff.id === 'for-their' )
+}), {
+   showModal,
+   setDataOrder
+} )( Header )

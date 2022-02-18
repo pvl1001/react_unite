@@ -12,16 +12,10 @@ import '../components/Tariffs/Tariffs.sass'
 import '../components/Equipments/Equipments.sass'
 
 import React, { useEffect } from 'react';
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { rootReducer } from "../redux/rootReducer";
 import Analytics from "../analytics/Analytics";
 import { analyticsView } from "../analytics/events";
-
-const composedEnhancer = composeWithDevTools( applyMiddleware( thunk ) )
-export const store = createStore( rootReducer, composedEnhancer )
+import { store } from '../redux/store'
 
 
 export default function App( { Component, pageProps } ) {

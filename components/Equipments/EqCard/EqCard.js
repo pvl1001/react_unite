@@ -1,7 +1,7 @@
 import s from './EqCard.module.sass';
 import { connect } from "react-redux";
-import { showModal } from "../../../redux/modals/modalsAction";
-import { setDataOrder } from "../../../redux/order/orderAction";
+import { showModal } from "../../../redux/slices/modalsSlice";
+import { setDataOrder } from "../../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../../analytics/events";
 import Image from 'next/image';
 

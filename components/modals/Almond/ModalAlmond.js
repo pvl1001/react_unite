@@ -1,14 +1,14 @@
 import s from './ModalAlmond.module.sass'
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
-import { showModal } from "../../../redux/modals/modalsAction";
+import { showModal } from "../../../redux/slices/modalsSlice";
 import Banner from "./Banner/Banner";
 import AlmondCard from "./AlmondCard/AlmondCard";
-import { templateEqAlmond } from "../../../redux/tariffs/tariffsReducer";
-import { optionSwitch } from "../../../redux/tariffs/tariffsAction";
-import { sumTotalPrice } from "../../../redux/tariffs/tariffsAction";
-import { changeAlmondTotalPrice } from "../../../redux/tariffs/tariffsAction";
-import { setDataOrder } from "../../../redux/order/orderAction";
+import { templateEqAlmond } from "../../../redux/slices/tariffsSlice";
+import { optionSwitch } from "../../../redux/slices/tariffsSlice";
+import { sumTotalPrice } from "../../../redux/slices/tariffsSlice";
+import { changeAlmondTotalPrice } from "../../../redux/slices/tariffsSlice";
+import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 
 function ModalAlmond( props ) {

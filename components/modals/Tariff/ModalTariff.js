@@ -2,8 +2,8 @@ import s from './ModalTariff.module.sass'
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
-import { showModal } from "../../../redux/modals/modalsAction";
-import { sumTotalPrice } from "../../../redux/tariffs/tariffsAction";
+import { showModal } from "../../../redux/slices/modalsSlice";
+import { sumTotalPrice } from "../../../redux/slices/tariffsSlice";
 import CardOption from "./CardOption/CardOption";
 import CardOptionSim from "./CardOption/CardOptionSim";
 import BlockInfo from "./BlockInfo/BlockInfo";

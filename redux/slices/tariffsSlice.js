@@ -1,18 +1,8 @@
+import { createSlice } from '@reduxjs/toolkit'
+import { store } from "../store";
+import { showModal } from "./modalsSlice";
 import produce from "immer";
-import {showModal} from "../modals/modalsAction";
-import {store} from "../../pages/_app";
-import {
-   CHANGE_ALMOND_TOTAL_PRICE,
-   COUNTER_SIM,
-   HANDLE_SWITCH,
-   HANDLE_SWITCH_ALMOND,
-   HANDLER_COUNTER_ALMOND,
-   SET_CHANNELS,
-   SUM_ALMOND_TOTAL_PRICE,
-   SUM_TOTAL_PRICE,
-   TARIFF_RADIO_PLAN,
-   UNITE_SWITCH
-} from "./tariffsAction";
+
 
 export const templateEqAlmond = [
    {
@@ -93,34 +83,34 @@ export const templateEqAlmond = [
    }
 ]
 
-const closeModal = (modal) => {
-   store.getState().modals[modal].show && store.dispatch(showModal({modal, bool: false}))
+const closeModal = ( modal ) => {
+   store.getState().modals[modal].show && store.dispatch( showModal( { modal, bool: false } ) )
 }
 
-const toPlug = (id) => {
-   closeModal('tariff')
+export function toPlug( id ) {
+   closeModal( 'tariff' )
 
-   const element = document.querySelector(`#${id} button`)
+   const element = document.querySelector( `#${ id } button` )
 
-   const handleClick = () => element.classList.contains('collapsed') && element.click()
+   const handleClick = () => element.classList.contains( 'collapsed' ) && element.click()
 
-   scrollTo(element, handleClick)
+   scrollTo( element, handleClick )
 }
 
-export const scrollTo = (element, callback = null) => {
+export function scrollTo( element, callback = null ) {
    const maxScroll = document.body.scrollHeight - window.innerHeight
    const onScroll = () => {
-      if (Math.ceil(window.scrollY) >= element.offsetTop || Math.ceil(window.scrollY) === maxScroll) {
+      if ( Math.ceil( window.scrollY ) >= element.offsetTop || Math.ceil( window.scrollY ) === maxScroll ) {
          callback && callback()
-         window.removeEventListener('scroll', onScroll)
+         window.removeEventListener( 'scroll', onScroll )
       }
    }
 
-   window.addEventListener('scroll', onScroll)
+   window.addEventListener( 'scroll', onScroll )
 
    onScroll()
 
-   setTimeout(() => window.scrollTo(0, element.offsetTop), 0)
+   setTimeout( () => window.scrollTo( 0, element.offsetTop ), 0 )
 }
 
 
@@ -166,8 +156,7 @@ const initialState = [
       oldPrice: 1300,
       price: 650,
       totalPrice: 650,
-      iconInfo: <><span onClick={() => toPlug('faq-0-0')} className="link">Скидка</span> на абонентскую плату
-         действует 3 месяца после подключения</>,
+      iconInfo: "faq-0-0",
       youtube: true,
       rentDevice: [
          {
@@ -281,8 +270,8 @@ const initialState = [
             dataView: "androidtv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 169, checked: true},
-               {name: '24 мес', value: 249, checked: false}
+               { name: '36 мес', value: 169, checked: true },
+               { name: '24 мес', value: 249, checked: false }
             ],
          },
          {
@@ -462,8 +451,7 @@ const initialState = [
       oldPrice: null,
       price: 700,
       totalPrice: 700,
-      iconInfo: <><span onClick={() => toPlug('faq-0-1')} className="link">Скидка</span> на абонентскую плату
-         действует 3 месяца после подключения</>,
+      iconInfo: "faq-0-1",
       rentDevice: [
          {
             text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
@@ -552,8 +540,8 @@ const initialState = [
             dataView: "androidtv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 169, checked: true},
-               {name: '24 мес', value: 249, checked: false}
+               { name: '36 мес', value: 169, checked: true },
+               { name: '24 мес', value: 249, checked: false }
             ],
          },
          {
@@ -593,8 +581,8 @@ const initialState = [
             dataView: "fr100",
             switch: false,
             plan: [
-               {name: '36 мес', value: 99, checked: true},
-               {name: '24 мес', value: 149, checked: false}
+               { name: '36 мес', value: 99, checked: true },
+               { name: '24 мес', value: 149, checked: false }
             ],
          },
          {
@@ -634,8 +622,8 @@ const initialState = [
             dataView: "fr1000",
             switch: false,
             plan: [
-               {name: '36 мес', value: 129, checked: true},
-               {name: '24 мес', value: 199, checked: false}
+               { name: '36 мес', value: 129, checked: true },
+               { name: '24 мес', value: 199, checked: false }
             ],
          },
          {
@@ -820,8 +808,8 @@ const initialState = [
             dataView: "androidtv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 169, checked: true},
-               {name: '24 мес', value: 249, checked: false}
+               { name: '36 мес', value: 169, checked: true },
+               { name: '24 мес', value: 249, checked: false }
             ],
          },
          {
@@ -861,8 +849,8 @@ const initialState = [
             dataView: "fr100",
             switch: false,
             plan: [
-               {name: '36 мес', value: 99, checked: true},
-               {name: '24 мес', value: 149, checked: false}
+               { name: '36 мес', value: 99, checked: true },
+               { name: '24 мес', value: 149, checked: false }
             ],
          },
          {
@@ -902,8 +890,8 @@ const initialState = [
             dataView: "fr1000",
             switch: false,
             plan: [
-               {name: '36 мес', value: 129, checked: true},
-               {name: '24 мес', value: 199, checked: false}
+               { name: '36 мес', value: 129, checked: true },
+               { name: '24 мес', value: 199, checked: false }
             ],
          },
          {
@@ -934,8 +922,8 @@ const initialState = [
             dataView: "mftv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 159, checked: true},
-               {name: '24 мес', value: 239, checked: false}
+               { name: '36 мес', value: 159, checked: true },
+               { name: '24 мес', value: 239, checked: false }
             ],
          },
          {
@@ -1115,8 +1103,8 @@ const initialState = [
             dataView: "androidtv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 169, checked: true},
-               {name: '24 мес', value: 249, checked: false}
+               { name: '36 мес', value: 169, checked: true },
+               { name: '24 мес', value: 249, checked: false }
             ],
          },
          {
@@ -1156,8 +1144,8 @@ const initialState = [
             dataView: "fr100",
             switch: false,
             plan: [
-               {name: '36 мес', value: 99, checked: true},
-               {name: '24 мес', value: 149, checked: false}
+               { name: '36 мес', value: 99, checked: true },
+               { name: '24 мес', value: 149, checked: false }
             ],
          },
          {
@@ -1197,8 +1185,8 @@ const initialState = [
             dataView: "fr1000",
             switch: false,
             plan: [
-               {name: '36 мес', value: 129, checked: true},
-               {name: '24 мес', value: 199, checked: false}
+               { name: '36 мес', value: 129, checked: true },
+               { name: '24 мес', value: 199, checked: false }
             ],
          },
          {
@@ -1229,8 +1217,8 @@ const initialState = [
             dataView: "mftv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 159, checked: true},
-               {name: '24 мес', value: 239, checked: false}
+               { name: '36 мес', value: 159, checked: true },
+               { name: '24 мес', value: 239, checked: false }
             ],
          },
          {
@@ -1441,8 +1429,8 @@ const initialState = [
             dataView: "androidtv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 169, checked: true},
-               {name: '24 мес', value: 249, checked: false}
+               { name: '36 мес', value: 169, checked: true },
+               { name: '24 мес', value: 249, checked: false }
             ],
          },
          {
@@ -1731,8 +1719,8 @@ const initialState = [
             dataView: "androidtv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 169, checked: true},
-               {name: '24 мес', value: 249, checked: false}
+               { name: '36 мес', value: 169, checked: true },
+               { name: '24 мес', value: 249, checked: false }
             ],
          },
          {
@@ -1772,8 +1760,8 @@ const initialState = [
             dataView: "fr100",
             switch: false,
             plan: [
-               {name: '36 мес', value: 99, checked: true},
-               {name: '24 мес', value: 149, checked: false}
+               { name: '36 мес', value: 99, checked: true },
+               { name: '24 мес', value: 149, checked: false }
             ],
          },
          {
@@ -1813,8 +1801,8 @@ const initialState = [
             dataView: "fr1000",
             switch: false,
             plan: [
-               {name: '36 мес', value: 129, checked: true},
-               {name: '24 мес', value: 199, checked: false}
+               { name: '36 мес', value: 129, checked: true },
+               { name: '24 мес', value: 199, checked: false }
             ],
          },
          {
@@ -1845,8 +1833,8 @@ const initialState = [
             dataView: "mftv",
             switch: false,
             plan: [
-               {name: '36 мес', value: 159, checked: true},
-               {name: '24 мес', value: 239, checked: false}
+               { name: '36 мес', value: 159, checked: true },
+               { name: '24 мес', value: 239, checked: false }
             ],
          },
          {
@@ -2031,72 +2019,72 @@ const initialState = [
 ]
 
 
-export function tariffsReducer(state = initialState, action) {
-
-   switch (action.type) {
-
-      case HANDLE_SWITCH :
-         return produce(state, setState => {
+export const tariffsSlice = createSlice( {
+   name: 'tariffs',
+   initialState,
+   reducers: {
+      optionSwitch( state, action ) {
+         return produce( state, setState => {
             const id = action.payload.id
             const i = action.payload.index
             const checked = action.payload.checked
-            const currentTariff = setState.find(tariff => tariff.id === id)
+            const currentTariff = setState.find( tariff => tariff.id === id )
             const optionCard = currentTariff.equipments[i]
             optionCard.switch = checked
-         })
-
-      case COUNTER_SIM:
-         return produce(state, setState => {
+         } )
+      },
+      counterSim( state, action ) {
+         return produce( state, setState => {
             const id = action.payload.id
             const i = action.payload.index
             const name = action.payload.name
-            const optionCard = setState.find(tariff => tariff.id === id).equipments[i]
+            const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
 
-            if (name === 'plus') {
+            if ( name === 'plus' ) {
                optionCard.cnt++
                optionCard.switch = true
             }
-            if (name === 'minus') {
+            if ( name === 'minus' ) {
                optionCard.cnt--
             }
             optionCard.sumPrice = optionCard.price * optionCard.cnt
             optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
-         })
-
-      case TARIFF_RADIO_PLAN:
-         return produce(state, setState => {
+         } )
+      },
+      tariffRadioPlan( state, action ) {
+         return produce( state, setState => {
             const id = action.payload.id
             const i = action.payload.index
-            const cardOption = setState.find(tariff => tariff.id === id).equipments[i]
-            cardOption.plan.map(p => p.checked = !p.checked)
-            cardOption.price = cardOption.plan.find(p => p.checked).value
-         })
-
-      case SUM_TOTAL_PRICE:
-         return produce(state, setState => {
+            const cardOption = setState.find( tariff => tariff.id === id ).equipments[i]
+            cardOption.plan.map( p => p.checked = !p.checked )
+            cardOption.price = cardOption.plan.find( p => p.checked ).value
+         } )
+      },
+      sumTotalPrice( state, action ) {
+         return produce( state, setState => {
             const id = action.payload.id
-            const currentTariff = setState.find(tariff => tariff.id === id)
+            const currentTariff = setState.find( tariff => tariff.id === id )
 
             currentTariff.totalPrice = currentTariff.equipments
-               .map(eq => {
-                  if (eq.switch) {
-                     if (eq.id === 'eq-almond' && eq.currentPrice) {
+               .map( eq => {
+                  if ( eq.switch ) {
+                     if ( eq.id === 'eq-almond' && eq.currentPrice ) {
                         return typeof eq.currentPrice === 'string'
-                           ? parseInt(eq.currentPrice.match(/\d+/))
+                           ? parseInt( eq.currentPrice.match( /\d+/ ) )
                            : eq.currentPrice
                      }
-                     if (typeof eq.price === 'string') return parseInt(eq.price.match(/\d+/))
-                     if (eq.id === 'equipment-sim') return eq.sumPrice || eq.price
-                     if (eq.plan) return eq.plan.find(p => p.checked).value
+                     if ( typeof eq.price === 'string' ) return parseInt( eq.price.match( /\d+/ ) )
+                     if ( eq.id === 'equipment-sim' ) return eq.sumPrice || eq.price
+                     if ( eq.plan ) return eq.plan.find( p => p.checked ).value
                      return eq.price
                   }
                   return 0
-               })
-               .reduce((a, b) => a + b, currentTariff.price)
-         })
-
-      case HANDLE_SWITCH_ALMOND:
-         return produce(state, setState => {
+               } )
+               .reduce( ( a, b ) => a + b, currentTariff.price )
+         } )
+      },
+      switchAlmond( state, action ) {
+         return produce( state, setState => {
 
             const data = action.payload.data
             const checked = action.payload.checked
@@ -2104,73 +2092,95 @@ export function tariffsReducer(state = initialState, action) {
             const id = action.payload.tariffID
 
             const almond = setState
-               .find(tariff => tariff.id === id).equipments
-               .find(eq => eq.id === 'eq-almond')
+               .find( tariff => tariff.id === id ).equipments
+               .find( eq => eq.id === 'eq-almond' )
 
-            almond.equipments[data.index] = {...data, cnt, checked}
-         })
-
-      case HANDLER_COUNTER_ALMOND:
-         return produce(state, setState => {
+            almond.equipments[data.index] = { ...data, cnt, checked }
+         } )
+      },
+      counterAlmond( state, action ) {
+         return produce( state, setState => {
             let cnt = action.payload.cnt
             const name = action.payload.name
             const data = action.payload.data
             const id = action.payload.tariffID
-            const currentTariff = setState.find(tariff => tariff.id === id)
-            const almond = currentTariff.equipments.find(eq => eq.id === 'eq-almond')
+            const currentTariff = setState.find( tariff => tariff.id === id )
+            const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
 
-            if (name === 'plus') {
-               almond.equipments[data.index] = {...data, cnt: ++cnt, checked: true}
+            if ( name === 'plus' ) {
+               almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
             }
-            if (name === 'minus') {
-               almond.equipments[data.index] = {...almond.equipments[data.index], cnt: --cnt}
+            if ( name === 'minus' ) {
+               almond.equipments[data.index] = { ...almond.equipments[data.index], cnt: --cnt }
             }
-         })
-
-      case SUM_ALMOND_TOTAL_PRICE:
-         return produce(state, setState => {
+         } )
+      },
+      sumAlmondTotalPrice( state, action ) {
+         return produce( state, setState => {
 
             const almond = setState
-               .find(tariff => tariff.id === action.payload).equipments
-               .find(eq => eq.id === 'eq-almond')
+               .find( tariff => tariff.id === action.payload ).equipments
+               .find( eq => eq.id === 'eq-almond' )
 
             const arrPrices = almond.equipments
-               .filter(alEq => alEq.checked)
-               .map(alEq => alEq.price * alEq.cnt)
+               .filter( alEq => alEq.checked )
+               .map( alEq => alEq.price * alEq.cnt )
 
-            almond.totalPrice = arrPrices.length ? arrPrices.reduce((a, b) => a + b) : null
-         })
-
-      case CHANGE_ALMOND_TOTAL_PRICE:
-         return produce(state, setState => {
+            almond.totalPrice = arrPrices.length
+               ? arrPrices.reduce( ( a, b ) => a + b )
+               : null
+         } )
+      },
+      changeAlmondTotalPrice( state, action ) {
+         return produce( state, setState => {
             const id = action.payload.id
             const i = action.payload.index
-            const almond = setState.find(tariff => tariff.id === id).equipments[i]
+            const almond = setState.find( tariff => tariff.id === id ).equipments[i]
             almond.currentPrice = almond.totalPrice || almond.price
-         })
+         } )
+      },
+      onUniteSwitch( state, action ) {
+         return produce( state, setState => {
+            const tariff = setState.find( tariff => tariff.id === 'around' )
+            tariff.routerSwitch = action.payload
+            const priceReduce = [ tariff.priceSale, tariff.routerSwitch && tariff.equipments[0].price ]
 
-      case SET_CHANNELS:
-         return produce(state, setState => {
+            tariff.calcPriceSale = priceReduce.reduce( ( a, b ) => a + b )
+         } )
+      },
+      setChannels( state, action ) {
+         return produce( state, setState => {
             const id = action.payload.id
             const channels = action.payload.channels
-            setState.forEach(tariff => {
-               if (tariff.tvId === id) {
+            setState.forEach( tariff => {
+               if ( tariff.tvId === id ) {
                   tariff.channels = channels
                }
-            })
-         })
-
-      case UNITE_SWITCH:
-         return produce(state, setState => {
-            const tariff = setState.find(tariff => tariff.id === 'around')
-            tariff.routerSwitch = action.payload
-            const priceReduce = [tariff.priceSale, tariff.routerSwitch && tariff.equipments[0].price]
-
-            tariff.calcPriceSale = priceReduce.reduce((a, b) => a + b)
-         })
-
-      default:
-         return state
+            } )
+         } )
+      }
    }
+} )
+
+
+export const getChannels = ( tvId ) => ( dispatch ) => {
+   return fetch( `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${ tvId }` )
+      .then( res => res.json() )
+      .then( data => dispatch( setChannels( data.packages[tvId] ) ) )
+      .catch( err => console.log( 'Ошибка загрузки тв-каналов (getChannels)', err ) )
 }
 
+
+export const {
+   optionSwitch,
+   counterSim,
+   tariffRadioPlan,
+   sumTotalPrice,
+   switchAlmond,
+   counterAlmond,
+   sumAlmondTotalPrice,
+   changeAlmondTotalPrice,
+   setChannels,
+   onUniteSwitch
+} = tariffsSlice.actions
+export default tariffsSlice.reducer

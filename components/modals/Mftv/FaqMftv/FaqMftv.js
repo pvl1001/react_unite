@@ -1,9 +1,12 @@
 import s from './FaqMftv.module.sass'
 import { wrapp } from '/components/modals/Tariff/ModalTariff.module.sass'
 import { Accordion } from "react-bootstrap";
+import { connect } from 'react-redux'
+import { showModal } from "../../../../redux/slices/modalsSlice";
+import { setDataOrder } from "../../../../redux/slices/orderSlice";
 
 
-function FaqMftv( { tariff } ) {
+function FaqMftv( props ) {
    const faq = [
       {
          "question": "Как смотреть фильмы и сериалы из пакетов и сервисов, включённых в тариф «Объединяй!»?",
@@ -24,13 +27,13 @@ function FaqMftv( { tariff } ) {
    ]
 
    function showModalOrder() {
-      showModal( { modal: 'order', bool: true } )
-      setDataOrder( {
-         tariffName: tariff.name,
-         tariffId: tariff.tariffId,
+      props.showModal( { modal: 'order', bool: true } )
+      props.setDataOrder( {
+         tariffName: props.tariff.name,
+         tariffId: props.tariff.tariffId,
          eventLabel: {
-            order: `click_button_order_${ tariff.dataView }`,
-            send: `click_button_send_${ tariff.dataView }`
+            order: `click_button_order_${ props.tariff.dataView }`,
+            send: `click_button_send_${ props.tariff.dataView }`
          }
       } )
    }
@@ -43,7 +46,10 @@ function FaqMftv( { tariff } ) {
          <Accordion>
 
             { faq.map( ( el, i ) => (
-               <Accordion.Item key={ el.question } eventKey={ i } bsPrefix={ s.accordion__item + " accordion__item" }>
+               <Accordion.Item
+                  key={ el.question }
+                  eventKey={ i }
+                  bsPrefix={ s.accordion__item + " accordion__item" }>
                   <Accordion.Header bsPrefix="accordion__header">{ el.question }</Accordion.Header>
                   <Accordion.Body bsPrefix="card-body" dangerouslySetInnerHTML={ { __html: el.answer } }/>
                </Accordion.Item>
@@ -54,7 +60,7 @@ function FaqMftv( { tariff } ) {
          <button
             type="button"
             className={ s.btn + " btn" }
-            data-view={ `mftv_${ tariff.id }_end` }
+            data-view={ `mftv_${ props.tariff.id }_end` }
             onClick={ showModalOrder }>
             Подключить
          </button>
@@ -64,4 +70,7 @@ function FaqMftv( { tariff } ) {
 }
 
 
-export default FaqMftv
+export default connect( null, {
+   showModal,
+   setDataOrder
+} )( FaqMftv )

@@ -1,8 +1,8 @@
 import s from './InfoBox.module.sass'
-import { onUniteSwitch } from "/redux/tariffs/tariffsAction";
+import { onUniteSwitch } from "/redux/slices/tariffsSlice";
 import { connect } from "react-redux";
 import { analyticsEvent } from "/analytics/events";
-import { showModal } from "/redux/modals/modalsAction";
+import { showModal } from "/redux/slices/modalsSlice";
 
 
 function InfoBox( props ) {

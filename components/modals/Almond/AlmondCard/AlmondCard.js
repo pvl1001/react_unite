@@ -1,6 +1,6 @@
 import s from './AlmondCard.module.sass'
 import { connect } from "react-redux";
-import { showModal } from "../../../../redux/modals/modalsAction";
+import { showModal } from "../../../../redux/slices/modalsSlice";
 import Image from 'next/image';
 
 function almondCard( props ) {

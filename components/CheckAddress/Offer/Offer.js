@@ -2,7 +2,7 @@ import s from './Offer.module.sass';
 import { link } from '../CheckAddress.module.sass'
 import { useRef } from "react";
 import Image from 'next/image'
-import { scrollTo } from "/redux/tariffs/tariffsReducer";
+import { scrollTo } from "/redux/slices/tariffsSlice";
 import InfoBox from "./InfoBox/InfoBox";
 
 

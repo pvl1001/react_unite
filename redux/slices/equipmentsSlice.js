@@ -1,10 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit'
 import produce from "immer";
-import {
-   CHANGE_PLAN,
-   HANDLE_SWITCH_ALMOND_EQ,
-   HANDLER_COUNTER_ALMOND_EQ,
-   SUM_ALMOND_TOTAL_PRICE_EQ
-} from "./equipmentsAction";
 
 
 const initialState = [
@@ -35,8 +30,8 @@ const initialState = [
       price: 199,
       dataView: "androidtv",
       plan: [
-         {name: '36 мес', value: 169, checked: true},
-         {name: '24 мес', value: 249, checked: false}
+         { name: '36 мес', value: 169, checked: true },
+         { name: '24 мес', value: 249, checked: false }
       ]
    },
    {
@@ -74,8 +69,8 @@ const initialState = [
       price: 55,
       dataView: "fr100",
       plan: [
-         {name: '36 мес', value: 99, checked: true},
-         {name: '24 мес', value: 149, checked: false}
+         { name: '36 мес', value: 99, checked: true },
+         { name: '24 мес', value: 149, checked: false }
       ]
    },
    {
@@ -114,8 +109,8 @@ const initialState = [
       price: 88,
       dataView: "fr10002",
       plan: [
-         {name: '36 мес', value: 129, checked: true},
-         {name: '24 мес', value: 199, checked: false}
+         { name: '36 мес', value: 129, checked: true },
+         { name: '24 мес', value: 199, checked: false }
       ]
    },
    {
@@ -145,8 +140,8 @@ const initialState = [
       price: 99,
       dataView: "mftv",
       plan: [
-         {name: '36 мес', value: 159, checked: true},
-         {name: '24 мес', value: 139, checked: false}
+         { name: '36 мес', value: 159, checked: true },
+         { name: '24 мес', value: 139, checked: false }
       ]
    },
    {
@@ -185,42 +180,46 @@ const initialState = [
    }
 ]
 
-export function equipmentsReducer(state = initialState, action) {
-   switch (action.type) {
 
-      case CHANGE_PLAN:
+export const equipmentsSlice = createSlice( {
+   name: 'equipments',
+   initialState,
+   reducers: {
+      changePlan( state, action ) {
          return produce( state, setState => {
             setState
                .find( eq => eq.id === action.payload.id ).plan
                .map( p => p.checked = !p.checked )
          } )
-
-      case HANDLER_COUNTER_ALMOND_EQ:
-         return produce( state, setState => {
-            let cnt = action.payload.cnt
-            const name = action.payload.name
-            const data = action.payload.data
-            const almond = setState.find( eq => eq.id === 'eq-almond' )
-
-            if (name === 'plus') {
-               almond.equipments[data.index] = {...data, cnt: ++cnt, checked: true}
-            }
-            if (name === 'minus') {
-               almond.equipments[data.index] = {...almond.equipments[data.index], cnt: --cnt}
-            }
-         } )
-
-      case SUM_ALMOND_TOTAL_PRICE_EQ:
+      },
+      sumAlmondTotalPriceEq( state ) {
          return produce( state, setState => {
             const almond = setState.find( eq => eq.id === 'eq-almond' )
             const arrPrices = almond.equipments
                .filter( alEq => alEq.checked )
                .map( alEq => alEq.price * alEq.cnt )
 
-            almond.totalPrice = arrPrices.length ? arrPrices.reduce( (a, b) => a + b ) : null
+            almond.totalPrice = arrPrices.length
+               ? arrPrices.reduce( ( a, b ) => a + b )
+               : null
          } )
+      },
+      counterAlmondEq( state, action ) {
+         return produce( state, setState => {
+            let cnt = action.payload.cnt
+            const name = action.payload.name
+            const data = action.payload.data
+            const almond = setState.find( eq => eq.id === 'eq-almond' )
 
-      case HANDLE_SWITCH_ALMOND_EQ:
+            if ( name === 'plus' ) {
+               almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
+            }
+            if ( name === 'minus' ) {
+               almond.equipments[data.index] = { ...almond.equipments[data.index], cnt: --cnt }
+            }
+         } )
+      },
+      switchAlmondEq( state, action ) {
          return produce( state, setState => {
 
             const data = action.payload.data
@@ -228,10 +227,17 @@ export function equipmentsReducer(state = initialState, action) {
             const cnt = action.payload.cnt
             const almond = setState.find( eq => eq.id === 'eq-almond' )
 
-            almond.equipments[data.index] = {...data, cnt, checked}
+            almond.equipments[data.index] = { ...data, cnt, checked }
          } )
-
-      default:
-         return state
+      }
    }
-}
+} )
+
+
+export const {
+   changePlan,
+   sumAlmondTotalPriceEq,
+   counterAlmondEq,
+   switchAlmondEq
+} = equipmentsSlice.actions
+export default equipmentsSlice.reducer

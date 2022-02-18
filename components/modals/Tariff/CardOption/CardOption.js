@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import { optionSwitch } from "../../../../redux/tariffs/tariffsAction";
-import { tariffRadioPlan } from "../../../../redux/tariffs/tariffsAction";
-import { sumTotalPrice } from "../../../../redux/tariffs/tariffsAction";
-import { showModal } from "../../../../redux/modals/modalsAction";
+import { optionSwitch } from "../../../../redux/slices/tariffsSlice";
+import { tariffRadioPlan } from "../../../../redux/slices/tariffsSlice";
+import { sumTotalPrice } from "../../../../redux/slices/tariffsSlice";
+import { showModal } from "../../../../redux/slices/modalsSlice";
 import Image from 'next/image';
 import s from './CardOption.module.sass'
 
