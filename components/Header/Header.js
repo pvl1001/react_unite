@@ -1,15 +1,16 @@
-import s from './Header.module.sass'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { showModal } from "../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../analytics/events";
 import Image from 'next/image'
-import images from '/public/images/header'
+import { useRouter } from 'next/router'
 
-function Header( props ) {
+function Header( { data, style, ...props } ) {
+   const router = useRouter()
 
-   const [ img, setImg ] = useState( images.desktop )
+   const [ img, setImg ] = useState( data.img.desktop )
+   const resize = () => data.resize( setImg, data.img )
 
    function showModalOrder() {
       props.showModal( {
@@ -35,13 +36,6 @@ function Header( props ) {
       analyticsEvent( `click_button_connect_details_${ props.tariff.dataView }` )
    }
 
-   function resize() {
-      window.innerWidth < 603
-         ? setImg( images.mob )
-         : (window.innerWidth > 602 && window.innerWidth < 936)
-            ? setImg( images.tap )
-            : setImg( images.desktop )
-   }
 
    useEffect( () => {
       resize()
@@ -54,39 +48,40 @@ function Header( props ) {
 
 
    return (
-      <header className={ s.container }>
-         <div className={ s.wrapper + ' wrapper' }>
-            <div className={ s.row }>
-               <div className={ s.text }>
-                  <h1>
-                     Домашний интернет,
-                     <nobr> ТВ и связь</nobr>
+      <header className={ style.container }>
+         <div className={ style.wrapper + ' wrapper' }>
+            <div className={ style.row }>
+               <div className={ style.text }>
+                  <h1>{ data.title }
+                     <nobr>{ data.titleBr }</nobr>
                   </h1>
 
-                  <p>В тарифах «Объединяй!»</p>
+                  <p>{ data.desc }</p>
 
-                  <div className={ s.btns }>
+                  <div className={ style.btns }>
                      <button
                         type="button"
                         onClick={ showModalOrder }
-                        className={ `${ s.btn } btn btn-fiolet` }
+                        className={ `${ style.btn } btn btn-fiolet` }
                         data-view="first_banner">
                         Подключить
                      </button>
 
-                     <span
-                        className={ s.about }
-                        onClick={ showModalTariff }>
-                        Подробнее
-                     </span>
+                     { router.route === '/' &&
+                        <span
+                           className={ style.about }
+                           onClick={ showModalTariff }>
+                           Подробнее
+                        </span>
+                     }
                   </div>
                </div>
 
-               <div className={ s.img_container }>
-                  <div className={ s.img }>
+               <div className={ style.img_container }>
+                  <div className={ style.img }>
                      <Image
                         { ...img }
-                        alt="баннер старт"
+                        alt="баннер"
                         priority
                      />
                   </div>
