@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import Support from "../components/Support/Support";
 import Nav from "../components/Nav/Nav";
 import Header from "../components/Header/Header";
@@ -19,20 +19,15 @@ import ModalAboutAlmond from "../components/modals/AboutAlmond/ModalAboutAlmond"
 import ChoiceRouter from "../components/modals/ChoiceRouter/ChoiceRouter";
 import ModalEquipment from "../components/modals/Equipment/ModalEquipment";
 import { faqUnitePageData } from "../data/FAQ";
-import { useRouter } from 'next/router'
-import { headerUnitePageData } from '../data/header'
-import headerStyle from '../components/Header/Header.module.sass'
+import { headerUnitePageData } from '../data/header';
+import headerStyle from '../components/Header/Header.module.sass';
 
 export default function Home() {
-   const router = useRouter()
 
-   console.log( router )
    return (
       <>
          <Head>
-            <title>MegaFon NextJS</title>
-            <link rel="icon" href="/favicon.ico"/>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23688716-34"/>
+            <title>NextJS !Объединяй</title>
          </Head>
 
          <Support/>
