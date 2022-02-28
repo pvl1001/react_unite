@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { showModal } from "../../redux/slices/modalsSlice";
 import { api } from "../../api";
 import { analyticsEvent } from "../../analytics/events";
-import { onUniteSwitch } from "../../redux/slices/tariffsSlice";
+import { onUniteSwitch } from "../../redux/slices/tariffAroundSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 
 
@@ -125,13 +125,10 @@ function CheckAddress( props ) {
 }
 
 
-export default connect(
-   state => ({
-      tariff: state.tariffs.find( tariff => tariff.id === 'around' )
-   }),
-   {
-      showModal,
-      onUniteSwitch,
-      setDataOrder,
-   }
-)( CheckAddress )
+export default connect( state => ({
+   tariff: state.tariffAround
+}), {
+   showModal,
+   onUniteSwitch,
+   setDataOrder,
+} )( CheckAddress )

@@ -18,11 +18,18 @@ import ModalAboutAlmond from "../components/modals/AboutAlmond/ModalAboutAlmond"
 import ChoiceRouter from "../components/modals/ChoiceRouter/ChoiceRouter";
 import ModalEquipment from "../components/modals/Equipment/ModalEquipment";
 import { faqHomePageData } from '../data/FAQ'
+import { tariffsPageHome } from '/data/tariffs'
 import { headerHomePageData } from "../data/header";
 import headerStyle from "../components/Header/HeaderHome.module.sass";
+import { connect } from 'react-redux'
+import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
+import { useEffect } from "react";
 
 
-export default function Home() {
+function Internet( props ) {
+   useEffect( () => {
+      props.setInitialStateTariffs( props.tariffsPageHome )
+   }, [] )
 
    return (
       <>
@@ -57,3 +64,17 @@ export default function Home() {
       </>
    )
 }
+
+
+export async function getServerSideProps() {
+   return {
+      props: { tariffsPageHome }
+   }
+}
+
+
+export default connect( state => ({
+   // tariffs: state.tariffs
+}), {
+   setInitialStateTariffs
+} )( Internet )

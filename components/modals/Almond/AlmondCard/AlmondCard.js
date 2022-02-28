@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { showModal } from "../../../../redux/slices/modalsSlice";
 import Image from 'next/image';
 
-function almondCard( props ) {
+function AlmondCard( props ) {
    const eqAlmond = props.almond.equipments[props.index]
    const classActive = eqAlmond?.checked
       ? s.active
@@ -44,4 +44,4 @@ function almondCard( props ) {
 }
 
 
-export default connect( null, { showModal } )( almondCard )
+export default connect( null, { showModal } )( AlmondCard )

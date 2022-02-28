@@ -46,6 +46,7 @@ function Tariffs( props ) {
                   <TariffCard
                      key={ tariff.id }
                      tariff={ tariff }
+                     tariffs={ props.tariffs }
                      premium={ premium }
                      collapse={ {
                         collapseGroup,
@@ -64,8 +65,6 @@ function Tariffs( props ) {
 }
 
 
-export default connect(
-   state => ({
-      tariffs: state.tariffs
-   })
-)( Tariffs )
+export default connect( state => ({
+   tariffs: state.tariffs
+}) )( Tariffs )

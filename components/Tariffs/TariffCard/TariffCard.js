@@ -94,6 +94,7 @@ function TariffCard( props ) {
 
                { props.tariff.tvLength &&
                   <TvChannels
+                     tariffs={ props.tariffs }
                      collapse={ props.collapse }
                      premium={ props.premium }
                      tvLength={ props.tariff.tvLength }
@@ -162,10 +163,9 @@ function TariffCard( props ) {
 }
 
 
-export default connect(
-   null,
-   {
-      showModal,
-      setDataOrder
-   }
-)( TariffCard )
+export default connect( state => ({
+   tariffs: state.tariffs
+}), {
+   showModal,
+   setDataOrder
+} )( TariffCard )

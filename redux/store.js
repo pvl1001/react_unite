@@ -3,6 +3,7 @@ import tariffsSlice from "./slices/tariffsSlice";
 import equipmentsSlice from "./slices/equipmentsSlice";
 import modalsSlice from "./slices/modalsSlice";
 import orderSlice from "./slices/orderSlice";
+import tariffAroundSlice from "./slices/tariffAroundSlice";
 
 
 export const store = configureStore( {
@@ -10,6 +11,11 @@ export const store = configureStore( {
       modals: modalsSlice,
       tariffs: tariffsSlice,
       equipments: equipmentsSlice,
-      order: orderSlice
-   }
+      order: orderSlice,
+      tariffAround: tariffAroundSlice
+   },
+   middleware: getDefaultMiddleware =>
+      getDefaultMiddleware( {
+         serializableCheck: false,
+      } )
 } )

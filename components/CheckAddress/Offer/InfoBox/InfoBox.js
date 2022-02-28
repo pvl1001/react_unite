@@ -1,5 +1,5 @@
 import s from './InfoBox.module.sass'
-import { onUniteSwitch } from "/redux/slices/tariffsSlice";
+import { onUniteSwitch } from "/redux/slices/tariffAroundSlice";
 import { connect } from "react-redux";
 import { analyticsEvent } from "/analytics/events";
 import { showModal } from "/redux/slices/modalsSlice";
@@ -123,11 +123,9 @@ function InfoBox( props ) {
 }
 
 
-export default connect(
-   state => ({
-      tariff: state.tariffs.find( tariff => tariff.id === 'around' )
-   }), {
-      onUniteSwitch,
-      showModal
-   }
-)( InfoBox )
+export default connect( state => ({
+   tariff: state.tariffAround
+}), {
+   onUniteSwitch,
+   showModal
+} )( InfoBox )

@@ -73,7 +73,6 @@ function TvChannels( props ) {
                         />
                      ) }
                </ul>
-
             </Collapse>
          }
 
@@ -81,9 +80,8 @@ function TvChannels( props ) {
 }
 
 
-export default connect(
-   state => ({
-      tariffs: state.tariffs
-   }),
-   { getChannels }
-)( TvChannels )
+export default connect( state => ({
+   tariffs: state.tariffs
+}), {
+   getChannels
+} )( TvChannels )

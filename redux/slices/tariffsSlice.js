@@ -2139,15 +2139,6 @@ export const tariffsSlice = createSlice( {
             almond.currentPrice = almond.totalPrice || almond.price
          } )
       },
-      onUniteSwitch( state, action ) {
-         return produce( state, setState => {
-            const tariff = setState.find( tariff => tariff.id === 'around' )
-            tariff.routerSwitch = action.payload
-            const priceReduce = [ tariff.priceSale, tariff.routerSwitch && tariff.equipments[0].price ]
-
-            tariff.calcPriceSale = priceReduce.reduce( ( a, b ) => a + b )
-         } )
-      },
       setChannels( state, action ) {
          return produce( state, setState => {
             const id = action.payload.id
@@ -2158,16 +2149,23 @@ export const tariffsSlice = createSlice( {
                }
             } )
          } )
+      },
+      setInitialStateTariffs( state, action ) {
+         console.log( 'setInitialStateTariffs' )
+         return action.payload
       }
    }
 } )
 
 
-export const getChannels = ( tvId ) => ( dispatch ) => {
-   return fetch( `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${ tvId }` )
-      .then( res => res.json() )
-      .then( data => dispatch( setChannels( data.packages[tvId] ) ) )
-      .catch( err => console.log( 'Ошибка загрузки тв-каналов (getChannels)', err ) )
+export const getChannels = ( tvId ) => async ( dispatch ) => {
+   try {
+      const res = await fetch( `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${ tvId }` )
+      const data = await res.json()
+      dispatch( setChannels( data.packages[tvId] ) )
+   } catch ( err ) {
+      console.log( 'Ошибка getChannels', err )
+   }
 }
 
 
@@ -2181,6 +2179,6 @@ export const {
    sumAlmondTotalPrice,
    changeAlmondTotalPrice,
    setChannels,
-   onUniteSwitch
+   setInitialStateTariffs
 } = tariffsSlice.actions
 export default tariffsSlice.reducer

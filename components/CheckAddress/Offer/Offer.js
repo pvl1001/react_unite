@@ -49,7 +49,7 @@ function Offer( props ) {
             </div>
 
             <div className={ s.row }>
-               <InfoBox/>
+               <InfoBox showModalOrder={ props.showModalOrder }/>
                <div className={ s.img }>
                   <Image
                      alt="router"

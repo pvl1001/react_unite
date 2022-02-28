@@ -209,20 +209,17 @@ function ModalAlmond( props ) {
 }
 
 
-export default connect(
-   state => ({
-      show: state.modals.almond.show,
-      showModalTariff: state.modals.tariff.show,
-      tariff: state.modals.tariff.props,
-      tariffs: state.tariffs,
-      equipments: state.equipments,
-      tariffForTheir: state.tariffs.find( tariff => tariff.id === 'for-their' )
-   }),
-   {
-      showModal,
-      optionSwitch,
-      sumTotalPrice,
-      changeAlmondTotalPrice,
-      setDataOrder
-   }
-)( ModalAlmond )
+export default connect( state => ({
+   show: state.modals.almond.show,
+   showModalTariff: state.modals.tariff.show,
+   tariff: state.modals.tariff.props,
+   tariffs: state.tariffs,
+   equipments: state.equipments,
+   tariffForTheir: state.tariffs.find( tariff => tariff.id === 'for-their' )
+}), {
+   showModal,
+   optionSwitch,
+   sumTotalPrice,
+   changeAlmondTotalPrice,
+   setDataOrder
+} )( ModalAlmond )
