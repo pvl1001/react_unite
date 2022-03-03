@@ -12,10 +12,11 @@ import '../components/Tariffs/Tariffs.sass'
 import '../components/Equipments/Equipments.sass'
 
 import React, { useEffect } from 'react';
+import Head from 'next/head';
 import Analytics from "../analytics/Analytics";
 import { analyticsScroll, analyticsView, setEventCategory } from "../analytics/events";
-import { wrapper } from '../redux/store'
-import { useRouter } from 'next/router'
+import { wrapper } from '../redux/store';
+import { useRouter } from 'next/router';
 
 
 function App( { Component, pageProps } ) {
@@ -31,6 +32,11 @@ function App( { Component, pageProps } ) {
 
    return (
       <>
+         <Head>
+            <title>NextJS</title>
+            <link rel="icon" href="/favicon.ico"/>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23688716-34"/>
+         </Head>
          <Component { ...pageProps }/>
          <Analytics/>
       </>

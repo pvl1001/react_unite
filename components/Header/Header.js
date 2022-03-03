@@ -3,14 +3,26 @@ import { connect } from 'react-redux'
 import { showModal } from "../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../analytics/events";
-import Image from 'next/image'
-import { useRouter } from 'next/router'
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 function Header( { data, style, ...props } ) {
    const router = useRouter()
 
    const [ img, setImg ] = useState( data.img.desktop )
-   const resize = () => data.resize( setImg, data.img )
+
+   const resize = () => {
+      if ( router.route === '/internet' ) {
+         return window.innerWidth < 768
+            ? setImg( data.img.mob )
+            : setImg( data.img.desktop )
+      }
+      window.innerWidth < 603
+         ? setImg( data.img.mob )
+         : (window.innerWidth > 602 && window.innerWidth < 936)
+            ? setImg( data.img.tap )
+            : setImg( data.img.desktop )
+   }
 
    function showModalOrder() {
       props.showModal( {
@@ -94,6 +106,7 @@ function Header( { data, style, ...props } ) {
 
 
 export default connect( state => ({
+   data: state.page.header,
    tariff: state.tariffs.find( tariff => tariff.id === 'for-their' )
 }), {
    showModal,

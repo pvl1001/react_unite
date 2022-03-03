@@ -1,8 +1,9 @@
-import s from './FAQ.module.sass'
+import s from './FAQ.module.sass';
 import { Accordion } from "react-bootstrap";
+import { connect } from 'react-redux';
 
 
-export default function FAQ( { data } ) {
+function FAQ( { data } ) {
 
    return (
       <section className={ s.container }>
@@ -50,3 +51,8 @@ export default function FAQ( { data } ) {
       </section>
    )
 }
+
+
+export default connect( state => ({
+   data: state.page.FAQ
+}) )( FAQ )

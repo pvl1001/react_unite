@@ -50,7 +50,7 @@ function ModalTariff( props ) {
 
 
             <div style={ premiumStyle } className={ `${ s.title } ${ s.wrapp }` }>
-               <h1>Объединяй! { props.tariff.name }</h1>
+               <h1>{ props.pageName } { props.tariff.name }</h1>
             </div>
 
             <div className={ s.container }>
@@ -111,6 +111,7 @@ function ModalTariff( props ) {
 
 export default connect(
    state => ({
+      pageName: state.page.name,
       show: state.modals.tariff.show,
       tariff: state.tariffs.find( tariff => tariff.id === state.modals.tariff.props ),
    }),

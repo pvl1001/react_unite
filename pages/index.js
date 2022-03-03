@@ -18,8 +18,6 @@ import ModalAlmond from "../components/modals/Almond/ModalAlmond";
 import ModalAboutAlmond from "../components/modals/AboutAlmond/ModalAboutAlmond";
 import ChoiceRouter from "../components/modals/ChoiceRouter/ChoiceRouter";
 import ModalEquipment from "../components/modals/Equipment/ModalEquipment";
-import { faqUnitePageData } from "../data/FAQ";
-import { headerUnitePageData } from '../data/header';
 import headerStyle from '../components/Header/Header.module.sass';
 
 
@@ -33,17 +31,14 @@ export default function IndexPage() {
 
          <Support/>
          <Nav/>
-         <Header
-            data={ headerUnitePageData }
-            style={ headerStyle }
-         />
+         <Header style={ headerStyle }/>
          <main>
             <Tariffs/>
             <CheckAddress/>
             <Equipments/>
             <WhatElse/>
             <AppBanner/>
-            <FAQ data={ faqUnitePageData }/>
+            <FAQ/>
          </main>
          <Footer/>
 
@@ -56,7 +51,6 @@ export default function IndexPage() {
          <ModalAboutAlmond/>
          <ChoiceRouter/>
          <ModalEquipment/>
-
       </>
    )
 }

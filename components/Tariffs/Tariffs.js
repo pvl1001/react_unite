@@ -39,7 +39,7 @@ function Tariffs( props ) {
    return (
       <section className={ 'tariffs ' + s.container }>
          <div className="wrapper">
-            <h1 className={ s.title }>Тарифы «Объединяй!»</h1>
+            <h1 className={ s.title }>Тарифы «{ props.pageName }»</h1>
 
             <Slider className="slider" { ...settingsSlider }>
                { props.tariffs.map( tariff =>
@@ -66,5 +66,6 @@ function Tariffs( props ) {
 
 
 export default connect( state => ({
-   tariffs: state.tariffs
+   pageName: state.page.name,
+   tariffs: state.tariffs,
 }) )( Tariffs )
