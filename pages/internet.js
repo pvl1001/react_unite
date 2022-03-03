@@ -21,15 +21,11 @@ import { faqHomePageData } from '../data/FAQ'
 import { tariffsPageHome } from '/data/tariffs'
 import { headerHomePageData } from "../data/header";
 import headerStyle from "../components/Header/HeaderHome.module.sass";
-import { connect } from 'react-redux'
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
-import { useEffect } from "react";
+import { wrapper } from "../redux/store";
 
 
-function Internet( props ) {
-   useEffect( () => {
-      props.setInitialStateTariffs( props.tariffsPageHome )
-   }, [] )
+export default function InternetPage() {
 
    return (
       <>
@@ -66,15 +62,7 @@ function Internet( props ) {
 }
 
 
-export async function getServerSideProps() {
-   return {
-      props: { tariffsPageHome }
-   }
-}
-
-
-export default connect( state => ({
-   // tariffs: state.tariffs
-}), {
-   setInitialStateTariffs
-} )( Internet )
+export const getServerSideProps = wrapper.getServerSideProps( store => async () => {
+   await store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
+   return { props: {} }
+} )

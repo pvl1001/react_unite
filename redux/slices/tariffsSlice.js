@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { store } from "../store";
 import { showModal } from "./modalsSlice";
 import produce from "immer";
+import { HYDRATE } from 'next-redux-wrapper';
 
 
 export const templateEqAlmond = [
@@ -2151,10 +2152,14 @@ export const tariffsSlice = createSlice( {
          } )
       },
       setInitialStateTariffs( state, action ) {
-         console.log( 'setInitialStateTariffs' )
          return action.payload
       }
-   }
+   },
+   extraReducers: {
+      [HYDRATE]: ( state, action ) => {
+         return action.payload.tariffs
+      },
+   },
 } )
 
 

@@ -21,9 +21,9 @@ import ModalEquipment from "../components/modals/Equipment/ModalEquipment";
 import { faqUnitePageData } from "../data/FAQ";
 import { headerUnitePageData } from '../data/header';
 import headerStyle from '../components/Header/Header.module.sass';
-import { connect } from 'react-redux';
 
-function Index() {
+
+export default function IndexPage() {
 
    return (
       <>
@@ -60,7 +60,3 @@ function Index() {
       </>
    )
 }
-
-export default connect( state => ({
-   tariffs: state.tariffs
-}) )( Index )

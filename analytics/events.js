@@ -81,6 +81,6 @@ export function analyticsScroll() {
 
 // Аналитика событий по клику
 export function analyticsEvent( eventLabel ) {
-   console.log( { 'event_category': event_category, 'event_label': eventLabel } )
+   // console.log( { 'event_category': event_category, 'event_label': eventLabel } )
    gtag( 'event', 'click', { 'event_category': event_category, 'event_label': eventLabel } )
 }

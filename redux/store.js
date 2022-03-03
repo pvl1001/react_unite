@@ -4,6 +4,7 @@ import equipmentsSlice from "./slices/equipmentsSlice";
 import modalsSlice from "./slices/modalsSlice";
 import orderSlice from "./slices/orderSlice";
 import tariffAroundSlice from "./slices/tariffAroundSlice";
+import { createWrapper } from 'next-redux-wrapper';
 
 
 export const store = configureStore( {
@@ -19,3 +20,5 @@ export const store = configureStore( {
          serializableCheck: false,
       } )
 } )
+
+export const wrapper = createWrapper( () => store, { debug: false } )

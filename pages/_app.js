@@ -12,14 +12,13 @@ import '../components/Tariffs/Tariffs.sass'
 import '../components/Equipments/Equipments.sass'
 
 import React, { useEffect } from 'react';
-import { Provider } from 'react-redux';
 import Analytics from "../analytics/Analytics";
 import { analyticsScroll, analyticsView, setEventCategory } from "../analytics/events";
-import { store } from '../redux/store'
+import { wrapper } from '../redux/store'
 import { useRouter } from 'next/router'
 
 
-export default function App( { Component, pageProps } ) {
+function App( { Component, pageProps } ) {
    const router = useRouter()
    setEventCategory( router.route )
 
@@ -31,14 +30,11 @@ export default function App( { Component, pageProps } ) {
 
 
    return (
-      <React.StrictMode>
-         <Provider store={ store }>
-
-            <Component { ...pageProps } />
-
-            <Analytics/>
-
-         </Provider>
-      </React.StrictMode>
+      <>
+         <Component { ...pageProps }/>
+         <Analytics/>
+      </>
    )
 }
+
+export default wrapper.withRedux( App )
