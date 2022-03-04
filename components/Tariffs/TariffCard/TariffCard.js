@@ -1,16 +1,17 @@
-import s from './TariffCard.module.sass'
+import s from './TariffCard.module.sass';
 import React from 'react';
 import { connect } from "react-redux";
-import Mark from "./Mark/Mark"
-import ProgressBar from "./ProgressBar/ProgressBar"
-import MfTv from "./MfTv/MfTv"
-import TvChannels from "./TvChannels/TvChannels"
+import Mark from "./Mark/Mark";
+import ProgressBar from "./ProgressBar/ProgressBar";
+import MfTv from "./MfTv/MfTv";
+import TvChannels from "./TvChannels/TvChannels";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import Tippy from "@tippyjs/react";
 import { tippyAttrs } from "../../../plugins_config";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../../analytics/events";
-import YoutubeIcon from '../../../public/svg/youtube.svg'
+import YoutubeIcon from '../../../public/svg/youtube.svg';
+import RouterIcon from '../../../public/svg/Router_3.svg'
 import { toPlug } from "../../../redux/slices/tariffsSlice";
 
 
@@ -118,6 +119,15 @@ function TariffCard( props ) {
                      <YoutubeIcon/>
                   </div>
                   <p>Безлимитный мобильный интернет на соцсети и YouTube</p>
+               </div>
+            }
+
+            { props.tariff.id === 'turbo' &&
+               <div className={ `${ s.option_icon } ${ s.option_icon_router }` }>
+                  <div className={ s.icon }>
+                     <RouterIcon/>
+                  </div>
+                  <p>Wi-Fi-роутер (1 Гбит/с)</p>
                </div>
             }
 
