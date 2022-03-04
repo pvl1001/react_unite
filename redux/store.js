@@ -23,4 +23,4 @@ export const store = configureStore( {
       } )
 } )
 
-export const wrapper = createWrapper( () => store, { debug: true } )
+export const wrapper = createWrapper( () => store, { debug: false } )

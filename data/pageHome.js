@@ -522,6 +522,7 @@ export const tariffsPageHome = [
       tariffId: 4275,
       dataView: "maximum",
       name: "Максимум",
+      marks: [],
       sale: "Скидка 40% на SIM-карты",
       infoProgress: [
          {
@@ -754,6 +755,7 @@ export const tariffsPageHome = [
       tariffId: 4272,
       dataView: "plusTV",
       name: "ПлюсТВ",
+      marks: [],
       web: "Безлимитный интернет",
       sale: "Скидка 40% на SIM-карты",
       infoProgress: [

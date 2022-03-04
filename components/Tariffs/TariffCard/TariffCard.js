@@ -69,12 +69,16 @@ function TariffCard( props ) {
                { props.tariff.name }
             </h2>
 
-            { props.tariff.mark &&
-               <Mark
-                  className={ s.title_mark }
-                  mark={ props.tariff.mark }
-               />
-            }
+            <div className={ s.marks }>
+               { props.tariff.marks.map( ( mark, i ) =>
+                  <Mark
+                     key={ i }
+                     className={ s.title_mark }
+                     mark={ mark }
+                  />
+               ) }
+            </div>
+
 
          </div>
 
