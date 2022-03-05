@@ -97,12 +97,13 @@ function CardOption( props ) {
          </div>
 
          <div className={ s.price }>
-            <div className={ s.price__price }>
-               <span className={ s.price__current }>
-                  { price( props.equipment.id ) }
-               </span> <span> ₽</span>
-               <span className={ s.price__month }> в месяц</span>
-            </div>
+            { props.equipment.price &&
+               <div className={ s.price__price }>
+                  <span className={ s.price__current }>{ price( props.equipment.id ) }</span>
+                  <span> ₽</span>
+                  <span className={ s.price__month }> в месяц</span>
+               </div>
+            }
 
             <label className={ s.price__switch + " switch" }>
                <input type="checkbox"

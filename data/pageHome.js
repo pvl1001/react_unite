@@ -97,6 +97,7 @@ export const tariffsPageHome = [
             img: "pristavka",
             price: 199,
             dataView: "androidtv",
+            switch: false,
             plan: [
                { name: '36 мес', value: 169, checked: true },
                { name: '24 мес', value: 249, checked: false }
@@ -137,6 +138,7 @@ export const tariffsPageHome = [
             img: "fr100",
             price: 55,
             dataView: "fr100",
+            switch: false,
             plan: [
                { name: '36 мес', value: 99, checked: true },
                { name: '24 мес', value: 149, checked: false }
@@ -177,6 +179,7 @@ export const tariffsPageHome = [
             img: "fr1000-2",
             price: 88,
             dataView: "fr1000",
+            switch: false,
             plan: [
                { name: '36 мес', value: 129, checked: true },
                { name: '24 мес', value: 199, checked: false }
@@ -213,6 +216,7 @@ export const tariffsPageHome = [
                }
             ],
             dataView: "almond",
+            switch: false,
             equipments: []
          }
       ]
@@ -310,6 +314,7 @@ export const tariffsPageHome = [
             img: "pristavka",
             price: 199,
             dataView: "androidtv",
+            switch: false,
             plan: [
                { name: '36 мес', value: 169, checked: true },
                { name: '24 мес', value: 249, checked: false }
@@ -350,6 +355,7 @@ export const tariffsPageHome = [
             img: "fr100",
             price: 55,
             dataView: "fr100",
+            switch: false,
             plan: [
                { name: '36 мес', value: 99, checked: true },
                { name: '24 мес', value: 149, checked: false }
@@ -390,6 +396,7 @@ export const tariffsPageHome = [
             img: "fr1000-2",
             price: 88,
             dataView: "fr1000",
+            switch: false,
             plan: [
                { name: '36 мес', value: 129, checked: true },
                { name: '24 мес', value: 199, checked: false }
@@ -421,6 +428,7 @@ export const tariffsPageHome = [
             img: "tv_new",
             price: 99,
             dataView: "mftv",
+            switch: false,
             plan: [
                { name: '36 мес', value: 159, checked: true },
                { name: '24 мес', value: 239, checked: false }
@@ -513,6 +521,7 @@ export const tariffsPageHome = [
             img: "fr1000-2",
             price: null,
             dataView: "fr1000",
+            switch: true,
             plan: null
          }
       ]
@@ -608,6 +617,7 @@ export const tariffsPageHome = [
             img: "pristavka",
             price: 199,
             dataView: "androidtv",
+            switch: false,
             plan: [
                { name: '36 мес', value: 169, checked: true },
                { name: '24 мес', value: 249, checked: false }
@@ -648,6 +658,7 @@ export const tariffsPageHome = [
             img: "fr100",
             price: 10,
             dataView: "fr100",
+            switch: false,
             plan: null
          },
          {
@@ -685,6 +696,7 @@ export const tariffsPageHome = [
             img: "fr1000-2",
             price: 10,
             dataView: "fr1000",
+            switch: false,
             plan: null
          },
          {
@@ -713,6 +725,7 @@ export const tariffsPageHome = [
             img: "tv_new",
             price: 10,
             dataView: "mftv",
+            switch: false,
             plan: null
          },
          {
@@ -746,6 +759,7 @@ export const tariffsPageHome = [
                }
             ],
             dataView: "almond",
+            switch: false,
             equipments: []
          }
       ]
@@ -838,6 +852,7 @@ export const tariffsPageHome = [
             img: "pristavka",
             price: 199,
             dataView: "androidtv",
+            switch: false,
             plan: [
                { name: '36 мес', value: 169, checked: true },
                { name: '24 мес', value: 249, checked: false }
@@ -878,6 +893,7 @@ export const tariffsPageHome = [
             img: "fr100",
             price: 55,
             dataView: "fr100",
+            switch: false,
             plan: [
                { name: '36 мес', value: 99, checked: true },
                { name: '24 мес', value: 149, checked: false }
@@ -918,6 +934,7 @@ export const tariffsPageHome = [
             img: "fr1000-2",
             price: 88,
             dataView: "fr1000",
+            switch: false,
             plan: [
                { name: '36 мес', value: 129, checked: true },
                { name: '24 мес', value: 199, checked: false }
@@ -949,6 +966,7 @@ export const tariffsPageHome = [
             img: "tv_new",
             price: 99,
             dataView: "mftv",
+            switch: false,
             plan: [
                { name: '36 мес', value: 159, checked: true },
                { name: '24 мес', value: 239, checked: false }
@@ -985,6 +1003,7 @@ export const tariffsPageHome = [
                }
             ],
             dataView: "almond",
+            switch: false,
             equipments: []
          }
       ]
@@ -1062,6 +1081,7 @@ export const tariffsPageHome = [
             img: "pristavka",
             price: 199,
             dataView: "androidtv",
+            switch: false,
             plan: [
                { name: '36 мес', value: 169, checked: true },
                { name: '24 мес', value: 249, checked: false }
@@ -1102,6 +1122,7 @@ export const tariffsPageHome = [
             img: "fr100",
             price: 55,
             dataView: "fr100",
+            switch: false,
             plan: [
                { name: '36 мес', value: 99, checked: true },
                { name: '24 мес', value: 149, checked: false }
@@ -1142,6 +1163,7 @@ export const tariffsPageHome = [
             img: "fr1000-2",
             price: 88,
             dataView: "fr1000",
+            switch: false,
             plan: [
                { name: '36 мес', value: 129, checked: true },
                { name: '24 мес', value: 199, checked: false }
@@ -1178,6 +1200,7 @@ export const tariffsPageHome = [
                }
             ],
             dataView: "almond",
+            switch: false,
             equipments: []
          }
       ]
