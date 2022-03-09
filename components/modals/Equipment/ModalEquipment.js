@@ -1,7 +1,7 @@
 import s from './ModalEquipment.module.sass'
 import s_tariff from '/components/modals/Tariff/ModalTariff.module.sass'
 import { Modal } from "react-bootstrap";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import Plan from "./Plan/Plan";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { changePlan } from "../../../redux/slices/equipmentsSlice";
@@ -11,25 +11,34 @@ import Image from 'next/image';
 
 
 function ModalEquipment( props ) {
-
    const [ pricePlan, setPricePlan ] = useState( null )
+   const pageName = useSelector( state => state.page.name )
+   const defaultTariff = useSelector( state => state.page.tariffDefault )
+   const show = useSelector( state => state.modals.equipment.show )
+   const showModalTariff = useSelector( state => state.modals.tariff.show )
+   const eq = useSelector( state => state.modals.equipment.props )
+   const tariff = useSelector( state => eq?.id === 'eq-unite'
+      ? state.tariffAround
+      : state.tariffs.find( t => t.id === defaultTariff )
+   )
+
    useEffect( () => {
-      props.show && setPricePlan( props.eq.plan?.find( p => p.checked ).value ?? props.eq.price )
-   }, [ props.show, props.eq?.plan, props.eq?.price ] )
+      show && setPricePlan( eq.plan?.find( p => p.checked ).value ?? eq.price )
+   }, [ show, eq?.plan, eq?.price ] )
 
 
-   if ( props.show ) {
+   if ( show ) {
 
       const onHide = () => props.showModal( { modal: 'equipment', bool: false } )
 
-      const eventLabel = props.eq.dataView === 'router-4g'
+      const eventLabel = eq.dataView === 'router-4g'
          ? {
             order: `click_button_order_vezde_ntv`,
             send: `click_button_send_vezde_ntv`
          }
          : {
-            order: `click_button_order_${ props.eq.dataView }`,
-            send: `click_button_${ props.eq.dataView }_send_equipment`
+            order: `click_button_order_${ eq.dataView }`,
+            send: `click_button_${ eq.dataView }_send_equipment`
          }
 
       function handleChangePlan( payload ) {
@@ -40,9 +49,9 @@ function ModalEquipment( props ) {
       function showModalOrder() {
          props.showModal( { modal: 'order', bool: true } )
          props.setDataOrder( {
-            tariffName: props.tariff.name,
-            tariffId: props.tariff.tariffId,
-            equipments: props.eq.dataView,
+            tariffName: `${ pageName } ${ tariff.name }`,
+            tariffId: tariff.tariffId,
+            equipments: eq.dataView,
             price: pricePlan,
             eventLabel: eventLabel
          } )
@@ -53,7 +62,7 @@ function ModalEquipment( props ) {
          <Modal
             centered
             animation={ false }
-            show={ props.show }
+            show={ show }
             onHide={ onHide }
             dialogClassName={ s.modal_dialog }
             contentClassName={ s.modal_content }
@@ -65,10 +74,10 @@ function ModalEquipment( props ) {
                onClick={ onHide }
             />
             <h1 className={ s.title }>
-               { props.eq.name === 'Android TV' && <>Приставка</> } { props.eq.name }
+               { eq.name === 'Android TV' && <>Приставка</> } { eq.name }
             </h1>
 
-            { props.eq.name === 'Android TV' && (
+            { eq.name === 'Android TV' && (
                <div className={ s.sale }>
                   <div className={ s.sale__mark + " mark" }>Акция</div>
                   <p className={ s.sale__text }>
@@ -78,15 +87,15 @@ function ModalEquipment( props ) {
             }
 
             <div className={ s.container }
-                 style={ props.eq.style }
+                 style={ eq.style }
             >
                <div className={ s.text }>
-                  <h3>Характеристики { props.eq.name.split( ' ' )[0] === 'Роутер'
+                  <h3>Характеристики { eq.name.split( ' ' )[0] === 'Роутер'
                      ? <>роутера</>
                      : <>приставки</> }:</h3>
 
                   <ul>
-                     { props.eq.params.map( ( param, i ) =>
+                     { eq.params.map( ( param, i ) =>
                         <li key={ i }>
                            { param.icon &&
                               <img
@@ -114,19 +123,19 @@ function ModalEquipment( props ) {
 
                <div className={ s.img }>
                   <Image
-                     alt={ props.eq.name }
-                     src={ `/images/equipments/${ props.eq.img }.webp` }
+                     alt={ eq.name }
+                     src={ `/images/equipments/${ eq.img }.webp` }
                      layout={ 'fill' }
                      objectFit={ 'contain' }
                   />
                </div>
             </div>
 
-            { !props.showModalTariff &&
+            { !showModalTariff &&
                <>
-                  { props.eq.plan &&
+                  { eq.plan &&
                      <Plan
-                        eq={ props.eq }
+                        eq={ eq }
                         handleChange={ handleChangePlan }
                      />
                   }
@@ -154,16 +163,7 @@ function ModalEquipment( props ) {
 }
 
 
-export default connect( state => ({
-   show: state.modals.equipment.show,
-   showModalTariff: state.modals.tariff.show,
-   eq: state.modals.equipment.props,
-   get tariff() {
-      return this.eq?.id === 'eq-unite'
-         ? state.tariffs.find( tariff => tariff.id === 'around' )
-         : state.tariffs.find( tariff => tariff.id === 'for-their' )
-   }
-}), {
+export default connect( null, {
    showModal,
    changePlan,
    setDataOrder

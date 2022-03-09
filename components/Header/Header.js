@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { showModal } from "../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../analytics/events";
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-function Header( { data, style, ...props } ) {
-   const router = useRouter()
 
+function Header( { style, ...props } ) {
+   const router = useRouter()
+   const pageName = useSelector( state => state.page.name )
+   const tariffDefault = useSelector( state => state.page.tariffDefault )
+   const data = useSelector( state => state.page.header )
+   const tariff = useSelector( state => state.tariffs.find( t => t.id === tariffDefault ) )
    const [ img, setImg ] = useState( data.img.desktop )
 
-   const resize = () => {
+   function resize() {
       if ( router.route === '/internet' ) {
          return window.innerWidth < 768
             ? setImg( data.img.mob )
@@ -30,11 +34,11 @@ function Header( { data, style, ...props } ) {
          bool: true
       } )
       props.setDataOrder( {
-         tariffName: props.tariff.name,
-         tariffId: props.tariff.tariffId,
+         tariffName: `${ pageName } ${ tariff.name }`,
+         tariffId: tariff.tariffId,
          eventLabel: {
-            order: `click_button_connect_${ props.tariff.dataView }`,
-            send: `click_button_connect_send_${ props.tariff.dataView }`
+            order: `click_button_connect_${ tariff.dataView }`,
+            send: `click_button_connect_send_${ tariff.dataView }`
          }
       } )
    }
@@ -43,11 +47,10 @@ function Header( { data, style, ...props } ) {
       props.showModal( {
          modal: 'tariff',
          bool: true,
-         props: props.tariff.id
+         props: tariff.id
       } )
-      analyticsEvent( `click_button_connect_details_${ props.tariff.dataView }` )
+      analyticsEvent( `click_button_connect_details_${ tariff.dataView }` )
    }
-
 
    useEffect( () => {
       resize()
@@ -105,10 +108,7 @@ function Header( { data, style, ...props } ) {
 }
 
 
-export default connect( state => ({
-   data: state.page.header,
-   tariff: state.tariffs.find( tariff => tariff.id === 'for-their' )
-}), {
+export default connect( null, {
    showModal,
    setDataOrder
 } )( Header )

@@ -99,7 +99,10 @@ function ModalTariff( props ) {
 
             </div>
 
-            <Footer tariff={ props.tariff }/>
+            <Footer
+               pageName={ props.pageName }
+               tariff={ props.tariff }
+            />
 
          </Modal>
       )
@@ -109,14 +112,11 @@ function ModalTariff( props ) {
 }
 
 
-export default connect(
-   state => ({
-      pageName: state.page.name,
-      show: state.modals.tariff.show,
-      tariff: state.tariffs.find( tariff => tariff.id === state.modals.tariff.props ),
-   }),
-   {
-      showModal,
-      sumTotalPrice
-   }
-)( ModalTariff )
+export default connect( state => ({
+   pageName: state.page.name,
+   show: state.modals.tariff.show,
+   tariff: state.tariffs.find( tariff => tariff.id === state.modals.tariff.props ),
+}), {
+   showModal,
+   sumTotalPrice
+} )( ModalTariff )

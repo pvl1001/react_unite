@@ -36,7 +36,7 @@ function TariffCard( props ) {
          bool: true
       } )
       props.setDataOrder( {
-         tariffName: props.tariff.name,
+         tariffName: `${ props.pageName } ${ props.tariff.name }`,
          tariffId: props.tariff.tariffId,
          price: props.tariff.price,
          eventLabel: {
@@ -178,7 +178,8 @@ function TariffCard( props ) {
 
 
 export default connect( state => ({
-   tariffs: state.tariffs
+   tariffs: state.tariffs,
+   pageName: state.page.name,
 }), {
    showModal,
    setDataOrder

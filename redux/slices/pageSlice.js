@@ -3,6 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 const initialState = {
    name: 'Объединяй!',
+   tariffDefault: 'for-their',
    header: {
       title: 'Домашний интернет,',
       titleBr: ' ТВ и связь',

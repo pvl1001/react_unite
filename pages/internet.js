@@ -17,7 +17,8 @@ import ModalAlmond from "../components/modals/Almond/ModalAlmond";
 import ModalAboutAlmond from "../components/modals/AboutAlmond/ModalAboutAlmond";
 import ChoiceRouter from "../components/modals/ChoiceRouter/ChoiceRouter";
 import ModalEquipment from "../components/modals/Equipment/ModalEquipment";
-import { tariffsPageHome, pageName, dataHeader, dataFAQ } from '/data/pageHome'
+import { tariffsPageHome } from '/data/pageHome'
+import pageHome from '/data/pageHome';
 import headerStyle from "../components/Header/HeaderHome.module.sass";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import { wrapper } from "../redux/store";
@@ -59,14 +60,7 @@ export default function InternetPage() {
 
 
 export const getServerSideProps = wrapper.getServerSideProps( store => async () => {
-
-   await store.dispatch( setInitialStatePage( {
-      name: pageName,
-      header: dataHeader,
-      FAQ: dataFAQ
-   } ) )
-
+   await store.dispatch( setInitialStatePage( pageHome ) )
    await store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
    return { props: {} }
-
 } )

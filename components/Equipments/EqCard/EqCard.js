@@ -1,5 +1,5 @@
 import s from './EqCard.module.sass';
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../../analytics/events";
@@ -7,6 +7,9 @@ import Image from 'next/image';
 
 
 function EqCard( props ) {
+   const tariffDefault = useSelector( state => state.page.tariffDefault )
+   const pageName = useSelector( state => state.page.name )
+   const tariff = useSelector( state => state.tariffs.find( t => t.id === tariffDefault ) )
 
    function sMark( mark ) {
       return mark === 'ГОД СЕРИАЛОВ В ПОДАРОК' && "var(--mf-orange)"
@@ -26,8 +29,8 @@ function EqCard( props ) {
          bool: true
       } )
       props.setDataOrder( {
-         tariffName: props.tariff.name,
-         tariffId: props.tariff.tariffId,
+         tariffName: `${ pageName } ${ tariff.name }`,
+         tariffId: tariff.tariffId,
          equipments: props.eq.dataView,
          eventLabel: {
             order: `click_button_order_${ props.eq.dataView }`,
@@ -103,12 +106,7 @@ function EqCard( props ) {
 }
 
 
-export default connect(
-   state => ({
-      tariff: state.tariffs.find( tariff => tariff.id === 'for-their' )
-   }),
-   {
-      showModal,
-      setDataOrder,
-   }
-)( EqCard )
+export default connect( null, {
+   showModal,
+   setDataOrder,
+} )( EqCard )

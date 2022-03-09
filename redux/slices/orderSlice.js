@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 
 function arrEquipmentsChecked( value ) {
@@ -48,7 +48,7 @@ export const orderSlice = createSlice( {
             house_guid: data.house_guid || state.house_guid,
             tariffId: data.tariffId || state.tariffId,
             tariffName: data.tariffName && data.tariffName !== state.tariffName
-               ? 'Объединяй! ' + data.tariffName
+               ? data.tariffName
                : state.tariffName,
             equipments: data.equipments
                ? arrEquipmentsChecked( data.equipments )

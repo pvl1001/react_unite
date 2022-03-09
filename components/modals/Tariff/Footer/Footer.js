@@ -18,7 +18,7 @@ function Footer( props ) {
    function showModalOrder() {
       props.showModal( { modal: 'order', bool: true } )
       props.setDataOrder( {
-         tariffName: props.tariff.name,
+         tariffName: `${ props.pageName } ${ props.tariff.name }`,
          tariffId: props.tariff.tariffId,
          equipments: props.tariff.equipments,
          eventLabel: {

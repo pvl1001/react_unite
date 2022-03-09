@@ -1,5 +1,5 @@
 import s from './ModalAlmond.module.sass'
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import Banner from "./Banner/Banner";
@@ -12,7 +12,18 @@ import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 
 function ModalAlmond( props ) {
-   if ( props.show ) {
+   const show = useSelector( state => state.modals.almond.show )
+   const pageName = useSelector( state => state.page.name )
+   const tariffNameDefault = useSelector( state => state.page.tariffDefault )
+   const tariffDefault = useSelector( state => state.tariffs.find( t => t.id === tariffNameDefault ) )
+   const showModalTariff = useSelector( state => state.modals.tariff.show )
+   const tariff = useSelector( state => state.modals.tariff.props )
+   const tariffs = useSelector( state => state.tariffs )
+   const equipments = useSelector( state => state.equipments )
+
+
+   if ( show ) {
+
 
       const banners = [
          {
@@ -53,20 +64,19 @@ function ModalAlmond( props ) {
          }
       ]
 
-      const i = props.showModalTariff && props.tariffs
-         .find( tariff => tariff.id === props.tariff ).equipments
+      const i = showModalTariff && tariffs
+         .find( t => t.id === tariff ).equipments
          .map( eq => eq.id )
          .indexOf( 'eq-almond' )
 
-      const payload = { id: props.tariff, index: i }
+      const payload = { id: tariff, index: i }
 
-      const almond = props.showModalTariff
-         ? props.tariffs.find( tariff => tariff.id === props.tariff )
-            .equipments.find( eq => eq.id === 'eq-almond' )
-         : props.equipments.find( eq => eq.id === 'eq-almond' )
+      const almond = showModalTariff
+         ? tariffs.find( t => t.id === tariff ).equipments.find( eq => eq.id === 'eq-almond' )
+         : equipments.find( eq => eq.id === 'eq-almond' )
 
       function onHide() {
-         if ( props.showModalTariff && isEquipments() ) {
+         if ( showModalTariff && isEquipments() ) {
             props.changeAlmondTotalPrice( payload )
             props.optionSwitch( { ...payload, checked: false } )
             props.sumTotalPrice( payload )
@@ -76,7 +86,7 @@ function ModalAlmond( props ) {
       }
 
       function isEquipments() {
-         return !props.tariffs.find( tariff => tariff.id === props.tariff ).equipments[i].totalPrice
+         return !tariffs.find( t => t.id === tariff ).equipments[i].totalPrice
       }
 
       function addToTariff() {
@@ -89,8 +99,8 @@ function ModalAlmond( props ) {
       function showModalOrder() {
          props.showModal( { modal: 'order', bool: true } )
          props.setDataOrder( {
-            tariffName: props.tariffForTheir.name,
-            tariffId: props.tariffForTheir.tariffId,
+            tariffName: `${ pageName } ${ tariffDefault.name }`,
+            tariffId: tariffDefault.tariffId,
             equipments: almond.dataView,
             eventLabel: {
                order: `click_button_order_${ almond.dataView }`,
@@ -108,7 +118,7 @@ function ModalAlmond( props ) {
          <Modal
             centered
             animation={ false }
-            show={ props.show }
+            show={ show }
             onHide={ onHide }
             className={ s.modal }
             dialogClassName={ s.modal_dialog }
@@ -184,7 +194,7 @@ function ModalAlmond( props ) {
                   </div>
                }
 
-               { props.showModalTariff
+               { showModalTariff
                   ? <button
                      className={ s.prices__btn + " btn" }
                      disabled={ !almond.totalPrice }
@@ -209,14 +219,7 @@ function ModalAlmond( props ) {
 }
 
 
-export default connect( state => ({
-   show: state.modals.almond.show,
-   showModalTariff: state.modals.tariff.show,
-   tariff: state.modals.tariff.props,
-   tariffs: state.tariffs,
-   equipments: state.equipments,
-   tariffForTheir: state.tariffs.find( tariff => tariff.id === 'for-their' )
-}), {
+export default connect( null, {
    showModal,
    optionSwitch,
    sumTotalPrice,

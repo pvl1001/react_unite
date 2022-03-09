@@ -79,7 +79,7 @@ function CheckAddress( props ) {
          bool: true
       } )
       props.setDataOrder( {
-         tariffName: props.tariff.name,
+         tariffName: `${ props.pageName } ${ props.tariff.name }`,
          tariffId: props.tariff.tariffId,
          equipments: props.tariff.equipments,
          eventLabel: eventLabel
@@ -126,7 +126,8 @@ function CheckAddress( props ) {
 
 
 export default connect( state => ({
-   tariff: state.tariffAround
+   tariff: state.tariffAround,
+   pageName: state.page.name
 }), {
    showModal,
    onUniteSwitch,

@@ -2,13 +2,16 @@ import s from './WhatElse.module.sass'
 import films from '/public/images/what-else/films.webp'
 import sales from '/public/images/what-else/sales.webp'
 import Brus from '/public/images/what-else/Brus.webp'
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { showModal } from "/redux/slices/modalsSlice";
 import { setDataOrder } from "/redux/slices/orderSlice";
 import CardWE from "./CardWE/CardWE";
 
 
 function WhatElse( props ) {
+   const tariffDefault = useSelector( state => state.page.tariffDefault )
+   const pageName = useSelector( state => state.page.name )
+   const tariff = useSelector( state => state.tariffs.find( tariff => tariff.id === tariffDefault ) )
 
    const data = [
       {
@@ -47,8 +50,8 @@ function WhatElse( props ) {
          bool: true
       } )
       props.setDataOrder( {
-         tariffName: props.tariff.name,
-         tariffId: props.tariff.tariffId,
+         tariffName: `${ pageName } ${ tariff.name }`,
+         tariffId: tariff.tariffId,
          eventLabel: {
             order: `click_button_order_${ dataView }`,
             send: `click_button_what_else_${ dataView }_send_equipment`
@@ -81,12 +84,7 @@ function WhatElse( props ) {
 }
 
 
-export default connect(
-   state => ({
-      tariff: state.tariffs.find( tariff => tariff.id === 'for-their' )
-   }),
-   {
-      showModal,
-      setDataOrder,
-   }
-)( WhatElse )
+export default connect( null, {
+   showModal,
+   setDataOrder,
+} )( WhatElse )
