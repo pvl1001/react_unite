@@ -3,11 +3,9 @@ import WifiIcon from '../../../public/svg/green_wi-fi.svg';
 import TvIcon from '../../../public/svg/green_tv.svg';
 import Range from "../Range/Range";
 import { useState } from "react";
-import { useSelector } from 'react-redux'
 
 
-function BlockRange() {
-   const tariff = useSelector( state => state.tariffs.find( t => t.id === 'vse' ) )
+function BlockRange( { tariff, name } ) {
    const price = tariff.oldPrice
    const [ rangeValue, setRangeValue ] = useState( 4 )
    const [ range, setRange ] = useState( [
@@ -26,9 +24,7 @@ function BlockRange() {
    return (
       <div className={ s.container }>
 
-         <h2 className={ s.title } data-view="tariff_card_vse_start">
-            { 'name' }
-         </h2>
+         <h2 className={ s.title } data-view="tariff_card_vse_start">{ name }</h2>
 
          <div className={ s.options }>
             <div className={ s.option }>
@@ -38,7 +34,7 @@ function BlockRange() {
 
                <div>
                   <p className={ s.option__key }>Домашний интернет</p>
-                  <p className={ s.option__value }>{ 'speed' }</p>
+                  <p className={ s.option__value }>{ tariff.infoModal[0].options[0].value }</p>
                </div>
 
             </div>
@@ -48,7 +44,7 @@ function BlockRange() {
                </div>
                <div>
                   <p className={ s.option__key }>Цифровое ТВ</p>
-                  <p className={ ` ${ s.option__value } ${ s.option__value_btn } ` }>{ 'tvLength' }</p>
+                  <p className={ ` ${ s.option__value } ${ s.option__value_btn } ` }>{ tariff.tvLength }</p>
                </div>
             </div>
          </div>
