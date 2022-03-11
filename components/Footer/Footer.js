@@ -6,7 +6,7 @@ export default function Footer() {
          <div className={ s.wrapper + ' wrapper' }>
             <div className={ s.copyright }>
                <div className={ s.copyright__age }>6+</div>
-               <div className={ s.copyright__text }>© 2021 <br/> ПАО «Мегафон»</div>
+               <div className={ s.copyright__text }>© 2022 <br/> ПАО «Мегафон»</div>
             </div>
             <p className={ s.transfer }>
                Услуги предоставляются ООО «Нэт Бай Нэт Холдинг» и ПАО «МегаФон» на территории присутствия операторов при

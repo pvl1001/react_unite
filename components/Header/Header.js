@@ -16,7 +16,7 @@ function Header( { style, ...props } ) {
    const [ img, setImg ] = useState( data.img.desktop )
 
    function resize() {
-      if ( router.route === '/internet' ) {
+      if ( router.route !== '/' ) {
          return window.innerWidth < 768
             ? setImg( data.img.mob )
             : setImg( data.img.desktop )
