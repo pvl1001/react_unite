@@ -18,9 +18,10 @@ import ChoiceRouter from "../components/modals/ChoiceRouter/ChoiceRouter";
 import ModalEquipment from "../components/modals/Equipment/ModalEquipment";
 import Head from 'next/head'
 import { setInitialStatePage } from "../redux/slices/pageSlice";
-import pageHome from "../data/pageHome";
+import pageHome, { tariffsPageHome } from "../data/pageHome";
 import { wrapper } from "../redux/store";
 import ForHomeAll from "../components/ForHomeAll/ForHomeAll";
+import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 
 export default function InternetVsePage() {
    return (
@@ -57,5 +58,6 @@ export default function InternetVsePage() {
 
 export const getServerSideProps = wrapper.getServerSideProps( store => async () => {
    await store.dispatch( setInitialStatePage( pageHome ) )
+   await store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
    return { props: {} }
 } )

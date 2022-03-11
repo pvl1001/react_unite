@@ -3,9 +3,12 @@ import WifiIcon from '../../../public/svg/green_wi-fi.svg';
 import TvIcon from '../../../public/svg/green_tv.svg';
 import Range from "../Range/Range";
 import { useState } from "react";
+import { useSelector } from 'react-redux'
 
 
 function BlockRange() {
+   const tariff = useSelector( state => state.tariffs.find( t => t.id === 'vse' ) )
+   const price = tariff.oldPrice
    const [ rangeValue, setRangeValue ] = useState( 4 )
    const [ range, setRange ] = useState( [
       { month: 1, percent: 5, active: false },
@@ -14,6 +17,11 @@ function BlockRange() {
       { month: 31, percent: 25, active: false },
       { month: 61, percent: 50, active: false },
    ] )
+
+   function setSalePrice() {
+      return Math.ceil( price - price * range[rangeValue].percent / 100 )
+   }
+
 
    return (
       <div className={ s.container }>
@@ -48,9 +56,8 @@ function BlockRange() {
          <div id="range" className={ s.range }>
 
             <div className={ s.range__block_range }>
-               <h3 className={ s.range__title }>
-                  Время пользования тарифом <nobr>{ 'name' }</nobr>
-               </h3>
+
+               <h3 className={ s.range__title }>Время использования</h3>
 
                <Range
                   range={ range }
@@ -58,6 +65,7 @@ function BlockRange() {
                   rangeValue={ rangeValue }
                   setRangeValue={ setRangeValue }
                />
+
             </div>
 
             <div className={ s.range__block_price }>
@@ -65,7 +73,7 @@ function BlockRange() {
                   Ваша цена
                </h3>
                <p className={ s.range__price }>
-                  <span>275</span> ₽ в месяц
+                  <span>{ setSalePrice() }</span> ₽ в месяц
                </p>
                <button
                   onClick={ () => {
