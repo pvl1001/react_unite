@@ -8,6 +8,14 @@ function Range( { range, setRange, rangeValue, setRangeValue } ) {
       handleChange( 4 )
    }, [] )
 
+   const options = {
+      type: "range",
+      min: 0,
+      max: 4,
+      step: 1,
+      defaultValue: rangeValue
+   }
+
 
    function handleChange( i ) {
       setRangeValue( i )
@@ -15,6 +23,10 @@ function Range( { range, setRange, rangeValue, setRangeValue } ) {
       newArr.forEach( el => el.active = false )
       newArr[i].active = true
       setRange( newArr )
+   }
+
+   function widthProgressRange() {
+      return rangeValue / options.max * 100 + '%'
    }
 
 
@@ -31,15 +43,9 @@ function Range( { range, setRange, rangeValue, setRangeValue } ) {
          </ul>
 
          <div className={ s.mf_range }>
-            <input
-               type="range"
-               min="0"
-               max="4"
-               step="1"
-               defaultValue={ rangeValue }
-               onChange={ e => handleChange( e.target.value ) }
+            <input{ ...options } onChange={ e => handleChange( e.target.value ) }
             />
-            <div className={ s.mf_range__progress_active }/>
+            <div style={ { width: widthProgressRange() } } className={ s.mf_range__progress_active }/>
          </div>
 
          <ul className={ s.labels }>
