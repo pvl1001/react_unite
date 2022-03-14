@@ -24,7 +24,11 @@ function ForHomeAll() {
                </p>
             </div>
 
-            <BlockRange tariff={ tariff } name={ name }/>
+            <BlockRange
+               tariff={ tariff }
+               name={ name }
+               pageName={ pageName }
+            />
          </div>
       </section>
    )

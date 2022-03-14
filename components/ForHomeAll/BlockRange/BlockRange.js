@@ -6,8 +6,10 @@ import { useState } from "react";
 import { connect } from 'react-redux';
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { getChannels } from "../../../redux/slices/tariffsSlice";
+import { setDataOrder } from "../../../redux/slices/orderSlice";
 
-function BlockRange( { tariff, name, showModal, getChannels } ) {
+
+function BlockRange( { tariff, name, showModal, getChannels, setDataOrder, pageName } ) {
    const price = tariff.oldPrice
    const [ rangeValue, setRangeValue ] = useState( 4 )
    const [ range, setRange ] = useState( [
@@ -22,6 +24,18 @@ function BlockRange( { tariff, name, showModal, getChannels } ) {
    const showModalChannels = () => {
       !tariff.channels && getChannels( tariff.tvId )
       showModal( { modal: 'channels', bool: true } )
+   }
+
+   function showModalOrder() {
+      showModal( { modal: 'order', bool: true } )
+      setDataOrder( {
+         tariffName: `${ pageName } ${ tariff.name }`,
+         tariffId: tariff.tariffId,
+         eventLabel: {
+            order: `click_button_order_${ tariff.dataView }`,
+            send: `click_button_send_${ tariff.dataView }`
+         }
+      } )
    }
 
 
@@ -79,7 +93,7 @@ function BlockRange( { tariff, name, showModal, getChannels } ) {
                   <span>{ setSalePrice() }</span> ₽ в месяц
                </p>
                <button
-                  // onClick={  }
+                  onClick={ showModalOrder }
                   data-view="tariff_card_vse_end"
                   type="button"
                   className={ `${ s.range__btn } btn btn-fiolet` }>
@@ -100,5 +114,6 @@ function BlockRange( { tariff, name, showModal, getChannels } ) {
 
 export default connect( null, {
    showModal,
-   getChannels
+   getChannels,
+   setDataOrder
 } )( BlockRange )
