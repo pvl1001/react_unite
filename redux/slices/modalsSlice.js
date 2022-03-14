@@ -12,6 +12,7 @@ const initialState = {
    almond: { show: false },
    aboutAlmond: { show: false },
    choiceRouter: { show: false },
+   channels: { show: false },
 }
 
 

@@ -3,9 +3,11 @@ import WifiIcon from '../../../public/svg/green_wi-fi.svg';
 import TvIcon from '../../../public/svg/green_tv.svg';
 import Range from "../Range/Range";
 import { useState } from "react";
+import { connect } from 'react-redux';
+import { showModal } from "../../../redux/slices/modalsSlice";
+import { getChannels } from "../../../redux/slices/tariffsSlice";
 
-
-function BlockRange( { tariff, name } ) {
+function BlockRange( { tariff, name, showModal, getChannels } ) {
    const price = tariff.oldPrice
    const [ rangeValue, setRangeValue ] = useState( 4 )
    const [ range, setRange ] = useState( [
@@ -16,8 +18,10 @@ function BlockRange( { tariff, name } ) {
       { month: 61, percent: 50, active: false },
    ] )
 
-   function setSalePrice() {
-      return Math.ceil( price - price * range[rangeValue].percent / 100 )
+   const setSalePrice = () => Math.ceil( price - price * range[rangeValue].percent / 100 )
+   const showModalChannels = () => {
+      !tariff.channels && getChannels( tariff.tvId )
+      showModal( { modal: 'channels', bool: true } )
    }
 
 
@@ -44,12 +48,15 @@ function BlockRange( { tariff, name } ) {
                </div>
                <div>
                   <p className={ s.option__key }>Цифровое ТВ</p>
-                  <p className={ ` ${ s.option__value } ${ s.option__value_btn } ` }>{ tariff.tvLength }</p>
+                  <p className={ ` ${ s.option__value } ${ s.option__value_btn } ` }
+                     onClick={ showModalChannels }>
+                     { tariff.tvLength }
+                  </p>
                </div>
             </div>
          </div>
 
-         <div id="range" className={ s.range }>
+         <div className={ s.range }>
 
             <div className={ s.range__block_range }>
 
@@ -72,8 +79,7 @@ function BlockRange( { tariff, name } ) {
                   <span>{ setSalePrice() }</span> ₽ в месяц
                </p>
                <button
-                  onClick={ () => {
-                  } }
+                  // onClick={  }
                   data-view="tariff_card_vse_end"
                   type="button"
                   className={ `${ s.range__btn } btn btn-fiolet` }>
@@ -92,4 +98,7 @@ function BlockRange( { tariff, name } ) {
 }
 
 
-export default BlockRange
+export default connect( null, {
+   showModal,
+   getChannels
+} )( BlockRange )

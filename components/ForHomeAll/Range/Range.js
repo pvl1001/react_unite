@@ -5,13 +5,13 @@ import { useEffect } from "react";
 function Range( { range, setRange, rangeValue, setRangeValue } ) {
 
    useEffect( () => {
-      handleChange( 4 )
+      handleChange( options.max )
    }, [] )
 
    const options = {
       type: "range",
       min: 0,
-      max: 4,
+      max: range.length - 1,
       step: 1,
       defaultValue: rangeValue
    }

@@ -22,6 +22,7 @@ import pageHome, { tariffsPageHome } from "../data/pageHome";
 import { wrapper } from "../redux/store";
 import ForHomeAll from "../components/ForHomeAll/ForHomeAll";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
+import ModalChannels from "../components/modals/Channels/ModalChannels";
 
 export default function InternetVsePage() {
    return (
@@ -51,6 +52,7 @@ export default function InternetVsePage() {
          <ModalAboutAlmond/>
          <ChoiceRouter/>
          <ModalEquipment/>
+         <ModalChannels/>
       </>
 
    )
