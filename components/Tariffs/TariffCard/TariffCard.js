@@ -13,10 +13,11 @@ import { analyticsEvent } from "../../../analytics/events";
 import YoutubeIcon from '../../../public/svg/youtube.svg';
 import RouterIcon from '../../../public/svg/Router_3.svg'
 import { toPlug } from "../../../redux/slices/tariffsSlice";
+import { useRouter } from 'next/router';
 
 
 function TariffCard( props ) {
-
+   const router = useRouter()
    const premiumStyle = props.tariff.id === 'premium'
       ? { backgroundColor: 'var(--mf-premium)' }
       : {}
@@ -47,6 +48,9 @@ function TariffCard( props ) {
    }
 
    function showModalTariff() {
+      if ( props.tariff.id === 'vse' ) {
+         return router.push( '/internetvse' )
+      }
       props.showModal( {
          modal: 'tariff',
          bool: true,
