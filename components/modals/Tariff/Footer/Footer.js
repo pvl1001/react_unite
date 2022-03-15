@@ -7,9 +7,10 @@ import { setDataOrder } from "../../../../redux/slices/orderSlice";
 import { analyticsView } from "../../../../analytics/events";
 import s from './Footer.module.sass'
 import { wrapp } from '../ModalTariff.module.sass'
-import { toPlug } from "../../../../redux/slices/tariffsSlice";
+import iconInfo from "../../../../mixins/iconInfo";
 
 function Footer( props ) {
+   const tmplIconInfo = iconInfo( props.tariff.id, props.tariff.iconInfo )
 
    useEffect( () => {
       analyticsView()
@@ -41,11 +42,7 @@ function Footer( props ) {
             <span className={ s.price__month }> ₽ в месяц</span>
 
             { props.tariff.iconInfo &&
-               <Tippy { ...tippyAttrs } content={
-                  <><span
-                     onClick={ () => toPlug( props.tariff.iconInfo ) }
-                     className="link">Скидка</span> на абонентскую плату действует 3 месяца после подключения
-                  </> }>
+               <Tippy { ...tippyAttrs } content={ tmplIconInfo }>
                   <div className={ s.price__icon + ' price__icon' }/>
                </Tippy>
             }

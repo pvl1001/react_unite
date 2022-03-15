@@ -1,3 +1,7 @@
+import { toPlug } from "../redux/slices/tariffsSlice";
+import Link from 'next/link';
+
+
 export const tariffsPageHome = [
    {
       id: "internet",
@@ -1183,6 +1187,12 @@ export const tariffsPageHome = [
       ]
    }
 ]
+
+export const templateIconInfo = {
+   internet: <>Для участия в <span onClick={ () => toPlug( 'faq-0-0' ) } className="link">
+      Акции</span> необходимо быть абонентом МегаФон и подключить услугу ДляДома</>,
+   vse: <>С учетом <Link href="/internetvse"><a>скидки</a></Link> 50% с 61 месяца</>
+}
 
 export default {
    name: '#ДляДома',

@@ -11,16 +11,16 @@ import { tippyAttrs } from "../../../plugins_config";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../../analytics/events";
 import YoutubeIcon from '../../../public/svg/youtube.svg';
-import RouterIcon from '../../../public/svg/Router_3.svg'
-import { toPlug } from "../../../redux/slices/tariffsSlice";
+import RouterIcon from '../../../public/svg/Router_3.svg';
 import { useRouter } from 'next/router';
+import iconInfo from "../../../mixins/iconInfo";
 
 
 function TariffCard( props ) {
    const router = useRouter()
+   const tmplIconInfo = iconInfo( props.tariff.id, props.tariff.iconInfo )
    const premiumStyle = props.tariff.id === 'premium'
-      ? { backgroundColor: 'var(--mf-premium)' }
-      : {}
+      ? { backgroundColor: 'var(--mf-premium)' } : {}
 
    function activeProgress( title, n ) {
       if ( title === 'Мобильный интернет' ) return n === 30
@@ -153,11 +153,7 @@ function TariffCard( props ) {
                <span> в месяц</span>
 
                { props.tariff.iconInfo &&
-                  <Tippy { ...tippyAttrs } content={
-                     <><span
-                        onClick={ () => toPlug( props.tariff.iconInfo ) }
-                        className="link">Скидка</span> на абонентскую плату действует 3 месяца после подключения
-                     </> }>
+                  <Tippy { ...tippyAttrs } content={ tmplIconInfo }>
                      <div className="price__icon"/>
                   </Tippy> }
             </div>

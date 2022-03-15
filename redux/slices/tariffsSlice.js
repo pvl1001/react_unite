@@ -157,7 +157,8 @@ const initialState = [
       oldPrice: 1300,
       price: 650,
       totalPrice: 650,
-      iconInfo: "faq-0-0",
+      iconInfo: <><span onClick={ () => toPlug( 'faq-0-0' ) } className="link">
+         Скидка</span> на абонентскую плату действует 3 месяца после подключения</>,
       youtube: true,
       rentDevice: [
          {
@@ -452,7 +453,8 @@ const initialState = [
       oldPrice: null,
       price: 700,
       totalPrice: 700,
-      iconInfo: "faq-0-1",
+      iconInfo: <><span onClick={ () => toPlug( 'faq-0-1' ) } className="link">
+         Скидка</span> на абонентскую плату действует 3 месяца после подключения</>,
       rentDevice: [
          {
             text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
