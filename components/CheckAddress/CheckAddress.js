@@ -10,10 +10,11 @@ import { api } from "../../api";
 import { analyticsEvent } from "../../analytics/events";
 import { onUniteSwitch } from "../../redux/slices/tariffAroundSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
+import { useRouter } from 'next/router'
 
 
 function CheckAddress( props ) {
-
+   const router = useRouter()
    useEffect( () => {
       window.autocomplete = require( '../../plugins/jquery.autocomplete' )
 
@@ -41,6 +42,9 @@ function CheckAddress( props ) {
    const [ address, setAddress ] = useState( {} )
    const [ result, setResult ] = useState( null )
    const [ isShowLabel, setIsShowLabel ] = useState( false )
+   const container = router.route === '/internetvse'
+      ? s.container_vse
+      : s.container
 
    function clearInput() {
       $( inputAddress ).val( '' )
@@ -88,7 +92,7 @@ function CheckAddress( props ) {
 
 
    return (
-      <section className={ s.wrapper }>
+      <section className={ container }>
          <div className={ 'wrapper ' }>
             <div className={ s.address }>
 
