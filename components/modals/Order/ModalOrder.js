@@ -29,6 +29,11 @@ function ModalOrder( props ) {
 
    const errorMessage = 'Заполните поле!'
 
+   const errorResponse = {
+      response_head: 'Сервис временно не доступен',
+      response: 'Пожалуйста, свяжитесь с нами по телефону, либо попробуйте позднее'
+   }
+
    const validationSchema = object().shape( {
       phone: string().min( 16, errorMessage ).required( errorMessage ),
       name: string().min( 2, errorMessage ).required( errorMessage ),
@@ -47,7 +52,7 @@ function ModalOrder( props ) {
       if ( !errors && dirty ) return 'valid'
    }
 
-   function submit( data ) {
+   async function submit( data ) {
       props.setDataOrder( {
          ...props.dataOrder,
          clientName: data.name,
@@ -67,43 +72,39 @@ function ModalOrder( props ) {
          clientSite: location.host + location.pathname,
          calltracking_params: ct( 'calltracking_params', 'g96m2c8n' )?.sessionId ?? '',
       }
+      try {
+         const resMailSender = await api( 'https://home.megafon.ru/form/mail-sender', dataOrder )
+         // console.log(props.dataOrder.eventLabel.send)
+         if ( resMailSender.code === '200' ) {
+            analyticsEvent( props.dataOrder.eventLabel.send )
+            gtag( 'event', 'requestLandingSend', { 'event_category': 'order' } )
 
-      api( 'https://home.megafon.ru/form/mail-sender', dataOrder )
-         .then( ( resMailSender ) => {
-            // console.log(props.dataOrder.eventLabel.send)
-            if ( resMailSender.code === '200' ) {
-               analyticsEvent( props.dataOrder.eventLabel.send )
-               gtag( 'event', 'requestLandingSend', { 'event_category': 'order' } )
-
-               if ( ym !== undefined ) {
-                  ym( 66149989, 'reachGoal', 'zayavka_megafon' )
-                  ym( 66149989, 'reachGoal', props.dataOrder.eventLabel.send )
-               }
-
-               if ( dataOrder.calltracking_params ) {
-                  const ct_site_id = '37410'
-                  const ct_data = {
-                     fio: dataOrder.clientName,
-                     phoneNumber: dataOrder.clientPhone,
-                     email: '',
-                     subject: 'Заявка с сайта ' + dataOrder.city,
-                     tags: 'id' + dataOrder.tariffId + ',' + dataOrder.tariffName,
-                     comment: dataOrder.comment,
-                     sessionId: dataOrder.calltracking_params
-                  }
-
-                  api( `https://api.calltouch.ru/calls-service/RestAPI/requests/'${ ct_site_id }'/register/`, ct_data )
-                     .catch( err => console.log( 'Ошибка отправки запроса /register: ', err ) )
-               }
-               return
+            if ( ym !== undefined ) {
+               ym( 66149989, 'reachGoal', 'zayavka_megafon' )
+               ym( 66149989, 'reachGoal', props.dataOrder.eventLabel.send )
             }
 
-            setApiResponse( resMailSender )
-         } )
-         .catch( () => setApiResponse( {
-            response_head: 'Сервис временно не доступен',
-            response: 'Пожалуйста, свяжитесь с нами по телефону, либо попробуйте позднее'
-         } ) )
+            if ( dataOrder.calltracking_params ) {
+               const ct_site_id = '37410'
+               const ct_data = {
+                  fio: dataOrder.clientName,
+                  phoneNumber: dataOrder.clientPhone,
+                  email: '',
+                  subject: 'Заявка с сайта ' + dataOrder.city,
+                  tags: 'id' + dataOrder.tariffId + ',' + dataOrder.tariffName,
+                  comment: dataOrder.comment,
+                  sessionId: dataOrder.calltracking_params
+               }
+
+               api( `https://api.calltouch.ru/calls-service/RestAPI/requests/'${ ct_site_id }'/register/`, ct_data )
+                  .catch( () => setApiResponse( errorResponse ) )
+            }
+            return
+         }
+         setApiResponse( resMailSender )
+      } catch ( err ) {
+         setApiResponse( errorResponse )
+      }
    }
 
 

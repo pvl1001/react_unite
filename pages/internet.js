@@ -34,8 +34,8 @@ export default function InternetPage() {
 }
 
 
-export const getServerSideProps = wrapper.getServerSideProps( store => async () => {
-   await store.dispatch( setInitialStatePage( pageHome ) )
-   await store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
+export const getServerSideProps = wrapper.getServerSideProps( store => () => {
+   store.dispatch( setInitialStatePage( pageHome ) )
+   store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
    return { props: {} }
 } )
