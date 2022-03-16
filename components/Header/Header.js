@@ -55,11 +55,7 @@ function Header( { style, ...props } ) {
    useEffect( () => {
       resize()
       window.addEventListener( 'resize', resize )
-
-      return () => {
-         window.removeEventListener( 'resize', resize )
-      }
-   } )
+   }, [] )
 
 
    return (
