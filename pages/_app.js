@@ -17,6 +17,7 @@ import Analytics from "../analytics/Analytics";
 import { analyticsScroll, analyticsView, setEventCategory } from "../analytics/events";
 import { wrapper } from '../redux/store';
 import { useRouter } from 'next/router';
+import Layout from "../components/Layout";
 
 
 function App( { Component, pageProps } ) {
@@ -37,7 +38,9 @@ function App( { Component, pageProps } ) {
             <link rel="icon" href="/favicon.ico"/>
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23688716-34"/>
          </Head>
-         <Component { ...pageProps }/>
+         <Layout>
+            <Component { ...pageProps }/>
+         </Layout>
          <Analytics/>
       </>
    )

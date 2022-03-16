@@ -12,7 +12,7 @@ function ModalChannels( { show, showModal, tariff } ) {
    }
 
 
-   if ( !tariff.channels ) return null
+   if ( !tariff?.channels ) return null
 
    return (
       <Modal
