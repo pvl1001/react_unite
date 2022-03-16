@@ -17,6 +17,7 @@ import Analytics from "../analytics/Analytics";
 import { analyticsScroll, analyticsView, setEventCategory } from "../analytics/events";
 import { wrapper } from '../redux/store';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import Layout from "../components/Layout";
 
 
@@ -36,7 +37,7 @@ function App( { Component, pageProps } ) {
          <Head>
             <title>NextJS</title>
             <link rel="icon" href="/favicon.ico"/>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23688716-34"/>
+            <Script async src="https://www.googletagmanager.com/gtag/js?id=UA-23688716-34"/>
          </Head>
          <Layout>
             <Component { ...pageProps }/>
