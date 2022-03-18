@@ -13,7 +13,6 @@ import BannerMfTv from "./BannerMfTv/BannerMfTv";
 function ModalTariff( props ) {
    useEffect( () => {
       props.show && props.sumTotalPrice( props.tariff )
-      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [ props.show ] )
 
    if ( props.show ) {

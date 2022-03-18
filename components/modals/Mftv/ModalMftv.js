@@ -11,8 +11,8 @@ import { analyticsView } from "../../../analytics/events";
 
 function ModalMftv( props ) {
    useEffect( () => {
-      analyticsView()
-   } )
+      props.mftv && analyticsView()
+   }, [ props.mftv ] )
 
 
    if ( props.mftv ) {

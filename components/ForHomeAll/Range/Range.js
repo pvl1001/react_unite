@@ -43,8 +43,8 @@ function Range( { range, setRange, rangeValue, setRangeValue } ) {
          </ul>
 
          <div className={ s.mf_range }>
-            <input{ ...options } onChange={ e => handleChange( e.target.value ) }
-            />
+            <input { ...options }
+                   onChange={ e => handleChange( e.target.value ) }/>
             <div style={ { width: widthProgressRange() } } className={ s.mf_range__progress_active }/>
          </div>
 

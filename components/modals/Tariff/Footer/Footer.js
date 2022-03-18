@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { showModal } from "../../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../../redux/slices/orderSlice";
 import { analyticsView } from "../../../../analytics/events";
-import s from './Footer.module.sass'
-import { wrapp } from '../ModalTariff.module.sass'
+import s from './Footer.module.sass';
+import { wrapp } from '../ModalTariff.module.sass';
 import iconInfo from "../../../../mixins/iconInfo";
 
 function Footer( props ) {
@@ -14,7 +14,7 @@ function Footer( props ) {
 
    useEffect( () => {
       analyticsView()
-   } )
+   }, [] )
 
    function showModalOrder() {
       props.showModal( { modal: 'order', bool: true } )

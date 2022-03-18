@@ -26,6 +26,7 @@ export function analyticsView() {
             const widthW = window.innerWidth
 
             if ( eventFired.indexOf( lazyBlock ) === -1 ) {
+               // console.log( lazyBlock )
                eventFired.push( lazyBlock )
                if ( widthW > widthDesktop ) return setDataView( lazyBlock, 'desktop' )
                if ( widthW > widthTablet ) return setDataView( lazyBlock, 'tablet' )
