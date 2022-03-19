@@ -10,6 +10,7 @@ import pageHome, { tariffsPageHome } from "../data/pageHome";
 import { wrapper } from "../redux/store";
 import ForHomeAll from "../components/ForHomeAll/ForHomeAll";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
+import getLocation from "../mixins/getLocation";
 
 
 export default function InternetVsePage() {
@@ -32,7 +33,10 @@ export default function InternetVsePage() {
 }
 
 
-export const getServerSideProps = wrapper.getServerSideProps( store => () => {
+export const getStaticProps = wrapper.getStaticProps( store => async () => {
+   const location = await getLocation()
+   console.log( location.value )
+
    store.dispatch( setInitialStatePage( pageHome ) )
    store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
    return { props: {} }

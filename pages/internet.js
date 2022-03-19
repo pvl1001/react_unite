@@ -11,6 +11,7 @@ import headerStyle from "../components/Header/HeaderHome.module.sass";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import { wrapper } from "../redux/store";
 import { setInitialStatePage } from "../redux/slices/pageSlice";
+import getLocation from "../mixins/getLocation";
 
 
 export default function InternetPage() {
@@ -34,7 +35,10 @@ export default function InternetPage() {
 }
 
 
-export const getServerSideProps = wrapper.getServerSideProps( store => () => {
+export const getStaticProps = wrapper.getStaticProps( store => async () => {
+   const location = await getLocation()
+   console.log( location.value )
+
    store.dispatch( setInitialStatePage( pageHome ) )
    store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
    return { props: {} }

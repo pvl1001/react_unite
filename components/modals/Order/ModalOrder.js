@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 import { string, object } from 'yup'
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
-import { api } from "../../../api";
+import { api } from "../../../api/api";
 import { analyticsEvent, analyticsView } from "../../../analytics/events";
 import s from './ModalOrder.module.sass'
 

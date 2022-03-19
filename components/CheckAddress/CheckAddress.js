@@ -6,7 +6,7 @@ import $ from "jquery";
 import Success from "./Success/Success";
 import { connect } from "react-redux";
 import { showModal } from "../../redux/slices/modalsSlice";
-import { api } from "../../api";
+import { api } from "../../api/api";
 import { analyticsEvent } from "../../analytics/events";
 import { onUniteSwitch } from "../../redux/slices/tariffAroundSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
@@ -56,7 +56,7 @@ function CheckAddress( props ) {
       clearInput()
    }
 
-   function submit( e ) {
+   async function submit( e ) {
       e.preventDefault()
       analyticsEvent( 'click_button_address' )
 
@@ -65,8 +65,8 @@ function CheckAddress( props ) {
             clientAddress: address.address,
             house_guid: address.house_guid
          } )
-         return api( 'https://api.wifire.ru/api/address/check_dadata_address', address )
-            .then( data => setResult( data.result ) )
+         const data = await api( 'https://api.wifire.ru/api/address/check_dadata_address', address )
+         return setResult( data.result )
       }
 
       setIsShowLabel( true )
