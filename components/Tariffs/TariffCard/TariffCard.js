@@ -44,7 +44,7 @@ function TariffCard( props ) {
          case 'Домашний&nbsp;<br>интернет':
             return n.split( ' ' )[0] / 5
          case 'Звонки':
-            return n.split( ' ' )[0] / 30
+            return n.split( ' ' )[0] / 25
          case 'ТВ':
             return n.split( ' ' )[0] / 2.5
          default:
