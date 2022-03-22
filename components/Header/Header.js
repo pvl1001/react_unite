@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux'
 import { showModal } from "../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 import { analyticsEvent } from "../../analytics/events";
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 
@@ -13,20 +11,6 @@ function Header( { style, ...props } ) {
    const tariffDefault = useSelector( state => state.page.tariffDefault )
    const data = useSelector( state => state.page.header )
    const tariff = useSelector( state => state.tariffs.find( t => t.id === tariffDefault ) )
-   const [ img, setImg ] = useState( data.img.desktop )
-
-   function resize() {
-      if ( router.route !== '/' ) {
-         return window.innerWidth < 768
-            ? setImg( data.img.mob )
-            : setImg( data.img.desktop )
-      }
-      window.innerWidth < 603
-         ? setImg( data.img.mob )
-         : (window.innerWidth > 602 && window.innerWidth < 936)
-            ? setImg( data.img.tap )
-            : setImg( data.img.desktop )
-   }
 
    function showModalOrder() {
       props.showModal( {
@@ -51,11 +35,6 @@ function Header( { style, ...props } ) {
       } )
       analyticsEvent( `click_button_connect_details_${ tariff.dataView }` )
    }
-
-   useEffect( () => {
-      resize()
-      window.addEventListener( 'resize', resize )
-   }, [] )
 
 
    return (
@@ -88,15 +67,10 @@ function Header( { style, ...props } ) {
                   </div>
                </div>
 
-               <div className={ style.img_container }>
-                  <div className={ style.img }>
-                     <Image
-                        { ...img }
-                        alt="баннер"
-                        priority
-                     />
-                  </div>
-               </div>
+               <picture className={ style.img_container }>
+                  <source srcSet={ data.img.mobile } media="(max-width: 767px)"/>
+                  <img className={ style.img } src={ data.img.desktop } alt="главный баннер"/>
+               </picture>
             </div>
          </div>
       </header>

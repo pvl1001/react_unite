@@ -12,6 +12,7 @@ import Nav from "../components/Nav/Nav";
 
 
 export default function IndexPage( { location } ) {
+   console.log( location.data.region )
    return (
       <>
          <Head>

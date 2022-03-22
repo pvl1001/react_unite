@@ -633,22 +633,12 @@ export default {
    name: '#ДляДома',
    tariffDefault: 'turbo',
    header: {
-      title: 'Подключай интернет',
-      titleBr: ' для дома',
-      desc: 'С заботой о будущем',
+      title: 'Цена меньше',
+      titleBr: ' с каждым днём',
+      desc: 'Подключай интернет и ТВ',
       img: {
-         desktop: {
-            src: '/images/headerFT/head_banner_desktop.webp',
-            width: 860,
-            height: 720,
-            layout: 'responsive'
-         },
-         mob: {
-            src: '/images/headerFT/head_banner_mob.webp',
-            width: 426,
-            height: 442,
-            layout: 'responsive',
-         }
+         desktop: '/images/headerHome/head_banner_desktop.webp',
+         mobile: '/images/headerHome/head_banner_mob.webp'
       }
    },
    FAQ: [

@@ -9,24 +9,8 @@ const initialState = {
       titleBr: ' ТВ и связь',
       desc: 'В тарифах «Объединяй!»',
       img: {
-         desktop: {
-            src: '/images/header/head_banner_desktop.webp',
-            width: 1538,
-            height: 1159,
-            layout: 'responsive'
-         },
-         tap: {
-            src: '/images/header/head_banner_tap.webp',
-            layout: 'fill',
-            objectFit: 'cover',
-            objectPosition: 'center',
-         },
-         mob: {
-            src: '/images/header/head_banner_mob.webp',
-            width: 1204,
-            height: 684,
-            layout: 'responsive',
-         }
+         desktop: '/images/header/head_banner_desktop.png',
+         mobile: '/images/header/head_banner_mob.png',
       }
    },
    FAQ: [
