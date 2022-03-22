@@ -52,7 +52,7 @@ function BlockRange( { tariff, name, showModal, getChannels, setDataOrder, pageN
 
                <div>
                   <p className={ s.option__key }>Домашний интернет</p>
-                  <p className={ s.option__value }>{ tariff.infoModal[0].options[0].value }</p>
+                  <p className={ s.option__value }>{ tariff.speed + " Мбит/с" }</p>
                </div>
 
             </div>

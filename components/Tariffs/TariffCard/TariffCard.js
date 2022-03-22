@@ -22,13 +22,34 @@ function TariffCard( props ) {
    const premiumStyle = props.tariff.id === 'premium'
       ? { backgroundColor: 'var(--mf-premium)' } : {}
 
+   const infoProgress = [
+      props.tariff.web && {
+         title: "Мобильный интернет",
+         value: props.tariff.web + ' ГБ'
+      },
+      props.tariff.min && {
+         title: "Звонки",
+         value: props.tariff.min + ' минут'
+      },
+      props.tariff.speed && {
+         title: "Домашний&nbsp;<br>интернет",
+         value: props.tariff.speed + ' Мбит/с'
+      }
+   ]
+
    function activeProgress( title, n ) {
-      if ( title === 'Мобильный интернет' ) return n === 30
-         ? 50
-         : 100
-      if ( title === 'Домашний&nbsp;<br>интернет' ) return n.split( ' ' )[0] / 5
-      if ( title === 'Звонки' ) return n.split( ' ' )[0] / 30
-      return title === 'ТВ' && n.split( ' ' )[0] / 2.5
+      switch ( title ) {
+         case 'Мобильный интернет':
+            return +n.split( ' ' )[0] * 2
+         case 'Домашний&nbsp;<br>интернет':
+            return n.split( ' ' )[0] / 5
+         case 'Звонки':
+            return n.split( ' ' )[0] / 30
+         case 'ТВ':
+            return n.split( ' ' )[0] / 2.5
+         default:
+            return 0
+      }
    }
 
    function showModalOrder() {
@@ -90,14 +111,14 @@ function TariffCard( props ) {
          <div className={ `${ s.info } ${ s.wrapper }` }>
             <div className={ s.block_progress }>
 
-               { props.tariff.infoProgress.map( pb =>
-                  <ProgressBar
-                     key={ pb.title } pb={ pb }
-                     lineStyle={ {
-                        width: activeProgress( pb.title, pb.value ) + '%',
-                        ...premiumStyle
-                     } }
-                  />
+               { infoProgress.map( pb =>
+                     pb && <ProgressBar
+                        key={ pb.title } pb={ pb }
+                        lineStyle={ {
+                           width: activeProgress( pb.title, pb.value ) + '%',
+                           ...premiumStyle
+                        } }
+                     />
                ) }
 
 

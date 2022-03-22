@@ -36,8 +36,8 @@ export default function InternetPage() {
 
 
 export const getStaticProps = wrapper.getStaticProps( store => async () => {
-   const location = await getLocation()
-   console.log( location.value )
+   // const location = await getLocation()
+   // console.log( location.value )
 
    store.dispatch( setInitialStatePage( pageHome ) )
    store.dispatch( setInitialStateTariffs( tariffsPageHome ) )

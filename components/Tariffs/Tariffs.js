@@ -9,6 +9,7 @@ function Tariffs( props ) {
    const premium = props.tariffs.find( el => el.id === 'premium' )
    const [ collapseGroup, setCollapseGroup ] = useState( false )
    const [ collapseChannels, setCollapseChannels ] = useState( [] )
+   const tariffsName = props.pageName === 'Объединяй!' ? '«Объединяй!»' : props.pageName
 
 
    const settingsSlider = {
@@ -39,7 +40,7 @@ function Tariffs( props ) {
    return (
       <section className={ 'tariffs ' + s.container }>
          <div className="wrapper">
-            <h1 className={ s.title }>Тарифы «{ props.pageName }»</h1>
+            <h1 className={ s.title }>Тарифы { tariffsName }</h1>
 
             <Slider className="slider" { ...settingsSlider }>
                { props.tariffs.map( tariff =>

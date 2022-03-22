@@ -114,6 +114,9 @@ export function scrollTo( element, callback = null ) {
    setTimeout( () => window.scrollTo( 0, element.offsetTop ), 0 )
 }
 
+const iconInfo = <><span onClick={ () => toPlug( 'faq-0-0' ) } className="link">
+         Скидка</span> на абонентскую плату при подключения до 01.05.2022</>
+
 
 const initialState = [
    {
@@ -122,24 +125,10 @@ const initialState = [
       dataView: "their",
       name: "Для своих",
       marks: [ "Акция" ],
-      speed: 500,
+      web: 50,
       min: 2100,
-      web: "Безлимитный интернет",
+      speed: 300,
       sale: "Скидка 40% на SIM-карты",
-      infoProgress: [
-         {
-            title: "Мобильный интернет",
-            value: "<span class='icon-infinity'></span> ГБ"
-         },
-         {
-            title: "Звонки",
-            value: "2100 минут"
-         },
-         {
-            title: "Домашний&nbsp;<br>интернет",
-            value: "500 Мбит/с"
-         }
-      ],
       mftv: [
          {
             name: "START",
@@ -154,11 +143,12 @@ const initialState = [
       ],
       tvId: 3,
       tvLength: "188 каналов",
-      oldPrice: 1300,
-      price: 650,
+      oldPrice: 950,
+      price: 0,
       totalPrice: 650,
-      iconInfo: <><span onClick={ () => toPlug( 'faq-0-0' ) } className="link">
-         Скидка</span> на абонентскую плату действует 3 месяца после подключения</>,
+      get iconInfo() {
+         return this.oldPrice && iconInfo
+      },
       youtube: true,
       rentDevice: [
          {
@@ -172,75 +162,6 @@ const initialState = [
          {
             text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
             price: "0"
-         }
-      ],
-      infoModal: [
-         {
-            title: "Мобильная связь",
-            icon: "mob_bold",
-            options: [
-               {
-                  name: "Мобильный интернет",
-                  description: "",
-                  value: "50 ГБ"
-               },
-               {
-                  name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на номера МегаФона России",
-                  description: "Не расходуют пакет минут",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на мобильные номера других операторов России",
-                  description: "",
-                  value: "2100 минут"
-               },
-               {
-                  name: "Интернет на социальные сети и YouTube",
-                  description: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе. <br>Эти приложения не расходуют интернет по тарифу: WhatsApp, Viber, Telegram, eMotion, Facebook Messenger, ТамТам, Snapchat.",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "SMS на номера России",
-                  value: "50 сообщений"
-               }
-            ]
-         },
-         {
-            title: "Интернет",
-            icon: "wi-fi_bold",
-            options: [
-               {
-                  name: "Скорость",
-                  description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-                  value: "500 Мбит/с"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
-         },
-         {
-            title: "ТВ",
-            icon: "TV_bold",
-            options: [
-               {
-                  name: "Мегафон ТВ",
-                  description: "",
-                  value: "188 каналов"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
          }
       ],
       equipments: [
@@ -430,31 +351,18 @@ const initialState = [
       tariffId: 5328,
       dataView: "dvainet",
       name: "Два интернета",
-      marks: [ "Только нужное" ],
-      speed: 200,
+      marks: [],
+      web: 30,
       min: 1200,
-      web: "Безлимитный интернет",
+      speed: 100,
       sale: "Скидка 40% на SIM-карты",
-      infoProgress: [
-         {
-            title: "Мобильный интернет",
-            value: "<span class='icon-infinity'></span> ГБ"
-         },
-         {
-            title: "Звонки",
-            value: "1200 минут"
-         },
-         {
-            title: "Домашний&nbsp;<br>интернет",
-            value: "200 Мбит/с"
-         }
-      ],
       tvId: null,
-      oldPrice: null,
-      price: 700,
+      oldPrice: 600,
+      price: 0,
       totalPrice: 700,
-      iconInfo: <><span onClick={ () => toPlug( 'faq-0-1' ) } className="link">
-         Скидка</span> на абонентскую плату действует 3 месяца после подключения</>,
+      get iconInfo() {
+         return this.oldPrice && iconInfo
+      },
       rentDevice: [
          {
             text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
@@ -463,55 +371,6 @@ const initialState = [
          {
             text: "Аренда Android TV",
             price: 199
-         }
-      ],
-      infoModal: [
-         {
-            title: "Мобильная связь",
-            icon: "mob_bold",
-            options: [
-               {
-                  name: "Мобильный интернет",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на номера МегаФона России",
-                  description: "Не расходуют пакет минут",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на мобильные номера других операторов России",
-                  description: "",
-                  value: "1200 минут"
-               },
-               {
-                  name: "МегаДиск",
-                  description: "Облачное хранилище для ваших фотографий и файлов",
-                  value: "1 ТБ"
-               }
-            ]
-         },
-         {
-            title: "Интернет",
-            icon: "wi-fi_bold",
-            options: [
-               {
-                  name: "Скорость",
-                  description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-                  value: "200 Мбит/с"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
          }
       ],
       equipments: [
@@ -679,30 +538,18 @@ const initialState = [
       dataView: "hit",
       name: "Хит",
       marks: [ "Популярное" ],
-      speed: 300,
+      web: 30,
       min: 1500,
-      web: "Безлимитный интернет",
+      speed: 100,
       sale: "Скидка 40% на SIM-карты",
-      infoProgress: [
-         {
-            title: "Мобильный интернет",
-            value: "<span class='icon-infinity'></span> ГБ"
-         },
-         {
-            title: "Звонки",
-            value: "1500 минут"
-         },
-         {
-            title: "Домашний&nbsp;<br>интернет",
-            value: "300 Мбит/с"
-         }
-      ],
       tvId: 2,
       tvLength: "188 каналов",
-      oldPrice: null,
-      price: 850,
+      oldPrice: 700,
+      price: 0,
       totalPrice: 850,
-      iconInfo: false,
+      get iconInfo() {
+         return this.oldPrice && iconInfo
+      },
       rentDevice: [
          {
             text: "Аренда ТВ-приставки",
@@ -715,71 +562,6 @@ const initialState = [
          {
             text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
             price: 99
-         }
-      ],
-      infoModal: [
-         {
-            title: "Мобильная связь",
-            icon: "mob_bold",
-            options: [
-               {
-                  name: "Мобильный интернет",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на номера МегаФона России",
-                  description: "Не расходуют пакет минут",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на мобильные номера других операторов России",
-                  description: "",
-                  value: "1500 минут"
-               },
-               {
-                  name: "МегаДиск",
-                  description: "Облачное хранилище для ваших фотографий и файлов",
-                  value: "1 ТБ"
-               }
-            ]
-         },
-         {
-            title: "Интернет",
-            icon: "wi-fi_bold",
-            options: [
-               {
-                  name: "Скорость",
-                  description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-                  value: "300 Мбит/с"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
-         },
-         {
-            title: "ТВ",
-            icon: "TV_bold",
-            options: [
-               {
-                  name: "Мегафон ТВ",
-                  description: "",
-                  value: "188 каналов"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
          }
       ],
       equipments: [
@@ -979,24 +761,10 @@ const initialState = [
       dataView: "films",
       name: "Кино и сериалы",
       marks: [],
-      speed: 300,
+      web: 30,
       min: 1500,
-      web: "Безлимитный интернет",
+      speed: 100,
       sale: "Скидка 40% на SIM-карты",
-      infoProgress: [
-         {
-            title: "Мобильный интернет",
-            value: "<span class='icon-infinity'></span> ГБ"
-         },
-         {
-            title: "Звонки",
-            value: "1500 минут"
-         },
-         {
-            title: "Домашний&nbsp;<br>интернет",
-            value: "300 Мбит/с"
-         }
-      ],
       mftv: [
          {
             name: "START",
@@ -1011,10 +779,12 @@ const initialState = [
       ],
       tvId: null,
       tvLength: null,
-      oldPrice: null,
-      price: 850,
+      oldPrice: 700,
+      price: 0,
       totalPrice: 850,
-      iconInfo: false,
+      get iconInfo() {
+         return this.oldPrice && iconInfo
+      },
       rentDevice: [
          {
             text: "Аренда ТВ-приставки",
@@ -1027,55 +797,6 @@ const initialState = [
          {
             text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
             price: 99
-         }
-      ],
-      infoModal: [
-         {
-            title: "Мобильная связь",
-            icon: "mob_bold",
-            options: [
-               {
-                  name: "Мобильный интернет",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на номера МегаФона России",
-                  description: "Не расходуют пакет минут",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на мобильные номера других операторов России",
-                  description: "",
-                  value: "1500 минут"
-               },
-               {
-                  name: "МегаДиск",
-                  description: "Облачное хранилище для ваших фотографий и файлов",
-                  value: "1 ТБ"
-               }
-            ]
-         },
-         {
-            title: "Интернет",
-            icon: "wi-fi_bold",
-            options: [
-               {
-                  name: "Скорость",
-                  description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-                  value: "300 Мбит/с"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
          }
       ],
       equipments: [
@@ -1275,24 +996,10 @@ const initialState = [
       dataView: "premium",
       name: "Премиум",
       marks: [],
+      web: 50,
+      min: 2500,
       speed: 500,
-      min: 3000,
-      web: "Безлимитный интернет",
       sale: "Скидка 40% на SIM-карты",
-      infoProgress: [
-         {
-            title: "Мобильный интернет",
-            value: "<span class='icon-infinity'></span> ГБ"
-         },
-         {
-            title: "Звонки",
-            value: "3000 минут"
-         },
-         {
-            title: "Домашний&nbsp;<br>интернет",
-            value: "500 Мбит/с"
-         }
-      ],
       mftv: [
          {
             name: "START",
@@ -1317,10 +1024,12 @@ const initialState = [
       ],
       tvId: 4,
       tvLength: "250 каналов",
-      oldPrice: null,
-      price: 1900,
+      oldPrice: 1500,
+      price: 0,
       totalPrice: 1900,
-      iconInfo: false,
+      get iconInfo() {
+         return this.oldPrice && iconInfo
+      },
       youtube: true,
       rentDevice: [
          {
@@ -1334,75 +1043,6 @@ const initialState = [
          {
             text: "Аренда Wi-Fi роутера <nobr>(100 Мбит/с)</nobr>",
             price: 55
-         }
-      ],
-      infoModal: [
-         {
-            title: "Мобильная связь",
-            icon: "mob_bold",
-            options: [
-               {
-                  name: "Мобильный интернет",
-                  description: "",
-                  value: "50 ГБ"
-               },
-               {
-                  name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на номера МегаФона России",
-                  description: "Не расходуют пакет минут",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на мобильные номера других операторов России",
-                  description: "",
-                  value: "3000 минут"
-               },
-               {
-                  name: "Интернет на социальные сети и YouTube",
-                  description: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе. <br>Эти приложения не расходуют интернет по тарифу: WhatsApp, Viber, Telegram, eMotion, Facebook Messenger, ТамТам, Snapchat.",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "SMS на номера России",
-                  value: "300 сообщений"
-               }
-            ]
-         },
-         {
-            title: "Интернет",
-            icon: "wi-fi_bold",
-            options: [
-               {
-                  name: "Скорость",
-                  description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-                  value: "500 Мбит/с"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
-         },
-         {
-            title: "ТВ",
-            icon: "TV_bold",
-            options: [
-               {
-                  name: "Мегафон ТВ",
-                  description: "",
-                  value: "250 каналов"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
          }
       ],
       equipments: [
@@ -1593,30 +1233,18 @@ const initialState = [
       dataView: "econom",
       name: "Эконом",
       marks: [],
-      speed: 100,
+      web: 20,
       min: 700,
-      web: "30 ГБ",
+      speed: 100,
       sale: "Скидка 40% на SIM-карты",
-      infoProgress: [
-         {
-            title: "Мобильный интернет",
-            value: "30 ГБ"
-         },
-         {
-            title: "Звонки",
-            value: "700 минут"
-         },
-         {
-            title: "Домашний&nbsp;<br>интернет",
-            value: "100 Мбит/с"
-         }
-      ],
       tvId: 1,
       tvLength: "61 канал",
-      oldPrice: null,
-      price: 650,
+      oldPrice: 550,
+      price: 0,
       totalPrice: 650,
-      iconInfo: false,
+      get iconInfo() {
+         return this.oldPrice && iconInfo
+      },
       rentDevice: [
          {
             text: "Аренда ТВ-приставки",
@@ -1629,71 +1257,6 @@ const initialState = [
          {
             text: "Аренда Wi-Fi роутера <nobr>(100 Мбит/с)</nobr>",
             price: 99
-         }
-      ],
-      infoModal: [
-         {
-            title: "Мобильная связь",
-            icon: "mob_bold",
-            options: [
-               {
-                  name: "Мобильный интернет",
-                  description: "",
-                  value: "30 ГБ"
-               },
-               {
-                  name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на номера МегаФона России",
-                  description: "Не расходуют пакет минут",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на мобильные номера других операторов России",
-                  description: "",
-                  value: "700 минут"
-               },
-               {
-                  name: "МегаДиск",
-                  description: "Облачное хранилище для ваших фотографий и файлов",
-                  value: "1 ТБ"
-               }
-            ]
-         },
-         {
-            title: "Интернет",
-            icon: "wi-fi_bold",
-            options: [
-               {
-                  name: "Скорость",
-                  description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-                  value: "100 Мбит/с"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "30 ГБ"
-               }
-            ]
-         },
-         {
-            title: "ТВ",
-            icon: "TV_bold",
-            options: [
-               {
-                  name: "Мегафон ТВ",
-                  description: "",
-                  value: "61 канал"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
          }
       ],
       equipments: [
@@ -1893,100 +1456,23 @@ const initialState = [
       dataView: "vezde",
       name: "Везде",
       marks: [],
-      speed: 150,
+      web: 50,
       min: 2100,
-      web: "Безлимитный интернет",
+      speed: 150,
       sale: null,
-      infoProgress: [
-         {
-            title: "Мобильный интернет",
-            value: "<span class='icon-infinity'></span> ГБ"
-         },
-         {
-            title: "Звонки",
-            value: "2100 минут"
-         },
-         {
-            title: "Домашний&nbsp;<br>интернет",
-            value: "150 Мбит/с"
-         }
-      ],
       tvId: 1,
       tvLength: "61 канал",
       oldPrice: null,
-      price: 1400,
+      price: 1050,
       totalPrice: 1400,
       priceSale: 960,
-      iconInfo: false,
+      get iconInfo() {
+         return this.oldPrice && iconInfo
+      },
       rentDevice: [
          {
             text: "Аренда 4G Wi-Fi роутера",
             price: 100
-         }
-      ],
-      infoModal: [
-         {
-            title: "Мобильная связь",
-            icon: "mob_bold",
-            options: [
-               {
-                  name: "Мобильный интернет",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
-                  description: "",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на номера МегаФона России",
-                  description: "Не расходуют пакет минут",
-                  value: "Безлимитно"
-               },
-               {
-                  name: "Звонки на мобильные номера других операторов России",
-                  description: "",
-                  value: "2100 минут"
-               },
-               {
-                  name: "МегаДиск",
-                  description: "Облачное хранилище для ваших фотографий и файлов",
-                  value: "1 ТБ"
-               }
-            ]
-         },
-         {
-            title: "Интернет",
-            icon: "wi-fi_bold",
-            options: [
-               {
-                  name: "Скорость",
-                  description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-                  value: "150 Мбит/с"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
-         },
-         {
-            title: "ТВ",
-            icon: "TV_bold",
-            options: [
-               {
-                  name: "Мегафон ТВ",
-                  description: "",
-                  value: "61 канал"
-               },
-               {
-                  name: "Трафик",
-                  description: "",
-                  value: "Безлимитно"
-               }
-            ]
          }
       ],
       equipments: [

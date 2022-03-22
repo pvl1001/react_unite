@@ -10,8 +10,7 @@ import headerStyle from '../components/Header/Header.module.sass';
 import getLocation from "../mixins/getLocation";
 
 
-export default function IndexPage( { location } ) {
-   console.log( location )
+export default function IndexPage() {
    return (
       <>
          <Head>
@@ -34,7 +33,7 @@ export default function IndexPage( { location } ) {
 
 export const getStaticProps = async () => {
    const location = await getLocation()
-   console.log( location.value )
+   // console.log( location.value )
 
    return { props: { location } }
 }

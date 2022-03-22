@@ -16,6 +16,71 @@ function ModalTariff( props ) {
    }, [ props.show ] )
 
    if ( props.show ) {
+      const infoModal = [
+         props.tariff.web && {
+            title: "Мобильная связь",
+            icon: "mob_bold",
+            options: [
+               {
+                  name: "Мобильный интернет",
+                  description: "",
+                  value: props.tariff.web + " ГБ"
+               },
+               {
+                  name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
+                  description: "",
+                  value: "Безлимитно"
+               },
+               {
+                  name: "Звонки на все номера России",
+                  description: "Звонки на городские номера и межгород включены в пакет. Звонки на номера МегаФона России не расходуют пакет минут.",
+                  value: props.tariff.min + " минут"
+               },
+               props.tariff.youtube && {
+                  name: "Интернет на социальные сети и YouTube",
+                  description: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе.\n" +
+                     "Эти приложения не расходуют интернет по тарифу: WhatsApp, Viber, Telegram, eMotion, Facebook Messenger, ТамТам, Snapchat.",
+                  value: "Безлимитно"
+               },
+               {
+                  name: "SMS на номера России",
+                  value: "50 сообщений"
+               }
+            ]
+         },
+         props.tariff.speed && {
+            title: "Домашний интернет",
+            icon: "wi-fi_bold",
+            options: [
+               {
+                  name: "Скорость",
+                  description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
+                  value: props.tariff.speed + " Мбит/с"
+               },
+               {
+                  name: "Трафик",
+                  description: "",
+                  value: "Безлимитно"
+               }
+            ]
+         },
+         props.tariff.tvLength && {
+            title: "ТВ",
+            icon: "TV_bold",
+            options: [
+               {
+                  name: "Мегафон ТВ",
+                  description: "",
+                  value: props.tariff.tvLength
+               },
+               {
+                  name: "Трафик",
+                  description: "",
+                  value: "Безлимитно"
+               }
+            ]
+         }
+      ]
 
       const premiumStyle = props.tariff.id === 'premium'
          ? { backgroundColor: 'var(--mf-premium)' }
@@ -55,12 +120,12 @@ function ModalTariff( props ) {
             <div className={ s.container }>
 
                <ul className={ s.items }>
-                  { props.tariff.infoModal.map( info =>
-                     <BlockInfo
-                        key={ info.title }
-                        info={ info }
-                        tariff={ props.tariff }
-                     />
+                  { infoModal.map( info =>
+                        info && <BlockInfo
+                           key={ info.title }
+                           info={ info }
+                           tariff={ props.tariff }
+                        />
                   ) }
                </ul>
 

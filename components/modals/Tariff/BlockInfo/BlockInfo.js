@@ -19,11 +19,11 @@ function BlockInfo( { info, tariff } ) {
 
          <ul>
             { info.options.map( option =>
-               <ItemInfo
-                  key={ option.name }
-                  option={ option }
-                  tariff={ tariff }
-               />
+                  option && <ItemInfo
+                     key={ option.name }
+                     option={ option }
+                     tariff={ tariff }
+                  />
             ) }
          </ul>
 
