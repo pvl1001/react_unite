@@ -8,15 +8,17 @@ import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
 import headerStyle from '../components/Header/Header.module.sass';
 import getLocation from "../mixins/getLocation";
+import Nav from "../components/Nav/Nav";
 
 
-export default function IndexPage() {
+export default function IndexPage( { location } ) {
    return (
       <>
          <Head>
             <title>NextJS !Объединяй</title>
          </Head>
 
+         <Nav location={ location }/>
          <Header style={ headerStyle }/>
          <main>
             <Tariffs/>
@@ -33,7 +35,7 @@ export default function IndexPage() {
 
 export const getStaticProps = async () => {
    const location = await getLocation()
-   // console.log( location.value )
+   console.log( location.data.region )
 
    return { props: { location } }
 }

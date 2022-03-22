@@ -1,5 +1,4 @@
-import Support from "./Support/Support";
-import Nav from "./Nav/Nav";
+// import Support from "./Support/Support";
 import Footer from "./Footer/Footer";
 import ModalCity from "./modals/City/ModalCity";
 import ModalOrder from "./modals/Order/ModalOrder";
@@ -16,8 +15,7 @@ import ModalChannels from "./modals/Channels/ModalChannels";
 export default function Layout( { children } ) {
    return (
       <>
-         <Support/>
-         <Nav/>
+         {/*<Support/>*/ }
          { children }
          <Footer/>
 

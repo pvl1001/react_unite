@@ -12,9 +12,10 @@ import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import { wrapper } from "../redux/store";
 import { setInitialStatePage } from "../redux/slices/pageSlice";
 import getLocation from "../mixins/getLocation";
+import Nav from "../components/Nav/Nav";
 
 
-export default function InternetPage() {
+export default function InternetPage( { location } ) {
 
    return (
       <>
@@ -22,6 +23,7 @@ export default function InternetPage() {
             <title>NextJS #ДляДома</title>
          </Head>
 
+         <Nav location={ location }/>
          <Header style={ headerStyle }/>
          <main>
             <Tariffs/>
@@ -36,10 +38,10 @@ export default function InternetPage() {
 
 
 export const getStaticProps = wrapper.getStaticProps( store => async () => {
-   // const location = await getLocation()
+   const location = await getLocation()
    // console.log( location.value )
 
    store.dispatch( setInitialStatePage( pageHome ) )
    store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
-   return { props: {} }
+   return { props: { location } }
 } )

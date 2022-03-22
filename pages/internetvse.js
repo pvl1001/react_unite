@@ -11,15 +11,17 @@ import { wrapper } from "../redux/store";
 import ForHomeAll from "../components/ForHomeAll/ForHomeAll";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import getLocation from "../mixins/getLocation";
+import Nav from "../components/Nav/Nav";
 
 
-export default function InternetVsePage() {
+export default function InternetVsePage( { location } ) {
    return (
       <>
          <Head>
             <title>NextJS #ДляДома Всё</title>
          </Head>
 
+         <Nav location={ location }/>
          <Header style={ headerStyle }/>
          <main>
             <ForHomeAll/>
@@ -34,10 +36,10 @@ export default function InternetVsePage() {
 
 
 export const getStaticProps = wrapper.getStaticProps( store => async () => {
-   // const location = await getLocation()
+   const location = await getLocation()
    // console.log( location.value )
 
    store.dispatch( setInitialStatePage( pageHome ) )
    store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
-   return { props: {} }
+   return { props: { location } }
 } )

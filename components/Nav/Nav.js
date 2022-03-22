@@ -30,10 +30,10 @@ function Nav( props ) {
                <a href='/'> </a>
             </div>
             <div className={ s.phone }>
-               <a href="tel:88005500001">8 800 55-00-001</a>
+               <a href="tel:+78352236997">8 8352 23-69-97</a>
             </div>
             <div className={ s.city } onClick={ showModalCities }>
-               <span ref={ refCity }>Москва и область</span>
+               <span ref={ refCity }>{ props.location.data.region }</span>
             </div>
          </div>
       </nav>
