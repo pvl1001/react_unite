@@ -1,9 +1,14 @@
 import s from './FAQ.module.sass';
 import { Accordion } from "react-bootstrap";
 import { connect } from 'react-redux';
+import { useRouter } from 'next/router';
 
 
 function FAQ( { data } ) {
+   const { route } = useRouter()
+   const lastAccordionItem = ( parentIdx, childIdx, arr ) =>
+      parentIdx === 1 && childIdx === arr.length - 1 && route === '/'
+
 
    return (
       <section className={ s.container }>
@@ -33,15 +38,19 @@ function FAQ( { data } ) {
 
                            </Accordion.Item>
 
-                           { (i === 1 && idx === arr.length - 1) && (
-                              <Accordion.Item eventKey={ i + '-' + idx } bsPrefix="accordion__item">
-                                 <a href="https://help.home.megafon.ru/" style={ { color: "#333" } }>
-                                    <Accordion.Header bsPrefix="accordion__header">
-                                       Помощь и обслуживание клиентов
-                                    </Accordion.Header>
+                           { lastAccordionItem( i, idx, arr ) &&
+                              <div className="accordion__item">
+                                 <a href="https://help.home.megafon.ru/">
+                                    <h2 className="accordion__header">
+                                       <button
+                                          type="button" aria-expanded="true"
+                                          className="accordion-button collapsed">
+                                          Помощь и обслуживание клиентов
+                                       </button>
+                                    </h2>
                                  </a>
-                              </Accordion.Item>
-                           ) }
+                              </div>
+                           }
                         </div>
                      ) ) }
                   </div>
