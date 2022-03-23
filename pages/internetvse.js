@@ -6,7 +6,7 @@ import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
 import Head from 'next/head'
 import { setInitialStatePage } from "../redux/slices/pageSlice";
-import pageHome, { tariffsPageHome } from "../data/pageHome";
+import pageHomeVse, { tariffsPageHome } from "../data/pageHomeVse";
 import { wrapper } from "../redux/store";
 import ForHomeAll from "../components/ForHomeAll/ForHomeAll";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
@@ -39,7 +39,7 @@ export const getStaticProps = wrapper.getStaticProps( store => async () => {
    const region = await getRegion()
    // console.log( location.value )
 
-   store.dispatch( setInitialStatePage( pageHome ) )
+   store.dispatch( setInitialStatePage( pageHomeVse ) )
    store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
    return { props: { region } }
 } )
