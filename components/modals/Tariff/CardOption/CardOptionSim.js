@@ -1,12 +1,12 @@
 import { optionSwitch } from "../../../../redux/slices/tariffsSlice";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { counterSim } from "../../../../redux/slices/tariffsSlice";
 import { showModal } from "../../../../redux/slices/modalsSlice";
 import { sumTotalPrice } from "../../../../redux/slices/tariffsSlice";
-import s from './CardOption.module.sass'
+import s from './CardOption.module.sass';
 
 function CardOptionSim( props ) {
-
+   const megaTariff = useSelector( state => state.megaTariff )
    const payload = { id: props.id, index: props.idx }
    const showModalTariffAll = () => props.showModal( { modal: 'tariffAll', bool: true } )
 
@@ -26,7 +26,8 @@ function CardOptionSim( props ) {
           className={ s.container }>
          <div className={ s.sim }>
             <p>SIM-карта с тарифом
-               <span onClick={ showModalTariffAll }> «Без переплат. Всё»</span> Скидка 40% на абонентскую плату
+               <span onClick={ showModalTariffAll }> «Без переплат. { megaTariff.name }»</span> Скидка 40% на
+               абонентскую плату
             </p>
             <div className="counter">
                <button className="counter__minus"

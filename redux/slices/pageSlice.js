@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
+import { stateMegaTariff } from './megaTariffSlice';
 
 const initialState = {
    name: 'Объединяй!',
@@ -21,8 +22,8 @@ const initialState = {
                "answer": "<p class=\"text\">С 12 апреля 2021 по 1 апреля 2022 года при подключении тарифа Объединяй! Для своих или переходе на него вы получите скидку 50 % на абонентскую плату на 3 месяца.<br>Как подключить:</p>\n                     <ul class=\"text\">\n                        <li>—&nbsp;Оставить заявку;</li>\n                        <li>—&nbsp;Пополните счёт номера, на который подключаете тариф, на сумму абонентской платы.;</li>\n                        <li>—&nbsp;Готово! Теперь абонентская плата на 50% меньше.</li> \n                     </ul>\n                  <p class=\"text\"><a href=\"https://moscow.megafon.ru/download/~federal/action/obyedinyai_oferta_50.pdf\">Подробные условия акции</a></p>"
             },
             {
-               "question": "Скидка на тариф «Без переплат. Всё»",
-               "answer": "Подключите своим близким тариф «Без переплат. Всё» со скидкой 40% на абонентскую плату. Для заказа\n               SIM-карт позвоните по номеру 8 800 550-00-01 (максимум 10 SIM-карт). <br>\n               <a class=\"text-link link\" href=\"#\"\n                  target=\"_blank\">Скачать подробную информацию о тарифе</a>"
+               "question": `Скидка на тариф «Без переплат. ${ stateMegaTariff.name }»`,
+               "answer": `Подключите своим близким тариф «Без переплат. ${ stateMegaTariff.name }» со скидкой 40% на абонентскую плату. Для заказа\n               SIM-карт позвоните по номеру 8 800 550-00-01 (максимум 10 SIM-карт). <br>\n               <a class=\"text-link link\" href=\"#\"\n                  target=\"_blank\">Скачать подробную информацию о тарифе</a>`
             },
             {
                "question": "Подключение к домашнему интернету",

@@ -6,10 +6,12 @@ import equipmentsSlice from "./slices/equipmentsSlice";
 import modalsSlice from "./slices/modalsSlice";
 import orderSlice from "./slices/orderSlice";
 import tariffAroundSlice from "./slices/tariffAroundSlice";
+import megaTariffSlice from "./slices/megaTariffSlice";
 
 
 export const store = configureStore( {
    reducer: {
+      megaTariff: megaTariffSlice,
       page: pageSlice,
       modals: modalsSlice,
       tariffs: tariffsSlice,

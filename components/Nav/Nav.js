@@ -33,7 +33,7 @@ function Nav( props ) {
                <a href="tel:+78352236997">8 8352 23-69-97</a>
             </div>
             <div className={ s.city } onClick={ showModalCities }>
-               <span ref={ refCity }>{ props.location.data.region }</span>
+               <span ref={ refCity }>{ props.region }</span>
             </div>
          </div>
       </nav>
@@ -41,10 +41,7 @@ function Nav( props ) {
 }
 
 
-export default connect(
-   null,
-   {
-      showModal,
-      setDataOrder
-   }
-)( Nav )
+export default connect( null, {
+   showModal,
+   setDataOrder
+} )( Nav )

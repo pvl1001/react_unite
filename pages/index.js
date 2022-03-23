@@ -7,19 +7,19 @@ import WhatElse from "../components/WhatElse/WhatElse";
 import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
 import headerStyle from '../components/Header/Header.module.sass';
-import getLocation from "../mixins/getLocation";
+import getRegion from "../mixins/getRegion";
 import Nav from "../components/Nav/Nav";
 
 
-export default function IndexPage( { location } ) {
-   console.log( location.data.region )
+export default function IndexPage( { region } ) {
+   console.log( region )
    return (
       <>
          <Head>
             <title>NextJS !Объединяй</title>
          </Head>
 
-         <Nav location={ location }/>
+         <Nav region={ region }/>
          <Header style={ headerStyle }/>
          <main>
             <Tariffs/>
@@ -35,8 +35,8 @@ export default function IndexPage( { location } ) {
 
 
 export const getStaticProps = async () => {
-   const location = await getLocation()
-   console.log( location.data.region )
+   const region = await getRegion()
+   console.log( region )
 
-   return { props: { location } }
+   return { props: { region } }
 }

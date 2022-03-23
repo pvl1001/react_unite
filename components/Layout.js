@@ -4,7 +4,7 @@ import ModalCity from "./modals/City/ModalCity";
 import ModalOrder from "./modals/Order/ModalOrder";
 import ModalTariff from "./modals/Tariff/ModalTariff";
 import ModalMftv from "./modals/Mftv/ModalMftv";
-import ModalTariffAll from "./modals/TariffAll/ModalTariffAll";
+import ModalMegaTariff from "./modals/MegaTariff/ModalMegaTariff";
 import ModalAlmond from "./modals/Almond/ModalAlmond";
 import ModalAboutAlmond from "./modals/AboutAlmond/ModalAboutAlmond";
 import ChoiceRouter from "./modals/ChoiceRouter/ChoiceRouter";
@@ -23,7 +23,7 @@ export default function Layout( { children } ) {
          <ModalOrder/>
          <ModalTariff/>
          <ModalMftv/>
-         <ModalTariffAll/>
+         <ModalMegaTariff/>
          <ModalAlmond/>
          <ModalAboutAlmond/>
          <ChoiceRouter/>

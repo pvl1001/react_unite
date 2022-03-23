@@ -11,6 +11,7 @@ import CardWE from "./CardWE/CardWE";
 function WhatElse( props ) {
    const tariffDefault = useSelector( state => state.page.tariffDefault )
    const pageName = useSelector( state => state.page.name )
+   const megaTariff = useSelector( state => state.megaTariff )
    const tariff = useSelector( state => state.tariffs.find( tariff => tariff.id === tariffDefault ) )
 
    const data = [
@@ -33,7 +34,7 @@ function WhatElse( props ) {
          "img": sales,
          "alt": "скидки",
          "title": "Тариф со скидкой 40% <br> для ваших близких",
-         "text": "Общайтесь выгодно: подключите до 10 человек к тарифу «Без переплат. Всё» со скидкой 40 % по"
+         "text": `Общайтесь выгодно: подключите до 10 человек к тарифу «Без переплат. ${ megaTariff.name }» со скидкой 40 % по`
       }
    ]
 
