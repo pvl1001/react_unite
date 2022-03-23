@@ -5,8 +5,7 @@ import CheckAddress from "../components/CheckAddress/CheckAddress";
 import Equipments from "../components/Equipments/Equipments";
 import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
-import { tariffsPageHome } from '/data/pageHome'
-import pageHome from '/data/pageHome';
+import pageHome, { tariffsPageHome } from '/pageData/pageHome'
 import headerStyle from "../components/Header/HeaderHome.module.sass";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import { wrapper } from "../redux/store";

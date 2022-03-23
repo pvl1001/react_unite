@@ -1,6 +1,10 @@
-import s from './Footer.module.sass'
+import s from './Footer.module.sass';
+import { useSelector } from 'react-redux';
 
 export default function Footer() {
+   const transfer = useSelector( state => state.page.footer )
+
+
    return (
       <footer className={ s.container }>
          <div className={ s.wrapper + ' wrapper' }>
@@ -8,11 +12,7 @@ export default function Footer() {
                <div className={ s.copyright__age }>6+</div>
                <div className={ s.copyright__text }>© 2022 <br/> ПАО «Мегафон»</div>
             </div>
-            <p className={ s.transfer }>
-               Услуги предоставляются ООО «Нэт Бай Нэт Холдинг» и ПАО «МегаФон» на территории присутствия операторов при
-               наличии технической возможности. Выгода указана для тарифа «Объединяй! Для своих» по сравнению с
-               тарифами операторов на аналогичные услуги при раздельном подключении. Подробности на megafon.ru
-            </p>
+            <p className={ s.transfer }>{ transfer }</p>
             <p className={ s.policy }>
                Продолжая использовать наш сайт, вы даете согласие на обработку файлов Cookies и других
                пользовательских данных, в соответствии с <a href="https://www.megafon.ru/ad/politika"

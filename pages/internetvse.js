@@ -6,7 +6,8 @@ import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
 import Head from 'next/head'
 import { setInitialStatePage } from "../redux/slices/pageSlice";
-import pageHomeVse, { tariffsPageHome } from "../data/pageHomeVse";
+import pageHome, { tariffsPageHome } from "../pageData/pageHome";
+import pageHomeVse from "../pageData/pageHomeVse";
 import { wrapper } from "../redux/store";
 import ForHomeAll from "../components/ForHomeAll/ForHomeAll";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
@@ -37,9 +38,7 @@ export default function InternetVsePage( { region } ) {
 
 export const getStaticProps = wrapper.getStaticProps( store => async () => {
    const region = await getRegion()
-   // console.log( location.value )
-
-   store.dispatch( setInitialStatePage( pageHomeVse ) )
+   store.dispatch( setInitialStatePage( { ...pageHome, ...pageHomeVse } ) )
    store.dispatch( setInitialStateTariffs( tariffsPageHome ) )
    return { props: { region } }
 } )
