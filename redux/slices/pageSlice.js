@@ -19,7 +19,9 @@ const initialState = {
          "col": [
             {
                "question": "Скидка для новых абонентов тарифов «Объединяй!»",
-               "answer": "<p class=\"text\">С 12 апреля 2021 по 1 апреля 2022 года при подключении тарифа Объединяй! Для своих или переходе на него вы получите скидку 50 % на абонентскую плату на 3 месяца.<br>Как подключить:</p>\n                     <ul class=\"text\">\n                        <li>—&nbsp;Оставить заявку;</li>\n                        <li>—&nbsp;Пополните счёт номера, на который подключаете тариф, на сумму абонентской платы.;</li>\n                        <li>—&nbsp;Готово! Теперь абонентская плата на 50% меньше.</li> \n                     </ul>\n                  <p class=\"text\"><a href=\"https://moscow.megafon.ru/download/~federal/action/obyedinyai_oferta_50.pdf\">Подробные условия акции</a></p>"
+               "answer":
+                  "                           <p class=\"faq__text\">С 28 февраля по 1 мая 2022 года вы можете получить скидку 100 % на абонентскую плату по тарифу линейки Объединяй! на первый месяц.</p> \n" +
+                  "                           <p class=\"faq__text\">Акция не распространяется на тариф «Объединяй! Везде» и действует только при первом подключении тарифа.</p>\n"
             },
             {
                "question": `Скидка на тариф «Без переплат. ${ stateMegaTariff.name }»`,
@@ -63,7 +65,15 @@ const initialState = {
             },
             {
                "question": "Подробная информация о тарифах",
-               "answer": "<ul class=\"text\">\n                  <li>— <a target=\"_blank\" href=\"#\"\n                           class=\" text-link link\">Скачать подробную информацию о тарифе «Объединяй! Два\n                     интернета»</a> (PDF)\n                  </li>\n                  <li>— <a target=\"_blank\" href=\"#\"\n                           class=\" text-link link\">Скачать подробную информацию о тарифе «Объединяй!\n                     Эконом»</a> (PDF)\n                  </li>\n                  <li>— <a target=\"_blank\" href=\"#\"\n                           class=\" text-link link\">Скачать подробную информацию о тарифе «Объединяй!\n                     хит»</a> (PDF)\n                  </li>\n                  <li>— <a target=\"_blank\" href=\"#\"\n                           class=\" text-link link\">Скачать подробную информацию о тарифе «Объединяй! Для\n                     своих»</a> (PDF)\n                  </li>\n                  <li>— <a target=\"_blank\" href=\"#\"\n                           class=\" text-link link\">Скачать подробную информацию о тарифе «Объединяй!\n                     Везде»</a> (PDF)\n                  </li>\n               </ul>"
+               "answer": "<ul class=\"faq__text\">\n" +
+                  "          <li>— <a target=\"_blank\" href=\"/uploads/docs/2021/home/tariff_5608_chuvashia.pdf\" class=\" faq__text-link link\">Скачать подробную информацию о тарифе «Объединяй! Два интернета»</a> (PDF)</li>\n" +
+                  "          <li>— <a target=\"_blank\" href=\"/uploads/docs/2021/home/tariff_5607_chuvashia.pdf\" class=\" faq__text-link link\">Скачать подробную информацию о тарифе «Объединяй! Эконом»</a> (PDF)</li>\n" +
+                  "          <li>— <a target=\"_blank\" href=\"/uploads/docs/2021/home/tariff_5612_chuvashia.pdf\" class=\" faq__text-link link\">Скачать подробную информацию о тарифе «Объединяй! хит»</a> (PDF)</li>\n" +
+                  "          <li>— <a target=\"_blank\" href=\"/uploads/docs/2021/home/tariff_5609_chuvashia.pdf\" class=\" faq__text-link link\">Скачать подробную информацию о тарифе «Объединяй! Для своих»</a> (PDF)</li> \n" +
+                  "          <li>— <a target=\"_blank\" href=\"/uploads/docs/2021/home/tariff_5610_chuvashia.pdf\" class=\" faq__text-link link\">Скачать подробную информацию о тарифе «Объединяй! Кино и сериалы»</a> (PDF)</li> \n" +
+                  "          <li>— <a target=\"_blank\" href=\"/uploads/docs/2021/home/tariff_5611_chuvashia.pdf\" class=\" faq__text-link link\">Скачать подробную информацию о тарифе «Объединяй! Премиум»</a> (PDF)</li> \n" +
+                  "          <li>— <a target=\"_blank\" href=\"/uploads/docs/2022/home/tariff_5687_chuvashia.pdf\" class=\" faq__text-link link\">Скачать подробную информацию о тарифе «Объединяй! Везде»</a> (PDF)</li> \n" +
+                  "       </ul>"
             }
          ]
       }
