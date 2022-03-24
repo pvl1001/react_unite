@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import produce from "immer";
 
 
-const initialState = [
+export const equipments = [
    {
       id: "eq-android-tv",
       name: "Android TV",
@@ -29,10 +29,12 @@ const initialState = [
       img: "pristavka",
       price: 199,
       dataView: "androidtv",
+      link: "/uploads/docs/2020/ATV_KM8_user_manual_032021.pdf",
       plan: [
          { name: '36 мес', value: 169, checked: true },
          { name: '24 мес', value: 249, checked: false }
-      ]
+      ],
+      switch: false
    },
    {
       id: "eq-FR100-1",
@@ -68,10 +70,12 @@ const initialState = [
       img: "fr100",
       price: 55,
       dataView: "fr100",
+      link: "/uploads/docs/2020/MegaFon%20FR100.pdf",
       plan: [
          { name: '36 мес', value: 99, checked: true },
          { name: '24 мес', value: 149, checked: false }
-      ]
+      ],
+      switch: false
    },
    {
       id: "eq-FR1000-2",
@@ -108,10 +112,12 @@ const initialState = [
       img: "fr1000-2",
       price: 88,
       dataView: "fr10002",
+      link: "/uploads/docs/2020/MegaFon%20FR1000.pdf",
       plan: [
          { name: '36 мес', value: 129, checked: true },
          { name: '24 мес', value: 199, checked: false }
-      ]
+      ],
+      switch: false
    },
    {
       id: "eq-MFTV",
@@ -139,10 +145,12 @@ const initialState = [
       img: "tv_new",
       price: 99,
       dataView: "mftv",
+      link: "/uploads/docs/2020/MegaFon%20Q5.pdf",
       plan: [
          { name: '36 мес', value: 159, checked: true },
          { name: '24 мес', value: 139, checked: false }
-      ]
+      ],
+      switch: false
    },
    {
       id: "eq-almond",
@@ -180,6 +188,7 @@ const initialState = [
    }
 ]
 
+const initialState = equipments
 
 export const equipmentsSlice = createSlice( {
    name: 'equipments',

@@ -31,7 +31,7 @@ function CardOption( props ) {
    }
 
    const openModalEquipment = () => {
-      props.showModal( { modal: 'equipment', bool: true, props: props.equipment } )
+      props.showModal( { modal: 'equipment', bool: true, props: props.equipment.id } )
    }
 
    const openModalAlmond = () => {
@@ -67,15 +67,15 @@ function CardOption( props ) {
                               : '')
                         } }/>
                   : <h3 onClick={ openModalEquipment }>{ props.equipment.name }</h3> }
-
-
             </div>
 
-            { props.equipment.plan
-               ? <p>Рассрочка</p>
-               : <p>Аренда</p> }
+            { props.id !== 'turbo' && (
+               props.equipment.plan
+                  ? <p>Рассрочка</p>
+                  : <p>Аренда</p>
+            ) }
 
-            { props.equipment.plan &&
+            { Array.isArray( props.equipment.plan ) &&
                <div className={ s.option__radio + " option-radio" }>
 
                   { props.equipment.plan.map( ( p, i ) => (

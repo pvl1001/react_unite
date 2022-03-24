@@ -1,6 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit';
 import produce from 'immer';
 
+export const eqUnite = {
+   id: "eq-unite",
+   name: "4G Wi-Fi роутер",
+   params: [
+      {
+         icon: "fiolet_speed",
+         text: "Скорость до 150 Мбит/с"
+      },
+      {
+         icon: "fiolet_hertz",
+         text: "Wi-Fi 2,4 и 5 ГГц"
+      },
+      {
+         icon: "fiolet_zone",
+         text: "Уверенный сигнал и большая зона покрытия"
+      },
+      {
+         icon: "fiolet_settings",
+         text: "Простое подключение до 50 пользователей"
+      },
+      {
+         icon: "fiolet_razmer",
+         text: "Компактные размеры"
+      }
+   ],
+   img: "router_info",
+   price: 200,
+   dataView: "router-4g",
+   switch: true,
+   plan: null,
+   link: "/download/~federal/~federal/oferta/wi_fi/rukovodstvo_polzovatelya.pdf"
+}
 
 const initialState = {
    id: 'around',
@@ -103,39 +135,7 @@ const initialState = {
          ]
       }
    ],
-   equipments: [
-      {
-         id: "eq-unite",
-         name: "4G Wi-Fi роутер",
-         params: [
-            {
-               icon: "fiolet_speed",
-               text: "Скорость до 150 Мбит/с"
-            },
-            {
-               icon: "fiolet_hertz",
-               text: "Wi-Fi 2,4 и 5 ГГц"
-            },
-            {
-               icon: "fiolet_zone",
-               text: "Уверенный сигнал и большая зона покрытия"
-            },
-            {
-               icon: "fiolet_settings",
-               text: "Простое подключение до 50 пользователей"
-            },
-            {
-               icon: "fiolet_razmer",
-               text: "Компактные размеры"
-            }
-         ],
-         img: "router_info",
-         price: 200,
-         dataView: "router-4g",
-         switch: true,
-         plan: null
-      }
-   ],
+   equipments: [ eqUnite ],
 }
 
 

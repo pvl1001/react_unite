@@ -3,7 +3,27 @@ import { store } from "../store";
 import { showModal } from "./modalsSlice";
 import produce from "immer";
 import { HYDRATE } from 'next-redux-wrapper';
+import { equipments } from "./equipmentsSlice";
+import { eqUnite } from './tariffAroundSlice';
 
+
+const sim = {
+   id: "eq-sim",
+   dataView: 'sim',
+   oldPrice: 380,
+   price: 228,
+   cnt: 1,
+   switch: false
+}
+
+export const getEquipments = arr => {
+   let newArr = []
+   arr.forEach( el => el.id === "eq-sim"
+      ? newArr = [ ...newArr, sim ]
+      : newArr = [ ...newArr, { ...equipments.find( eq => eq.id === el.id ), ...el } ]
+   )
+   return newArr
+}
 
 export const templateEqAlmond = [
    {
@@ -164,187 +184,27 @@ const initialState = [
             price: "0"
          }
       ],
-      equipments: [
+      equipments: getEquipments( [
          {
-            id: "eq-android-tv",
-            name: "Android TV",
-            mark: "ГОД СЕРИАЛОВ В ПОДАРОК",
-            text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
-            params: [
-               {
-                  icon: "fiolet_googleplay",
-                  text: "1000+ приложений в Google Play"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддержка 4K UHD и HDR"
-               },
-               {
-                  icon: "fiolet_voice-message",
-                  text: "Голосовое управление"
-               },
-               {
-                  icon: "fiolet_video",
-                  text: "Google Chromecast"
-               }
-            ],
-            img: "pristavka",
-            price: 199,
-            dataView: "androidtv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 169, checked: true },
-               { name: '24 мес', value: 249, checked: false }
-            ],
-         },
-         {
-            id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1",
-            speed: "(100 Мбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 100 Мбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия до 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_settings",
-                  text: "Лёгкость настройки"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr100",
-            price: "0",
-            dataView: "fr100",
-            switch: true,
-            plan: null
+            id: "eq-android-tv"
          },
          {
             id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2",
-            speed: "(1 Гбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 1 Гбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия более 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_router",
-                  text: "4 внешние антенны MU‑MIMO"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr1000-2",
-            price: "0",
-            dataView: "fr1000",
-            switch: true,
-            plan: null
+            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)",
+            plan: null, price: '0',
+            switch: true
          },
          {
             id: "eq-MFTV",
-            name: "ТВ-приставка МегаФон ТВ",
-            mark: "РАССРОЧКА",
-            text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
-            params: [
-               {
-                  icon: "fiolet_umnyj-dom",
-                  text: "Работает везде, где есть интернет"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддерживает видео UHD и HD"
-               },
-               {
-                  icon: "fiolet_wi-fi",
-                  text: "Подключается через Wi‑Fi"
-               },
-               {
-                  icon: "fiolet_pult",
-                  text: "Управляется Bluetooth‑пультом"
-               }
-            ],
-            img: "tv_new",
-            price: "0",
-            dataView: "mftv",
-            switch: true,
-            plan: null
+            plan: null,
+            price: '0',
+            switch: true
          },
          {
-            id: "eq-almond",
-            name: "Роутер Almond с функцией <nobr>Умный дом</nobr>",
-            text: "Wi-Fi роутер Almond с системой охраны дома.",
-            params: [
-               "Настройте за несколько секунд",
-               "Управляйте Wi-Fi через приложение",
-               "Объедините устройства в умный дом",
-               "Получайте сигналы, если в дом кто-то проникнет"
-            ],
-            img: "almond",
-            price: "от 229",
-            icons: [
-               {
-                  icon: "settings",
-                  text: "Настройте за несколько секунд"
-               },
-               {
-                  icon: "phone",
-                  text: "Управляйте Wi-Fi через приложение"
-               },
-               {
-                  icon: "safety",
-                  text: "Объедините устройства в умный дом"
-               },
-               {
-                  icon: "message",
-                  text: "Получайте сигналы,<br> если в дом кто-то проникнет"
-               }
-            ],
-            dataView: "almond",
-            switch: false,
-            equipments: []
-         },
-         {
-            id: "equipment-sim",
-            dataView: 'sim',
-            oldPrice: 600,
-            price: 360,
-            cnt: 1,
-            switch: false
+            id: "eq-sim"
          }
-      ],
+      ] ),
+      link: "/uploads/docs/2021/home/tariff_5609_chuvashia.pdf"
    },
    {
       id: 'two-web',
@@ -373,164 +233,21 @@ const initialState = [
             price: 199
          }
       ],
-      equipments: [
+      equipments: getEquipments( [
          {
-            id: "eq-android-tv",
-            name: "Android TV",
-            mark: "ГОД СЕРИАЛОВ В ПОДАРОК",
-            text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
-            params: [
-               {
-                  icon: "fiolet_googleplay",
-                  text: "1000+ приложений в Google Play"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддержка 4K UHD и HDR"
-               },
-               {
-                  icon: "fiolet_voice-message",
-                  text: "Голосовое управление"
-               },
-               {
-                  icon: "fiolet_video",
-                  text: "Google Chromecast"
-               }
-            ],
-            img: "pristavka",
-            price: 199,
-            dataView: "androidtv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 169, checked: true },
-               { name: '24 мес', value: 249, checked: false }
-            ],
+            id: "eq-android-tv"
          },
          {
             id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1",
-            speed: "(100 Мбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 100 Мбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия до 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_settings",
-                  text: "Лёгкость настройки"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr100",
-            price: 55,
-            dataView: "fr100",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 99, checked: true },
-               { name: '24 мес', value: 149, checked: false }
-            ],
+            name: "Wi-Fi роутер FR100-1 (100 Мбит/с)"
          },
          {
             id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2",
-            speed: "(1 Гбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 1 Гбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия более 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_router",
-                  text: "4 внешние антенны MU‑MIMO"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr1000-2",
-            price: 88,
-            dataView: "fr1000",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 129, checked: true },
-               { name: '24 мес', value: 199, checked: false }
-            ],
+            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)"
          },
-         {
-            id: "eq-almond",
-            name: "Роутер Almond с функцией <nobr>Умный дом</nobr>",
-            text: "Wi-Fi роутер Almond с системой охраны дома.",
-            params: [
-               "Настройте за несколько секунд",
-               "Управляйте Wi-Fi через приложение",
-               "Объедините устройства в умный дом",
-               "Получайте сигналы, если в дом кто-то проникнет"
-            ],
-            img: "almond",
-            price: "от 229",
-            icons: [
-               {
-                  icon: "settings",
-                  text: "Настройте за несколько секунд"
-               },
-               {
-                  icon: "phone",
-                  text: "Управляйте Wi-Fi через приложение"
-               },
-               {
-                  icon: "safety",
-                  text: "Объедините устройства в умный дом"
-               },
-               {
-                  icon: "message",
-                  text: "Получайте сигналы,<br> если в дом кто-то проникнет"
-               }
-            ],
-            dataView: "almond",
-            switch: false,
-            equipments: []
-         },
-         {
-            id: "equipment-sim",
-            dataView: 'sim',
-            oldPrice: 600,
-            price: 360,
-            cnt: 1,
-            switch: false
-         }
-      ],
+         { id: "eq-sim" }
+      ] ),
+      link: "/uploads/docs/2021/home/tariff_5608_chuvashia.pdf"
    },
    {
       id: 'hit',
@@ -564,196 +281,26 @@ const initialState = [
             price: 99
          }
       ],
-      equipments: [
+      equipments: getEquipments( [
          {
-            id: "eq-android-tv",
-            name: "Android TV",
-            mark: "ГОД СЕРИАЛОВ В ПОДАРОК",
-            text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
-            params: [
-               {
-                  icon: "fiolet_googleplay",
-                  text: "1000+ приложений в Google Play"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддержка 4K UHD и HDR"
-               },
-               {
-                  icon: "fiolet_voice-message",
-                  text: "Голосовое управление"
-               },
-               {
-                  icon: "fiolet_video",
-                  text: "Google Chromecast"
-               }
-            ],
-            img: "pristavka",
-            price: 199,
-            dataView: "androidtv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 169, checked: true },
-               { name: '24 мес', value: 249, checked: false }
-            ],
+            id: "eq-android-tv"
          },
          {
             id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1",
-            speed: "(100 Мбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 100 Мбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия до 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_settings",
-                  text: "Лёгкость настройки"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr100",
-            price: 55,
-            dataView: "fr100",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 99, checked: true },
-               { name: '24 мес', value: 149, checked: false }
-            ],
+            name: "Wi-Fi роутер FR100-1 (100 Мбит/с)"
          },
          {
             id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2",
-            speed: "(1 Гбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 1 Гбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия более 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_router",
-                  text: "4 внешние антенны MU‑MIMO"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr1000-2",
-            price: 88,
-            dataView: "fr1000",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 129, checked: true },
-               { name: '24 мес', value: 199, checked: false }
-            ],
+            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)"
          },
          {
-            id: "eq-MFTV",
-            name: "ТВ-приставка МегаФон ТВ",
-            mark: "РАССРОЧКА",
-            text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
-            params: [
-               {
-                  icon: "fiolet_umnyj-dom",
-                  text: "Работает везде, где есть интернет"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддерживает видео UHD и HD"
-               },
-               {
-                  icon: "fiolet_wi-fi",
-                  text: "Подключается через Wi‑Fi"
-               },
-               {
-                  icon: "fiolet_pult",
-                  text: "Управляется Bluetooth‑пультом"
-               }
-            ],
-            img: "tv_new",
-            price: 99,
-            dataView: "mftv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 159, checked: true },
-               { name: '24 мес', value: 239, checked: false }
-            ],
+            id: "eq-MFTV"
          },
          {
-            id: "eq-almond",
-            name: "Роутер Almond с функцией <nobr>Умный дом</nobr>",
-            text: "Wi-Fi роутер Almond с системой охраны дома.",
-            params: [
-               "Настройте за несколько секунд",
-               "Управляйте Wi-Fi через приложение",
-               "Объедините устройства в умный дом",
-               "Получайте сигналы, если в дом кто-то проникнет"
-            ],
-            img: "almond",
-            price: "от 229",
-            icons: [
-               {
-                  icon: "settings",
-                  text: "Настройте за несколько секунд"
-               },
-               {
-                  icon: "phone",
-                  text: "Управляйте Wi-Fi через приложение"
-               },
-               {
-                  icon: "safety",
-                  text: "Объедините устройства в умный дом"
-               },
-               {
-                  icon: "message",
-                  text: "Получайте сигналы,<br> если в дом кто-то проникнет"
-               }
-            ],
-            dataView: "almond",
-            switch: false,
-            equipments: []
-         },
-         {
-            id: "equipment-sim",
-            dataView: 'sim',
-            oldPrice: 600,
-            price: 360,
-            cnt: 1,
-            switch: false
+            id: "eq-sim"
          }
-      ],
+      ] ),
+      link: "/uploads/docs/2021/home/tariff_5612_chuvashia.pdf"
    },
    {
       id: 'films',
@@ -799,196 +346,26 @@ const initialState = [
             price: 99
          }
       ],
-      equipments: [
+      equipments: getEquipments( [
          {
-            id: "eq-android-tv",
-            name: "Android TV",
-            mark: "ГОД СЕРИАЛОВ В ПОДАРОК",
-            text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
-            params: [
-               {
-                  icon: "fiolet_googleplay",
-                  text: "1000+ приложений в Google Play"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддержка 4K UHD и HDR"
-               },
-               {
-                  icon: "fiolet_voice-message",
-                  text: "Голосовое управление"
-               },
-               {
-                  icon: "fiolet_video",
-                  text: "Google Chromecast"
-               }
-            ],
-            img: "pristavka",
-            price: 199,
-            dataView: "androidtv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 169, checked: true },
-               { name: '24 мес', value: 249, checked: false }
-            ],
+            id: "eq-android-tv"
          },
          {
             id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1",
-            speed: "(100 Мбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 100 Мбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия до 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_settings",
-                  text: "Лёгкость настройки"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr100",
-            price: 55,
-            dataView: "fr100",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 99, checked: true },
-               { name: '24 мес', value: 149, checked: false }
-            ],
+            name: "Wi-Fi роутер FR100-1 (100 Мбит/с)"
          },
          {
             id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2",
-            speed: "(1 Гбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 1 Гбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия более 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_router",
-                  text: "4 внешние антенны MU‑MIMO"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr1000-2",
-            price: 88,
-            dataView: "fr1000",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 129, checked: true },
-               { name: '24 мес', value: 199, checked: false }
-            ],
+            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)"
          },
          {
-            id: "eq-MFTV",
-            name: "ТВ-приставка МегаФон ТВ",
-            mark: "РАССРОЧКА",
-            text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
-            params: [
-               {
-                  icon: "fiolet_umnyj-dom",
-                  text: "Работает везде, где есть интернет"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддерживает видео UHD и HD"
-               },
-               {
-                  icon: "fiolet_wi-fi",
-                  text: "Подключается через Wi‑Fi"
-               },
-               {
-                  icon: "fiolet_pult",
-                  text: "Управляется Bluetooth‑пультом"
-               }
-            ],
-            img: "tv_new",
-            price: 99,
-            dataView: "mftv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 159, checked: true },
-               { name: '24 мес', value: 239, checked: false }
-            ],
+            id: "eq-MFTV"
          },
          {
-            id: "eq-almond",
-            name: "Роутер Almond с функцией <nobr>Умный дом</nobr>",
-            text: "Wi-Fi роутер Almond с системой охраны дома.",
-            params: [
-               "Настройте за несколько секунд",
-               "Управляйте Wi-Fi через приложение",
-               "Объедините устройства в умный дом",
-               "Получайте сигналы, если в дом кто-то проникнет"
-            ],
-            img: "almond",
-            price: "от 229",
-            icons: [
-               {
-                  icon: "settings",
-                  text: "Настройте за несколько секунд"
-               },
-               {
-                  icon: "phone",
-                  text: "Управляйте Wi-Fi через приложение"
-               },
-               {
-                  icon: "safety",
-                  text: "Объедините устройства в умный дом"
-               },
-               {
-                  icon: "message",
-                  text: "Получайте сигналы,<br> если в дом кто-то проникнет"
-               }
-            ],
-            dataView: "almond",
-            switch: false,
-            equipments: []
-         },
-         {
-            id: "equipment-sim",
-            dataView: 'sim',
-            oldPrice: 600,
-            price: 360,
-            cnt: 1,
-            switch: false
+            id: "eq-sim"
          }
-      ]
+      ] ),
+      link: "/uploads/docs/2021/home/tariff_5610_chuvashia.pdf"
    },
    {
       id: 'premium',
@@ -1045,187 +422,28 @@ const initialState = [
             price: 55
          }
       ],
-      equipments: [
+      equipments: getEquipments( [
          {
-            id: "eq-android-tv",
-            name: "Android TV",
-            mark: "ГОД СЕРИАЛОВ В ПОДАРОК",
-            text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
-            params: [
-               {
-                  icon: "fiolet_googleplay",
-                  text: "1000+ приложений в Google Play"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддержка 4K UHD и HDR"
-               },
-               {
-                  icon: "fiolet_voice-message",
-                  text: "Голосовое управление"
-               },
-               {
-                  icon: "fiolet_video",
-                  text: "Google Chromecast"
-               }
-            ],
-            img: "pristavka",
-            price: 199,
-            dataView: "androidtv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 169, checked: true },
-               { name: '24 мес', value: 249, checked: false }
-            ],
-         },
-         {
-            id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1",
-            speed: "(100 Мбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 100 Мбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия до 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_settings",
-                  text: "Лёгкость настройки"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr100",
-            price: "0",
-            dataView: "fr100",
-            switch: true,
-            plan: null
+            id: "eq-android-tv"
          },
          {
             id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2",
-            speed: "(1 Гбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 1 Гбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия более 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_router",
-                  text: "4 внешние антенны MU‑MIMO"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr1000-2",
+            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)",
             price: "0",
-            dataView: "fr1000",
-            switch: true,
-            plan: null
+            plan: null,
+            switch: true
          },
          {
             id: "eq-MFTV",
-            name: "ТВ-приставка МегаФон ТВ",
-            mark: "РАССРОЧКА",
-            text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
-            params: [
-               {
-                  icon: "fiolet_umnyj-dom",
-                  text: "Работает везде, где есть интернет"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддерживает видео UHD и HD"
-               },
-               {
-                  icon: "fiolet_wi-fi",
-                  text: "Подключается через Wi‑Fi"
-               },
-               {
-                  icon: "fiolet_pult",
-                  text: "Управляется Bluetooth‑пультом"
-               }
-            ],
-            img: "tv_new",
             price: "0",
-            dataView: "mftv",
-            switch: true,
-            plan: null
+            plan: null,
+            switch: true
          },
          {
-            id: "eq-almond",
-            name: "Роутер Almond с функцией <nobr>Умный дом</nobr>",
-            text: "Wi-Fi роутер Almond с системой охраны дома.",
-            params: [
-               "Настройте за несколько секунд",
-               "Управляйте Wi-Fi через приложение",
-               "Объедините устройства в умный дом",
-               "Получайте сигналы, если в дом кто-то проникнет"
-            ],
-            img: "almond",
-            price: "от 229",
-            icons: [
-               {
-                  icon: "settings",
-                  text: "Настройте за несколько секунд"
-               },
-               {
-                  icon: "phone",
-                  text: "Управляйте Wi-Fi через приложение"
-               },
-               {
-                  icon: "safety",
-                  text: "Объедините устройства в умный дом"
-               },
-               {
-                  icon: "message",
-                  text: "Получайте сигналы,<br> если в дом кто-то проникнет"
-               }
-            ],
-            dataView: "almond",
-            switch: false,
-            equipments: []
-         },
-         {
-            id: "equipment-sim",
-            dataView: 'sim',
-            oldPrice: 600,
-            price: 360,
-            cnt: 1,
-            switch: false
+            id: "eq-sim"
          }
-      ],
+      ] ),
+      link: "/uploads/docs/2021/home/tariff_5611_chuvashia.pdf"
    },
    {
       id: 'economic',
@@ -1259,196 +477,26 @@ const initialState = [
             price: 99
          }
       ],
-      equipments: [
+      equipments: getEquipments( [
          {
-            id: "eq-android-tv",
-            name: "Android TV",
-            mark: "ГОД СЕРИАЛОВ В ПОДАРОК",
-            text: "Играйте в игры, смотрите видео, слушайте музыку и общайтесь с друзьями без каких-либо ограничений. Наслаждайтесь реалистичным качеством картинки.",
-            params: [
-               {
-                  icon: "fiolet_googleplay",
-                  text: "1000+ приложений в Google Play"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддержка 4K UHD и HDR"
-               },
-               {
-                  icon: "fiolet_voice-message",
-                  text: "Голосовое управление"
-               },
-               {
-                  icon: "fiolet_video",
-                  text: "Google Chromecast"
-               }
-            ],
-            img: "pristavka",
-            price: 199,
-            dataView: "androidtv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 169, checked: true },
-               { name: '24 мес', value: 249, checked: false }
-            ],
+            id: "eq-android-tv"
          },
          {
             id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1",
-            speed: "(100 Мбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Мощный Wi-Fi роутер для стабильного интернета в любом уголке вашего дома. Привезем и настроим бесплатно.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 100 Мбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия до 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_settings",
-                  text: "Лёгкость настройки"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr100",
-            price: 55,
-            dataView: "fr100",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 99, checked: true },
-               { name: '24 мес', value: 149, checked: false }
-            ],
+            name: "Wi-Fi роутер FR100-1 (100 Мбит/с)"
          },
          {
             id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2",
-            speed: "(1 Гбит/с)",
-            mark: "РАССРОЧКА",
-            text: "Высокоскоростной Wi‑Fi‑роутер для стабильного интернета. Ловит по всему дому. Бесплатная доставка и настройка.",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 1 Гбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Диапазон частот 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_mobile-internet",
-                  text: "Возможность подключения 4G"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Зона покрытия более 70 м<sup>2</sup>"
-               },
-               {
-                  icon: "fiolet_router",
-                  text: "4 внешние антенны MU‑MIMO"
-               },
-               {
-                  icon: "fiolet_block",
-                  text: "Родительский контроль"
-               }
-            ],
-            img: "fr1000-2",
-            price: 88,
-            dataView: "fr1000",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 129, checked: true },
-               { name: '24 мес', value: 199, checked: false }
-            ],
+            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)"
          },
          {
-            id: "eq-MFTV",
-            name: "ТВ-приставка МегаФон ТВ",
-            mark: "РАССРОЧКА",
-            text: "Управляйте эфиром, перематывайте, ставьте на паузу – смотрите как удобно и когда удобно.",
-            params: [
-               {
-                  icon: "fiolet_umnyj-dom",
-                  text: "Работает везде, где есть интернет"
-               },
-               {
-                  icon: "fiolet_4k",
-                  text: "Поддерживает видео UHD и HD"
-               },
-               {
-                  icon: "fiolet_wi-fi",
-                  text: "Подключается через Wi‑Fi"
-               },
-               {
-                  icon: "fiolet_pult",
-                  text: "Управляется Bluetooth‑пультом"
-               }
-            ],
-            img: "tv_new",
-            price: 99,
-            dataView: "mftv",
-            switch: false,
-            plan: [
-               { name: '36 мес', value: 159, checked: true },
-               { name: '24 мес', value: 239, checked: false }
-            ],
+            id: "eq-MFTV"
          },
          {
-            id: "eq-almond",
-            name: "Роутер Almond с функцией <nobr>Умный дом</nobr>",
-            text: "Wi-Fi роутер Almond с системой охраны дома.",
-            params: [
-               "Настройте за несколько секунд",
-               "Управляйте Wi-Fi через приложение",
-               "Объедините устройства в умный дом",
-               "Получайте сигналы, если в дом кто-то проникнет"
-            ],
-            img: "almond",
-            price: "от 229",
-            icons: [
-               {
-                  icon: "settings",
-                  text: "Настройте за несколько секунд"
-               },
-               {
-                  icon: "phone",
-                  text: "Управляйте Wi-Fi через приложение"
-               },
-               {
-                  icon: "safety",
-                  text: "Объедините устройства в умный дом"
-               },
-               {
-                  icon: "message",
-                  text: "Получайте сигналы,<br> если в дом кто-то проникнет"
-               }
-            ],
-            dataView: "almond",
-            switch: false,
-            equipments: []
-         },
-         {
-            id: "equipment-sim",
-            dataView: 'sim',
-            oldPrice: 600,
-            price: 360,
-            cnt: 1,
-            switch: false
+            id: "eq-sim"
          }
-      ],
+      ] ),
+      link: "/uploads/docs/2021/home/tariff_5607_chuvashia.pdf"
    },
    {
       id: 'around',
@@ -1475,39 +523,8 @@ const initialState = [
             price: 100
          }
       ],
-      equipments: [
-         {
-            id: "eq-unite",
-            name: "4G Wi-Fi роутер",
-            params: [
-               {
-                  icon: "fiolet_speed",
-                  text: "Скорость до 150 Мбит/с"
-               },
-               {
-                  icon: "fiolet_hertz",
-                  text: "Wi-Fi 2,4 и 5 ГГц"
-               },
-               {
-                  icon: "fiolet_zone",
-                  text: "Уверенный сигнал и большая зона покрытия"
-               },
-               {
-                  icon: "fiolet_settings",
-                  text: "Простое подключение до 50 пользователей"
-               },
-               {
-                  icon: "fiolet_razmer",
-                  text: "Компактные размеры"
-               }
-            ],
-            img: "router_info",
-            price: 200,
-            dataView: "router-4g",
-            switch: true,
-            plan: null
-         }
-      ],
+      equipments: [ eqUnite ],
+      link: "/uploads/docs/2022/home/tariff_5687_chuvashia.pdf"
    },
 ]
 
@@ -1567,7 +584,7 @@ export const tariffsSlice = createSlice( {
                            : eq.currentPrice
                      }
                      if ( typeof eq.price === 'string' ) return parseInt( eq.price.match( /\d+/ ) )
-                     if ( eq.id === 'equipment-sim' ) return eq.sumPrice || eq.price
+                     if ( eq.id === 'eq-sim' ) return eq.sumPrice || eq.price
                      if ( eq.plan ) return eq.plan.find( p => p.checked ).value
                      return eq.price
                   }

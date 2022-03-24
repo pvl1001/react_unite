@@ -19,10 +19,7 @@ function InfoBox( props ) {
       props.showModal( {
          modal: 'equipment',
          bool: true,
-         props: {
-            ...router,
-            style: { marginBottom: 55 }
-         }
+         props: router.id
       } )
       analyticsEvent( `click_button_details_${ props.tariff.dataView }_ntv` )
    }
@@ -99,7 +96,7 @@ function InfoBox( props ) {
          </div>
 
          <div className={ s.links }>
-            <a href=" ">Скачать подробную информацию</a>
+            <a href="#">Скачать подробную информацию</a>
             <span onClick={ showModalEq }>Технические характеристики</span>
          </div>
 

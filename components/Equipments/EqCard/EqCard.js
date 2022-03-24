@@ -43,7 +43,7 @@ function EqCard( props ) {
       props.showModal( {
          modal: 'equipment',
          bool: true,
-         props: props.eq
+         props: props.eq.id
       } )
       analyticsEvent( `click_button_details_${ props.eq.dataView }` )
    }

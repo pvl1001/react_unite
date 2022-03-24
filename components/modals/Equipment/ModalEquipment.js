@@ -16,7 +16,11 @@ function ModalEquipment( props ) {
    const defaultTariff = useSelector( state => state.page.tariffDefault )
    const show = useSelector( state => state.modals.equipment.show )
    const showModalTariff = useSelector( state => state.modals.tariff.show )
-   const eq = useSelector( state => state.modals.equipment.props )
+   const eqId = useSelector( state => state.modals.equipment.props )
+   const eq = useSelector( state => eqId === 'eq-unite'
+      ? state.tariffAround.equipments[0]
+      : state.equipments.find( el => el.id === eqId )
+   )
    const tariff = useSelector( state => eq?.id === 'eq-unite'
       ? state.tariffAround
       : state.tariffs.find( t => t.id === defaultTariff )
@@ -87,7 +91,7 @@ function ModalEquipment( props ) {
             }
 
             <div className={ s.container }
-                 style={ eq.style }
+                 style={ { marginBottom: eq.id === 'eq-unite' ? 55 : 0 } }
             >
                <div className={ s.text }>
                   <h3>Характеристики { eq.name.split( ' ' )[0] === 'Роутер'
@@ -115,8 +119,8 @@ function ModalEquipment( props ) {
                              alt="download-pdf"/>
                      </button>
                      <div className={ s_tariff.download_pdf__text }>
-                        <a href=" " className="download-pdf__text-link">Скачать подробную информацию</a>
-                        <p className="download-pdf__text-pdf">(PDF, 0.4 MB)</p>
+                        <a href={ eq.link } className="download-pdf__text-link">Скачать подробную информацию</a>
+                        <p className="download-pdf__text-pdf"> (PDF, 0.4 MB)</p>
                      </div>
                   </div>
                </div>

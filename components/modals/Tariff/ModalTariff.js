@@ -141,7 +141,7 @@ function ModalTariff( props ) {
 
                   <ul className={ s.dop_options__cards }>
                      { props.tariff.equipments.map( ( equipment, idx ) =>
-                        equipment.id !== 'equipment-sim'
+                        equipment.id !== 'eq-sim'
                            ? <CardOption key={ equipment.id } equipment={ equipment } idx={ idx }
                                          id={ props.tariff.id }/>
                            : <CardOptionSim key={ equipment.id } equipment={ equipment } idx={ idx }
@@ -154,8 +154,9 @@ function ModalTariff( props ) {
                         <img src={ '/svg/download-pdf.svg' } alt="download-pdf"/>
                      </button>
                      <div className={ s.download_pdf__text }>
-                        <a href=" " className="download-pdf__text-link">Скачать подробную информацию о тарифе</a>
-                        <span className="download-pdf__text-pdf">(PDF, 0.4 MB)</span>
+                        <a href={ props.tariff.link } className="download-pdf__text-link">
+                           Скачать подробную информацию о тарифе</a>
+                        <span className="download-pdf__text-pdf"> (PDF, 0.4 MB)</span>
                      </div>
                   </div>
 
