@@ -1,4 +1,4 @@
-import { templateIconInfo } from "../pageData/pageHome";
+import { templateIconInfo } from "../pageData/internet";
 
 export default function iconInfo( id, defaultTemplate ) {
    switch ( id ) {

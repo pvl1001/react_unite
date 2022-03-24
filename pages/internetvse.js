@@ -6,8 +6,8 @@ import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
 import Head from 'next/head'
 import { setInitialStatePage } from "../redux/slices/pageSlice";
-import pageHome, { tariffsPageHome } from "../pageData/pageHome";
-import pageHomeVse from "../pageData/pageHomeVse";
+import pageHome, { tariffsPageHome } from "../pageData/internet";
+import pageHomeVse from "../pageData/internetvse";
 import { wrapper } from "../redux/store";
 import ForHomeAll from "../components/ForHomeAll/ForHomeAll";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
