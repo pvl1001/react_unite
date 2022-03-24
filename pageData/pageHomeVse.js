@@ -1,4 +1,5 @@
 export default {
+   tariffDefault: 'vse',
    FAQ: [
       {
          "col": [
