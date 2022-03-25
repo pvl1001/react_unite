@@ -1,4 +1,5 @@
-import s from './Form.module.sass'
+import s from './Form.module.sass';
+import { Spinner } from 'react-bootstrap';
 
 function Form( props ) {
 
@@ -36,7 +37,20 @@ function Form( props ) {
                className={ 'btn ' + s.btn }
                data-view="block_checkaddress"
                onClick={ props.submit }>
-               Проверить
+               <span>
+                  Проверить
+                  { props.isLoading &&
+                     <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                     />
+                  }
+               </span>
+
+
             </button>
 
          </form>

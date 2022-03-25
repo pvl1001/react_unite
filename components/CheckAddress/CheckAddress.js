@@ -42,6 +42,7 @@ function CheckAddress( props ) {
    const [ address, setAddress ] = useState( {} )
    const [ result, setResult ] = useState( null )
    const [ isShowLabel, setIsShowLabel ] = useState( false )
+   const [ isLoading, setIsLoading ] = useState( false )
    const container = router.route === '/internetvse'
       ? s.container_vse
       : s.container
@@ -65,8 +66,15 @@ function CheckAddress( props ) {
             clientAddress: address.address,
             house_guid: address.house_guid
          } )
-         const data = await api( 'https://api.wifire.ru/api/address/check_dadata_address', address )
-         return setResult( data.result )
+         try {
+            setIsLoading( true )
+            const data = await api( 'https://api.wifire.ru/api/address/check_dadata_address', address )
+            setIsLoading( false )
+            return setResult( data.result )
+         } catch ( err ) {
+            console.log( err )
+         }
+
       }
 
       setIsShowLabel( true )
@@ -103,6 +111,7 @@ function CheckAddress( props ) {
                   isShowLabel={ isShowLabel }
                   setIsShowLabel={ setIsShowLabel }
                   submit={ submit }
+                  isLoading={ isLoading }
                />
 
                { result === 1 &&
