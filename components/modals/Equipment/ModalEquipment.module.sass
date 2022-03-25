@@ -1,9 +1,12 @@
 .modal_content
+   display: block
+   padding-bottom: 0
+
    @media (max-width: 1023px)
-      padding: 47px 48px 54px
+      padding: 47px 48px 0
 
    @media (max-width: 677px)
-      padding: 47px 16px 54px
+      padding: 47px 16px 0
 
 
 .modal_dialog
@@ -20,17 +23,17 @@
    margin-top: -28px
    margin-bottom: 50px
 
-
-.sale__mark
-   margin-bottom: 14px
-   background-color: var(--mf-orange)
-   padding: 4px 8px
+   &__mark
+      margin-bottom: 14px
+      background-color: var(--mf-orange)
+      padding: 4px 8px
 
 
 .container
    display: flex
    flex-wrap: wrap
    justify-content: space-between
+   margin-bottom: 48px
 
    sup
       font-size: 60%
@@ -96,6 +99,7 @@
 .modal_order
    justify-content: flex-end
    flex-direction: row-reverse
+   margin-bottom: 55px
 
    &__text
       width: auto
@@ -121,9 +125,6 @@
 
 
 @media (max-width: 1023px)
-   .container
-      margin-bottom: 57px
-
    .text
       width: 186px
 
@@ -162,12 +163,6 @@
 
 
 @media (max-width: 677px)
-   .modal_content
-      padding: 47px 16px 54px
-
-   .container
-      margin-bottom: 54px
-
    .sale
       margin-bottom: 49px
       margin-top: -24px
@@ -192,6 +187,7 @@
    .img
       min-width: 0
       margin: 0 auto
+      width: 75%
 
 
    .modal_close

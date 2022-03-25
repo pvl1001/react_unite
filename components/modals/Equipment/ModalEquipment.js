@@ -81,18 +81,16 @@ function ModalEquipment( props ) {
                { eq.name === 'Android TV' && <>Приставка</> } { eq.name }
             </h1>
 
-            { eq.name === 'Android TV' && (
+            { eq.name === 'Android TV' &&
                <div className={ s.sale }>
                   <div className={ s.sale__mark + " mark" }>Акция</div>
                   <p className={ s.sale__text }>
                      Возьми в аренду Android TV и получи год сериалов в подарок
                   </p>
-               </div>)
+               </div>
             }
 
-            <div className={ s.container }
-                 style={ { marginBottom: eq.id === 'eq-unite' ? 55 : 0 } }
-            >
+            <div className={ s.container }>
                <div className={ s.text }>
                   <h3>Характеристики { eq.name.split( ' ' )[0] === 'Роутер'
                      ? <>роутера</>
