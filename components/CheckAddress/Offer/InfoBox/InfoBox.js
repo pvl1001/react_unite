@@ -8,7 +8,9 @@ import { showModal } from "/redux/slices/modalsSlice";
 function InfoBox( props ) {
 
    const router = props.tariff.equipments[0]
-   const oldPrice = props.tariff.price + props.tariff.equipments[0].price
+   const oldPrice = props.tariff.routerSwitch
+      ? props.tariff.price + props.tariff.equipments[0].price
+      : props.tariff.price
    const priceSale = props.tariff.calcPriceSale
 
    function handleChange( e ) {
@@ -34,7 +36,7 @@ function InfoBox( props ) {
 
          <div className={ s.row }>
             <div className={ s.params }>
-               <p className={ s.params__title }>Беспроводной интернет и ТВ</p>
+               <p className={ s.params__title }>Беспроводной интернет <nobr>и ТВ</nobr></p>
 
                <div className={ s.params__desc }>
                   <div className={ s.params__icon }>
@@ -70,7 +72,7 @@ function InfoBox( props ) {
                   <div className={ s.params__icon }>
                      <img src={ '/svg/4g.svg' } alt="4g"/>
                   </div>
-                  Безлимитный интернет
+                  { props.tariff.web } ГБ
                </div>
             </div>
          </div>

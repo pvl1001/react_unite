@@ -1,143 +1,69 @@
 import { createSlice } from '@reduxjs/toolkit';
 import produce from 'immer';
 
-export const eqUnite = {
-   id: "eq-unite",
-   name: "4G Wi-Fi роутер",
-   params: [
-      {
-         icon: "fiolet_speed",
-         text: "Скорость до 150 Мбит/с"
-      },
-      {
-         icon: "fiolet_hertz",
-         text: "Wi-Fi 2,4 и 5 ГГц"
-      },
-      {
-         icon: "fiolet_zone",
-         text: "Уверенный сигнал и большая зона покрытия"
-      },
-      {
-         icon: "fiolet_settings",
-         text: "Простое подключение до 50 пользователей"
-      },
-      {
-         icon: "fiolet_razmer",
-         text: "Компактные размеры"
-      }
-   ],
-   img: "router_info",
-   price: 200,
-   dataView: "router-4g",
-   switch: true,
-   plan: null,
-   link: "/download/~federal/~federal/oferta/wi_fi/rukovodstvo_polzovatelya.pdf"
-}
 
-const initialState = {
+export const tariffAround = {
    id: 'around',
    tariffId: 3981,
    dataView: "vezde",
    name: "Везде",
-   speed: 150,
+   marks: [],
+   web: 50,
    min: 2100,
-   web: "Безлимитный интернет",
+   speed: 150,
    sale: null,
-   infoProgress: [
-      {
-         title: "Мобильный интернет",
-         value: "<span class='icon-infinity'></span> ГБ"
-      },
-      {
-         title: "Звонки",
-         value: "2100 минут"
-      },
-      {
-         title: "Домашний&nbsp;<br>интернет",
-         value: "150 Мбит/с"
-      }
-   ],
    tvId: 1,
    tvLength: "61 канал",
    oldPrice: null,
-   price: 1400,
-   totalPrice: 1400,
-   priceSale: 960,
-   iconInfo: false,
+   price: 1050,
+   totalPrice: null,
+   get iconInfo() {
+      return this.oldPrice && iconInfo
+   },
    rentDevice: [
       {
          text: "Аренда 4G Wi-Fi роутера",
          price: 100
       }
    ],
-   infoModal: [
+   equipments: [
       {
-         title: "Мобильная связь",
-         icon: "mob_bold",
-         options: [
+         id: "eq-unite",
+         name: "4G Wi-Fi роутер",
+         params: [
             {
-               name: "Мобильный интернет",
-               description: "",
-               value: "Безлимитно"
+               icon: "fiolet_speed",
+               text: "Скорость до 150 Мбит/с"
             },
             {
-               name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
-               description: "",
-               value: "Безлимитно"
+               icon: "fiolet_hertz",
+               text: "Wi-Fi 2,4 и 5 ГГц"
             },
             {
-               name: "Звонки на номера МегаФона России",
-               description: "Не расходуют пакет минут",
-               value: "Безлимитно"
+               icon: "fiolet_zone",
+               text: "Уверенный сигнал и большая зона покрытия"
             },
             {
-               name: "Звонки на мобильные номера других операторов России",
-               description: "",
-               value: "2100 минут"
+               icon: "fiolet_settings",
+               text: "Простое подключение до 50 пользователей"
             },
             {
-               name: "МегаДиск",
-               description: "Облачное хранилище для ваших фотографий и файлов",
-               value: "1 ТБ"
+               icon: "fiolet_razmer",
+               text: "Компактные размеры"
             }
-         ]
-      },
-      {
-         title: "Интернет",
-         icon: "wi-fi_bold",
-         options: [
-            {
-               name: "Скорость",
-               description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-               value: "150 Мбит/с"
-            },
-            {
-               name: "Трафик",
-               description: "",
-               value: "Безлимитно"
-            }
-         ]
-      },
-      {
-         title: "ТВ",
-         icon: "TV_bold",
-         options: [
-            {
-               name: "Мегафон ТВ",
-               description: "",
-               value: "61 канал"
-            },
-            {
-               name: "Трафик",
-               description: "",
-               value: "Безлимитно"
-            }
-         ]
+         ],
+         img: "router_info",
+         price: 200,
+         dataView: "router-4g",
+         switch: true,
+         plan: null,
+         link: "/download/~federal/~federal/oferta/wi_fi/rukovodstvo_polzovatelya.pdf"
       }
    ],
-   equipments: [ eqUnite ],
+   link: "/uploads/docs/2022/home/tariff_5687_chuvashia.pdf"
 }
 
+const initialState = tariffAround
 
 export const tariffAroundSlice = createSlice( {
    name: 'tariffAround',
@@ -146,7 +72,7 @@ export const tariffAroundSlice = createSlice( {
       onUniteSwitch( state, action ) {
          return produce( state, setState => {
             setState.routerSwitch = action.payload
-            const priceReduce = [ setState.priceSale, setState.routerSwitch && setState.equipments[0].price ]
+            const priceReduce = [ setState.price * 0.6, setState.routerSwitch && setState.equipments[0].price ]
             setState.calcPriceSale = priceReduce.reduce( ( a, b ) => a + b )
          } )
       },

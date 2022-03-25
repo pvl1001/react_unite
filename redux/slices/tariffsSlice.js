@@ -4,7 +4,7 @@ import { showModal } from "./modalsSlice";
 import produce from "immer";
 import { HYDRATE } from 'next-redux-wrapper';
 import { equipments } from "./equipmentsSlice";
-import { eqUnite } from './tariffAroundSlice';
+import { tariffAround } from './tariffAroundSlice';
 
 
 const sim = {
@@ -104,6 +104,7 @@ export const templateEqAlmond = [
    }
 ]
 
+
 const closeModal = ( modal ) => {
    store.getState().modals[modal].show && store.dispatch( showModal( { modal, bool: false } ) )
 }
@@ -191,7 +192,8 @@ const initialState = [
          {
             id: "eq-FR1000-2",
             name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)",
-            plan: null, price: '0',
+            plan: null,
+            price: '0',
             switch: true
          },
          {
@@ -498,34 +500,7 @@ const initialState = [
       ] ),
       link: "/uploads/docs/2021/home/tariff_5607_chuvashia.pdf"
    },
-   {
-      id: 'around',
-      tariffId: 3981,
-      dataView: "vezde",
-      name: "Везде",
-      marks: [],
-      web: 50,
-      min: 2100,
-      speed: 150,
-      sale: null,
-      tvId: 1,
-      tvLength: "61 канал",
-      oldPrice: null,
-      price: 1050,
-      totalPrice: 1400,
-      priceSale: 960,
-      get iconInfo() {
-         return this.oldPrice && iconInfo
-      },
-      rentDevice: [
-         {
-            text: "Аренда 4G Wi-Fi роутера",
-            price: 100
-         }
-      ],
-      equipments: [ eqUnite ],
-      link: "/uploads/docs/2022/home/tariff_5687_chuvashia.pdf"
-   },
+   tariffAround
 ]
 
 
