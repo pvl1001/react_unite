@@ -149,19 +149,19 @@ function ModalTariff( props ) {
                      ) }
                   </ul>
 
-                  <div className={ "download-pdf" }>
-                     <button className="download-pdf__icon">
-                        <img src={ '/svg/download-pdf.svg' } alt="download-pdf"/>
-                     </button>
-                     <div className={ s.download_pdf__text }>
-                        <a href={ props.tariff.link } className="download-pdf__text-link">
-                           Скачать подробную информацию о тарифе</a>
-                        <span className="download-pdf__text-pdf"> (PDF, 0.4 MB)</span>
+                  { props.tariff.link &&
+                     <div className={ "download-pdf" }>
+                        <button className="download-pdf__icon">
+                           <img src={ '/svg/download-pdf.svg' } alt="download-pdf"/>
+                        </button>
+                        <div className={ s.download_pdf__text }>
+                           <a href={ props.tariff.link } className="download-pdf__text-link">
+                              Скачать подробную информацию о тарифе</a>
+                           <span className="download-pdf__text-pdf"> (PDF, 0.4 MB)</span>
+                        </div>
                      </div>
-                  </div>
-
+                  }
                </div>
-
             </div>
 
             <Footer
