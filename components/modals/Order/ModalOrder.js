@@ -8,7 +8,8 @@ import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
 import { api } from "../../../api/api";
 import { analyticsEvent, analyticsView } from "../../../analytics/events";
-import s from './ModalOrder.module.sass'
+import s from './ModalOrder.module.sass';
+import { Spinner } from 'react-bootstrap';
 
 
 function ModalOrder( props ) {
@@ -26,18 +27,16 @@ function ModalOrder( props ) {
    }, [ props.show ] )
 
    const [ apiResponse, setApiResponse ] = useState( null )
-
    const errorMessage = 'Заполните поле!'
-
    const errorResponse = {
       response_head: 'Сервис временно не доступен',
       response: 'Пожалуйста, свяжитесь с нами по телефону, либо попробуйте позднее'
    }
-
    const validationSchema = object().shape( {
       phone: string().min( 16, errorMessage ).required( errorMessage ),
       name: string().min( 2, errorMessage ).required( errorMessage ),
    } )
+   const [ isLoading, setIsLoading ] = useState( false )
 
    function onHide() {
       props.showModal( {
@@ -73,7 +72,9 @@ function ModalOrder( props ) {
          calltracking_params: ct( 'calltracking_params', 'g96m2c8n' )?.sessionId ?? '',
       }
       try {
+         setIsLoading( true )
          const resMailSender = await api( 'https://home.megafon.ru/form/mail-sender', dataOrder )
+         setIsLoading( false )
          // console.log(props.dataOrder.eventLabel.send)
          if ( resMailSender.code === '200' ) {
             analyticsEvent( props.dataOrder.eventLabel.send )
@@ -184,7 +185,19 @@ function ModalOrder( props ) {
                            type="submit"
                            className={ s.form__btn + " btn" }
                            data-view="modal_order">
-                           Отправить
+                           <span>
+                              Отправить
+                              { isLoading &&
+                                 <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                 />
+                              }
+                           </span>
+
                         </button>
                      </form>
                   }
