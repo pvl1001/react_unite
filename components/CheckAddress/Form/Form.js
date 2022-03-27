@@ -17,7 +17,6 @@ function Form( props ) {
             name="address"
             className={ s.input }
          >
-
             <div>
                <input
                   type="text"
@@ -36,6 +35,7 @@ function Form( props ) {
                type="submit"
                className={ 'btn ' + s.btn }
                data-view="block_checkaddress"
+               disabled={ props.isLoading }
                onClick={ props.submit }>
                <span>
                   Проверить
@@ -49,10 +49,7 @@ function Form( props ) {
                      />
                   }
                </span>
-
-
             </button>
-
          </form>
 
       </div>
