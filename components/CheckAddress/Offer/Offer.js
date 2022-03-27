@@ -18,13 +18,9 @@ function Offer( props ) {
    return (
       <>
          <div className={ s.container }>
-            <p>
-               К сожалению, мы пока не можем подключить ваш дом к домашнему интернету. <br/>
-               Но по адресу <b>{ props.address }</b> доступно
-               <span className={ s.underline }
-                     onClick={ scroll }
-               > специальное предложение</span> на беспроводной интернет:
-            </p>
+            <p>К сожалению, мы пока не можем подключить ваш дом к домашнему интернету. <br/>
+               Но по адресу <b>{ props.address }</b> доступно <span className={ s.underline } onClick={ scroll }
+               >специальное предложение</span> на беспроводной интернет:</p>
 
             <span
                className={ link }

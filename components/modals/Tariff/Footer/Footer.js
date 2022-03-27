@@ -35,7 +35,7 @@ function Footer( props ) {
          <div className={ s.price }>
 
             { props.tariff.oldPrice &&
-               <span className={ s.price__old }>{ props.tariff.oldPrice } ₽</span> }
+               <span className={ s.price__old }>{ props.tariff.totalOldPrice } ₽</span> }
 
             <span className={ s.price__current }>{ props.tariff.totalPrice }</span>
 

@@ -550,7 +550,7 @@ export const tariffsSlice = createSlice( {
             const id = action.payload.id
             const currentTariff = setState.find( tariff => tariff.id === id )
 
-            currentTariff.totalPrice = currentTariff.equipments
+            const reducePrice = currentTariff.equipments
                .map( eq => {
                   if ( eq.switch ) {
                      if ( eq.id === 'eq-almond' && eq.currentPrice ) {
@@ -565,7 +565,9 @@ export const tariffsSlice = createSlice( {
                   }
                   return 0
                } )
-               .reduce( ( a, b ) => a + b, currentTariff.price )
+               .reduce( ( a, b ) => a + b )
+            currentTariff.totalPrice = currentTariff.price + reducePrice
+            currentTariff.totalOldPrice = currentTariff.oldPrice + reducePrice
          } )
       },
       switchAlmond( state, action ) {
@@ -645,7 +647,6 @@ export const tariffsSlice = createSlice( {
       },
    },
 } )
-
 
 export const getChannels = ( tvId ) => async ( dispatch ) => {
    try {
