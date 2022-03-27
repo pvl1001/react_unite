@@ -72,6 +72,7 @@ function CheckAddress( props ) {
             setIsLoading( false )
             return setResult( data.result )
          } catch ( err ) {
+            setIsLoading( false )
             console.log( err )
          }
 

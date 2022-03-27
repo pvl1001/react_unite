@@ -104,6 +104,7 @@ function ModalOrder( props ) {
          }
          setApiResponse( resMailSender )
       } catch ( err ) {
+         setIsLoading( false )
          setApiResponse( errorResponse )
       }
    }
