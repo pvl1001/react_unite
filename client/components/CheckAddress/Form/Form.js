@@ -26,8 +26,7 @@ function Form( props ) {
                />
 
                { props.isShowLabel &&
-                  <label className={ s.label } htmlFor="addressCheck">
-                     Выберите адрес дома из выпадающего списка!</label>
+                  <label className={ s.label } htmlFor="addressCheck">{ props.formLabel }</label>
                }
             </div>
 

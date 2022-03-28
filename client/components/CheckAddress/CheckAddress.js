@@ -39,7 +39,10 @@ function CheckAddress( props ) {
    }, [] )
 
    const inputAddress = '#addressCheck'
+   const textLabelCheck = 'Выберите адрес дома из выпадающего списка!'
+   const textLabelError = 'Сервис временно не доступен'
    const [ address, setAddress ] = useState( {} )
+   const [ formLabel, setFormLabel ] = useState( textLabelCheck )
    const [ result, setResult ] = useState( null )
    const [ isShowLabel, setIsShowLabel ] = useState( false )
    const [ isLoading, setIsLoading ] = useState( false )
@@ -70,10 +73,11 @@ function CheckAddress( props ) {
             setIsLoading( true )
             const data = await api( 'https://api.wifire.ru/api/address/check_dadata_address', address )
             setIsLoading( false )
+            setFormLabel( textLabelCheck )
             return setResult( data.result )
          } catch ( err ) {
             setIsLoading( false )
-            console.log( err )
+            setFormLabel( textLabelError )
          }
 
       }
@@ -113,6 +117,7 @@ function CheckAddress( props ) {
                   setIsShowLabel={ setIsShowLabel }
                   submit={ submit }
                   isLoading={ isLoading }
+                  formLabel={ formLabel }
                />
 
                { result === 1 &&
@@ -134,7 +139,6 @@ function CheckAddress( props ) {
             </div>
          </div>
       </section>
-      // <!--г Москва, ул Набережная, д 4-->
    )
 }
 
