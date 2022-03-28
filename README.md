@@ -1,21 +1,43 @@
-# mf-nextjs
+# MF-NextJS
 
-```npm i``` - установка зависимостей
+## Запуск
 
-```npm run dev``` - запустить проект в режиме разработки на localhost:3000
-
-```npm run build``` - собрать проект
-
-```npm run start``` - запустить build проект на localhost:3000
-
-# О проекте
+#### Client
 
 ```
-Разработка на фреймворке Next.JS. 
+npm i - установка зависимостей
+
+npm run dev - запустить проект в режиме разработки на localhost:3000
+
+npm run build - собрать проект
+
+npm run start - запустить build проект на localhost:3000
+```
+
+#### Server
+
+```
+npm i - установка зависимостей
+
+npm run server - запустить сервер на localhost:4000
+
+npm run client - запустить проект в режиме разработки на localhost:3000 из папки Client
+
+npm run dev - запустить server и client 
+```
+
+## О проекте
+
+### Client
+
+```
+Разработка на фреймворке NextJS. 
 
 pages:
     _app.js - точка входа
-    app.js - гланая страница со всеми компонентами
+    index.js - Объединяй!
+    internet.js - #ДляДома
+    internetvse.js - #ДляДома Всё
     
 components - react компоненты
 
