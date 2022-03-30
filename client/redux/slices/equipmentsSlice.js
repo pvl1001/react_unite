@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
-import produce from "immer";
+import { createSlice } from '@reduxjs/toolkit';
 
 
 export const equipments = [
@@ -188,56 +187,46 @@ export const equipments = [
    }
 ]
 
-const initialState = equipments
 
 export const equipmentsSlice = createSlice( {
    name: 'equipments',
-   initialState,
+   initialState: equipments,
    reducers: {
       changePlan( state, action ) {
-         return produce( state, setState => {
-            setState
-               .find( eq => eq.id === action.payload.id ).plan
-               .map( p => p.checked = !p.checked )
-         } )
+         state
+            .find( eq => eq.id === action.payload.id ).plan
+            .map( p => p.checked = !p.checked )
       },
       sumAlmondTotalPriceEq( state ) {
-         return produce( state, setState => {
-            const almond = setState.find( eq => eq.id === 'eq-almond' )
-            const arrPrices = almond.equipments
-               .filter( alEq => alEq.checked )
-               .map( alEq => alEq.price * alEq.cnt )
+         const almond = state.find( eq => eq.id === 'eq-almond' )
+         const arrPrices = almond.equipments
+            .filter( alEq => alEq.checked )
+            .map( alEq => alEq.price * alEq.cnt )
 
-            almond.totalPrice = arrPrices.length
-               ? arrPrices.reduce( ( a, b ) => a + b )
-               : null
-         } )
+         almond.totalPrice = arrPrices.length
+            ? arrPrices.reduce( ( a, b ) => a + b )
+            : null
       },
       counterAlmondEq( state, action ) {
-         return produce( state, setState => {
-            let cnt = action.payload.cnt
-            const name = action.payload.name
-            const data = action.payload.data
-            const almond = setState.find( eq => eq.id === 'eq-almond' )
+         let cnt = action.payload.cnt
+         const name = action.payload.name
+         const data = action.payload.data
+         const almond = state.find( eq => eq.id === 'eq-almond' )
 
-            if ( name === 'plus' ) {
-               almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
-            }
-            if ( name === 'minus' ) {
-               almond.equipments[data.index] = { ...almond.equipments[data.index], cnt: --cnt }
-            }
-         } )
+         if ( name === 'plus' ) {
+            almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
+         }
+         if ( name === 'minus' ) {
+            almond.equipments[data.index] = { ...almond.equipments[data.index], cnt: --cnt }
+         }
       },
       switchAlmondEq( state, action ) {
-         return produce( state, setState => {
+         const data = action.payload.data
+         const checked = action.payload.checked
+         const cnt = action.payload.cnt
+         const almond = state.find( eq => eq.id === 'eq-almond' )
 
-            const data = action.payload.data
-            const checked = action.payload.checked
-            const cnt = action.payload.cnt
-            const almond = setState.find( eq => eq.id === 'eq-almond' )
-
-            almond.equipments[data.index] = { ...data, cnt, checked }
-         } )
+         almond.equipments[data.index] = { ...data, cnt, checked }
       }
    }
 } )

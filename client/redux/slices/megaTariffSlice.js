@@ -9,11 +9,9 @@ export const stateMegaTariff = {
    sms: 100
 }
 
-const initialState = stateMegaTariff
-
 const megaTariff = createSlice( {
    name: 'megaTariff',
-   initialState,
+   initialState: stateMegaTariff,
    reducers: {}
 } )
 

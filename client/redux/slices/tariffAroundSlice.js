@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import produce from 'immer';
 
 
 export const tariffAround = {
@@ -63,18 +62,15 @@ export const tariffAround = {
    link: "/uploads/docs/2022/home/tariff_5687_chuvashia.pdf"
 }
 
-const initialState = tariffAround
 
 export const tariffAroundSlice = createSlice( {
    name: 'tariffAround',
-   initialState,
+   initialState: tariffAround,
    reducers: {
       onUniteSwitch( state, action ) {
-         return produce( state, setState => {
-            setState.routerSwitch = action.payload
-            const priceReduce = [ setState.price * 0.6, setState.routerSwitch && setState.equipments[0].price ]
-            setState.calcPriceSale = priceReduce.reduce( ( a, b ) => a + b )
-         } )
+         state.routerSwitch = action.payload
+         const priceReduce = [ state.price * 0.6, state.routerSwitch && state.equipments[0].price ]
+         state.calcPriceSale = priceReduce.reduce( ( a, b ) => a + b )
       },
    }
 } )

@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
-import produce from "immer";
+import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
@@ -21,10 +20,8 @@ export const modalsSlice = createSlice( {
    initialState,
    reducers: {
       showModal( state, action ) {
-         return produce( state, setState => {
-            setState[action.payload.modal].show = action.payload.bool
-            setState[action.payload.modal].props = action.payload.props || null
-         } )
+         state[action.payload.modal].show = action.payload.bool
+         state[action.payload.modal].props = action.payload.props || null
       }
    }
 } )

@@ -1,7 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 import { store } from "../store";
 import { showModal } from "./modalsSlice";
-import produce from "immer";
 import { HYDRATE } from 'next-redux-wrapper';
 import { equipments } from "./equipmentsSlice";
 import { tariffAround } from './tariffAroundSlice';
@@ -504,137 +503,117 @@ const initialState = [
 ]
 
 
-export const tariffsSlice = createSlice( {
+const tariffsSlice = createSlice( {
    name: 'tariffs',
    initialState,
    reducers: {
       optionSwitch( state, action ) {
-         return produce( state, setState => {
-            const id = action.payload.id
-            const i = action.payload.index
-            const checked = action.payload.checked
-            const currentTariff = setState.find( tariff => tariff.id === id )
-            const optionCard = currentTariff.equipments[i]
-            optionCard.switch = checked
-         } )
+         const id = action.payload.id
+         const i = action.payload.index
+         const checked = action.payload.checked
+         const currentTariff = state.find( tariff => tariff.id === id )
+         const optionCard = currentTariff.equipments[i]
+         optionCard.switch = checked
       },
       counterSim( state, action ) {
-         return produce( state, setState => {
-            const id = action.payload.id
-            const i = action.payload.index
-            const name = action.payload.name
-            const optionCard = setState.find( tariff => tariff.id === id ).equipments[i]
+         const id = action.payload.id
+         const i = action.payload.index
+         const name = action.payload.name
+         const optionCard = state.find( tariff => tariff.id === id ).equipments[i]
 
-            if ( name === 'plus' ) {
-               optionCard.cnt++
-               optionCard.switch = true
-            }
-            if ( name === 'minus' ) {
-               optionCard.cnt--
-            }
-            optionCard.sumPrice = optionCard.price * optionCard.cnt
-            optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
-         } )
+         if ( name === 'plus' ) {
+            optionCard.cnt++
+            optionCard.switch = true
+         }
+         if ( name === 'minus' ) {
+            optionCard.cnt--
+         }
+         optionCard.sumPrice = optionCard.price * optionCard.cnt
+         optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
       },
       tariffRadioPlan( state, action ) {
-         return produce( state, setState => {
-            const id = action.payload.id
-            const i = action.payload.index
-            const cardOption = setState.find( tariff => tariff.id === id ).equipments[i]
-            cardOption.plan.map( p => p.checked = !p.checked )
-            cardOption.price = cardOption.plan.find( p => p.checked ).value
-         } )
+         const id = action.payload.id
+         const i = action.payload.index
+         const cardOption = state.find( tariff => tariff.id === id ).equipments[i]
+         cardOption.plan.map( p => p.checked = !p.checked )
+         cardOption.price = cardOption.plan.find( p => p.checked ).value
       },
       sumTotalPrice( state, action ) {
-         return produce( state, setState => {
-            const id = action.payload.id
-            const currentTariff = setState.find( tariff => tariff.id === id )
+         const id = action.payload.id
+         const currentTariff = state.find( tariff => tariff.id === id )
 
-            const reducePrice = currentTariff.equipments
-               .map( eq => {
-                  if ( eq.switch ) {
-                     if ( eq.id === 'eq-almond' && eq.currentPrice ) {
-                        return typeof eq.currentPrice === 'string'
-                           ? parseInt( eq.currentPrice.match( /\d+/ ) )
-                           : eq.currentPrice
-                     }
-                     if ( typeof eq.price === 'string' ) return parseInt( eq.price.match( /\d+/ ) )
-                     if ( eq.id === 'eq-sim' ) return eq.sumPrice || eq.price
-                     if ( eq.plan ) return eq.plan.find( p => p.checked ).value
-                     return eq.price
+         const reducePrice = currentTariff.equipments
+            .map( eq => {
+               if ( eq.switch ) {
+                  if ( eq.id === 'eq-almond' && eq.currentPrice ) {
+                     return typeof eq.currentPrice === 'string'
+                        ? parseInt( eq.currentPrice.match( /\d+/ ) )
+                        : eq.currentPrice
                   }
-                  return 0
-               } )
-               .reduce( ( a, b ) => a + b )
-            currentTariff.totalPrice = currentTariff.price + reducePrice
-            currentTariff.totalOldPrice = currentTariff.oldPrice + reducePrice
-         } )
+                  if ( typeof eq.price === 'string' ) return parseInt( eq.price.match( /\d+/ ) )
+                  if ( eq.id === 'eq-sim' ) return eq.sumPrice || eq.price
+                  if ( eq.plan ) return eq.plan.find( p => p.checked ).value
+                  return eq.price
+               }
+               return 0
+            } )
+            .reduce( ( a, b ) => a + b )
+         currentTariff.totalPrice = currentTariff.price + reducePrice
+         currentTariff.totalOldPrice = currentTariff.oldPrice + reducePrice
       },
       switchAlmond( state, action ) {
-         return produce( state, setState => {
+         const data = action.payload.data
+         const checked = action.payload.checked
+         const cnt = action.payload.cnt
+         const id = action.payload.tariffID
 
-            const data = action.payload.data
-            const checked = action.payload.checked
-            const cnt = action.payload.cnt
-            const id = action.payload.tariffID
+         const almond = state
+            .find( tariff => tariff.id === id ).equipments
+            .find( eq => eq.id === 'eq-almond' )
 
-            const almond = setState
-               .find( tariff => tariff.id === id ).equipments
-               .find( eq => eq.id === 'eq-almond' )
-
-            almond.equipments[data.index] = { ...data, cnt, checked }
-         } )
+         almond.equipments[data.index] = { ...data, cnt, checked }
       },
       counterAlmond( state, action ) {
-         return produce( state, setState => {
-            let cnt = action.payload.cnt
-            const name = action.payload.name
-            const data = action.payload.data
-            const id = action.payload.tariffID
-            const currentTariff = setState.find( tariff => tariff.id === id )
-            const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
+         let cnt = action.payload.cnt
+         const name = action.payload.name
+         const data = action.payload.data
+         const id = action.payload.tariffID
+         const currentTariff = state.find( tariff => tariff.id === id )
+         const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
 
-            if ( name === 'plus' ) {
-               almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
-            }
-            if ( name === 'minus' ) {
-               almond.equipments[data.index] = { ...almond.equipments[data.index], cnt: --cnt }
-            }
-         } )
+         if ( name === 'plus' ) {
+            almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
+         }
+         if ( name === 'minus' ) {
+            almond.equipments[data.index] = { ...almond.equipments[data.index], cnt: --cnt }
+         }
       },
       sumAlmondTotalPrice( state, action ) {
-         return produce( state, setState => {
+         const almond = state
+            .find( tariff => tariff.id === action.payload ).equipments
+            .find( eq => eq.id === 'eq-almond' )
 
-            const almond = setState
-               .find( tariff => tariff.id === action.payload ).equipments
-               .find( eq => eq.id === 'eq-almond' )
+         const arrPrices = almond.equipments
+            .filter( alEq => alEq.checked )
+            .map( alEq => alEq.price * alEq.cnt )
 
-            const arrPrices = almond.equipments
-               .filter( alEq => alEq.checked )
-               .map( alEq => alEq.price * alEq.cnt )
-
-            almond.totalPrice = arrPrices.length
-               ? arrPrices.reduce( ( a, b ) => a + b )
-               : null
-         } )
+         almond.totalPrice = arrPrices.length
+            ? arrPrices.reduce( ( a, b ) => a + b )
+            : null
       },
       changeAlmondTotalPrice( state, action ) {
-         return produce( state, setState => {
-            const id = action.payload.id
-            const i = action.payload.index
-            const almond = setState.find( tariff => tariff.id === id ).equipments[i]
-            almond.currentPrice = almond.totalPrice || almond.price
-         } )
+         const id = action.payload.id
+         const i = action.payload.index
+         const almond = state.find( tariff => tariff.id === id ).equipments[i]
+         almond.currentPrice = almond.totalPrice || almond.price
       },
       setChannels( state, action ) {
-         return produce( state, setState => {
-            const id = action.payload.id
-            const channels = action.payload.channels
-            setState.forEach( tariff => {
-               if ( tariff.tvId === id ) {
-                  tariff.channels = channels
-               }
-            } )
+         const id = action.payload.id
+         const channels = action.payload.channels
+         state.forEach( tariff => {
+            if ( tariff.tvId === id ) {
+               tariff.channels = channels
+            }
          } )
       },
       setInitialStateTariffs( state, action ) {
@@ -642,9 +621,7 @@ export const tariffsSlice = createSlice( {
       }
    },
    extraReducers: {
-      [HYDRATE]: ( state, action ) => {
-         return action.payload.tariffs
-      },
+      [HYDRATE]: ( state, action ) => action.payload.tariffs
    },
 } )
 

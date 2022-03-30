@@ -92,9 +92,7 @@ const pageSlice = createSlice( {
       }
    },
    extraReducers: {
-      [HYDRATE]: ( state, action ) => {
-         return action.payload.page
-      }
+      [HYDRATE]: ( state, action ) => action.payload.page
    }
 } )
 
