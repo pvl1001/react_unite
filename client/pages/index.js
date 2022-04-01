@@ -9,10 +9,19 @@ import FAQ from "../components/FAQ/FAQ";
 import headerStyle from '../components/Header/Header.module.sass';
 import getRegion from "../mixins/getRegion";
 import Nav from "../components/Nav/Nav";
+import TariffCard from "../components/Tariffs/TariffCard/TariffCard";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 
 export default function IndexPage( { region } ) {
    console.log( region )
+
+   const tariffs = useSelector( state => state.tariffs )
+   const premium = tariffs.find( el => el.id === 'premium' )
+   const [ collapseGroup, setCollapseGroup ] = useState( false )
+   const [ collapseChannels, setCollapseChannels ] = useState( [] )
+
    return (
       <>
          <Head>
@@ -22,7 +31,22 @@ export default function IndexPage( { region } ) {
          <Nav region={ region }/>
          <Header style={ headerStyle }/>
          <main>
-            <Tariffs/>
+            <Tariffs>
+               { tariffs.map( tariff =>
+                  <TariffCard
+                     key={ tariff.id }
+                     tariff={ tariff }
+                     tariffs={ tariffs }
+                     premium={ premium }
+                     collapse={ {
+                        collapseGroup,
+                        setCollapseGroup,
+                        collapseChannels,
+                        setCollapseChannels
+                     } }
+                  />
+               ) }
+            </Tariffs>
             <CheckAddress/>
             <Equipments/>
             <WhatElse/>

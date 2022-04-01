@@ -12,9 +12,18 @@ import { wrapper } from "../redux/store";
 import { setInitialStatePage } from "../redux/slices/pageSlice";
 import Nav from "../components/Nav/Nav";
 import getRegion from "../mixins/getRegion";
+import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import NewCard from "../components/Tariffs/NewCard/NewCard";
 
 
 export default function InternetPage( { region } ) {
+
+   const tariffs = useSelector( state => state.tariffs )
+   const premium = tariffs.find( el => el.id === 'premium' )
+   const [ collapseGroup, setCollapseGroup ] = useState( false )
+   const [ collapseChannels, setCollapseChannels ] = useState( [] )
+
 
    return (
       <>
@@ -25,7 +34,22 @@ export default function InternetPage( { region } ) {
          <Nav region={ region }/>
          <Header style={ headerStyle }/>
          <main>
-            <Tariffs/>
+            <Tariffs>
+               { tariffs.map( tariff =>
+                  <NewCard
+                     key={ tariff.id }
+                     tariff={ tariff }
+                     tariffs={ tariffs }
+                     premium={ premium }
+                     collapse={ {
+                        collapseGroup,
+                        setCollapseGroup,
+                        collapseChannels,
+                        setCollapseChannels
+                     } }
+                  />
+               ) }
+            </Tariffs>
             <CheckAddress/>
             <Equipments/>
             <AppBanner/>

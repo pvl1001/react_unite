@@ -125,11 +125,9 @@ function TariffCard( props ) {
                { props.tariff.tvLength &&
                   <TvChannels
                      tariffs={ props.tariffs }
+                     tariff={ props.tariff }
                      collapse={ props.collapse }
                      premium={ props.premium }
-                     tvLength={ props.tariff.tvLength }
-                     tvId={ props.tariff.tvId }
-                     channels={ props.tariff.channels }
                      lineStyle={ {
                         width: activeProgress( 'ТВ', props.tariff.tvLength ) + '%',
                         ...premiumStyle

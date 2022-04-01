@@ -5,5 +5,6 @@ export const tippyAttrs = {
    allowHTML: true,
    theme: 'light',
    hideOnClick: false,
+   delay: [ null, 250 ],
    // trigger: 'click'
 }

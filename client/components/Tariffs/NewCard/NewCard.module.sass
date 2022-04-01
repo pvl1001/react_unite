@@ -1,0 +1,129 @@
+.container
+   position: static
+   background: #FFFFFF
+   box-shadow: 0 0 12px rgba(51, 51, 51, .2)
+   border-radius: 10px
+   padding: 16px
+   border: 0
+   height: 100%
+   display: flex !important
+   flex-direction: column
+
+
+.title
+   display: flex
+   justify-content: space-between
+   align-items: center
+   margin-bottom: 4px
+
+
+.tariffName
+   font-size: 15px
+   line-height: 24px
+
+
+.marks
+   font-size: 12px
+   line-height: 16px
+   font-weight: 400
+   color: var(--mf-green)
+
+
+.greenBox
+   background-color: var(--mf-green-light)
+   height: 88px
+   border-radius: 8px
+   padding: 12px
+   margin-bottom: 13px
+
+
+.newPrice
+   font-size: 32px
+   font-weight: 600
+
+
+.infoIcon
+   margin-left: 14px
+   vertical-align: text-bottom
+   cursor: pointer
+
+
+.params
+   display: flex
+   flex-direction: column
+   justify-content: center
+   margin-bottom: 17px
+
+
+.params__item
+   display: flex
+   align-items: center
+   font-size: 20px
+   line-height: 28px
+   margin-bottom: 3px
+
+   &:last-child
+      margin-bottom: 0
+
+   svg, path
+      fill: var(--mf-green)
+
+
+.params__tv
+   border-bottom: 1px dashed
+   cursor: pointer
+
+   &:hover
+      text-decoration: none
+      border-bottom-style: solid
+
+
+.params__icon
+   display: inline-flex
+   width: 32px
+   height: 32px
+   margin-right: 12px
+
+   svg
+      margin: auto
+
+
+.btns
+   display: flex
+   flex-direction: column
+   align-items: center
+
+
+.aboutBtn
+   font-size: 15px
+   line-height: 24px
+   color: var(--mf-blue)
+   text-align: center
+   margin-bottom: 7px
+   cursor: pointer
+
+   &:hover
+      text-decoration: underline
+
+
+.connectBtn
+   height: 32px
+   padding: 0 32px
+
+
+.premium
+   svg, path
+      fill: var(--mf-premium)
+
+   .connectBtn
+      background-color: var(--mf-premium)
+
+      &:hover
+         background-color: var(--mf-premium-hov)
+
+
+.tippy
+   text-align: center
+   padding: 28px
+   line-height: 24px
+

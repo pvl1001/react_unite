@@ -1,17 +1,12 @@
 import s from './Tariffs.module.sass'
-import TariffCard from "./TariffCard/TariffCard";
 import Slider from "react-slick";
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 
-function Tariffs( props ) {
-   const premium = props.tariffs.find( el => el.id === 'premium' )
-   const [ collapseGroup, setCollapseGroup ] = useState( false )
-   const [ collapseChannels, setCollapseChannels ] = useState( [] )
-   const tariffsName = props.pageName === 'Объединяй!' ? '«Объединяй!»' : props.pageName
+function Tariffs( { children } ) {
 
-
+   const pageName = useSelector( state => state.page.name )
+   const tariffsName = pageName === 'Объединяй!' ? '«Объединяй!»' : pageName
    const settingsSlider = {
       dots: true,
       infinite: false,
@@ -43,20 +38,7 @@ function Tariffs( props ) {
             <h1 className={ s.title }>Тарифы { tariffsName }</h1>
 
             <Slider className="slider" { ...settingsSlider }>
-               { props.tariffs.map( tariff =>
-                  <TariffCard
-                     key={ tariff.id }
-                     tariff={ tariff }
-                     tariffs={ props.tariffs }
-                     premium={ premium }
-                     collapse={ {
-                        collapseGroup,
-                        setCollapseGroup,
-                        collapseChannels,
-                        setCollapseChannels
-                     } }
-                  />
-               ) }
+               { children }
             </Slider>
 
          </div>
@@ -66,7 +48,4 @@ function Tariffs( props ) {
 }
 
 
-export default connect( state => ({
-   pageName: state.page.name,
-   tariffs: state.tariffs,
-}) )( Tariffs )
+export default Tariffs
