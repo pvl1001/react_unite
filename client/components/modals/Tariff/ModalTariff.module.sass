@@ -38,18 +38,6 @@
       width: 0
 
 
-   > *
-      $br: 10px
-      overflow: hidden
-
-      &:nth-child(2)
-         border-radius: $br $br 0 0
-
-
-      &:last-child
-         border-radius: 0 0 $br $br
-
-
 .wrapp
    padding-left: 78px
    padding-right: 78px
@@ -62,6 +50,7 @@
    display: flex
    align-items: center
    font-weight: 700
+   border-radius: 10px 10px 0 0
 
 
 .container
@@ -105,6 +94,10 @@
 
 
 @media (max-width: 1023px)
+   .modal_dialog
+      padding: 0
+
+
    .wrapp
       padding-left: 48px
       padding-right: 48px

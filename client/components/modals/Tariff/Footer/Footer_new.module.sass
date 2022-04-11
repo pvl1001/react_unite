@@ -1,0 +1,86 @@
+.container
+   display: flex
+   align-items: center
+   justify-content: space-between
+   flex-wrap: wrap
+   padding-top: 16px
+   padding-bottom: 16px
+   background-color: var(--mf-green)
+   color: #fff
+   border-radius: 0 0 10px 10px
+
+
+.backdrop
+   @media (max-width: 767px)
+      position: sticky
+      bottom: 0
+      background-color: #777777
+      z-index: 1
+
+
+.price
+   font-size: 20px
+   line-height: 28px
+   font-weight: 500
+
+
+.price__current
+   font-size: 32px
+   line-height: 40px
+   font-weight: 600
+
+
+.title,
+.price__month,
+.price__desc
+   font-size: 20px
+   line-height: 28px
+   font-weight: 500
+
+
+.price__btn
+   width: 130px
+
+
+.price__desc
+   font-size: 20px
+   line-height: 28px
+   font-weight: 500
+
+
+.price__icon
+   vertical-align: baseline
+   margin-left: 5px
+
+
+.btn-close
+   position: sticky
+   position: -webkit-sticky
+   z-index: 100
+   top: 0
+   overflow: initial !important
+   pointer-events: auto
+
+
+.modal-close
+   top: 37px
+   right: 72px
+
+
+@media (max-width: 1023px)
+   .modal-close
+      top: 27px
+      right: 16px
+
+
+@media (max-width: 767px)
+   .price__month,
+   .price__desc
+      font-size: 12px
+      line-height: 16px
+      font-weight: 400
+
+
+   .title
+      font-size: 15px
+      line-height: 24px

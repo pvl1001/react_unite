@@ -9,6 +9,9 @@ import s from './CardOption.module.sass'
 
 function CardOption( props ) {
    const payload = { id: props.id, index: props.idx }
+   const containerClass = props.equipment.switch
+      ? s.container + ' ' + s.active
+      : s.container
 
    const handleSwitch = ( e ) => {
       props.optionSwitch( { ...payload, checked: e.target.checked } )
@@ -41,7 +44,7 @@ function CardOption( props ) {
 
    return (
       <li key={ props.equipment.id }
-          className={ s.container }>
+          className={ containerClass }>
 
          <div className={ s.img }>
 
@@ -99,7 +102,7 @@ function CardOption( props ) {
          <div className={ s.price }>
             { props.equipment.price &&
                <div className={ s.price__price }>
-                  <span className={ s.price__current }>{ price( props.equipment.id ) }</span>
+                  <span className={ s.price__current }>{ price( props.equipment.id ) } </span>
                   <span> ₽</span>
                   <span className={ s.price__month }> в месяц</span>
                </div>

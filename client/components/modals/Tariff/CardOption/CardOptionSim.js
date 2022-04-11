@@ -8,6 +8,9 @@ import s from './CardOption.module.sass';
 function CardOptionSim( props ) {
    const megaTariff = useSelector( state => state.megaTariff )
    const payload = { id: props.id, index: props.idx }
+   const containerClass = props.equipment.switch
+      ? s.container + ' ' + s.active
+      : s.container
    const showModalTariffAll = () => props.showModal( { modal: 'tariffAll', bool: true } )
 
    const handleSwitch = ( e ) => {
@@ -23,7 +26,7 @@ function CardOptionSim( props ) {
 
    return (
       <li key={ props.equipment.id }
-          className={ s.container }>
+          className={ containerClass }>
          <div className={ s.sim }>
             <p>SIM-карта с тарифом
                <span onClick={ showModalTariffAll }> «Без переплат. { megaTariff.name }»</span> Скидка 40% на
