@@ -298,11 +298,14 @@ input[data-provide="datepicker"]
 .switch
    position: relative
    display: inline-block
-   width: 40px
-   height: 20px
    box-sizing: border-box
    flex-shrink: 0
-   margin-right: 18px
+   height: 28px
+   width: 48px
+
+   & input:checked + span:before
+      left: calc(100% - 26px + 1px)
+
 
    input
       display: none
@@ -323,14 +326,14 @@ input[data-provide="datepicker"]
    span:before
       content: ''
       position: absolute
-      height: 18px
-      width: 18px
       left: -1px
-      top: calc(50% - 9px)
       background-color: #fff
       transition: .3s
       border: 1px solid #33333327
       box-shadow: 0 3px 1px 0 rgba(0, 0, 0, .05), 0 3px 3px 0 rgba(0, 0, 0, .05)
+      height: 26px
+      width: 26px
+      top: calc(50% - 26px / 2)
 
 
    input:checked + span
@@ -342,34 +345,7 @@ input[data-provide="datepicker"]
 
 
    input:checked + span:before
-      left: calc(100% - 18px + 1px)
-
-
-   /* Rounded sliders */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      left: calc(100% - 26px + 1px)
 
 
    span.round
@@ -747,14 +723,9 @@ form
    align-items: center
    font-size: 12px
    line-height: 1
-   border-radius: 2px
-   padding: 5px 9px
+   border-radius: 8px
+   padding: 6px 12px
    color: #fff
-   z-index: 1
-
-   span
-      margin-bottom: -1px
-
 
    &_blue
       background-color: var(--mf-blue)
@@ -769,6 +740,10 @@ form
 
    &_orange
       background-color: var(--mf-orange)
+
+
+   &_orange-light
+      background-color: var(--mf-orange-light)
 
 
 .option-radio
