@@ -2,6 +2,7 @@
    font-size: 15px
    line-height: 20px
    font-weight: 500
+   overflow: hidden
 
 
    ul
@@ -23,19 +24,49 @@
    max-width: calc(820px + 48px * 2)
    padding: 0 48px
    overflow: visible
+   margin: 0 auto
 
 
 .modal_content
+   display: block
    padding: 0
-   overflow: visible
    background-color: transparent
+   height: 100vh
+   overflow-x: hidden
+   overflow-y: auto
+   border-radius: 0 0 10px 10px
+   transform: translate(0)
 
-   // firefox
-   scrollbar-width: 0
+   // firefox scrollbar
+   scrollbar-width: none
 
+   // scrollbar
    &::-webkit-scrollbar-thumb,
    &::-webkit-scrollbar
       width: 0
+
+   &:before
+      content: ''
+      display: inline-block
+      height: 100%
+      vertical-align: middle
+
+
+.modal_scroll
+   width: 100%
+   display: inline-block
+   vertical-align: middle
+   position: relative
+
+   &:before
+      content: ""
+      position: absolute
+      top: 10px
+      right: 0
+      bottom: 10px
+      left: 0
+      background-color: #F1F1F1
+      z-index: -1
 
 
 .wrapp
@@ -120,19 +151,11 @@
 
 
 @media (max-width: 767px)
-   .modal_dialog
-      margin: 54px 0
-
-
    .wrapp
       padding-left: 16px
       padding-right: 16px
 
 
 @media (max-width: 510px)
-   .modal_dialog
-      padding: 0
-
-
    .modal_close
       right: 16px

@@ -104,70 +104,71 @@ function ModalTariff( props ) {
             dialogClassName={ s.modal_dialog }
             contentClassName={ s.modal_content }>
 
-            <div className={ s.btn_close }>
-               <button
-                  type="button"
-                  className={ s.modal_close + " modal-close" }
-                  onClick={ onHide }
-               />
-            </div>
-
-
-            <div style={ premiumStyle } className={ `${ s.title } ${ s.wrapp }` }>
-               <h1>{ props.pageName } { props.tariff.name }</h1>
-            </div>
-
-            <div className={ s.container }>
-
-               <ul className={ s.items }>
-                  { infoModal.map( info =>
-                        info && <BlockInfo
-                           key={ info.title }
-                           info={ info }
-                           tariff={ props.tariff }
-                        />
-                  ) }
-               </ul>
-
-               { props.tariff.mftv &&
-                  <BannerMfTv
-                     mftv={ props.tariff.mftv }
-                     tariff={ props.tariff }
+            <div className={ s.modal_scroll }>
+               <div className={ s.btn_close }>
+                  <button
+                     type="button"
+                     className={ s.modal_close + " modal-close" }
+                     onClick={ onHide }
                   />
-               }
+               </div>
 
-               <div className={ `${ s.dop_options } ${ s.wrapp }` }>
-                  <h2 className={ s.dop_options__title }>Дополнительные опции:</h2>
+               <div style={ premiumStyle } className={ `${ s.title } ${ s.wrapp }` }>
+                  <h1>{ props.pageName } { props.tariff.name }</h1>
+               </div>
 
-                  <ul className={ s.dop_options__cards }>
-                     { props.tariff.equipments.map( ( equipment, idx ) =>
-                        equipment.id !== 'eq-sim'
-                           ? <CardOption key={ equipment.id } equipment={ equipment } idx={ idx }
-                                         id={ props.tariff.id }/>
-                           : <CardOptionSim key={ equipment.id } equipment={ equipment } idx={ idx }
-                                            id={ props.tariff.id }/>
+               <div className={ s.container }>
+
+                  <ul className={ s.items }>
+                     { infoModal.map( info =>
+                           info && <BlockInfo
+                              key={ info.title }
+                              info={ info }
+                              tariff={ props.tariff }
+                           />
                      ) }
                   </ul>
 
-                  { props.tariff.link &&
-                     <div className={ "download-pdf" }>
-                        <button className="download-pdf__icon">
-                           <img src={ '/svg/download-pdf.svg' } alt="download-pdf"/>
-                        </button>
-                        <div className={ s.download_pdf__text }>
-                           <a href={ props.tariff.link } className="download-pdf__text-link">
-                              Скачать подробную информацию о тарифе</a>
-                           <span className="download-pdf__text-pdf"> (PDF, 0.4 MB)</span>
-                        </div>
-                     </div>
+                  { props.tariff.mftv &&
+                     <BannerMfTv
+                        mftv={ props.tariff.mftv }
+                        tariff={ props.tariff }
+                     />
                   }
-               </div>
-            </div>
 
-            <Footer
-               pageName={ props.pageName }
-               tariff={ props.tariff }
-            />
+                  <div className={ `${ s.dop_options } ${ s.wrapp }` }>
+                     <h2 className={ s.dop_options__title }>Дополнительные опции:</h2>
+
+                     <ul className={ s.dop_options__cards }>
+                        { props.tariff.equipments.map( ( equipment, idx ) =>
+                           equipment.id !== 'eq-sim'
+                              ? <CardOption key={ equipment.id } equipment={ equipment } idx={ idx }
+                                            id={ props.tariff.id }/>
+                              : <CardOptionSim key={ equipment.id } equipment={ equipment } idx={ idx }
+                                               id={ props.tariff.id }/>
+                        ) }
+                     </ul>
+
+                     { props.tariff.link &&
+                        <div className={ "download-pdf" }>
+                           <button className="download-pdf__icon">
+                              <img src={ '/svg/download-pdf.svg' } alt="download-pdf"/>
+                           </button>
+                           <div className={ s.download_pdf__text }>
+                              <a href={ props.tariff.link } className="download-pdf__text-link">
+                                 Скачать подробную информацию о тарифе</a>
+                              <span className="download-pdf__text-pdf"> (PDF, 0.4 MB)</span>
+                           </div>
+                        </div>
+                     }
+                  </div>
+               </div>
+
+               <Footer
+                  pageName={ props.pageName }
+                  tariff={ props.tariff }
+               />
+            </div>
 
          </Modal>
       )
