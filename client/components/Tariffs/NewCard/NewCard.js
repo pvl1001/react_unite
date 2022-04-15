@@ -100,9 +100,7 @@ function NewCard( props ) {
 
          <ul className={ s.params }>
 
-            <li className={ s.params__item }
-                style={ { height: props.tariff.id === 'internet' ? 70 : '' } }
-            >
+            <li className={ s.params__item }>
                <div className={ s.params__icon }><WifiIcon/></div>
                <span>{ props.tariff.speed } Мбит/с</span>
             </li>

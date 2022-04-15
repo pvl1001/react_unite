@@ -9,9 +9,10 @@ import FAQ from "../components/FAQ/FAQ";
 import headerStyle from '../components/Header/Header.module.sass';
 import getRegion from "../mixins/getRegion";
 import Nav from "../components/Nav/Nav";
-import TariffCard from "../components/Tariffs/TariffCard/TariffCard";
+// import TariffCard from "../components/Tariffs/TariffCard/TariffCard";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import NewCard from "../components/Tariffs/NewCard/NewCard";
 
 
 export default function IndexPage( { region } ) {
@@ -33,7 +34,7 @@ export default function IndexPage( { region } ) {
          <main>
             <Tariffs>
                { tariffs.map( tariff =>
-                  <TariffCard
+                  <NewCard
                      key={ tariff.id }
                      tariff={ tariff }
                      tariffs={ tariffs }
