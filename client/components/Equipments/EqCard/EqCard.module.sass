@@ -1,109 +1,62 @@
-.container
+._
+   padding: 16px
+   border-radius: 10px
    background: #FFFFFF
    box-shadow: 0 0 12px rgba(51, 51, 51, .2)
-   border-radius: 10px
-   border: 0
+   position: relative
    height: 100%
    display: flex !important
    flex-direction: column
+
+
+.mark__container
+   display: inline-block
+   margin-right: 4px
+   @media (max-width: 1400px)
+      display: block
+      margin-bottom: 4px
+
+
+.img
+   width: 126px
+   height: 120px
+   margin: 0 auto 2px
    position: relative
 
 
-.mark
-   text-transform: uppercase
-   background-color: var(--mf-fiolet)
-   position: absolute
-   top: 16px
-   left: 16px
+.title
+   font-size: 15px
+   line-height: 24px
+   font-weight: 500
 
 
-.info
+.text
    flex-grow: 1
-   padding: 31px 16px 22px
-   border-bottom: 1px solid #EDEDED
-
-   &__img
-      width: 126px
-      height: 139px
-      font-size: 0
-      white-space: nowrap
-      margin: 0 auto 42px
-      position: relative
-
-      &:before
-         content: ''
-         height: 100%
-         vertical-align: middle
-         display: inline-block
+   font-size: 15px
+   line-height: 24px
+   font-weight: 400
+   margin-bottom: 10px
 
 
-      img
-         max-width: 100%
-         max-height: 100%
-         display: inline-block
-         vertical-align: middle
-
-
-   &__title
-      font-size: 20px
-      line-height: 28px
-      font-weight: 500
-      margin-bottom: 12px
-
-
-   &__text
-      font-size: 12px
-      line-height: 16px
+.link
+   font-weight: 500
 
 
 .price
-   display: flex
-   flex-direction: column
-   align-items: center
-   padding: 23px 16px 21px
+   margin-bottom: 4px
 
-   &__link
+   span:last-child
       font-size: 15px
+      line-height: 24px
+      font-weight: 400
 
 
-   &__price
-      height: 20px
-      margin-bottom: 7px
-
-
-   &__icon
-      flex: 0 0 20px
-      height: 20px
-      display: inline-block
-      background: url('/public/public/svg/info.svg') center / 16px no-repeat
-      align-self: center
-      margin-left: 5px
-      cursor: pointer
-      vertical-align: middle
-      transform: translateY(-6px)
-
-
-@media (max-width: 1530px)
-
-   .info
-      padding: 31px 16px 10px
-
-
-@media (max-width: 1023px)
-
-   .container
-      width: 268px !important
-
-
-   .info
-      padding: 31px 16px 22px
+.btn
+   height: 32px
+   display: block
+   margin: 0 auto
 
 
 @media (max-width: 767px)
-
-   .container
-      width: 265px !important
-
-
    .price
       padding: 23px 16px 18px

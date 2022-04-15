@@ -400,6 +400,25 @@ input[data-provide="datepicker"]
 
 
 .slider
+   margin: 0 -10px
+
+   &.slider-equipments
+      .slick-dots
+         margin-top: 22px
+
+         li.slick-active
+            width: 8px
+            height: 8px
+
+         li
+            width: 6px
+            height: 6px
+            margin-right: 8px
+
+            &:last-child
+               margin-right: 0
+
+
    .card
       .price-card__btn
          height: 32px
@@ -409,9 +428,6 @@ input[data-provide="datepicker"]
          justify-content: center
          margin-bottom: 19px
 
-   //&_premium
-   //   background-color: red
-
 
    .slick-track, .slick-list
       display: flex
@@ -420,6 +436,7 @@ input[data-provide="datepicker"]
 
    .slick-slide > div
       height: 100%
+      padding: 10px
 
 
    .slick-arrow
@@ -506,7 +523,18 @@ input[data-provide="datepicker"]
 
 
    @media (max-width: 1023px)
-      .slick-track, .slick-list
+      margin: 0 -48px
+
+      .card
+         width: 268px !important
+
+
+      .slick-track
+         border-radius: 0
+
+
+      .slick-list
+         padding-left: 38px
          border-radius: 0
 
 
@@ -519,6 +547,19 @@ input[data-provide="datepicker"]
 
          &.slick-next
             right: $arrow_position
+
+
+      @media (max-width: 767px)
+         .card
+            width: 265px !important
+
+
+         .slick-list
+            padding-left: 40px
+
+
+         .slick-slide > div
+            padding: 8px
 
 
 .wrapper
@@ -738,24 +779,6 @@ form
    border-radius: 8px
    padding: 6px 12px
    color: #fff
-
-   &_blue
-      background-color: var(--mf-blue)
-
-      @media (max-width: 1379px)
-         display: none
-
-
-   &_fiolet
-      background-color: var(--mf-fiolet)
-
-
-   &_orange
-      background-color: var(--mf-orange)
-
-
-   &_orange-light
-      background-color: var(--mf-orange-light)
 
 
 .option-radio

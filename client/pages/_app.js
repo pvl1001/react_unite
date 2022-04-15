@@ -8,8 +8,6 @@ import '../public/styles/null.sass'
 import '../public/styles/colors.css'
 import '../public/styles/main.sass'
 
-import '../components/Tariffs/Tariffs.sass'
-import '../components/Equipments/Equipments.sass'
 
 import React, { useEffect } from 'react';
 import Head from 'next/head';

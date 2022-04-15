@@ -11,10 +11,6 @@ function EqCard( props ) {
    const pageName = useSelector( state => state.page.name )
    const tariff = useSelector( state => state.tariffs.find( t => t.id === tariffDefault ) )
 
-   function sMark( mark ) {
-      return mark === 'ГОД СЕРИАЛОВ В ПОДАРОК' && "var(--mf-orange)"
-   }
-
    function showModalAlmond() {
       props.showModal( {
          modal: 'almond',
@@ -50,56 +46,57 @@ function EqCard( props ) {
 
 
    return (
-      <div className={ 'card slider__card ' + s.container }>
+      <div className={ `${ s._ } card slider__card` }>
 
-         { props.eq.mark && (
-            <div className={ 'mark ' + s.mark }
-                 style={ { backgroundColor: sMark( props.eq.mark ) } }
-            >
-               <span>{ props.eq.mark }</span>
-            </div>
-         ) }
-
-         <div className={ s.info }>
-
-            <div className={ s.info__img }>
-               <Image
-                  alt={ props.eq.name }
-                  src={ `/images/equipments/${ props.eq.img }.webp` }
-                  layout={ 'fill' }
-                  objectFit={ 'contain' }
-               />
-            </div>
-            <h2 className={ s.info__title }>{ props.eq.name }</h2>
-            <p className={ s.info__text }>{ props.eq.text }</p>
+         <div>
+            { props.eq.marks.map( mark =>
+               <div key={ mark.text } className={ s.mark__container }>
+                  <div
+                     className="mark"
+                     style={ { backgroundColor: mark.color } }>
+                     { mark.text }
+                  </div>
+               </div>
+            ) }
          </div>
 
-         <div className={ 'price-card ' + s.price }>
-            <div className={ 'price ' + s.price__price }>
-               { props.eq.oldPrice && <span className="old-price"/> }
 
-               <span className="new-price">
+         <div className={ s.img }>
+            <Image
+               alt={ props.eq.name }
+               src={ `/images/equipments/${ props.eq.img }.webp` }
+               layout={ 'fill' }
+               objectFit={ 'contain' }
+            />
+         </div>
+
+         <h2 className={ s.title }>{ props.eq.name }</h2>
+
+         <div className={ `${ s.price } price` }>
+            { props.eq.oldPrice && <span className="old-price"/> }
+
+            <span className="new-price">
                   { props.eq.plan
                      ? <>от { props.eq.plan[0].value } ₽</>
                      : <>{ props.eq.price } ₽</>
                   }
                </span>
-               <span className="always"/>
-               <span> в месяц</span>
-            </div>
-            <button
-               className={ 'price-card__btn btn' }
-               data-view={ `block_${ props.eq.dataView }` }
-               onClick={ showModalOrder }>
-               Заказать
-            </button>
-
-            { props.eq.id === "eq-almond"
-               ? <div className="link" onClick={ showModalAlmond }>Подробнее</div>
-               : <div className="link" onClick={ showModalEquipment }>Подробнее</div>
-            }
-
+            <span className="always"/>
+            <span> в месяц</span>
          </div>
+
+         <p className={ s.text }>{ props.eq.text }
+            { props.eq.id === "eq-almond"
+               ? <span className={ `${ s.link } link` } onClick={ showModalAlmond }>Подробнее</span>
+               : <span className={ `${ s.link } link` } onClick={ showModalEquipment }>Подробнее</span>
+            }</p>
+
+         <button
+            className={ `${ s.btn } btn btn-fiolet` }
+            data-view={ `block_${ props.eq.dataView }` }
+            onClick={ showModalOrder }>
+            Заказать
+         </button>
 
       </div>
    )
