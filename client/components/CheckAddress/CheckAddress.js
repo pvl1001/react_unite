@@ -20,6 +20,7 @@ function CheckAddress( props ) {
 
       $( inputAddress ).autocomplete( {
          width: 'auto',
+         maxHeight: window.innerWidth > 767 ? 417 : 337,
          minChars: 1,
          deferRequestBy: 200,
          serviceUrl: 'https://api.wifire.ru/api/address/check_address_dadata',

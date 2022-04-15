@@ -9,7 +9,7 @@ function Form( props ) {
       <div id="addressCheckHead" hidden={ hidden }>
 
          <p className={ s.title }>
-            Проверь возможность <nobr>подключения по твоему</nobr> адресу
+            Проверьте возможность <nobr>подключения в вашем доме</nobr>
          </p>
 
          <form
@@ -17,7 +17,8 @@ function Form( props ) {
             name="address"
             className={ s.input }
          >
-            <div>
+            <div className={ s.input__container }>
+               <p className={ s.input__placeholder }>Укажите город, улицу, дом</p>
                <input
                   type="text"
                   id="addressCheck"

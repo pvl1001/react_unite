@@ -139,7 +139,7 @@ h1
 
 h2
    font-size: 32px
-   font-weight: 700
+   font-weight: 600
    line-height: 40px
 
 
@@ -360,38 +360,39 @@ input[data-provide="datepicker"]
    white-space: nowrap
 
    > span
-      font-size: 12px
-      line-height: 14px
-
+      font-size: 20px
+      line-height: 28px
+      font-weight: 500
 
    .old-price
-      font-size: 15px
+      font-size: 20px
+      line-height: 28px
       font-weight: 500
-      color: #7F7F7F
+      color: #999999
       position: relative
+      margin-right: 2px
 
       &:before
          content: ''
          position: absolute
          left: 0
-         top: 49%
+         top: calc(50% - 1px)
          height: 2px
          width: 100%
-         background-color: #ff0000
+         background-color: #EB5A40
 
-
-   .new-price
-      font-size: 20px
-      line-height: 18px
-      font-weight: 500
-
+   .new-price,
+   .new-price + span
+      font-size: 32px
+      line-height: 40px
+      font-weight: 600
 
    &__icon
       flex-shrink: 0
       width: 16px
       height: 16px
       display: inline-block
-      background: url('../svg/info1.svg') center / contain no-repeat
+      //background: url('/img/svg/info.svg') center / contain no-repeat
       align-self: center
       margin-left: 5px
       cursor: pointer
@@ -399,7 +400,6 @@ input[data-provide="datepicker"]
 
 
 .slider
-
    .card
       .price-card__btn
          height: 32px
@@ -589,16 +589,21 @@ form
 
 .autocomplete-suggestions
    background-color: #fff
-   border: 1px solid #ccc
+   border-radius: 8px
    cursor: default
    overflow: auto
+   margin-top: 4px
+   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2)
 
    .autocomplete-suggestion
-      padding: 5px
+      padding: 9px 12px
       overflow: hidden
       border-bottom: 1px solid #e1e1e1
-      margin-bottom: 4px
       line-height: 22px
+
+      &:last-child
+         border-bottom: none
+
 
       &:hover
          background-color: #57068c
@@ -608,6 +613,13 @@ form
       strong
          font-weight: normal
          color: #3399FF
+
+
+   @media (max-width: 1023px)
+      .autocomplete-suggestion
+         font-size: 12px
+         line-height: 16px
+         padding: 8px 12px
 
 
 .tippy-box

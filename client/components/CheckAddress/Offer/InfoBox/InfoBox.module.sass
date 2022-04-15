@@ -1,131 +1,114 @@
-.container
-   width: 52%
-   padding: 0 50px 43px
-   background-color: #fff
+._
    border-radius: 10px
-   overflow: hidden
+   background-color: #fff
    box-shadow: 0 1px 4px #0000004D
+
+
+.container
+   display: flex
+
+
+.img
+   max-width: 304px
+   margin: -120px 5% 16px auto
+   position: relative
+
+   img
+      max-width: 100%
+      max-height: 100%
+      vertical-align: bottom
+
+
+   &:before
+      content: ''
+      display: inline-block
+      height: 100%
+      vertical-align: bottom
+
+
+   .linkParams
+      display: none
+
+
+.switch
+   padding: 23px 0 17px
+   border-top: 1px solid #EDEDED
+   border-bottom: 1px solid #EDEDED
+   margin-bottom: 16px
+
+
+.linkParams
+   color: var(--mf-blue)
+   font-weight: 400
+   cursor: pointer
+
+
+.params
+   padding: 0 80px 16px 50px
    color: #333
 
 
 .title
    background-color: var(--mf-green)
    color: #fff
-   margin: 0 -50px 35px
+   margin: 0 0 17px
    padding: 20px 50px 16px
    display: flex
    align-items: center
+   border-radius: 10px 10px 0 0
 
 
-.row
-   display: flex
-   margin-bottom: 40px
+.info
+   margin-bottom: 10px
 
-
-.params
-   width: 49%
-
-   &:first-child
-      margin-right: 25px
-
+   &__item
+      margin-bottom: 10px
 
    &__title
-      color: #919191
-      font-size: 18px
+      font-size: 15px
       line-height: 24px
-      margin-bottom: 13px
-      font-weight: 500
+      margin-bottom: 7px
 
+   &__row
+      display: flex
+      align-items: center
+      flex-wrap: wrap
 
    &__desc
-      font-size: 15px
-      font-weight: 500
-      margin-bottom: 12px
+      font-size: 20px
+      line-height: 28px
       display: flex
-      align-items: flex-end
-
-      a
-         color: #333 !important
-         border-bottom: 1px dashed
-         pointer-events: none
-
-         &:hover
-            text-decoration: none
-            border-bottom-style: solid
-
+      align-items: center
+      margin-right: 21px
+      margin-bottom: 7px
 
       &:last-child
-         margin-bottom: 0
+         margin-right: 0
 
-
-   &__icon
+   &__descIcon
       width: 32px
-      margin-right: 15px
-
-      img
-         display: block
-         margin: 0 auto
-
-
-.desk_mobile
-   align-items: flex-start
-
-   p:first-child
-      font-weight: 500
-      margin-bottom: 5px
-
-
-   p:last-child
-      font-size: 14px
-
-
-   + div
-      margin-bottom: 8px
+      min-width: 32px
+      margin-right: 12px
+      text-align: center
 
 
 .checkbox
    display: flex
-   margin-bottom: 5px
 
    &__hire
       display: flex
-      width: 50%
-
 
    &__switch
-      margin-right: 18px
-      margin-top: 3px
+      margin-right: 14px
+      margin-top: -4px
 
-
-   &__text
+   &__switchText
       font-size: 15px
       line-height: 20px
       font-weight: 500
 
-      span
-         color: var(--mf-green)
-
-
-.links
-   display: inline-flex
-   flex-direction: column
-   font-size: 12px
-   padding-left: 58px
-   margin-bottom: 37px
-
-   a
-      line-height: 16px
-      margin-bottom: 5px
-
-      &:hover
-         text-decoration: none
-
-
-   span
-      text-decoration: underline
-      color: var(--mf-blue)
-      cursor: pointer
-      line-height: 20px
+   &__switchName
+      margin-right: 5px
 
 
 .order
@@ -134,27 +117,58 @@
 
    &__btn
       margin-right: 50px
-      max-width: 230px
-      width: 100%
-      padding: 0
+
+
+.switchPrice
+   color: var(--mf-green)
+   margin-top: 8px
+
+
+.price
+   > *
+      vertical-align: middle
 
 
 @media (max-width: 1279px)
-
    .params
-      width: 100%
-      margin-bottom: 32px
+      min-width: 225px
+      width: 50%
+      padding-bottom: 23px
 
-      &:last-child
-         margin-bottom: 0
+      *
+         font-size: 15px
+         line-height: 24px
+
+
+   .title
+      font-size: 28px
+      line-height: 36px
+
+
+   .img
+      width: 30%
+      max-width: 280px
+      min-width: 235px
+      margin: 0 auto
+
+      img, &:before
+         vertical-align: middle
 
 
    .links
       padding-left: 63px
 
 
-   .row
+   .row,
+   .info__row
       flex-wrap: wrap
+
+
+   .info
+      width: 100%
+
+      &:last-child
+         margin-bottom: 0
 
 
    .checkbox
@@ -171,29 +185,125 @@
 
    .order
       flex-wrap: wrap
-      padding-left: 15px
 
       &__btn
          order: 1
          margin: 10px 0 0
 
 
-      &__price
+   .price
+      width: 100%
+      justify-content: flex-start
+
+      &__newPrice,
+      &__newPrice + span
+         font-size: 28px
+         line-height: 36px
+
+      &__oldPrice
+         font-size: 18px
+         line-height: 26px
+
+      &:last-child
+         font-size: 15px
+         line-height: 24px
+
+
+@media (max-width: 1023px)
+   .linkParams
+      display: block
+
+
+   .params
+      padding: 0 16px 30px
+
+   .title
+      padding-left: 16px
+      padding-right: 16px
+
+
+   .info__desc
+      width: 100%
+
+
+   .row
+      flex-wrap: wrap
+
+      h2
+         max-width: none
+
+      > div
          width: 100%
-         justify-content: flex-start
+
+
+   .price
+      &__newPrice,
+      &__newPrice + span
+         font-size: 20px
+         line-height: 28px
+         font-weight: 500
+
+      &__oldPrice
+         font-size: 15px
+         line-height: 24px
+
+      span:last-child
+         font-size: 12px
+         line-height: 16px
+         font-weight: 400
+
+
+   ._ nobr
+      white-space: normal
 
 
 @media (max-width: 767px)
-   .container
-      padding: 0 36px 43px
+   .params
+      width: 100%
+
+   .title
+      font-size: 20px
+      line-height: 28px
+      font-weight: 500
+
+
+   .img
+      display: none
+      width: 226px
+      min-width: 0
+      margin: 20px auto 0
+      transform: translateX(16px)
+
+
+   .row
+      margin-bottom: 0
+
+
+   .row,
+   .info__row
+      flex-wrap: wrap
 
 
    .checkbox
+      flex-wrap: wrap
 
       &__hire
+         width: 100%
          margin-bottom: 20px
 
+         &:last-child
+            margin-bottom: 0
 
-   .order,
-   .order__price
+
+   .order
+      flex-wrap: wrap
       justify-content: center
+
+      .btn
+         order: 1
+         margin: 10px 0 0
+
+
+      .price
+         width: 100%
+         justify-content: center

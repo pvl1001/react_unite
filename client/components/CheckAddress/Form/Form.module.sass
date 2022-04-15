@@ -13,32 +13,37 @@
    justify-content: center
    padding-bottom: 44px
 
-   > div
+   input
+      border: 1px solid #731982
+      border-radius: 8px
       width: 100%
+
+   &__placeholder
+      width: 100%
+      color: #fff
+      font-weight: 400
+      line-height: 16px
+      margin-bottom: 6px
+
+   &__container
       max-width: 830px
       position: relative
-
-      input
-         width: 100%
-         border: 1px solid #731982
-
-
-      &:focus
-         border: 1px solid #731982
+      width: 100%
 
 
 .label
-   top: 48px
-   text-align: left
    color: #fff
    line-height: 24px
    pointer-events: none
+   @media (max-width: 340px)
+      position: static
 
 
 .btn
    margin-left: 20px
    padding: 0 44px
    font-weight: 500
+   align-self: end
 
    span
       position: relative
