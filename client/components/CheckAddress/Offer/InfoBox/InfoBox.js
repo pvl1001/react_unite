@@ -134,7 +134,8 @@ function InfoBox( props ) {
                <div className={ s.order }>
                   <div
                      className={ `${ s.order__btn } btn` }
-                     data-view="block_vezde_ntv">
+                     data-view="block_vezde_ntv"
+                     onClick={ props.showModalOrder }>
                      Отправить заявку
                   </div>
 
