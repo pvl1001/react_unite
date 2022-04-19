@@ -399,167 +399,98 @@ input[data-provide="datepicker"]
       font-weight: 400
 
 
-.slider
+.swiper
    margin: 0 -10px
 
-   &.slider-equipments
-      .slick-dots
-         margin-top: 22px
-
-         li.slick-active
-            width: 8px
-            height: 8px
-
-         li
-            width: 6px
-            height: 6px
-            margin-right: 8px
-
-            &:last-child
-               margin-right: 0
+   .swiper-slide
+      padding: 37px 10px
+      height: auto
 
 
-   .card
-      .price-card__btn
-         height: 32px
-         width: 220px
-         line-height: 1
-         font-weight: 500
-         justify-content: center
-         margin-bottom: 19px
+   .swiper-pagination
+      bottom: 0
+
+      &-bullet
+         margin: 0 3px !important
+
+      &-bullet-active
+         width: 12px
+         height: 12px
+         background-color: var(--mf-fiolet)
+         vertical-align: middle
 
 
-   .slick-track, .slick-list
-      display: flex
-      border-radius: 10px
-
-
-   .slick-slide > div
-      height: 100%
-      padding: 10px
-
-
-   .slick-arrow
-      $arrow_position: -46px
-
-      font-size: 0
-      width: 40px
-      height: 40px
-      border-radius: 50%
-      background: #731982 url('../svg/arrow_slider.svg') center / 10px no-repeat
-      position: absolute
-      top: calc(50% - 36px)
-      z-index: 1
-
-      &:not(.slick-disabled):hover
-         background-color: #B808D4
-
-
-      &.slick-prev
-         left: $arrow_position
-         transform: rotate(180deg)
-
-
-      &.slick-next
-         right: $arrow_position
-
-
-      &.slick-disabled
-         opacity: .3
-
-
-   .slick-dots
-      display: flex !important
-      align-items: center
-      justify-content: center
-      margin-top: 17px
-
-      li
-         font-size: 0
-         width: 8px
-         height: 8px
-         border-radius: 50%
-         background-color: #DBDBDB
-         margin-right: 6px
-         cursor: pointer
-
-         &:last-child
-            margin-right: 0
-
-
-         &.slick-active
-            width: 12px
-            height: 12px
-            background-color: var(--mf-fiolet)
-
-
-   @media (max-width: 1920px)
-      .card .price-card__btn
-         width: 168px
-
-
-   @media (max-width: 1530px)
-      .slick-arrow
-         $arrow_position: -45px
-
-         &.slick-prev
-            left: $arrow_position
-
-
-         &.slick-next
-            right: $arrow_position
-
-
-   @media (max-width: 1279px)
-      .slick-arrow
-         $arrow_position: -42px
-
-         &.slick-prev
-            left: $arrow_position
-
-
-         &.slick-next
-            right: $arrow_position
+   .swiper-backface-hidden .swiper-slide
+      transform: none
 
 
    @media (max-width: 1023px)
-      margin: 0 -48px
+      overflow: visible
 
-      .card
-         width: 268px !important
-
-
-      .slick-track
-         border-radius: 0
+      .swiper-slide
+         padding-top: 40px
+         width: calc(264px + 20px)
 
 
-      .slick-list
-         padding-left: 38px
-         border-radius: 0
+   @media (max-width: 767px)
+      .swiper-slide
+         padding-top: 25px
 
 
-      .slick-arrow
-         $arrow_position: -36px
+.swiper-btn
+   $arrow_position: -56px
 
-         &.slick-prev
-            left: $arrow_position
+   font-size: 0
+   width: 40px
+   height: 40px
+   border-radius: 50%
+   background: #731982 url('../svg/arrow_slider.svg') center / 10px no-repeat
+   position: absolute
+   top: calc(50% - 20px)
+   z-index: 10
 
-
-         &.slick-next
-            right: $arrow_position
-
-
-      @media (max-width: 767px)
-         .card
-            width: 265px !important
-
-
-         .slick-list
-            padding-left: 40px
+   &:hover
+      background-color: #B808D4
 
 
-         .slick-slide > div
-            padding: 8px
+   &.swiper-prev
+      left: $arrow_position
+      transform: rotate(180deg)
+
+
+   &.swiper-next
+      right: $arrow_position
+
+
+   &.swiper-button-disabled
+      opacity: .3
+      pointer-events: none
+
+
+   @media (max-width: 1530px)
+      $arrow_position: -55px
+
+      &.swiper-prev
+         left: $arrow_position
+
+
+      &.swiper-next
+         right: $arrow_position
+
+
+   @media (max-width: 1279px)
+      $arrow_position: -52px
+
+      &.swiper-prev
+         left: $arrow_position
+
+
+      &.swiper-next
+         right: $arrow_position
+
+
+   @media (max-width: 1023px)
+      display: none !important
 
 
 .wrapper
@@ -663,12 +594,15 @@ form
          padding: 8px 12px
 
 
-.tippy-box
+
+.tippy-box[data-theme~=light]
    border-radius: 0
    font-size: 15px
    line-height: 24px
    font-weight: 400
    text-align: center
+   box-shadow: 0 2px 9px 0 #00000026
+
 
    .tippy-content
       padding: 28px

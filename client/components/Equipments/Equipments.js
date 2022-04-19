@@ -1,8 +1,9 @@
 import s from './Equipments.module.sass';
-import Slider from 'react-slick'
 import EqCard from "./EqCard/EqCard";
 import { connect } from "react-redux";
-import { settingsSlider } from "../../plugins_config";
+import { swiperConfig } from "../../plugins_config";
+import { Swiper, SwiperSlide } from "swiper/react";
+import React from "react";
 
 
 function Equipments( props ) {
@@ -12,13 +13,20 @@ function Equipments( props ) {
          <div className="wrapper">
             <h1 className={ s.title }>Оборудование</h1>
 
-            <Slider { ...settingsSlider } className={ 'slider slider-equipments' }>
-
-               { props.data.map( eq => (
-                  <EqCard key={ eq.id } eq={ eq }/>
-               ) ) }
-
-            </Slider>
+            <div className={ `${ s.slider } slider-equipments` }>
+               <button className="swiper-btn swiper-next"/>
+               <button className="swiper-btn swiper-prev"/>
+               <Swiper { ...swiperConfig } navigation={ {
+                  nextEl: '.slider-equipments .swiper-next',
+                  prevEl: '.slider-equipments .swiper-prev'
+               } }>
+                  { props.data.map( eq => (
+                     <SwiperSlide key={ eq.id }>
+                        <EqCard eq={ eq }/>
+                     </SwiperSlide>
+                  ) ) }
+               </Swiper>
+            </div>
 
          </div>
       </section>

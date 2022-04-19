@@ -1,7 +1,8 @@
 import s from './Tariffs.module.sass'
-import Slider from "react-slick";
 import { useSelector } from "react-redux";
-import { settingsSlider } from "../../plugins_config";
+import { swiperConfig } from "../../plugins_config";
+import React from "react";
+import { Swiper } from "swiper/react";
 
 
 function Tariffs( { children } ) {
@@ -14,12 +15,18 @@ function Tariffs( { children } ) {
          <div className="wrapper">
             <h1 className={ s.title }>Тарифы { tariffsName }</h1>
 
-            <Slider className="slider" { ...settingsSlider }>
-               { children }
-            </Slider>
+            <div className={ `${ s.slider } slider-tariffs` }>
+               <button className="swiper-btn swiper-next"/>
+               <button className="swiper-btn swiper-prev"/>
+               <Swiper { ...swiperConfig } navigation={ {
+                  nextEl: '.slider-tariffs .swiper-next',
+                  prevEl: '.slider-tariffs .swiper-prev',
+               } }>
+                  { children }
+               </Swiper>
+            </div>
 
          </div>
-
       </section>
    )
 }
