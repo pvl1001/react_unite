@@ -5,7 +5,7 @@ import CheckAddress from "../components/CheckAddress/CheckAddress";
 import Equipments from "../components/Equipments/Equipments";
 import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
-import pageHome, { tariffsPageHome } from '/pageData/internet'
+import pageHome, { tariffsPageHome } from '../pageData/internet'
 import headerStyle from "../components/Header/HeaderHome.module.sass";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import { wrapper } from "../redux/store";
@@ -15,6 +15,7 @@ import getRegion from "../mixins/getRegion";
 import { useSelector } from "react-redux";
 import React, { useState } from "react";
 import NewCard from "../components/Tariffs/NewCard/NewCard";
+import { SwiperSlide } from "swiper/react";
 
 
 export default function InternetPage( { region } ) {
@@ -36,18 +37,20 @@ export default function InternetPage( { region } ) {
          <main>
             <Tariffs>
                { tariffs.map( tariff =>
-                  <NewCard
-                     key={ tariff.id }
-                     tariff={ tariff }
-                     tariffs={ tariffs }
-                     premium={ premium }
-                     collapse={ {
-                        collapseGroup,
-                        setCollapseGroup,
-                        collapseChannels,
-                        setCollapseChannels
-                     } }
-                  />
+                  <SwiperSlide key={ tariff.id }>
+                     <NewCard
+                        key={ tariff.id }
+                        tariff={ tariff }
+                        tariffs={ tariffs }
+                        premium={ premium }
+                        collapse={ {
+                           collapseGroup,
+                           setCollapseGroup,
+                           collapseChannels,
+                           setCollapseChannels
+                        } }
+                     />
+                  </SwiperSlide>
                ) }
             </Tariffs>
             <CheckAddress/>
