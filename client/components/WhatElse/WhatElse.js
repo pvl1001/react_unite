@@ -1,10 +1,10 @@
 import s from './WhatElse.module.sass'
-import films from '/public/images/what-else/films.webp'
-import sales from '/public/images/what-else/sales.webp'
-import Brus from '/public/images/what-else/Brus.webp'
+import films from '../../public/images/what-else/films.webp'
+import sales from '../../public/images/what-else/sales.webp'
+import Brus from '../../public/images/what-else/Brus.webp'
 import { connect, useSelector } from "react-redux";
-import { showModal } from "/redux/slices/modalsSlice";
-import { setDataOrder } from "/redux/slices/orderSlice";
+import { showModal } from "../../redux/slices/modalsSlice";
+import { setDataOrder } from "../../redux/slices/orderSlice";
 import CardWE from "./CardWE/CardWE";
 
 

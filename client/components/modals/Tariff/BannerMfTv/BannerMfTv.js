@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { showModal } from "../../../../redux/slices/modalsSlice";
 import Image from 'next/image'
 import { useEffect, useState } from "react";
-import images from '/public/images/mftv-banner'
+import images from '../../../../public/images/mftv-banner'
 import s from './BannerMfTv.module.sass'
 
 function BannerMfTv( props ) {

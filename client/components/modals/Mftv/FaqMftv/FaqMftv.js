@@ -1,5 +1,5 @@
 import s from './FaqMftv.module.sass'
-import { wrapp } from '/components/modals/Tariff/ModalTariff.module.sass'
+import { wrapp } from '../../Tariff/ModalTariff.module.sass'
 import { Accordion } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { showModal } from "../../../../redux/slices/modalsSlice";

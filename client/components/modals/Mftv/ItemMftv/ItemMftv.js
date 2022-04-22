@@ -1,6 +1,6 @@
 import s from './ItemMftv.module.sass'
-import { wrapp } from '/components/modals/Tariff/ModalTariff.module.sass'
-import { container } from '/components/modals/Tariff/BlockInfo/BlockInfo.module.sass'
+import { wrapp } from '../../Tariff/ModalTariff.module.sass'
+import { container } from '../../Tariff/BlockInfo/BlockInfo.module.sass'
 
 
 function ItemMftv( { item } ) {
