@@ -405,6 +405,7 @@ input[data-provide="datepicker"]
    .swiper-slide
       padding: 37px 10px
       height: auto
+      transform: none // исправляет баг z-index tippy
 
 
    .swiper-pagination
@@ -418,10 +419,6 @@ input[data-provide="datepicker"]
          height: 12px
          background-color: var(--mf-fiolet)
          vertical-align: middle
-
-
-   .swiper-backface-hidden .swiper-slide
-      transform: none
 
 
    @media (max-width: 1023px)
