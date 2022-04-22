@@ -1,5 +1,5 @@
 import s from './ModalEquipment.module.sass'
-import s_tariff from '/components/modals/Tariff/ModalTariff.module.sass'
+import s_modalMftv from '../Mftv/ModalMftv.module.sass'
 import { Modal } from "react-bootstrap";
 import { connect, useSelector } from "react-redux";
 import Plan from "./Plan/Plan";
@@ -116,7 +116,7 @@ function ModalEquipment( props ) {
                         <img src={ '/svg/download-pdf.svg' }
                              alt="download-pdf"/>
                      </button>
-                     <div className={ s_tariff.download_pdf__text }>
+                     <div className={ s_modalMftv.download_pdf__text }>
                         <a href={ eq.link } className="download-pdf__text-link">Скачать подробную информацию</a>
                         <p className="download-pdf__text-pdf"> (PDF, 0.4 MB)</p>
                      </div>

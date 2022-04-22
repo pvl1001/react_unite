@@ -1,6 +1,6 @@
 import s from './ModalMegaTariff.module.sass'
-import s_tariff from '/components/modals/Tariff/ModalTariff.module.sass'
-import s_info from '/components/modals/Tariff/BlockInfo/BlockInfo.module.sass'
+import s_modalMftv from '../Mftv/ModalMftv.module.sass'
+import s_info from '../Tariff/BlockInfo/BlockInfo.module.sass'
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
@@ -46,25 +46,25 @@ function ModalMegaTariff( props ) {
          animation={ false }
          show={ props.show }
          onHide={ onHide }
-         className={ s_tariff.modal }
-         dialogClassName={ s_tariff.modal_dialog }
-         contentClassName={ `${ s_tariff.modal_content } ${ s.modal_content }` }
+         className={ s_modalMftv.modal }
+         dialogClassName={ s_modalMftv.modal_dialog }
+         contentClassName={ `${ s_modalMftv.modal_content } ${ s.modal_content }` }
       >
-         <div className={ s_tariff.btn_close }>
+         <div className={ s_modalMftv.btn_close }>
             <button
                type="button"
-               className={ s_tariff.modal_close + " modal-close" }
+               className={ s_modalMftv.modal_close + " modal-close" }
                onClick={ onHide }
             />
          </div>
 
-         <h1 className={ `${ s_tariff.title } ${ s_tariff.wrapp }` }>
+         <h1 className={ `${ s_modalMftv.title } ${ s_modalMftv.wrapp }` }>
             Без переплат. { name }
          </h1>
 
-         <div className={ s_tariff.container }>
-            <ul className={ `${ s_tariff.items } ${ s.items }` }>
-               <li className={ `${ s_info.container } ${ s_tariff.wrapp } ${ s.item }` }>
+         <div className={ s_modalMftv.container }>
+            <ul className={ `${ s_modalMftv.items } ${ s.items }` }>
+               <li className={ `${ s_info.container } ${ s_modalMftv.wrapp } ${ s.item }` }>
                   <ul className={ s.options }>
 
                      { options.map( option =>
@@ -77,7 +77,7 @@ function ModalMegaTariff( props ) {
                   </ul>
                </li>
             </ul>
-            <div className={ `${ s.footer } ${ s_tariff.wrapp }` }>
+            <div className={ `${ s.footer } ${ s_modalMftv.wrapp }` }>
                <div className={ `${ s.footer__container } download-pdf` }>
                   <a href={ linkDownload } className="download-pdf__icon">
                      <img src="/svg/download-pdf.svg" alt="download-pdf"/>

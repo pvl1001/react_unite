@@ -1,4 +1,4 @@
-import s from '/components/modals/Tariff/ModalTariff.module.sass'
+import s from './ModalMftv.module.sass'
 import { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import FaqMftv from "./FaqMftv/FaqMftv";
