@@ -1,15 +1,15 @@
 // import Support from "./Support/Support";
 import Footer from "./Footer/Footer";
-import ModalCity from "./modals/City/ModalCity";
-import ModalOrder from "./modals/Order/ModalOrder";
-import ModalTariff from "./modals/Tariff/ModalTariff";
-import ModalMftv from "./modals/Mftv/ModalMftv";
-import ModalMegaTariff from "./modals/MegaTariff/ModalMegaTariff";
-import ModalAlmond from "./modals/Almond/ModalAlmond";
-import ModalAboutAlmond from "./modals/AboutAlmond/ModalAboutAlmond";
-import ChoiceRouter from "./modals/ChoiceRouter/ChoiceRouter";
-import ModalEquipment from "./modals/Equipment/ModalEquipment";
-import ModalChannels from "./modals/Channels/ModalChannels";
+import ModalCity from "./_modals/City/ModalCity";
+import ModalOrder from "./_modals/Order/ModalOrder";
+import ModalTariff from "./_modals/Tariff/ModalTariff";
+import ModalMftv from "./_modals/Mftv/ModalMftv";
+import ModalMegaTariff from "./_modals/MegaTariff/ModalMegaTariff";
+import ModalAlmond from "./_modals/Almond/ModalAlmond";
+import ModalAboutAlmond from "./_modals/AboutAlmond/ModalAboutAlmond";
+import ChoiceRouter from "./_modals/ChoiceRouter/ChoiceRouter";
+import ModalEquipment from "./_modals/Equipment/ModalEquipment";
+import ModalChannels from "./_modals/Channels/ModalChannels";
 
 
 export default function Layout( { children } ) {

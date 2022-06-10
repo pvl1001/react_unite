@@ -1,5 +1,4 @@
 import s from './AppBanner.module.sass';
-import { analyticsEvent } from "../../analytics/events";
 import Image from 'next/image';
 import images from '../../public/images/app-banner'
 import { useEffect, useState } from "react";

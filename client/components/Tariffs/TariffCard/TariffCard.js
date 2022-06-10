@@ -9,11 +9,9 @@ import { showModal } from "../../../redux/slices/modalsSlice";
 import Tippy from "@tippyjs/react";
 import { tippyAttrs } from "../../../plugins_config";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
-import { analyticsEvent } from "../../../analytics/events";
 import YoutubeIcon from '../../../public/svg/youtube.svg';
 import RouterIcon from '../../../public/svg/Router_3.svg';
 import { useRouter } from 'next/router';
-import iconInfo from "../../../mixins/iconInfo";
 
 
 function TariffCard( props ) {

@@ -13,7 +13,7 @@ import Image from 'next/image';
 function ModalEquipment( props ) {
    const [ pricePlan, setPricePlan ] = useState( null )
    const pageName = useSelector( state => state.page.name )
-   const defaultTariff = useSelector( state => state.page.tariffDefault )
+   
    const show = useSelector( state => state.modals.equipment.show )
    const showModalTariff = useSelector( state => state.modals.tariff.show )
    const eqId = useSelector( state => state.modals.equipment.props )
@@ -23,7 +23,7 @@ function ModalEquipment( props ) {
    )
    const tariff = useSelector( state => eq?.id === 'eq-unite'
       ? state.tariffAround
-      : state.tariffs.find( t => t.id === defaultTariff )
+      : state.tariffs.their
    )
 
    useEffect( () => {

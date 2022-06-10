@@ -1,154 +1,141 @@
-import s from './NewCard.module.sass';
-import Tippy from "@tippyjs/react";
-import { tippyAttrs } from "../../../plugins_config";
+import s from './NewCard.module.scss';
 import React from "react";
-import iconInfo from "../../../mixins/iconInfo";
-import InfoIcon from '../../../public/svg/info1.svg';
-import WifiIcon from '../../../public/svg/wi-fi.svg';
-import TvIcon from '../../../public/svg/tv_play.svg';
-import RouterIcon from '../../../public/svg/Router_3.svg';
-import { useDispatch } from "react-redux";
-import { showModal } from "../../../redux/slices/modalsSlice";
-import { setDataOrder } from "../../../redux/slices/orderSlice";
-import { analyticsEvent } from "../../../analytics/events";
-import { useRouter } from 'next/router';
-import { getChannels } from "../../../redux/slices/tariffsSlice";
-import CollapseChannels from "../TariffCard/CollapseChannels/CollapseChannels";
 
 
-function NewCard( props ) {
+function NewCard( { tariff, id } ) {
 
-   const router = useRouter()
-   const dispatch = useDispatch()
-   const tmplIconInfo = iconInfo( props.tariff.id, props.tariff.iconInfo )
-   const premiumClass = props.tariff.id === 'premium' ? s[props.tariff.id] : ''
+   // const router = useRouter()
+   // const dispatch = useDispatch()
+   // const tmplIconInfo = iconInfo( tariff.id, tariff.iconInfo )
+   // const premiumClass = tariff.id === 'premium' ? s[tariff.id] : ''
 
-   function openOrder() {
-      dispatch( showModal( {
-         modal: 'order',
-         bool: true
-      } ) )
-      dispatch( setDataOrder( {
-         tariffName: `${ props.pageName } ${ props.tariff.name }`,
-         tariffId: props.tariff.tariffId,
-         price: props.tariff.price,
-         eventLabel: {
-            order: `click_button_order_${ props.tariff.dataView }`,
-            send: `click_button_send_${ props.tariff.dataView }`
-         }
-      } ) )
-   }
+   // function openOrder() {
+   //    dispatch( showModal( {
+   //       modal: 'order',
+   //       bool: true
+   //    } ) )
+   //    dispatch( setDataOrder( {
+   //       tariffName: `${ pageName } ${ tariff.name }`,
+   //       tariffId: tariff.tariffId,
+   //       price: tariff.price,
+   //       eventLabel: {
+   //          order: `click_button_order_${ tariff.dataView }`,
+   //          send: `click_button_send_${ tariff.dataView }`
+   //       }
+   //    } ) )
+   // }
 
-   function showModalTariff() {
-      if ( props.tariff.id === 'vse' ) {
-         return router.push( '/internetvse' )
-      }
-      dispatch( showModal( {
-         modal: 'tariff',
-         bool: true,
-         props: props.tariff.id
-      } ) )
-      analyticsEvent( `click_button_details_${ props.tariff.dataView }` )
-   }
+   // function showModalTariff() {
+   //    if ( tariff.id === 'vse' ) {
+   //       return router.push( '/internetvse' )
+   //    }
+   //    dispatch( showModal( {
+   //       modal: 'tariff',
+   //       bool: true,
+   //       props: tariff.id
+   //    } ) )
+   //    analyticsEvent( `click_button_details_${ tariff.dataView }` )
+   // }
 
-   function collapseGroup() {
-      props.collapse.setCollapseGroup( !props.collapse.collapseGroup )
-   }
+   // function collapseGroup() {
+   //    collapse.setCollapseGroup( !collapse.collapseGroup )
+   // }
 
-   function handleCollapseChannels() {
-      if ( !props.premium.channels ) {
-         const allTvId = Array.from( new Set(
-            [
-               ...props.tariffs.filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
-            ] ) )
-         const allPromise = []
-         allTvId.forEach( ( id ) => allPromise.push( dispatch( getChannels( id ) ) ) )
-         return Promise.all( allPromise ).then( collapseGroup )
-      }
-
-      collapseGroup()
-   }
+   // function handleCollapseChannels() {
+   //    if ( !premium.channels ) {
+   //       const allTvId = Array.from( new Set(
+   {/*         [*/}
+   //             ...tariffs.filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
+   //          ] ) )
+   //       const allPromise = []
+   //       allTvId.forEach( ( id ) => allPromise.push( dispatch( getChannels( id ) ) ) )
+   //       return Promise.all( allPromise ).then( collapseGroup )
+   //    }
+   //
+   //    collapseGroup()
+   // }
 
 
    return (
-      <div className={ `${ s.container } ${ premiumClass } card` }
-           id={ 'tariff-card-' + props.tariff.id }
-      >
-         <div className={ s.greenBox }>
+      <div className={ s.container + ' card' } id={ 'tariff-card-' + id }>
+
+         <div className={ s.header }>
+
+            {/*<div className={ s.sale_banner }>Скидка<br/>навсегда!</div>*/ }
+            <div className={ s.tariff_icon }>
+               <img src={ `/svg/tariff_${ id }.svg` } alt={ `${ id }_icon` }/>
+            </div>
+
             <div className={ s.title }>
-               <h5 className={ s.tariffName }>{ props.tariff.name }</h5>
-               <p className={ s.marks }>{ props.tariff.marks && props.tariff.marks.map( mark => ' #' + mark ) }</p>
+               <h5 className={ s.tariff_name }>{ tariff.name }</h5>
             </div>
 
             <div className={ s.price }>
-               { props.tariff.oldPrice && false &&
-                  <span className="old-price">{ props.tariff.oldPrice } ₽</span>
-               }
-               <span className={ `${ s.newPrice }` }> { props.tariff.price } ₽</span>
-               <span className="always"/>
-               <span> в месяц</span>
-
-               { props.tariff.iconInfo &&
-                  <Tippy
-                     className={ s.tippy } { ...tippyAttrs }
-                     maxWidth={ 216 }
-                     content={ tmplIconInfo }>
-                     <span className={ s.infoIcon }><InfoIcon/></span>
-                  </Tippy> }
+               <span className={ s.old_price }>{ tariff.price } ₽</span> <span>
+                  <span className={ s.new_price }>{ Math.ceil( tariff.price * 0.5 ) } ₽</span>
+                  <span>/месяц</span>
+               </span>
             </div>
+
          </div>
 
          <ul className={ s.params }>
-
             <li className={ s.params__item }>
-               <div className={ s.params__icon }><WifiIcon/></div>
-               <span>{ props.tariff.speed } Мбит/с</span>
+               <p className={ s.params__key }>Мобильный интернет</p>
+               <p className={ s.params__value }>
+                  { tariff.inet ? `${ tariff.inet } ГБ` : '—' }
+               </p>
             </li>
-
-            { props.tariff.id === 'turbo' &&
-               <li className={ s.params__item }>
-                  <div className={ s.params__icon }><RouterIcon/></div>
-                  <span>Wi-Fi-роутер <nobr>(1 Гбит/с)</nobr></span>
-               </li>
-            }
-
-            { props.tariff.tvLength &&
-               <>
-                  <li className={ s.params__item }>
-                     <div className={ s.params__icon }><TvIcon/></div>
-                     <span
-                        className={ s.params__tv }
-                        aria-controls="tv-group"
-                        aria-expanded={ props.collapse.collapseGroup }
-                        onClick={ handleCollapseChannels }>
-                        { props.tariff.tvLength }
-                     </span>
-                  </li>
-
-                  { props.premium.channels &&
-                     <CollapseChannels
-                        collapse={ props.collapse }
-                        premium={ props.premium }
-                        tariff={ props.tariff }
-                     />
-                  }
-               </>
-            }
+            <li className={ s.params__item }>
+               <p className={ s.params__key }>Звонки</p>
+               <p className={ s.params__value }>
+                  { tariff.minutes ? `${ tariff.minutes } минут` : '—' }
+               </p>
+            </li>
+            <li className={ s.params__item }>
+               <p className={ s.params__key }>Домашний интернет</p>
+               <p className={ s.params__value }>
+                  { tariff.speed ? `${ tariff.speed } Мбит/с` : '—' }
+               </p>
+            </li>
+            <li className={ s.params__item }>
+               <p className={ s.params__key }>ТВ</p>
+               <p className={ s.params__value }>
+                  { tariff.tvchan != 0
+                     ? <span className={ s.params__tv }>{ tariff.tvchan } каналов</span>
+                     : '—' }
+               </p>
+            </li>
          </ul>
-         <div style={ { flexGrow: 1 } }/>
-         <div className={ s.btns }>
-            <span
-               className={ s.aboutBtn }
-               onClick={ showModalTariff }>
-               Все условия тарифа
-            </span>
 
-            <button
-               className={ `${ s.connectBtn } btn` }
-               onClick={ openOrder }>
-               Подключить
-            </button>
-         </div>
+         { tariff.dop_params || tariff.mftv &&
+            <div className={ s.dop_params }>
+               <h5 className={ `${ s.dop_params__title } ${ s.params__key }` }>дополнительно</h5>
+
+               { tariff.dop_params &&
+                  <ul>
+                     { tariff.dop_params.map( dp =>
+                        <li key={ dp } className={ s.dop_params__item }>
+                           <div className={ s.dop_params__icon }>
+                              <img src="./img/svg/Plus.svg" alt="иконка плюс"/>
+                           </div>
+                           <p>{ dp }</p>
+                        </li>
+                     ) }
+                  </ul>
+               }
+
+               { tariff.mftv &&
+                  <ul className={ s.dop_params_mftv }>
+                     { tariff.mftv.map( m =>
+                        <li key={ m.icon } className={ s.dop_params_mftv__item }>
+                           <img src={ `/svg/mftv_block_${ m.icon }.svg` } alt={ `иконка ${ m.icon }` }/>
+                        </li>
+                     ) }
+                  </ul>
+               }}
+            </div>
+         }
       </div>
    )
 }

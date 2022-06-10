@@ -14,8 +14,7 @@ import { setDataOrder } from "../../../redux/slices/orderSlice";
 function ModalAlmond( props ) {
    const show = useSelector( state => state.modals.almond.show )
    const pageName = useSelector( state => state.page.name )
-   const tariffNameDefault = useSelector( state => state.page.tariffDefault )
-   const tariffDefault = useSelector( state => state.tariffs.find( t => t.id === tariffNameDefault ) )
+   const tariffDefault = useSelector( state => state.tariffs.their )
    const showModalTariff = useSelector( state => state.modals.tariff.show )
    const tariff = useSelector( state => state.modals.tariff.props )
    const tariffs = useSelector( state => state.tariffs )
@@ -23,7 +22,6 @@ function ModalAlmond( props ) {
 
 
    if ( show ) {
-
 
       const banners = [
          {

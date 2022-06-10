@@ -63,7 +63,7 @@ function ModalChannels( { show, showModal, tariff } ) {
 
 export default connect( state => ({
    show: state.modals.channels.show,
-   tariff: state.tariffs.find( t => t.id === 'vse' )
+   tariff: state.tariffs.vse
 }), {
    showModal
 } )( ModalChannels )

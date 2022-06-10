@@ -1,16 +1,15 @@
 import { connect, useSelector } from 'react-redux'
 import { showModal } from "../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
-import { analyticsEvent } from "../../analytics/events";
 import { useRouter } from 'next/router';
 
 
 function Header( { style, ...props } ) {
    const router = useRouter()
    const pageName = useSelector( state => state.page.name )
-   const tariffDefault = useSelector( state => state.page.tariffDefault )
+   
    const data = useSelector( state => state.page.header )
-   const tariff = useSelector( state => state.tariffs.find( t => t.id === tariffDefault ) )
+   const tariff = useSelector( state => state.tariffs.their )
 
    function showModalOrder() {
       props.showModal( {

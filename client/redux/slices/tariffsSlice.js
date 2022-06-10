@@ -7,8 +7,7 @@ import { tariffAround } from './tariffAroundSlice';
 
 
 const sim = {
-   id: "eq-sim",
-   dataView: 'sim',
+   id: "sim",
    oldPrice: 380,
    price: 228,
    cnt: 1,
@@ -17,7 +16,7 @@ const sim = {
 
 export const getEquipments = arr => {
    let newArr = []
-   arr.forEach( el => el.id === "eq-sim"
+   arr.forEach( el => el.id === "sim"
       ? newArr = [ ...newArr, sim ]
       : newArr = [ ...newArr, { ...equipments.find( eq => eq.id === el.id ), ...el } ]
    )
@@ -138,380 +137,15 @@ const iconInfo = <><span onClick={ () => toPlug( 'faq-0-0' ) } className="link">
          Скидка</span> на абонентскую плату при подключения до 01.05.2022</>
 
 
-const initialState = [
-   {
-      id: 'for-their',
-      tariffId: 5330,
-      dataView: "their",
-      name: "Для своих",
-      marks: [ "Акция" ],
-      web: 50,
-      min: 2100,
-      speed: 300,
-      sale: "Скидка 40% на SIM-карты",
-      mftv: [
-         {
-            name: "START",
-            icon: "start",
-            desc: "START подарил зрителям «Содержанок», «Бывших», «257 причин, чтобы жить», «Вампиров средней полосы», «Текст» и другие сериалы и фильмы, перевернувшие представление о том, каким может быть российский контент. Новинки кино и сериалов каждую неделю, эксклюзивные премьеры хитов проката — всё это START."
-         },
-         {
-            name: "Мировое кино",
-            icon: "mf-tv",
-            desc: "Пакет «Мировое кино». 3478 фильмов, 729 сериалов."
-         }
-      ],
-      tvId: 3,
-      tvLength: "188 каналов",
-      oldPrice: 950,
-      price: 0,
-      totalPrice: 650,
-      get iconInfo() {
-         return this.oldPrice && iconInfo
-      },
-      youtube: true,
-      rentDevice: [
-         {
-            text: "Аренда ТВ-приставки",
-            price: "0"
-         },
-         {
-            text: "Аренда Android TV",
-            price: 199
-         },
-         {
-            text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
-            price: "0"
-         }
-      ],
-      equipments: getEquipments( [
-         {
-            id: "eq-android-tv"
-         },
-         {
-            id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)",
-            plan: null,
-            price: '0',
-            switch: true
-         },
-         {
-            id: "eq-MFTV",
-            plan: null,
-            price: '0',
-            switch: true
-         },
-         {
-            id: "eq-sim"
-         }
-      ] ),
-      link: "/uploads/docs/2021/home/tariff_5609_chuvashia.pdf"
-   },
-   {
-      id: 'two-web',
-      tariffId: 5328,
-      dataView: "dvainet",
-      name: "Два интернета",
-      marks: [],
-      web: 30,
-      min: 1200,
-      speed: 100,
-      sale: "Скидка 40% на SIM-карты",
-      tvId: null,
-      oldPrice: 600,
-      price: 0,
-      totalPrice: 700,
-      get iconInfo() {
-         return this.oldPrice && iconInfo
-      },
-      rentDevice: [
-         {
-            text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
-            price: 99
-         },
-         {
-            text: "Аренда Android TV",
-            price: 199
-         }
-      ],
-      equipments: getEquipments( [
-         {
-            id: "eq-android-tv"
-         },
-         {
-            id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1 (100 Мбит/с)"
-         },
-         {
-            id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)"
-         },
-         { id: "eq-sim" }
-      ] ),
-      link: "/uploads/docs/2021/home/tariff_5608_chuvashia.pdf"
-   },
-   {
-      id: 'hit',
-      tariffId: 5329,
-      dataView: "hit",
-      name: "Хит",
-      marks: [ "Популярное" ],
-      web: 30,
-      min: 1500,
-      speed: 100,
-      sale: "Скидка 40% на SIM-карты",
-      tvId: 2,
-      tvLength: "188 каналов",
-      oldPrice: 700,
-      price: 0,
-      totalPrice: 850,
-      get iconInfo() {
-         return this.oldPrice && iconInfo
-      },
-      rentDevice: [
-         {
-            text: "Аренда ТВ-приставки",
-            price: 159
-         },
-         {
-            text: "Аренда Android TV",
-            price: 199
-         },
-         {
-            text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
-            price: 99
-         }
-      ],
-      equipments: getEquipments( [
-         {
-            id: "eq-android-tv"
-         },
-         {
-            id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1 (100 Мбит/с)"
-         },
-         {
-            id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)"
-         },
-         {
-            id: "eq-MFTV"
-         },
-         {
-            id: "eq-sim"
-         }
-      ] ),
-      link: "/uploads/docs/2021/home/tariff_5612_chuvashia.pdf"
-   },
-   {
-      id: 'films',
-      tariffId: 5331,
-      dataView: "films",
-      name: "Кино и сериалы",
-      marks: [],
-      web: 30,
-      min: 1500,
-      speed: 100,
-      sale: "Скидка 40% на SIM-карты",
-      mftv: [
-         {
-            name: "START",
-            icon: "start",
-            desc: "START подарил зрителям «Содержанок», «Бывших», «257 причин, чтобы жить», «Вампиров средней полосы», «Текст» и другие сериалы и фильмы, перевернувшие представление о том, каким может быть российский контент. Новинки кино и сериалов каждую неделю, эксклюзивные премьеры хитов проката — всё это START."
-         },
-         {
-            name: "Мировое кино",
-            icon: "mf-tv",
-            desc: "Пакет «Мировое кино». 3478 фильмов, 729 сериалов."
-         }
-      ],
-      tvId: null,
-      tvLength: null,
-      oldPrice: 700,
-      price: 0,
-      totalPrice: 850,
-      get iconInfo() {
-         return this.oldPrice && iconInfo
-      },
-      rentDevice: [
-         {
-            text: "Аренда ТВ-приставки",
-            price: 159
-         },
-         {
-            text: "Аренда Android TV",
-            price: 199
-         },
-         {
-            text: "Аренда Wi-Fi роутера <nobr>(1 Гбит/с)</nobr>",
-            price: 99
-         }
-      ],
-      equipments: getEquipments( [
-         {
-            id: "eq-android-tv"
-         },
-         {
-            id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1 (100 Мбит/с)"
-         },
-         {
-            id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)"
-         },
-         {
-            id: "eq-MFTV"
-         },
-         {
-            id: "eq-sim"
-         }
-      ] ),
-      link: "/uploads/docs/2021/home/tariff_5610_chuvashia.pdf"
-   },
-   {
-      id: 'premium',
-      tariffId: 5347,
-      dataView: "premium",
-      name: "Премиум",
-      marks: [],
-      web: 50,
-      min: 2500,
-      speed: 500,
-      sale: "Скидка 40% на SIM-карты",
-      mftv: [
-         {
-            name: "START",
-            icon: "start",
-            desc: "START подарил зрителям «Содержанок», «Бывших», «257 причин, чтобы жить», «Вампиров средней полосы», «Текст» и другие сериалы и фильмы, перевернувшие представление о том, каким может быть российский контент. Новинки кино и сериалов каждую неделю, эксклюзивные премьеры хитов проката — всё это START."
-         },
-         {
-            name: "Мировое кино",
-            icon: "mf-tv",
-            desc: "Пакет «Мировое кино». 3478 фильмов, 729 сериалов."
-         },
-         {
-            name: "Амедиатека",
-            icon: "amediateka",
-            desc: "AMEDIATEKA – это премьеры лучших сериалов планеты одновременно со всем миром. Вас ждут новинки и хиты ведущих студий мира, включая HBO, Showtime, CBS, Sky, LIONSGATE и др. «Игра Престолов», «Чернобыль», «Мир Дикого Запада», «Убивая Еву», «Миллиарды», «Секс в большом городе», «Эйфория», «Отыграть назад» - все это и многое другое можно смотреть в онлайн-сервисе AMEDIATEKA."
-         },
-         {
-            name: "more.tv",
-            icon: "more",
-            desc: "Громкие эксклюзивные сериалы - ЧИКИ, Трудные подростки. Премьеры до эфира на ТВ и огромная библиотека главных российских телеканалов и мировых студий. Также только у нас смотрите премьеры нашумевших зарубежных сериалов – РАССКАЗ СЛУЖАНКИ, ФАРГО, ВЕЛИКАЯ и многое другое."
-         }
-      ],
-      tvId: 4,
-      tvLength: "250 каналов",
-      oldPrice: 1500,
-      price: 0,
-      totalPrice: 1900,
-      get iconInfo() {
-         return this.oldPrice && iconInfo
-      },
-      youtube: true,
-      rentDevice: [
-         {
-            text: "Аренда ТВ-приставки",
-            price: 159
-         },
-         {
-            text: "Аренда Android TV",
-            price: 199
-         },
-         {
-            text: "Аренда Wi-Fi роутера <nobr>(100 Мбит/с)</nobr>",
-            price: 55
-         }
-      ],
-      equipments: getEquipments( [
-         {
-            id: "eq-android-tv"
-         },
-         {
-            id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)",
-            price: "0",
-            plan: null,
-            switch: true
-         },
-         {
-            id: "eq-MFTV",
-            price: "0",
-            plan: null,
-            switch: true
-         },
-         {
-            id: "eq-sim"
-         }
-      ] ),
-      link: "/uploads/docs/2021/home/tariff_5611_chuvashia.pdf"
-   },
-   {
-      id: 'economic',
-      tariffId: 5327,
-      dataView: "econom",
-      name: "Эконом",
-      marks: [],
-      web: 20,
-      min: 700,
-      speed: 100,
-      sale: "Скидка 40% на SIM-карты",
-      tvId: 1,
-      tvLength: "61 канал",
-      oldPrice: 550,
-      price: 0,
-      totalPrice: 650,
-      get iconInfo() {
-         return this.oldPrice && iconInfo
-      },
-      rentDevice: [
-         {
-            text: "Аренда ТВ-приставки",
-            price: 159
-         },
-         {
-            text: "Аренда Android TV",
-            price: 199
-         },
-         {
-            text: "Аренда Wi-Fi роутера <nobr>(100 Мбит/с)</nobr>",
-            price: 99
-         }
-      ],
-      equipments: getEquipments( [
-         {
-            id: "eq-android-tv"
-         },
-         {
-            id: "eq-FR100-1",
-            name: "Wi-Fi роутер FR100-1 (100 Мбит/с)"
-         },
-         {
-            id: "eq-FR1000-2",
-            name: "Wi-Fi роутер FR1000-2 (1 Гбит/с)"
-         },
-         {
-            id: "eq-MFTV"
-         },
-         {
-            id: "eq-sim"
-         }
-      ] ),
-      link: "/uploads/docs/2021/home/tariff_5607_chuvashia.pdf"
-   },
-   tariffAround
-]
-
-
 const tariffsSlice = createSlice( {
    name: 'tariffs',
-   initialState,
+   initialState: {},
    reducers: {
       optionSwitch( state, action ) {
          const id = action.payload.id
          const i = action.payload.index
          const checked = action.payload.checked
-         const currentTariff = state.find( tariff => tariff.id === id )
+         const currentTariff = state[id]
          const optionCard = currentTariff.equipments[i]
          optionCard.switch = checked
       },
@@ -519,7 +153,7 @@ const tariffsSlice = createSlice( {
          const id = action.payload.id
          const i = action.payload.index
          const name = action.payload.name
-         const optionCard = state.find( tariff => tariff.id === id ).equipments[i]
+         const optionCard = state[id].equipments[i]
 
          if ( name === 'plus' ) {
             optionCard.cnt++
@@ -534,24 +168,24 @@ const tariffsSlice = createSlice( {
       tariffRadioPlan( state, action ) {
          const id = action.payload.id
          const i = action.payload.index
-         const cardOption = state.find( tariff => tariff.id === id ).equipments[i]
+         const cardOption = state[id].equipments[i]
          cardOption.plan.map( p => p.checked = !p.checked )
          cardOption.price = cardOption.plan.find( p => p.checked ).value
       },
       sumTotalPrice( state, action ) {
          const id = action.payload.id
-         const currentTariff = state.find( tariff => tariff.id === id )
+         const currentTariff = state[id]
 
          const reducePrice = currentTariff.equipments
             .map( eq => {
                if ( eq.switch ) {
-                  if ( eq.id === 'eq-almond' && eq.currentPrice ) {
+                  if ( eq.id === 'almond' && eq.currentPrice ) {
                      return typeof eq.currentPrice === 'string'
                         ? parseInt( eq.currentPrice.match( /\d+/ ) )
                         : eq.currentPrice
                   }
                   if ( typeof eq.price === 'string' ) return parseInt( eq.price.match( /\d+/ ) )
-                  if ( eq.id === 'eq-sim' ) return eq.sumPrice || eq.price
+                  if ( eq.id === 'sim' ) return eq.sumPrice || eq.price
                   if ( eq.plan ) return eq.plan.find( p => p.checked ).value
                   return eq.price
                }
@@ -567,9 +201,7 @@ const tariffsSlice = createSlice( {
          const cnt = action.payload.cnt
          const id = action.payload.tariffID
 
-         const almond = state
-            .find( tariff => tariff.id === id ).equipments
-            .find( eq => eq.id === 'eq-almond' )
+         const almond = state[id].equipments.find( eq => eq.id === 'almond' )
 
          almond.equipments[data.index] = { ...data, cnt, checked }
       },
@@ -578,8 +210,8 @@ const tariffsSlice = createSlice( {
          const name = action.payload.name
          const data = action.payload.data
          const id = action.payload.tariffID
-         const currentTariff = state.find( tariff => tariff.id === id )
-         const almond = currentTariff.equipments.find( eq => eq.id === 'eq-almond' )
+         const currentTariff = state[id]
+         const almond = currentTariff.equipments.find( eq => eq.id === 'almond' )
 
          if ( name === 'plus' ) {
             almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
@@ -591,7 +223,7 @@ const tariffsSlice = createSlice( {
       sumAlmondTotalPrice( state, action ) {
          const almond = state
             .find( tariff => tariff.id === action.payload ).equipments
-            .find( eq => eq.id === 'eq-almond' )
+            .find( eq => eq.id === 'almond' )
 
          const arrPrices = almond.equipments
             .filter( alEq => alEq.checked )
@@ -604,7 +236,7 @@ const tariffsSlice = createSlice( {
       changeAlmondTotalPrice( state, action ) {
          const id = action.payload.id
          const i = action.payload.index
-         const almond = state.find( tariff => tariff.id === id ).equipments[i]
+         const almond = state[id].equipments[i]
          almond.currentPrice = almond.totalPrice || almond.price
       },
       setChannels( state, action ) {
@@ -617,7 +249,21 @@ const tariffsSlice = createSlice( {
          } )
       },
       setInitialStateTariffs( state, action ) {
-         return action.payload
+         const tariffs = action.payload
+         const dvainet = tariffs[101]
+         const econom = tariffs[102]
+         const hit = tariffs[103]
+         const their = tariffs[104]
+         const films = tariffs[105]
+         const premium = tariffs[106]
+         const vezde = tariffs[55]
+
+         const internet = tariffs[201]
+         const turbo = tariffs[202]
+         const vse = tariffs[203]
+         const maximum = tariffs[204]
+
+         return { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium, vezde }
       }
    },
    extraReducers: {

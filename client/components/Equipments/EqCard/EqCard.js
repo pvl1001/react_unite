@@ -2,14 +2,13 @@ import s from './EqCard.module.sass';
 import { connect, useSelector } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
-import { analyticsEvent } from "../../../analytics/events";
 import Image from 'next/image';
 
 
 function EqCard( props ) {
-   const tariffDefault = useSelector( state => state.page.tariffDefault )
+   
    const pageName = useSelector( state => state.page.name )
-   const tariff = useSelector( state => state.tariffs.find( t => t.id === tariffDefault ) )
+   const tariff = useSelector( state => state.tariffs.their )
 
    function showModalAlmond() {
       props.showModal( {

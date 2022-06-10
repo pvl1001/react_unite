@@ -1,7 +1,6 @@
 import s from './InfoBox.module.sass'
 import { onUniteSwitch } from "/redux/slices/tariffAroundSlice";
 import { connect } from "react-redux";
-import { analyticsEvent } from "/analytics/events";
 import { showModal } from "/redux/slices/modalsSlice";
 
 

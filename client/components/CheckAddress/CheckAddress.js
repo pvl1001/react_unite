@@ -7,7 +7,6 @@ import Success from "./Success/Success";
 import { connect } from "react-redux";
 import { showModal } from "../../redux/slices/modalsSlice";
 import { api } from "../../api/api";
-import { analyticsEvent } from "../../analytics/events";
 import { onUniteSwitch } from "../../redux/slices/tariffAroundSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 import { useRouter } from 'next/router'

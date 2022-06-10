@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
 import ItemMftv from "./ItemMftv/ItemMftv";
-import { analyticsView } from "../../../analytics/events";
 
 
 function ModalMftv( props ) {

@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react'
 import { connect } from "react-redux";
 import { showModal } from "../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
-import { analyticsEvent } from "../../analytics/events";
 
 
 function Nav( props ) {

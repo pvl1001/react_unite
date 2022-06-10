@@ -3,23 +3,25 @@ import Header from "../components/Header/Header";
 import Tariffs from "../components/Tariffs/Tariffs";
 import CheckAddress from "../components/CheckAddress/CheckAddress";
 import Equipments from "../components/Equipments/Equipments";
-import WhatElse from "../components/WhatElse/WhatElse";
 import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
 import headerStyle from '../components/Header/Header.module.sass';
-import getRegion from "../mixins/getRegion";
 import Nav from "../components/Nav/Nav";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import NewCard from "../components/Tariffs/NewCard/NewCard";
 import { SwiperSlide } from "swiper/react";
+import { wrapper } from "../redux/store";
+import axios from "axios";
+import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 
 
-export default function IndexPage( { region } ) {
-   console.log( region )
+export default function IndexPage() {
 
-   const tariffs = useSelector( state => state.tariffs )
-   const premium = tariffs.find( el => el.id === 'premium' )
+   const tariffs = useSelector( state => {
+      const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
+      return { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium }
+   } )
    const [ collapseGroup, setCollapseGroup ] = useState( false )
    const [ collapseChannels, setCollapseChannels ] = useState( [] )
 
@@ -29,17 +31,16 @@ export default function IndexPage( { region } ) {
             <title>NextJS !Объединяй</title>
          </Head>
 
-         <Nav region={ region }/>
+         {/*<Nav region={ region }/>*/ }
          <Header style={ headerStyle }/>
          <main>
             <Tariffs>
-               { tariffs.map( tariff =>
-                  <SwiperSlide key={ tariff.id }>
+               { Object.keys( tariffs ).map( key =>
+                  <SwiperSlide key={ key }>
                      <NewCard
-                        key={ tariff.id }
-                        tariff={ tariff }
-                        tariffs={ tariffs }
-                        premium={ premium }
+                        key={ key }
+                        id={ key }
+                        tariff={ tariffs[key] }
                         collapse={ {
                            collapseGroup,
                            setCollapseGroup,
@@ -52,7 +53,6 @@ export default function IndexPage( { region } ) {
             </Tariffs>
             <CheckAddress/>
             <Equipments/>
-            <WhatElse/>
             <AppBanner/>
             <FAQ/>
          </main>
@@ -61,9 +61,12 @@ export default function IndexPage( { region } ) {
 }
 
 
-export const getStaticProps = async () => {
-   const region = await getRegion()
-   console.log( region )
+export const getStaticProps = wrapper.getStaticProps( ( store ) => async () => {
 
-   return { props: { region } }
-}
+   const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
+   store.dispatch( setInitialStateTariffs( data ) )
+
+   // const region = await getRegion()
+
+   return { props: { test: data } }
+} )
