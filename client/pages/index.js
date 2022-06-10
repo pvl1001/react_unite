@@ -40,7 +40,9 @@ export default function IndexPage() {
                      <NewCard
                         key={ key }
                         id={ key }
+                        premium={ tariffs.premium }
                         tariff={ tariffs[key] }
+                        tariffs={ tariffs }
                         collapse={ {
                            collapseGroup,
                            setCollapseGroup,

@@ -1,11 +1,14 @@
 import s from './NewCard.module.scss';
 import React from "react";
+import CollapseChannels from "../TariffCard/CollapseChannels/CollapseChannels";
+import { useDispatch } from "react-redux";
+import { getChannels } from "../../../redux/slices/tariffsSlice";
 
 
-function NewCard( { tariff, id } ) {
+function NewCard( { tariffs, tariff, id, collapse, premium } ) {
 
    // const router = useRouter()
-   // const dispatch = useDispatch()
+   const dispatch = useDispatch()
    // const tmplIconInfo = iconInfo( tariff.id, tariff.iconInfo )
    // const premiumClass = tariff.id === 'premium' ? s[tariff.id] : ''
 
@@ -37,23 +40,24 @@ function NewCard( { tariff, id } ) {
    //    analyticsEvent( `click_button_details_${ tariff.dataView }` )
    // }
 
-   // function collapseGroup() {
-   //    collapse.setCollapseGroup( !collapse.collapseGroup )
-   // }
+   function collapseGroup() {
+      collapse.setCollapseGroup( !collapse.collapseGroup )
+   }
 
-   // function handleCollapseChannels() {
-   //    if ( !premium.channels ) {
-   //       const allTvId = Array.from( new Set(
-   {/*         [*/}
-   //             ...tariffs.filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
-   //          ] ) )
-   //       const allPromise = []
-   //       allTvId.forEach( ( id ) => allPromise.push( dispatch( getChannels( id ) ) ) )
-   //       return Promise.all( allPromise ).then( collapseGroup )
-   //    }
-   //
-   //    collapseGroup()
-   // }
+   function handleCollapseChannels() {
+      if ( !premium.channels ) {
+         const allTvId = Array.from( new Set(
+            [
+               ...Object.values(tariffs).filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
+            ] ) )
+         const allPromise = []
+         // debugger
+         allTvId.forEach( ( id ) => allPromise.push( dispatch( getChannels( id ) ) ) )
+         return Promise.all( allPromise ).then( collapseGroup )
+      }
+
+      collapseGroup()
+   }
 
 
    return (
@@ -99,13 +103,27 @@ function NewCard( { tariff, id } ) {
                </p>
             </li>
             <li className={ s.params__item }>
+
                <p className={ s.params__key }>ТВ</p>
                <p className={ s.params__value }>
                   { tariff.tvchan != 0
-                     ? <span className={ s.params__tv }>{ tariff.tvchan } каналов</span>
+                     ? <span
+                        className={ s.params__tv }
+                        aria-controls="tv-group"
+                        aria-expanded={ collapse.collapseGroup }
+                        onClick={ handleCollapseChannels }
+                     >{ tariff.tvchan } каналов</span>
                      : '—' }
                </p>
             </li>
+
+            { premium.channels &&
+               <CollapseChannels
+                  collapse={ collapse }
+                  premium={ premium }
+                  tariff={ tariff }
+               />
+            }
          </ul>
 
          { tariff.dop_params || tariff.mftv &&

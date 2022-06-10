@@ -240,9 +240,10 @@ const tariffsSlice = createSlice( {
          almond.currentPrice = almond.totalPrice || almond.price
       },
       setChannels( state, action ) {
+         // debugger
          const id = action.payload.id
          const channels = action.payload.channels
-         state.forEach( tariff => {
+         Object.values(state).forEach( tariff => {
             if ( tariff.tvId === id ) {
                tariff.channels = channels
             }
@@ -263,7 +264,19 @@ const tariffsSlice = createSlice( {
          const vse = tariffs[203]
          const maximum = tariffs[204]
 
-         return { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium, vezde }
+         return {
+            internet,
+            dvainet,
+            hit: { ...hit, tvId: 2 },
+            their: { ...their, tvId: 3 },
+            vse: { ...their, tvId: 3 },
+            turbo,
+            econom: { ...econom, tvId: 1 },
+            films,
+            maximum: { ...maximum, tvId: 4},
+            premium: { ...premium, tvId: 4},
+            vezde,
+         }
       }
    },
    extraReducers: {
