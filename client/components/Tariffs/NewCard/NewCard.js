@@ -8,7 +8,6 @@ import SaleBanner from "../../SaleBanner/SaleBanner";
 
 
 function NewCard( { tariffs, tariff, id, collapse, premium } ) {
-
    // const router = useRouter()
    const dispatch = useDispatch()
    // const tmplIconInfo = iconInfo( tariff.id, tariff.iconInfo )

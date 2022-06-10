@@ -133,13 +133,37 @@ export function scrollTo( element, callback = null ) {
    setTimeout( () => window.scrollTo( 0, element.offsetTop ), 0 )
 }
 
-const iconInfo = <><span onClick={ () => toPlug( 'faq-0-0' ) } className="link">
-         Скидка</span> на абонентскую плату при подключения до 01.05.2022</>
 
+const initialState = {
+   hit: { tvId: 2 },
+   their: {
+      tvId: 3,
+      dop_params: [
+         'Аренда роутера за 0 ₽',
+         'Безлимитный мобильный интернет на соц. сети и Youtube'
+      ]
+   },
+   vse: {
+      tvId: 3
+   },
+   turbo: {
+      dop_params: [ 'Wi-Fi роутер в подарок' ] },
+   econom: {
+      tvId: 1 },
+   maximum: {
+      tvId: 4},
+   premium: {
+      tvId: 4,
+      dop_params: [
+         'Аренда роутера и ТВ-приставки за 0 ₽',
+         'Безлимитный мобильный интернет на соц. сети и Youtube'
+      ]
+   }
+         }
 
 const tariffsSlice = createSlice( {
    name: 'tariffs',
-   initialState: {},
+   initialState,
    reducers: {
       optionSwitch( state, action ) {
          const id = action.payload.id
@@ -264,30 +288,19 @@ const tariffsSlice = createSlice( {
          const vse = tariffs[203]
          const maximum = tariffs[204]
 
+
          return {
-            internet,
-            dvainet,
-            hit: { ...hit, tvId: 2 },
-            their: { ...their,
-               tvId: 3,
-               dop_params: [
-                  'Аренда роутера за 0 ₽',
-                  'Безлимитный мобильный интернет на соц. сети и Youtube'
-               ]
-            },
-            vse: { ...their, tvId: 3 },
-            turbo: { ...turbo, dop_params: [ 'Wi-Fi роутер в подарок' ] },
-            econom: { ...econom, tvId: 1 },
-            films,
-            maximum: { ...maximum, tvId: 4},
-            premium: { ...premium,
-               tvId: 4,
-               dop_params: [
-                  'Аренда роутера и ТВ-приставки за 0 ₽',
-                  'Безлимитный мобильный интернет на соц. сети и Youtube'
-               ]
-            },
-            vezde,
+            internet: {...state.internet, ...internet},
+            dvainet: {...state.dvainet, ...dvainet},
+            hit: {...state.hit, ...hit},
+            their: {...state.their, ...their},
+            vse: {...state.vse, ...vse},
+            turbo: {...state.turbo, ...turbo},
+            econom: {...state.econom, ...econom},
+            films: {...state.internet, ...internet},
+            maximum: {...state.maximum, ...maximum},
+            premium: {...state.premium, ...premium},
+            vezde: {...state.vezde, ...vezde},
          }
       }
    },
