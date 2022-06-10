@@ -152,7 +152,7 @@
       margin-right: 6px;
       flex-shrink: 0;
 
-      img {
+      svg {
          margin: auto;
       }
    }
@@ -200,7 +200,6 @@
    }
 }
 
-
 .old_price {
    font-size: 20px;
    line-height: 28px;
@@ -223,4 +222,10 @@
 .new_price {
    font-size: 32px;
    font-weight: 600;
+}
+
+.sale_banner {
+   position: absolute;
+   top: 0;
+   right: 0;
 }

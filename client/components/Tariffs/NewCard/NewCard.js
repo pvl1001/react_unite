@@ -3,6 +3,8 @@ import React from "react";
 import CollapseChannels from "../TariffCard/CollapseChannels/CollapseChannels";
 import { useDispatch } from "react-redux";
 import { getChannels } from "../../../redux/slices/tariffsSlice";
+import PlusIcon from '../../../public/svg/Plus.svg'
+import SaleBanner from "../../SaleBanner/SaleBanner";
 
 
 function NewCard( { tariffs, tariff, id, collapse, premium } ) {
@@ -48,7 +50,7 @@ function NewCard( { tariffs, tariff, id, collapse, premium } ) {
       if ( !premium.channels ) {
          const allTvId = Array.from( new Set(
             [
-               ...Object.values(tariffs).filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
+               ...Object.values( tariffs ).filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
             ] ) )
          const allPromise = []
          // debugger
@@ -65,7 +67,7 @@ function NewCard( { tariffs, tariff, id, collapse, premium } ) {
 
          <div className={ s.header }>
 
-            {/*<div className={ s.sale_banner }>Скидка<br/>навсегда!</div>*/ }
+            <SaleBanner className={ s.sale_banner }/>
             <div className={ s.tariff_icon }>
                <img src={ `/svg/tariff_${ id }.svg` } alt={ `${ id }_icon` }/>
             </div>
@@ -126,17 +128,15 @@ function NewCard( { tariffs, tariff, id, collapse, premium } ) {
             }
          </ul>
 
-         { tariff.dop_params || tariff.mftv &&
-            <div className={ s.dop_params }>
+         { (tariff.dop_params || tariff.mftv) &&
+            <div className={ s.dop_params + ' TEST' }>
                <h5 className={ `${ s.dop_params__title } ${ s.params__key }` }>дополнительно</h5>
 
                { tariff.dop_params &&
                   <ul>
                      { tariff.dop_params.map( dp =>
                         <li key={ dp } className={ s.dop_params__item }>
-                           <div className={ s.dop_params__icon }>
-                              <img src="./img/svg/Plus.svg" alt="иконка плюс"/>
-                           </div>
+                           <div className={ s.dop_params__icon }><PlusIcon/></div>
                            <p>{ dp }</p>
                         </li>
                      ) }
@@ -151,7 +151,7 @@ function NewCard( { tariffs, tariff, id, collapse, premium } ) {
                         </li>
                      ) }
                   </ul>
-               }}
+               }
             </div>
          }
       </div>

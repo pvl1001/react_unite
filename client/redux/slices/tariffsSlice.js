@@ -268,13 +268,25 @@ const tariffsSlice = createSlice( {
             internet,
             dvainet,
             hit: { ...hit, tvId: 2 },
-            their: { ...their, tvId: 3 },
+            their: { ...their,
+               tvId: 3,
+               dop_params: [
+                  'Аренда роутера за 0 ₽',
+                  'Безлимитный мобильный интернет на соц. сети и Youtube'
+               ]
+            },
             vse: { ...their, tvId: 3 },
-            turbo,
+            turbo: { ...turbo, dop_params: [ 'Wi-Fi роутер в подарок' ] },
             econom: { ...econom, tvId: 1 },
             films,
             maximum: { ...maximum, tvId: 4},
-            premium: { ...premium, tvId: 4},
+            premium: { ...premium,
+               tvId: 4,
+               dop_params: [
+                  'Аренда роутера и ТВ-приставки за 0 ₽',
+                  'Безлимитный мобильный интернет на соц. сети и Youtube'
+               ]
+            },
             vezde,
          }
       }
