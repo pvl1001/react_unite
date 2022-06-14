@@ -18,7 +18,7 @@ import { NextResponse } from 'next/server'
 
 
 export default function IndexPage( { ip } ) {
-   console.log( ip )
+   // console.log( ip )
 
    const tariffs = useSelector( state => {
       const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
@@ -72,22 +72,22 @@ export const getServerSideProps = wrapper.getServerSideProps( store => async ( {
 
    // const region = await getRegion()
 
-   let ip;
+   // let ip;
+   //
+   // if (req.headers["x-forwarded-for"]) {
+   //    ip = req.headers["x-forwarded-for"].split(',')[0]
+   // } else if (req.headers["x-real-ip"]) {
+   //    ip = req.connection.remoteAddress
+   // } else {
+   //    ip = req.connection.remoteAddress
+   // }
 
-   if (req.headers["x-forwarded-for"]) {
-      ip = req.headers["x-forwarded-for"].split(',')[0]
-   } else if (req.headers["x-real-ip"]) {
-      ip = req.connection.remoteAddress
-   } else {
-      ip = req.connection.remoteAddress
-   }
-
-   console.log(ip)
+   // console.log(ip)
 
    return {
       props: {
          test: data,
-         ip
+         // ip
       }
    }
 } )
