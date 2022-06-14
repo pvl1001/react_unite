@@ -1,39 +1,35 @@
 import s from './InfoBox.module.sass'
+import { onUniteSwitch } from "/redux/slices/tariffAroundSlice";
 import { connect } from "react-redux";
-import { onUniteSwitch } from "../../../../redux/slices/tariffVezdeSlice";
-import { showModal } from "../../../../redux/slices/modalsSlice";
+import { showModal } from "/redux/slices/modalsSlice";
 
 
-function InfoBox( { tariff, showModalOrder, showModal, onUniteSwitch } ) {
+function InfoBox( props ) {
 
-   const router = tariff.equipments.router_4g
-   const oldPrice = tariff.routerSwitch
-      ? tariff.price + tariff.equipments.router_4g.price
-      : tariff.price
-   const priceSale = tariff.calcPriceSale
+   const router = props.tariff.equipments[0]
+   const oldPrice = props.tariff.routerSwitch
+      ? props.tariff.price + props.tariff.equipments[0].price
+      : props.tariff.price
+   const priceSale = props.tariff.calcPriceSale
 
    function handleChange( e ) {
-      onUniteSwitch( e.target.checked )
+      props.onUniteSwitch( e.target.checked )
    }
 
    function showModalEq() {
-      showModal( {
+      props.showModal( {
          modal: 'equipment',
          bool: true,
          props: router.id
       } )
-      // analyticsEvent( `click_button_details_${ tariff.id }_ntv` )
-   }
-
-   function getInetValue() {
-      return tariff.inet === 'unlim' ? 'Безлимитный интернет' : tariff.inet + ' ГБ'
+      // analyticsEvent( `click_button_details_${ props.tariff.dataView }_ntv` )
    }
 
 
    return (
       <div className={ s._ }>
 
-         <h2 className={ s.title }>{ tariff.name }</h2>
+         <h2 className={ s.title }>Объединяй! { props.tariff.name }</h2>
          <div className={ s.container }>
             <div className={ s.params }>
                <div className={ s.info }>
@@ -50,7 +46,7 @@ function InfoBox( { tariff, showModalOrder, showModal, onUniteSwitch } ) {
                                  </g>
                               </svg>
                            </div>
-                           <p>{ tariff.minutes } минут <nobr>Безлимит на МегаФон России</nobr></p>
+                           <p>{ props.tariff.min } минут <nobr>Безлимит на МегаФон России</nobr></p>
                         </div>
                         <div className={ s.info__desc }>
                            <div className={ s.info__descIcon }>
@@ -61,7 +57,7 @@ function InfoBox( { tariff, showModalOrder, showModal, onUniteSwitch } ) {
                               </svg>
                            </div>
                            <p>
-                              <nobr>{ getInetValue() }</nobr>
+                              <nobr>50 ГБ</nobr>
                            </p>
                         </div>
                      </div>
@@ -85,7 +81,7 @@ function InfoBox( { tariff, showModalOrder, showModal, onUniteSwitch } ) {
                                  </g>
                               </svg>
                            </div>
-                           <p>{ tariff.speed } Мбит/с</p>
+                           <p>{ props.tariff.speed } Мбит/с</p>
                         </div>
                         <div className={ s.info__desc }>
                            <div className={ s.info__descIcon }>
@@ -99,7 +95,7 @@ function InfoBox( { tariff, showModalOrder, showModal, onUniteSwitch } ) {
                                     fill="#00B956"/>
                               </svg>
                            </div>
-                           <p>{ tariff.tvchan } каналов</p>
+                           <p>{ props.tariff.tvLength }</p>
                         </div>
                      </div>
                   </div>
@@ -112,7 +108,7 @@ function InfoBox( { tariff, showModalOrder, showModal, onUniteSwitch } ) {
                               <input
                                  type="checkbox"
                                  onClick={ handleChange }
-                                 defaultChecked={ tariff.routerSwitch }
+                                 defaultChecked={ props.tariff.routerSwitch }
                               />
                               <span className="round"/>
                            </div>
@@ -137,7 +133,8 @@ function InfoBox( { tariff, showModalOrder, showModal, onUniteSwitch } ) {
                <div className={ s.order }>
                   <div
                      className={ `${ s.order__btn } btn` }
-                     onClick={ showModalOrder }>
+                     data-view="block_vezde_ntv"
+                     onClick={ props.showModalOrder }>
                      Отправить заявку
                   </div>
 
@@ -158,12 +155,13 @@ function InfoBox( { tariff, showModalOrder, showModal, onUniteSwitch } ) {
          </div>
 
       </div>
+
    )
 }
 
 
 export default connect( state => ({
-   tariff: state.tariffVezde
+   tariff: state.tariffAround
 }), {
    onUniteSwitch,
    showModal

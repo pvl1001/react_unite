@@ -20,8 +20,8 @@ function Header( { style, ...props } ) {
          tariffName: `${ pageName } ${ tariff.name }`,
          tariffId: tariff.tariffId,
          eventLabel: {
-            order: `click_button_connect_${ tariff.id }`,
-            send: `click_button_connect_send_${ tariff.id }`
+            order: `click_button_connect_${ tariff.dataView }`,
+            send: `click_button_connect_send_${ tariff.dataView }`
          }
       } )
    }
@@ -32,7 +32,7 @@ function Header( { style, ...props } ) {
          bool: true,
          props: tariff.id
       } )
-      // analyticsEvent( `click_button_connect_details_${ tariff.id }` )
+      // analyticsEvent( `click_button_connect_details_${ tariff.dataView }` )
    }
 
 
@@ -52,7 +52,8 @@ function Header( { style, ...props } ) {
                         type="button"
                         onClick={ showModalOrder }
                         className={ `${ style.btn } btn btn-fiolet` }
-                        >Подключить
+                        data-view="first_banner">
+                        Подключить
                      </button>
 
                      { router.route === '/' &&

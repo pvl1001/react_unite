@@ -60,8 +60,8 @@ function TariffCard( props ) {
          tariffId: props.tariff.tariffId,
          price: props.tariff.price,
          eventLabel: {
-            order: `click_button_order_${ props.tariff.id }`,
-            send: `click_button_send_${ props.tariff.id }`
+            order: `click_button_order_${ props.tariff.dataView }`,
+            send: `click_button_send_${ props.tariff.dataView }`
          }
       } )
    }
@@ -75,7 +75,7 @@ function TariffCard( props ) {
          bool: true,
          props: props.tariff.id
       } )
-      // analyticsEvent( `click_button_details_${ props.tariff.id }` )
+      // analyticsEvent( `click_button_details_${ props.tariff.dataView }` )
    }
 
 
@@ -87,7 +87,11 @@ function TariffCard( props ) {
             style={ premiumStyle }
             className={ `${ s.title } ${ s.wrapper }` }>
 
-            <h2 onClick={ showModalTariff }>{ props.tariff.name }</h2>
+            <h2
+               data-view={ `tariff_card_${ props.tariff.dataView }_start` }
+               onClick={ showModalTariff }>
+               { props.tariff.name }
+            </h2>
 
             <div className={ s.marks }>
                { props.tariff.marks.map( ( mark, i ) =>
@@ -173,6 +177,7 @@ function TariffCard( props ) {
 
             <button
                className="price-card__btn btn"
+               data-view={ `tariff_card_${ props.tariff.dataView }_end` }
                onClick={ showModalOrder }>
                Подключить
             </button>
