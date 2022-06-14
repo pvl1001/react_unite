@@ -17,8 +17,8 @@ import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import { NextResponse } from 'next/server'
 
 
-export default function IndexPage( { testIP } ) {
-   console.log( testIP )
+export default function IndexPage( { ip } ) {
+   console.log( ip )
 
    const tariffs = useSelector( state => {
       const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
@@ -65,17 +65,29 @@ export default function IndexPage( { testIP } ) {
 }
 
 
-export const getStaticProps = wrapper.getServerSideProps( store => async ( { req, res } ) => {
+export const getServerSideProps = wrapper.getServerSideProps( store => async ( { req, res } ) => {
    const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
    // const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
    store.dispatch( setInitialStateTariffs( data ) )
 
    // const region = await getRegion()
 
+   let ip;
+
+   if (req.headers["x-forwarded-for"]) {
+      ip = req.headers["x-forwarded-for"].split(',')[0]
+   } else if (req.headers["x-real-ip"]) {
+      ip = req.connection.remoteAddress
+   } else {
+      ip = req.connection.remoteAddress
+   }
+
+   console.log(ip)
+
    return {
       props: {
          test: data,
-         testIP: { request: req || null, response: res || null }
+         ip
       }
    }
 } )
