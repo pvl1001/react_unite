@@ -14,9 +14,11 @@ import { SwiperSlide } from "swiper/react";
 import { wrapper } from "../redux/store";
 import axios from "axios";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
+import { NextResponse } from 'next/server'
 
 
-export default function IndexPage() {
+export default function IndexPage( { testIP } ) {
+   console.log( testIP )
 
    const tariffs = useSelector( state => {
       const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
@@ -63,13 +65,17 @@ export default function IndexPage() {
 }
 
 
-export const getStaticProps = wrapper.getStaticProps( ( store ) => async () => {
-
-   // const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
-   const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
+export const getStaticProps = wrapper.getServerSideProps( store => async ( { req, res } ) => {
+   const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
+   // const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
    store.dispatch( setInitialStateTariffs( data ) )
 
    // const region = await getRegion()
 
-   return { props: { test: data } }
+   return {
+      props: {
+         test: data,
+         testIP: { request: req || null, response: res || null }
+      }
+   }
 } )
