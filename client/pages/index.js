@@ -14,10 +14,9 @@ import { SwiperSlide } from "swiper/react";
 import { wrapper } from "../redux/store";
 import axios from "axios";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
-import { NextResponse } from 'next/server'
 
 
-export default function IndexPage( { ip } ) {
+export default function IndexPage(  ) {
    // console.log( ip )
 
    const tariffs = useSelector( state => {
@@ -65,7 +64,7 @@ export default function IndexPage( { ip } ) {
 }
 
 
-export const getServerSideProps = wrapper.getServerSideProps( store => async ( { req, res } ) => {
+export const getStaticProps = wrapper.getStaticProps( store => async ( { req, res } ) => {
    const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
    // const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
    store.dispatch( setInitialStateTariffs( data ) )
@@ -85,9 +84,6 @@ export const getServerSideProps = wrapper.getServerSideProps( store => async ( {
    // console.log(ip)
 
    return {
-      props: {
-         test: data,
-         // ip
-      }
+      props: {}
    }
 } )
