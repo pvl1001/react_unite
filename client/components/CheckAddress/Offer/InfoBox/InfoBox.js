@@ -22,7 +22,7 @@ function InfoBox( props ) {
          bool: true,
          props: router.id
       } )
-      analyticsEvent( `click_button_details_${ props.tariff.dataView }_ntv` )
+      // analyticsEvent( `click_button_details_${ props.tariff.dataView }_ntv` )
    }
 
 

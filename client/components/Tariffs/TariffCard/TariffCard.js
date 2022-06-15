@@ -75,7 +75,7 @@ function TariffCard( props ) {
          bool: true,
          props: props.tariff.id
       } )
-      analyticsEvent( `click_button_details_${ props.tariff.dataView }` )
+      // analyticsEvent( `click_button_details_${ props.tariff.dataView }` )
    }
 
 

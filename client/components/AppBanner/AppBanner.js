@@ -47,12 +47,12 @@ export default function AppBanner() {
                      <a
                         href="https://trk.mail.ru/c/uo37z4"
                         className={ s.google_play }
-                        onClick={ () => analyticsEvent( 'click_button_googleplay_lkmf' ) }
+                        // onClick={ () => analyticsEvent( 'click_button_googleplay_lkmf' ) }
                      > </a>
                      <a
                         href="https://trk.mail.ru/c/sa6p65"
                         className={ s.apple_store }
-                        onClick={ () => analyticsEvent( 'click_button_appstore_lkmf' ) }
+                        // onClick={ () => analyticsEvent( 'click_button_appstore_lkmf' ) }
                      > </a>
                   </div>
                </div>

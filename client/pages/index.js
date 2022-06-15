@@ -35,25 +35,25 @@ export default function IndexPage(  ) {
          {/*<Nav region={ region }/>*/ }
          <Header style={ headerStyle }/>
          <main>
-            {/*<Tariffs>*/}
-            {/*   { Object.keys( tariffs ).map( key =>*/}
-            {/*      <SwiperSlide key={ key }>*/}
-            {/*         <NewCard*/}
-            {/*            key={ key }*/}
-            {/*            id={ key }*/}
-            {/*            premium={ tariffs.premium }*/}
-            {/*            tariff={ tariffs[key] }*/}
-            {/*            tariffs={ tariffs }*/}
-            {/*            collapse={ {*/}
-            {/*               collapseGroup,*/}
-            {/*               setCollapseGroup,*/}
-            {/*               collapseChannels,*/}
-            {/*               setCollapseChannels*/}
-            {/*            } }*/}
-            {/*         />*/}
-            {/*      </SwiperSlide>*/}
-            {/*   ) }*/}
-            {/*</Tariffs>*/}
+            <Tariffs>
+               { Object.keys( tariffs ).map( key =>
+                  <SwiperSlide key={ key }>
+                     <NewCard
+                        key={ key }
+                        id={ key }
+                        premium={ tariffs.premium }
+                        tariff={ tariffs[key] }
+                        tariffs={ tariffs }
+                        collapse={ {
+                           collapseGroup,
+                           setCollapseGroup,
+                           collapseChannels,
+                           setCollapseChannels
+                        } }
+                     />
+                  </SwiperSlide>
+               ) }
+            </Tariffs>
             <CheckAddress/>
             <Equipments/>
             <AppBanner/>
@@ -64,26 +64,26 @@ export default function IndexPage(  ) {
 }
 
 
-// export const getServerSideProps = wrapper.getServerSideProps( store => async () => {
-//    const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
-//    // const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
-//    store.dispatch( setInitialStateTariffs( data ) )
-//
-//    // const region = await getRegion()
-//
-//    // let ip;
-//    //
-//    // if (req.headers["x-forwarded-for"]) {
-//    //    ip = req.headers["x-forwarded-for"].split(',')[0]
-//    // } else if (req.headers["x-real-ip"]) {
-//    //    ip = req.connection.remoteAddress
-//    // } else {
-//    //    ip = req.connection.remoteAddress
-//    // }
-//    //
-//    // console.log(ip)
-//
-//    return {
-//       props: {}
-//    }
-// } )
+export const getServerSideProps = wrapper.getServerSideProps( store => async () => {
+   const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
+   // const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
+   store.dispatch( setInitialStateTariffs( data ) )
+
+   // const region = await getRegion()
+
+   // let ip;
+   //
+   // if (req.headers["x-forwarded-for"]) {
+   //    ip = req.headers["x-forwarded-for"].split(',')[0]
+   // } else if (req.headers["x-real-ip"]) {
+   //    ip = req.connection.remoteAddress
+   // } else {
+   //    ip = req.connection.remoteAddress
+   // }
+   //
+   // console.log(ip)
+
+   return {
+      props: {}
+   }
+} )

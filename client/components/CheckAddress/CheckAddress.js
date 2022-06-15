@@ -62,7 +62,7 @@ function CheckAddress( props ) {
 
    async function submit( e ) {
       e.preventDefault()
-      analyticsEvent( 'click_button_address' )
+      // analyticsEvent( 'click_button_address' )
 
       if ( address.house_guid ) {
          props.setDataOrder( {

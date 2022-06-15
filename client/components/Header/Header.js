@@ -32,7 +32,7 @@ function Header( { style, ...props } ) {
          bool: true,
          props: tariff.id
       } )
-      analyticsEvent( `click_button_connect_details_${ tariff.dataView }` )
+      // analyticsEvent( `click_button_connect_details_${ tariff.dataView }` )
    }
 
 

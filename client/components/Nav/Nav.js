@@ -18,7 +18,7 @@ function Nav( props ) {
          modal: 'cities',
          bool: true
       } )
-      analyticsEvent( 'click_button_regions' )
+      // analyticsEvent( 'click_button_regions' )
    }
 
 

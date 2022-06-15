@@ -14,8 +14,8 @@ import { Spinner } from 'react-bootstrap';
 function ModalOrder( props ) {
    useEffect( () => {
       if ( props.show ) {
-         analyticsView()
-         analyticsEvent( props.dataOrder.eventLabel.order )
+         // analyticsView()
+         // analyticsEvent( props.dataOrder.eventLabel.order )
 
          window.mask = require( '../../../plugins/jquery.mask' )
          $( 'input[name="phone"]' ).mask( '+7(000)000-00-00', {
@@ -76,8 +76,8 @@ function ModalOrder( props ) {
          setIsLoading( false )
          // console.log(props.dataOrder.eventLabel.send)
          if ( resMailSender.code === '200' ) {
-            analyticsEvent( props.dataOrder.eventLabel.send )
-            gtag( 'event', 'requestLandingSend', { 'event_category': 'order' } )
+            // analyticsEvent( props.dataOrder.eventLabel.send )
+            // gtag( 'event', 'requestLandingSend', { 'event_category': 'order' } )
 
             if ( ym !== undefined ) {
                ym( 66149989, 'reachGoal', 'zayavka_megafon' )

@@ -15,7 +15,7 @@ function EqCard( props ) {
          modal: 'almond',
          bool: true
       } )
-      analyticsEvent( `click_button_details_${ props.eq.dataView }` )
+      // analyticsEvent( `click_button_details_${ props.eq.dataView }` )
    }
 
    function showModalOrder() {
@@ -40,7 +40,7 @@ function EqCard( props ) {
          bool: true,
          props: props.eq.id
       } )
-      analyticsEvent( `click_button_details_${ props.eq.dataView }` )
+      // analyticsEvent( `click_button_details_${ props.eq.dataView }` )
    }
 
 
