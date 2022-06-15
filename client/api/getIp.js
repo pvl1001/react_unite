@@ -1,8 +1,16 @@
-export default async function getIp() {
+export default function getIp( req ) {
    try {
-      const response = await fetch( 'https://geolocation-db.com/json/' )
-      const { IPv4 } = await response.json()
-      return IPv4
+
+      if ( req.headers["x-forwarded-for"] ) {
+         return req.headers["x-forwarded-for"].split( ',' )[0]
+      }
+
+      if ( req.headers["x-real-ip"] ) {
+         return req.connection.remoteAddress
+      }
+
+      return req.connection.remoteAddress
+
    } catch ( err ) {
       console.log( err )
    }

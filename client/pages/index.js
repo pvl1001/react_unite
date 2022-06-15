@@ -14,9 +14,11 @@ import { SwiperSlide } from "swiper/react";
 import { wrapper } from "../redux/store";
 import axios from "axios";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
+import getIp from "../api/getIp";
+import getLocation from "../api/getLocation";
 
 
-export default function IndexPage(  ) {
+export default function IndexPage() {
    // console.log( ip )
 
    const tariffs = useSelector( state => {
@@ -64,26 +66,12 @@ export default function IndexPage(  ) {
 }
 
 
-export const getServerSideProps = wrapper.getServerSideProps( store => async () => {
+export const getServerSideProps = wrapper.getServerSideProps( store => async ( { req, res } ) => {
    const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
    // const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
    store.dispatch( setInitialStateTariffs( data ) )
 
-   // const region = await getRegion()
-
-   // let ip;
-   //
-   // if (req.headers["x-forwarded-for"]) {
-   //    ip = req.headers["x-forwarded-for"].split(',')[0]
-   // } else if (req.headers["x-real-ip"]) {
-   //    ip = req.connection.remoteAddress
-   // } else {
-   //    ip = req.connection.remoteAddress
-   // }
-   //
-   // console.log(ip)
-
-   return {
-      props: {}
-   }
+   const ip = getIp(req)
+   const { location } = await getLocation(ip)
+   console.log(ip, location)
 } )
