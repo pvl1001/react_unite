@@ -1,6 +1,6 @@
 module.exports = {
    images: {
       domains: ['/'],
-      staticPageGenerationTimeout: 3000,
    },
+   staticPageGenerationTimeout: 3000,
 }
