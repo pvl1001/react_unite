@@ -64,7 +64,7 @@ export default function IndexPage(  ) {
 }
 
 
-export const getStaticProps = wrapper.getStaticProps( store => async ( { req, res } ) => {
+export const getStaticProps = wrapper.getStaticProps( store => async () => {
    const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
    // const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
    store.dispatch( setInitialStateTariffs( data ) )
