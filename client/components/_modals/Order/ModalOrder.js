@@ -185,7 +185,7 @@ function ModalOrder( props ) {
                            type="submit"
                            className={ s.form__btn + " btn" }
                            disabled={ isLoading }
-                           data-view="modal_order">
+                           >
                            <span>
                               Отправить
                               { isLoading &&

@@ -17,12 +17,13 @@ function ModalEquipment( props ) {
    const show = useSelector( state => state.modals.equipment.show )
    const showModalTariff = useSelector( state => state.modals.tariff.show )
    const eqId = useSelector( state => state.modals.equipment.props )
-   const eq = useSelector( state => eqId === 'eq-unite'
-      ? state.tariffAround.equipments[0]
-      : state.equipments.find( el => el.id === eqId )
+   const eq = useSelector( state => eqId === 'router-4g'
+      ? state.tariffVezde.equipments.router_4g
+      : state.equipments[eqId]
    )
-   const tariff = useSelector( state => eq?.id === 'eq-unite'
-      ? state.tariffAround
+
+   const tariff = useSelector( state => eq?.id === 'router-4g'
+      ? state.tariffVezde
       : state.tariffs.their
    )
 
@@ -35,14 +36,14 @@ function ModalEquipment( props ) {
 
       const onHide = () => props.showModal( { modal: 'equipment', bool: false } )
 
-      const eventLabel = eq.dataView === 'router-4g'
+      const eventLabel = eq.id === 'router-4g'
          ? {
             order: `click_button_order_vezde_ntv`,
             send: `click_button_send_vezde_ntv`
          }
          : {
-            order: `click_button_order_${ eq.dataView }`,
-            send: `click_button_${ eq.dataView }_send_equipment`
+            order: `click_button_order_${ eq.id }`,
+            send: `click_button_${ eq.id }_send_equipment`
          }
 
       function handleChangePlan( payload ) {
@@ -55,7 +56,7 @@ function ModalEquipment( props ) {
          props.setDataOrder( {
             tariffName: `${ pageName } ${ tariff.name }`,
             tariffId: tariff.tariffId,
-            equipments: eq.dataView,
+            equipments: eq.id,
             price: pricePlan,
             eventLabel: eventLabel
          } )

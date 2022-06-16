@@ -15,7 +15,7 @@ function EqCard( props ) {
          modal: 'almond',
          bool: true
       } )
-      // analyticsEvent( `click_button_details_${ props.eq.dataView }` )
+      // analyticsEvent( `click_button_details_${ props.eq.id }` )
    }
 
    function showModalOrder() {
@@ -26,10 +26,10 @@ function EqCard( props ) {
       props.setDataOrder( {
          tariffName: `${ pageName } ${ tariff.name }`,
          tariffId: tariff.tariffId,
-         equipments: props.eq.dataView,
+         equipments: props.eq.id,
          eventLabel: {
-            order: `click_button_order_${ props.eq.dataView }`,
-            send: `click_button_${ props.eq.dataView }_send_equipment`
+            order: `click_button_order_${ props.eq.id }`,
+            send: `click_button_${ props.eq.id }_send_equipment`
          }
       } )
    }
@@ -40,7 +40,7 @@ function EqCard( props ) {
          bool: true,
          props: props.eq.id
       } )
-      // analyticsEvent( `click_button_details_${ props.eq.dataView }` )
+      // analyticsEvent( `click_button_details_${ props.eq.id }` )
    }
 
 
@@ -85,14 +85,13 @@ function EqCard( props ) {
          </div>
 
          <p className={ s.text }>{ props.eq.text }
-            { props.eq.id === "eq-almond"
+            { props.eq.id === "almond"
                ? <span className={ `${ s.link } link` } onClick={ showModalAlmond }>Подробнее</span>
                : <span className={ `${ s.link } link` } onClick={ showModalEquipment }>Подробнее</span>
             }</p>
 
          <button
             className={ `${ s.btn } btn btn-fiolet` }
-            data-view={ `block_${ props.eq.dataView }` }
             onClick={ showModalOrder }>
             Заказать
          </button>

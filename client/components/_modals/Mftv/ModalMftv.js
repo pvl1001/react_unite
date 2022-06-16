@@ -1,5 +1,4 @@
 import s from './ModalMftv.module.sass'
-import { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import FaqMftv from "./FaqMftv/FaqMftv";
 import { connect } from "react-redux";
@@ -8,16 +7,12 @@ import { setDataOrder } from "../../../redux/slices/orderSlice";
 import ItemMftv from "./ItemMftv/ItemMftv";
 
 
-function ModalMftv( props ) {
-   useEffect( () => {
-      props.mftv && analyticsView()
-   }, [ props.mftv ] )
+function ModalMftv( { show, tariff, showModal, setDataOrder } ) {
 
-
-   if ( props.mftv ) {
+   if ( tariff ) {
 
       function onHide() {
-         props.showModal( { modal: 'mftv', bool: false } )
+         showModal( { modal: 'mftv', bool: false } )
       }
 
 
@@ -25,7 +20,7 @@ function ModalMftv( props ) {
          <Modal
             centered
             animation={ false }
-            show={ props.show }
+            show={ show }
             onHide={ onHide }
             className={ s.modal }
             dialogClassName={ s.modal_dialog }
@@ -40,25 +35,21 @@ function ModalMftv( props ) {
                />
             </div>
 
-            <div
-               className={ `${ s.title } ${ s.wrapp }` }
-               data-view={ `mftv_${ props.tariff.id }_start` }>
-               <h1>МегаФон ТВ</h1>
-            </div>
+            <h1 className={ `${ s.title } ${ s.wrapp }` }>МегаФон ТВ</h1>
 
             <div className={ s.container }>
 
                <ul className={ s.items }>
-                  { props.mftv.map( item =>
+                  { tariff.mftv.map( item =>
                      <ItemMftv key={ item.name } item={ item }/>
                   ) }
                </ul>
 
                <FaqMftv
-                  faq={ props.mftv.faq }
-                  tariff={ props.tariff }
-                  showModal={ props.showModal }
-                  setDataOrder={ props.setDataOrder }
+                  faq={ tariff.mftv.faq }
+                  tariff={ tariff }
+                  showModal={ showModal }
+                  setDataOrder={ setDataOrder }
                />
             </div>
 
@@ -73,7 +64,6 @@ function ModalMftv( props ) {
 export default connect(
    state => ({
       show: state.modals.mftv.show,
-      mftv: state.modals.mftv.props?.mftv,
       tariff: state.modals.mftv.props?.tariff,
    }),
    { showModal, setDataOrder }

@@ -34,7 +34,6 @@ function Form( props ) {
             <button
                type="submit"
                className={ 'btn ' + s.btn }
-               data-view="block_checkaddress"
                disabled={ props.isLoading }
                onClick={ props.submit }>
                <span>

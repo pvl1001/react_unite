@@ -33,11 +33,11 @@ function ModalAboutAlmond( props ) {
       const getData = ( name ) => {
          if ( props.showModalTariff ) {
             const almond = props
-               .tariffs.find( tariff => tariff.id === props.tariffID )
-               .equipments.find( eq => eq.id === 'eq-almond' )
+               .tariffs[props.tariffID]
+               .equipments.almond
             return almond.equipments[props.data.index]?.[name]
          } else {
-            const almond = props.equipments.find( eq => eq.id === 'eq-almond' )
+            const almond = props.equipments.almond
             return almond.equipments[props.data.index]?.[name]
          }
       }

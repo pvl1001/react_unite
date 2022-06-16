@@ -12,14 +12,13 @@ import { useSelector } from "react-redux";
 import NewCard from "../components/Tariffs/NewCard/NewCard";
 import { SwiperSlide } from "swiper/react";
 import { wrapper } from "../redux/store";
-import axios from "axios";
 import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import getIp from "../api/getIp";
 import getLocation from "../api/getLocation";
+import getLocationData from "../api/getLocationData";
 
 
-export default function IndexPage() {
-   // console.log( ip )
+export default function IndexPage( { location } ) {
 
    const tariffs = useSelector( state => {
       const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
@@ -34,7 +33,7 @@ export default function IndexPage() {
             <title>NextJS !Объединяй</title>
          </Head>
 
-         {/*<Nav region={ region }/>*/ }
+         <Nav region={ location }/>
          <Header style={ headerStyle }/>
          <main>
             <Tariffs>
@@ -67,11 +66,19 @@ export default function IndexPage() {
 
 
 export const getServerSideProps = wrapper.getServerSideProps( store => async ( { req, res } ) => {
-   const { data } = await axios.get( 'https://spb.home.megafon.ru/billing/bt/json/getalltarifs' )
-   // const { data } = await axios.get( 'https://moscow.home.megafon.ru/billing/bt/json/getalltarifs' )
-   store.dispatch( setInitialStateTariffs( data ) )
 
-   const ip = getIp(req)
-   const { location } = await getLocation(ip)
-   console.log(ip, location)
+   const ip = getIp( req )
+   const { location } = await getLocation( ip )
+
+   if( location !== null ) {
+      const { data } = await getLocationData('moscow')
+      store.dispatch( setInitialStateTariffs( data ) )
+   } else {
+      const { data } = await getLocationData( 'spb' )
+      store.dispatch( setInitialStateTariffs( data ) )
+   }
+
+   return {
+      props: { location }
+   }
 } )

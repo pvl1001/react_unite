@@ -5,19 +5,19 @@ import tariffsSlice from "./slices/tariffsSlice";
 import equipmentsSlice from "./slices/equipmentsSlice";
 import modalsSlice from "./slices/modalsSlice";
 import orderSlice from "./slices/orderSlice";
-import tariffAroundSlice from "./slices/tariffAroundSlice";
+import tariffVezdeSlice from "./slices/tariffVezdeSlice";
 import megaTariffSlice from "./slices/megaTariffSlice";
 
 
 export const store = configureStore( {
    reducer: {
-      megaTariff: megaTariffSlice,
       page: pageSlice,
-      modals: modalsSlice,
       tariffs: tariffsSlice,
+      megaTariff: megaTariffSlice,
+      modals: modalsSlice,
       equipments: equipmentsSlice,
       order: orderSlice,
-      tariffAround: tariffAroundSlice
+      tariffVezde: tariffVezdeSlice
    },
    middleware: getDefaultMiddleware =>
       getDefaultMiddleware( {

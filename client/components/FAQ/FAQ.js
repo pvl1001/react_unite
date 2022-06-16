@@ -13,11 +13,7 @@ function FAQ( { data } ) {
    return (
       <section className={ s.container }>
          <div className="wrapper">
-            <h1
-               className={ s.title }
-               data-view="block_faq">
-               Дополнительная информация:
-            </h1>
+            <h1 className={ s.title }>Дополнительная информация:</h1>
 
             <Accordion bsPrefix={ 'accordion ' + s.accordion }>
                { data.map( ( el, i ) => (

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 function ForHomeAll() {
    const pageName = useSelector( state => state.page.name )
-   const tariff = useSelector( state => state.tariffs.find( t => t.id === 'vse' ) )
+   const tariff = useSelector( state => state.tariffs.vse )
    const name = `${ pageName } ${ tariff.name }`
 
    return (

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 function arrEquipmentsChecked( value ) {
    if ( Array.isArray( value ) ) {
-      const arrEq = value.filter( eq => eq.switch ).map( eq => eq.dataView )
+      const arrEq = value.filter( eq => eq.switch ).map( eq => eq.id )
       return arrEq.length
          ? ' ' + arrEq.join( ', ' )
          : ''

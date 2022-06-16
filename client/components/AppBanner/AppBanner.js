@@ -43,7 +43,7 @@ export default function AppBanner() {
                      Ещё там можно активировать SIM‑карту или перенести свой номер в МегаФон
                   </p>
 
-                  <div className={ s.text__icons } data-view="block_mobilelk">
+                  <div className={ s.text__icons }>
                      <a
                         href="https://trk.mail.ru/c/uo37z4"
                         className={ s.google_play }

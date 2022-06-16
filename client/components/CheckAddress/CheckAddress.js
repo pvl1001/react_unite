@@ -7,7 +7,7 @@ import Success from "./Success/Success";
 import { connect } from "react-redux";
 import { showModal } from "../../redux/slices/modalsSlice";
 import { api } from "../../api/api";
-import { onUniteSwitch } from "../../redux/slices/tariffAroundSlice";
+import { onUniteSwitch } from "../../redux/slices/tariffVezdeSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 import { useRouter } from 'next/router'
 
@@ -86,8 +86,8 @@ function CheckAddress( props ) {
    }
 
    const eventLabelDefault = {
-      order: `click_button_order_${ props.tariff.dataView }_ntv`,
-      send: `click_button_send_${ props.tariff.dataView }_ntv`
+      order: `click_button_order_${ props.tariff.id }_ntv`,
+      send: `click_button_send_${ props.tariff.id }_ntv`
    }
 
    function showModalOrder( eventLabel = eventLabelDefault ) {
@@ -144,7 +144,7 @@ function CheckAddress( props ) {
 
 
 export default connect( state => ({
-   tariff: state.tariffAround,
+   tariff: state.tariffVezde,
    pageName: state.page.name
 }), {
    showModal,

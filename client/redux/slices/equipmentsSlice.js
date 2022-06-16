@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 
-export const equipments = [
-   {
-      id: "eq-android-tv",
+export const equipments = {
+   androidtv: {
+      id: "androidtv",
       name: "Android TV",
       marks: [
          {
-            "text":"Год сериалов в подарок",
+            "text": "Год сериалов в подарок",
             "color": "var(--mf-fiolet)"
          },
          {
@@ -36,7 +36,6 @@ export const equipments = [
       ],
       img: "pristavka",
       price: 199,
-      dataView: "androidtv",
       link: "/uploads/docs/2020/ATV_KM8_user_manual_032021.pdf",
       plan: [
          { name: '36 мес', value: 169, checked: true },
@@ -44,12 +43,12 @@ export const equipments = [
       ],
       switch: false
    },
-   {
-      id: "eq-FR100-1",
+   fr100: {
+      id: "fr100",
       name: "Роутер FR100-1",
       marks: [
          {
-            "text":"до 70 м2",
+            "text": "до 70 м2",
             "color": "var(--mf-orange)"
          },
          {
@@ -86,7 +85,6 @@ export const equipments = [
       ],
       img: "fr100",
       price: 55,
-      dataView: "fr100",
       link: "/uploads/docs/2020/MegaFon%20FR100.pdf",
       plan: [
          { name: '36 мес', value: 99, checked: true },
@@ -94,13 +92,13 @@ export const equipments = [
       ],
       switch: false
    },
-   {
-      id: "eq-FR1000-2",
+   fr1000: {
+      id: "fr1000",
       name: "Роутер FR1000-2",
       speed: "(1 Гбит/с)",
       marks: [
          {
-            "text":"более 70 м2",
+            "text": "более 70 м2",
             "color": "var(--mf-orange)"
          },
          {
@@ -137,7 +135,6 @@ export const equipments = [
       ],
       img: "fr1000-2",
       price: 88,
-      dataView: "fr10002",
       link: "/uploads/docs/2020/MegaFon%20FR1000.pdf",
       plan: [
          { name: '36 мес', value: 129, checked: true },
@@ -145,12 +142,12 @@ export const equipments = [
       ],
       switch: false
    },
-   {
-      id: "eq-MFTV",
+   mftv: {
+      id: "mftv",
       name: "ТВ-приставка МегаФон ТВ",
       marks: [
          {
-            "text":"Год сериалов в подарок",
+            "text": "Год сериалов в подарок",
             "color": "var(--mf-fiolet)"
          },
          {
@@ -179,7 +176,6 @@ export const equipments = [
       ],
       img: "tv_new",
       price: 99,
-      dataView: "mftv",
       link: "/uploads/docs/2020/MegaFon%20Q5.pdf",
       plan: [
          { name: '36 мес', value: 159, checked: true },
@@ -187,12 +183,12 @@ export const equipments = [
       ],
       switch: false
    },
-   {
-      id: "eq-almond",
+   almond: {
+      id: "almond",
       name: "Умный дом",
       marks: [
          {
-            "text":"Умный дом",
+            "text": "Умный дом",
             "color": "var(--mf-fiolet)"
          },
          {
@@ -227,24 +223,64 @@ export const equipments = [
             text: "Получайте сигналы,<br> если в дом кто-то проникнет"
          }
       ],
-      dataView: "almond",
       switch: false,
       equipments: []
+   },
+   sim: {
+      id: "sim",
+      oldPrice: 380,
+      get price() {
+         return this.oldPrice * 0.6
+      },
+      cnt: 1,
+      switch: false
+   },
+   router_4g: {
+      id: "router-4g",
+      name: "4G Wi-Fi роутер",
+      params: [
+         {
+            icon: "fiolet_speed",
+            text: "Скорость до 150 Мбит/с"
+         },
+         {
+            icon: "fiolet_hertz",
+            text: "Wi-Fi 2,4 и 5 ГГц"
+         },
+         {
+            icon: "fiolet_zone",
+            text: "Уверенный сигнал и большая зона покрытия"
+         },
+         {
+            icon: "fiolet_settings",
+            text: "Простое подключение до 50 пользователей"
+         },
+         {
+            icon: "fiolet_razmer",
+            text: "Компактные размеры"
+         }
+      ],
+      img: "router_info",
+      price: 200,
+      switch: true,
+      plan: null,
+      link: "/download/~federal/~federal/oferta/wi_fi/rukovodstvo_polzovatelya.pdf"
    }
-]
+}
+
+const { androidtv, fr100, fr1000, mftv, almond } = equipments
 
 
 export const equipmentsSlice = createSlice( {
    name: 'equipments',
-   initialState: equipments,
+   initialState: { androidtv, fr100, fr1000, mftv, almond },
    reducers: {
       changePlan( state, action ) {
-         state
-            .find( eq => eq.id === action.payload.id ).plan
-            .map( p => p.checked = !p.checked )
+         const { id } = action.payload
+         state[id].plan.forEach( p => p.checked = !p.checked )
       },
       sumAlmondTotalPriceEq( state ) {
-         const almond = state.find( eq => eq.id === 'eq-almond' )
+         const { almond } = state
          const arrPrices = almond.equipments
             .filter( alEq => alEq.checked )
             .map( alEq => alEq.price * alEq.cnt )
@@ -257,7 +293,7 @@ export const equipmentsSlice = createSlice( {
          let cnt = action.payload.cnt
          const name = action.payload.name
          const data = action.payload.data
-         const almond = state.find( eq => eq.id === 'eq-almond' )
+         const { almond } = state
 
          if ( name === 'plus' ) {
             almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
@@ -270,7 +306,7 @@ export const equipmentsSlice = createSlice( {
          const data = action.payload.data
          const checked = action.payload.checked
          const cnt = action.payload.cnt
-         const almond = state.find( eq => eq.id === 'eq-almond' )
+         const { almond } = state
 
          almond.equipments[data.index] = { ...data, cnt, checked }
       }

@@ -62,16 +62,11 @@ function ModalAlmond( props ) {
          }
       ]
 
-      const i = showModalTariff && tariffs
-         .find( t => t.id === tariff ).equipments
-         .map( eq => eq.id )
-         .indexOf( 'eq-almond' )
-
-      const payload = { id: tariff, index: i }
+      const payload = { id: tariff, eqKey: 'almond' }
 
       const almond = showModalTariff
-         ? tariffs.find( t => t.id === tariff ).equipments.find( eq => eq.id === 'eq-almond' )
-         : equipments.find( eq => eq.id === 'eq-almond' )
+         ? tariffs[tariff].equipments.almond
+         : equipments.almond
 
       function onHide() {
          if ( showModalTariff && isEquipments() ) {
@@ -84,7 +79,7 @@ function ModalAlmond( props ) {
       }
 
       function isEquipments() {
-         return !tariffs.find( t => t.id === tariff ).equipments[i].totalPrice
+         return !tariffs[tariff].equipments.almond.totalPrice
       }
 
       function addToTariff() {
@@ -99,10 +94,10 @@ function ModalAlmond( props ) {
          props.setDataOrder( {
             tariffName: `${ pageName } ${ tariffDefault.name }`,
             tariffId: tariffDefault.tariffId,
-            equipments: almond.dataView,
+            equipments: almond.id,
             eventLabel: {
-               order: `click_button_order_${ almond.dataView }`,
-               send: `click_button_${ almond.dataView }_send_equipment`
+               order: `click_button_order_${ almond.id }`,
+               send: `click_button_${ almond.id }_send_equipment`
             }
          } )
       }

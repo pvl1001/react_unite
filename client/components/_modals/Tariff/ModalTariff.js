@@ -1,30 +1,26 @@
 import s from './ModalTariff.module.sass'
-import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { showModal } from "../../../redux/slices/modalsSlice";
-import { sumTotalPrice } from "../../../redux/slices/tariffsSlice";
 import CardOption from "./CardOption/CardOption";
 import CardOptionSim from "./CardOption/CardOptionSim";
 import BlockInfo from "./BlockInfo/BlockInfo";
 import Footer from "./Footer/Footer";
 import BannerMfTv from "./BannerMfTv/BannerMfTv";
 
-function ModalTariff( props ) {
-   useEffect( () => {
-      props.show && props.sumTotalPrice( props.tariff )
-   }, [ props.show ] )
 
-   if ( props.show ) {
+function ModalTariff( { tariff, show, id, pageName, showModal } ) {
+
+   if ( show ) {
       const infoModal = [
-         props.tariff.web && {
+         tariff.inet && {
             title: "Мобильная связь",
             icon: "mob_bold",
             options: [
                {
                   name: "Мобильный интернет",
                   description: "",
-                  value: props.tariff.web + " ГБ"
+                  value: tariff.inet + " ГБ"
                },
                {
                   name: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе",
@@ -34,9 +30,9 @@ function ModalTariff( props ) {
                {
                   name: "Звонки на все номера России",
                   description: "Звонки на городские номера и межгород включены в пакет. Звонки на номера МегаФона России не расходуют пакет минут.",
-                  value: props.tariff.min + " минут"
+                  value: tariff.minutes + " минут"
                },
-               props.tariff.youtube && {
+               tariff.youtube && {
                   name: "Интернет на социальные сети и YouTube",
                   description: "Мессенджеры и звонки на номера МегаФона доступны при любом балансе.\n" +
                      "Эти приложения не расходуют интернет по тарифу: WhatsApp, Viber, Telegram, eMotion, Facebook Messenger, ТамТам, Snapchat.",
@@ -48,14 +44,14 @@ function ModalTariff( props ) {
                }
             ]
          },
-         props.tariff.speed && {
+         tariff.speed && {
             title: "Домашний интернет",
             icon: "wi-fi_bold",
             options: [
                {
                   name: "Скорость",
                   description: "Максимальная скорость интернет-соединения, предусмотренная тарифом.",
-                  value: props.tariff.speed + " Мбит/с"
+                  value: tariff.speed + " Мбит/с"
                },
                {
                   name: "Трафик",
@@ -64,14 +60,14 @@ function ModalTariff( props ) {
                }
             ]
          },
-         props.tariff.tvLength && {
+         tariff.tvchan != 0 && {
             title: "ТВ",
             icon: "TV_bold",
             options: [
                {
                   name: "Мегафон ТВ",
                   description: "",
-                  value: props.tariff.tvLength
+                  value: tariff.tvchan + ' каналов'
                },
                {
                   name: "Трафик",
@@ -82,12 +78,12 @@ function ModalTariff( props ) {
          }
       ]
 
-      const premiumStyle = props.tariff.id === 'premium'
+      const premiumStyle = tariff.id === 'premium'
          ? { backgroundColor: 'var(--mf-premium)' }
          : {}
 
       function onHide() {
-         props.showModal( {
+         showModal( {
             modal: 'tariff',
             bool: false
          } )
@@ -98,7 +94,7 @@ function ModalTariff( props ) {
          <Modal
             centered
             animation={ false }
-            show={ props.show }
+            show={ show }
             onHide={ onHide }
             className={ s.modal }
             dialogClassName={ s.modal_dialog }
@@ -114,7 +110,7 @@ function ModalTariff( props ) {
                </div>
 
                <div style={ premiumStyle } className={ `${ s.title } ${ s.wrapp }` }>
-                  <h1>{ props.pageName } { props.tariff.name }</h1>
+                  <h1>{ tariff.name }</h1>
                </div>
 
                <div className={ s.container }>
@@ -124,15 +120,15 @@ function ModalTariff( props ) {
                            info && <BlockInfo
                               key={ info.title }
                               info={ info }
-                              tariff={ props.tariff }
+                              tariff={ tariff }
                            />
                      ) }
                   </ul>
 
-                  { props.tariff.mftv &&
+                  { tariff.mftv &&
                      <BannerMfTv
-                        mftv={ props.tariff.mftv }
-                        tariff={ props.tariff }
+                        mftv={ tariff.mftv }
+                        tariff={ tariff }
                      />
                   }
 
@@ -140,22 +136,30 @@ function ModalTariff( props ) {
                      <h2 className={ s.dop_options__title }>Дополнительные опции:</h2>
 
                      <ul className={ s.dop_options__cards }>
-                        { props.tariff.equipments.map( ( equipment, idx ) =>
-                           equipment.id !== 'eq-sim'
-                              ? <CardOption key={ equipment.id } equipment={ equipment } idx={ idx }
-                                            id={ props.tariff.id }/>
-                              : <CardOptionSim key={ equipment.id } equipment={ equipment } idx={ idx }
-                                               id={ props.tariff.id }/>
+                        { Object.keys( tariff.equipments ).map( ( key ) =>
+                           tariff.equipments[key].id === 'sim'
+                              ? <CardOptionSim
+                                 key={ key }
+                                 eqKey={ key }
+                                 equipment={ tariff.equipments[key] }
+                                 id={ id }
+                              />
+                              : <CardOption
+                                 key={ key }
+                                 eqKey={ key }
+                                 equipment={ tariff.equipments[key] }
+                                 id={ id }
+                              />
                         ) }
                      </ul>
 
-                     { props.tariff.link &&
+                     { tariff.link &&
                         <div className={ "download-pdf" }>
                            <button className="download-pdf__icon">
                               <img src={ '/svg/download-pdf.svg' } alt="download-pdf"/>
                            </button>
                            <div className={ s.download_pdf__text }>
-                              <a href={ props.tariff.link } className="download-pdf__text-link">
+                              <a href={ tariff.link } className="download-pdf__text-link">
                                  Скачать подробную информацию о тарифе</a>
                               <span className="download-pdf__text-pdf"> (PDF, 0.4 MB)</span>
                            </div>
@@ -164,10 +168,7 @@ function ModalTariff( props ) {
                   </div>
                </div>
 
-               <Footer
-                  pageName={ props.pageName }
-                  tariff={ props.tariff }
-               />
+               <Footer tariff={ tariff }/>
             </div>
 
          </Modal>
@@ -181,8 +182,10 @@ function ModalTariff( props ) {
 export default connect( state => ({
    pageName: state.page.name,
    show: state.modals.tariff.show,
-   tariff: Object.values( state.tariffs ).find( tariff => tariff.id === state.modals.tariff.props ),
+   id: state.modals.tariff.props,
+   get tariff() {
+      return state.tariffs[this.id]
+   },
 }), {
-   showModal,
-   sumTotalPrice
+   showModal
 } )( ModalTariff )

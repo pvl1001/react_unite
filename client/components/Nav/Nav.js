@@ -7,14 +7,15 @@ import { setDataOrder } from "../../redux/slices/orderSlice";
 
 function Nav( props ) {
 
+   const { region, setDataOrder, showModal } = props
    const refCity = useRef( null )
 
    useEffect( () => {
-      props.setDataOrder( { city: refCity.current.textContent } )
+      setDataOrder( { city: refCity.current.textContent } )
    }, [ refCity ] )
 
    function showModalCities() {
-      props.showModal( {
+      showModal( {
          modal: 'cities',
          bool: true
       } )
@@ -32,7 +33,7 @@ function Nav( props ) {
                <a href="tel:+78352236997">8 8352 23-69-97</a>
             </div>
             <div className={ s.city } onClick={ showModalCities }>
-               <span ref={ refCity }>{ props.region }</span>
+               <span ref={ refCity }>{ region || 'Москва' }</span>
             </div>
          </div>
       </nav>

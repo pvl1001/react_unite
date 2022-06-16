@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import React from "react";
 
 
-function Equipments( props ) {
+function Equipments( { equipments } ) {
 
    return (
       <section className={ 'equipments ' + s.container }>
@@ -20,11 +20,11 @@ function Equipments( props ) {
                   nextEl: '.slider-equipments .swiper-next',
                   prevEl: '.slider-equipments .swiper-prev'
                } }>
-                  { props.data.map( eq => (
+                  { Object.values(equipments).map( eq =>
                      <SwiperSlide key={ eq.id }>
                         <EqCard eq={ eq }/>
                      </SwiperSlide>
-                  ) ) }
+                   ) }
                </Swiper>
             </div>
 
@@ -35,6 +35,6 @@ function Equipments( props ) {
 
 
 const mapStateToProps = state => ({
-   data: state.equipments
+   equipments: state.equipments
 })
 export default connect( mapStateToProps, null )( Equipments )

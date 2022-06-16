@@ -2,26 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import { store } from "../store";
 import { showModal } from "./modalsSlice";
 import { HYDRATE } from 'next-redux-wrapper';
-import { equipments } from "./equipmentsSlice";
-import { tariffAround } from './tariffAroundSlice';
+import { equipments } from './equipmentsSlice'
+import { amediateka, mir, more, start } from "../../modules/mftv.module";
 
-
-const sim = {
-   id: "sim",
-   oldPrice: 380,
-   price: 228,
-   cnt: 1,
-   switch: false
-}
-
-export const getEquipments = arr => {
-   let newArr = []
-   arr.forEach( el => el.id === "sim"
-      ? newArr = [ ...newArr, sim ]
-      : newArr = [ ...newArr, { ...equipments.find( eq => eq.id === el.id ), ...el } ]
-   )
-   return newArr
-}
+const { sim, almond, mftv, fr100, fr1000, androidtv, router_4g } = equipments
 
 export const templateEqAlmond = [
    {
@@ -134,50 +118,140 @@ export function scrollTo( element, callback = null ) {
 }
 
 
-const initialState = {
-   hit: { tvId: 2 },
+const tariffs = {
+   internet: {
+      equipments: {
+         androidtv,
+         fr1000,
+         mftv,
+         almond,
+         sim
+      },
+   },
+   dvainet: {
+      equipments: {
+         androidtv,
+         fr1000,
+         mftv,
+         almond,
+         sim
+      },
+   },
+   hit: {
+      tvId: 2,
+      equipments: {
+         androidtv,
+         fr1000,
+         mftv,
+         almond,
+         sim
+      }
+   },
    their: {
       tvId: 3,
       dop_params: [
          'Аренда роутера за 0 ₽',
          'Безлимитный мобильный интернет на соц. сети и Youtube'
-      ]
+      ],
+      equipments: {
+         androidtv,
+         fr1000,
+         mftv,
+         almond,
+         sim
+      },
+      mftv: [
+         start,
+         mir
+      ],
    },
    vse: {
       tvId: 3
    },
    turbo: {
-      dop_params: [ 'Wi-Fi роутер в подарок' ] },
+      dop_params: [ 'Wi-Fi роутер в подарок' ],
+      equipments: {
+         fr1000,
+      }
+   },
    econom: {
-      tvId: 1 },
+      tvId: 1,
+      equipments: {
+         androidtv,
+         fr100,
+         mftv,
+         almond,
+         sim
+      }
+   },
+   films: {
+      equipments: {
+         androidtv,
+         fr100,
+         mftv,
+         almond,
+         sim
+      },
+      mftv: [
+         start,
+         mir
+      ],
+   },
    maximum: {
-      tvId: 4},
+      tvId: 4,
+      equipments: {
+         androidtv,
+         fr1000,
+         mftv,
+         almond,
+      },
+   },
    premium: {
       tvId: 4,
       dop_params: [
          'Аренда роутера и ТВ-приставки за 0 ₽',
          'Безлимитный мобильный интернет на соц. сети и Youtube'
-      ]
-   }
+      ],
+      equipments: {
+         androidtv,
+         fr1000,
+         mftv,
+         almond,
+         sim
+      },
+      mftv: [
+         start,
+         mir,
+         amediateka,
+         more
+      ],
+   },
+   vezde: {
+      tvId: 1,
+      rentDevice: [
+         {
+            text: "Аренда 4G Wi-Fi роутера",
+            price: 100
          }
+      ],
+      equipments: { router_4g },
+      link: "/uploads/docs/2022/home/tariff_5687_chuvashia.pdf"
+   }
+}
 
 const tariffsSlice = createSlice( {
    name: 'tariffs',
-   initialState,
+   initialState: tariffs,
    reducers: {
       optionSwitch( state, action ) {
-         const id = action.payload.id
-         const i = action.payload.index
-         const checked = action.payload.checked
+         const { id, eqKey, checked } = action.payload
          const currentTariff = state[id]
-         const optionCard = currentTariff.equipments[i]
+         const optionCard = currentTariff.equipments[eqKey]
          optionCard.switch = checked
       },
       counterSim( state, action ) {
-         const id = action.payload.id
-         const i = action.payload.index
-         const name = action.payload.name
-         const optionCard = state[id].equipments[i]
+         const { id, eqKey, name } = action.payload
+         const optionCard = state[id].equipments[eqKey]
 
          if ( name === 'plus' ) {
             optionCard.cnt++
@@ -190,18 +264,17 @@ const tariffsSlice = createSlice( {
          optionCard.sumOldPrice = optionCard.oldPrice * optionCard.cnt
       },
       tariffRadioPlan( state, action ) {
-         const id = action.payload.id
-         const i = action.payload.index
-         const cardOption = state[id].equipments[i]
-         cardOption.plan.map( p => p.checked = !p.checked )
+         const { id, eqKey } = action.payload
+         const cardOption = state[id].equipments[eqKey]
+         cardOption.plan.forEach( p => p.checked = !p.checked )
          cardOption.price = cardOption.plan.find( p => p.checked ).value
       },
       sumTotalPrice( state, action ) {
-         const id = action.payload.id
+         const { id } = action.payload
          const currentTariff = state[id]
+         const equipments = { ...currentTariff.equipments }
 
-         const reducePrice = currentTariff.equipments
-            .map( eq => {
+         const reducePrice = Object.values(equipments).map( eq => {
                if ( eq.switch ) {
                   if ( eq.id === 'almond' && eq.currentPrice ) {
                      return typeof eq.currentPrice === 'string'
@@ -216,38 +289,29 @@ const tariffsSlice = createSlice( {
                return 0
             } )
             .reduce( ( a, b ) => a + b )
-         currentTariff.totalPrice = currentTariff.price + reducePrice
+         currentTariff.totalPrice = +currentTariff.price + reducePrice
          currentTariff.totalOldPrice = currentTariff.oldPrice + reducePrice
       },
       switchAlmond( state, action ) {
-         const data = action.payload.data
-         const checked = action.payload.checked
-         const cnt = action.payload.cnt
-         const id = action.payload.tariffID
-
-         const almond = state[id].equipments.find( eq => eq.id === 'almond' )
-
+         const { data, checked, cnt, tariffID } = action.payload
+         const almond = state[tariffID].equipments.almond
          almond.equipments[data.index] = { ...data, cnt, checked }
       },
       counterAlmond( state, action ) {
-         let cnt = action.payload.cnt
-         const name = action.payload.name
-         const data = action.payload.data
-         const id = action.payload.tariffID
-         const currentTariff = state[id]
-         const almond = currentTariff.equipments.find( eq => eq.id === 'almond' )
+         let { cnt, name, data, tariffID } = action.payload
+         const { index } = data
+         const currentTariff = state[tariffID]
+         const { almond } = currentTariff.equipments
 
          if ( name === 'plus' ) {
-            almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
+            almond.equipments[index] = { ...data, cnt: ++cnt, checked: true }
          }
          if ( name === 'minus' ) {
-            almond.equipments[data.index] = { ...almond.equipments[data.index], cnt: --cnt }
+            almond.equipments[index] = { ...almond.equipments[index], cnt: --cnt }
          }
       },
       sumAlmondTotalPrice( state, action ) {
-         const almond = state
-            .find( tariff => tariff.id === action.payload ).equipments
-            .find( eq => eq.id === 'almond' )
+         const { almond } = state[action.payload].equipments
 
          const arrPrices = almond.equipments
             .filter( alEq => alEq.checked )
@@ -258,16 +322,14 @@ const tariffsSlice = createSlice( {
             : null
       },
       changeAlmondTotalPrice( state, action ) {
-         const id = action.payload.id
-         const i = action.payload.index
-         const almond = state[id].equipments[i]
+         const { id, eqKey } = action.payload
+         const almond = state[id].equipments[eqKey]
          almond.currentPrice = almond.totalPrice || almond.price
       },
       setChannels( state, action ) {
-         // debugger
          const id = action.payload.id
          const channels = action.payload.channels
-         Object.values(state).forEach( tariff => {
+         Object.values( state ).forEach( tariff => {
             if ( tariff.tvId === id ) {
                tariff.channels = channels
             }
@@ -275,33 +337,37 @@ const tariffsSlice = createSlice( {
       },
       setInitialStateTariffs( state, action ) {
          const tariffs = action.payload
-         const dvainet = tariffs[101]
-         const econom = tariffs[102]
-         const hit = tariffs[103]
-         const their = tariffs[104]
-         const films = tariffs[105]
-         const premium = tariffs[106]
-         const vezde = tariffs[55]
 
-         const internet = tariffs[201]
-         const turbo = tariffs[202]
-         const vse = tariffs[203]
-         const maximum = tariffs[204]
-
-
-         return {
-            internet: {...state.internet, ...internet},
-            dvainet: {...state.dvainet, ...dvainet},
-            hit: {...state.hit, ...hit},
-            their: {...state.their, ...their},
-            vse: {...state.vse, ...vse},
-            turbo: {...state.turbo, ...turbo},
-            econom: {...state.econom, ...econom},
-            films: {...state.internet, ...internet},
-            maximum: {...state.maximum, ...maximum},
-            premium: {...state.premium, ...premium},
-            vezde: {...state.vezde, ...vezde},
+         const payloadTariffs = {
+            dvainet: tariffs[101],
+            econom: tariffs[102],
+            hit: tariffs[103],
+            their: tariffs[104],
+            films: tariffs[105],
+            premium: tariffs[106],
+            vezde: tariffs[55],
+            internet: tariffs[201],
+            turbo: tariffs[202],
+            vse: tariffs[203],
+            maximum: tariffs[204]
          }
+
+         const data = new Map()
+
+         for ( const key in payloadTariffs ) {
+            const tariff = payloadTariffs[key]
+            const group = tariff.name.split( ' ' )[0]
+            tariff.oldPrice = +tariff.price
+
+            if ( group === 'Объединяй!' ) { // скидка
+               tariff.price = Math.ceil( tariff.price * 0.5 )
+            } else {
+               tariff.price = Math.ceil( tariff.price * 0.7 )
+            }
+
+            data.set( key, { ...state[key], ...tariff } )
+         }
+         return Object.fromEntries( data )
       }
    },
    extraReducers: {

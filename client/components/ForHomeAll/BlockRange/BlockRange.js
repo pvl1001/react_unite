@@ -32,8 +32,8 @@ function BlockRange( { tariff, name, showModal, getChannels, setDataOrder, pageN
          tariffName: `${ pageName } ${ tariff.name }`,
          tariffId: tariff.tariffId,
          eventLabel: {
-            order: `click_button_order_${ tariff.dataView }`,
-            send: `click_button_send_${ tariff.dataView }`
+            order: `click_button_order_${ tariff.id }`,
+            send: `click_button_send_${ tariff.id }`
          }
       } )
    }
@@ -42,7 +42,7 @@ function BlockRange( { tariff, name, showModal, getChannels, setDataOrder, pageN
    return (
       <div className={ s.container }>
 
-         <h2 className={ s.title } data-view="tariff_card_vse_start">{ name }</h2>
+         <h2 className={ s.title }>{ name }</h2>
 
          <div className={ s.options }>
             <div className={ s.option }>
@@ -94,7 +94,6 @@ function BlockRange( { tariff, name, showModal, getChannels, setDataOrder, pageN
                </p>
                <button
                   onClick={ showModalOrder }
-                  data-view="tariff_card_vse_end"
                   type="button"
                   className={ `${ s.range__btn } btn btn-fiolet` }>
                   Подключить

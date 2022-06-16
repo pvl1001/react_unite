@@ -7,7 +7,7 @@ import s from './CardOption.module.sass';
 
 function CardOptionSim( props ) {
    const megaTariff = useSelector( state => state.megaTariff )
-   const payload = { id: props.id, index: props.idx }
+   const payload = { id: props.id, eqKey: props.eqKey }
    const _class = props.equipment.switch
       ? s._ + ' ' + s.active
       : s._

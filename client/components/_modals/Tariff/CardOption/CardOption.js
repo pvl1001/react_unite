@@ -8,7 +8,7 @@ import s from './CardOption.module.sass'
 
 
 function CardOption( props ) {
-   const payload = { id: props.id, index: props.idx }
+   const payload = { id: props.id, eqKey: props.eqKey }
    const _class = props.equipment.switch
       ? s._ + ' ' + s.active
       : s._
@@ -24,7 +24,7 @@ function CardOption( props ) {
    }
 
    const price = ( id ) => {
-      if ( id === 'eq-almond' ) {
+      if ( id === 'almond' ) {
          return props.equipment.currentPrice || props.equipment.price
       }
       if ( props.equipment.plan ) {
@@ -62,7 +62,7 @@ function CardOption( props ) {
 
             <div className={ s.option }>
                <div>
-                  { props.equipment.id === 'eq-almond'
+                  { props.equipment.id === 'almond'
                      ? <h3 onClick={ openModalAlmond }
                            dangerouslySetInnerHTML={ {
                               __html: props.equipment.name + (props.equipment.speed

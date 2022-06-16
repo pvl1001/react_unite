@@ -32,8 +32,8 @@ function FaqMftv( props ) {
          tariffName: props.tariff.name,
          tariffId: props.tariff.tariffId,
          eventLabel: {
-            order: `click_button_order_${ props.tariff.dataView }`,
-            send: `click_button_send_${ props.tariff.dataView }`
+            order: `click_button_order_${ props.tariff.id }`,
+            send: `click_button_send_${ props.tariff.id }`
          }
       } )
    }
@@ -60,7 +60,6 @@ function FaqMftv( props ) {
          <button
             type="button"
             className={ s.btn + " btn" }
-            data-view={ `mftv_${ props.tariff.id }_end` }
             onClick={ showModalOrder }>
             Подключить
          </button>
