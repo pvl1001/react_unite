@@ -401,6 +401,7 @@ input[data-provide="datepicker"]
 
 .swiper
    margin: 0 -10px
+   padding-bottom: 15px
 
    .swiper-slide
       padding: 37px 10px
@@ -435,7 +436,7 @@ input[data-provide="datepicker"]
 
 
 .swiper-btn
-   $arrow_position: -56px
+   $arrow_position: 0
 
    font-size: 0
    width: 40px
@@ -443,7 +444,7 @@ input[data-provide="datepicker"]
    border-radius: 50%
    background: #731982 url('../svg/arrow_slider.svg') center / 10px no-repeat
    position: absolute
-   top: calc(50% - 20px)
+   bottom: -13px
    z-index: 10
 
    &:hover
@@ -462,28 +463,6 @@ input[data-provide="datepicker"]
    &.swiper-button-disabled
       opacity: .3
       pointer-events: none
-
-
-   @media (max-width: 1530px)
-      $arrow_position: -55px
-
-      &.swiper-prev
-         left: $arrow_position
-
-
-      &.swiper-next
-         right: $arrow_position
-
-
-   @media (max-width: 1279px)
-      $arrow_position: -52px
-
-      &.swiper-prev
-         left: $arrow_position
-
-
-      &.swiper-next
-         right: $arrow_position
 
 
    @media (max-width: 1023px)
