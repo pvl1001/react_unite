@@ -28,7 +28,7 @@ export default function Layout( { children } ) {
          <ModalAboutAlmond/>
          <ChoiceRouter/>
          <ModalEquipment/>
-         <ModalChannels/>
+         {/*<ModalChannels/>*/}
       </>
    )
 }

@@ -2,15 +2,13 @@ import s from './NewCard.module.scss';
 import React, { useEffect } from "react";
 import CollapseChannels from "../TariffCard/CollapseChannels/CollapseChannels";
 import { useDispatch } from "react-redux";
-import { getChannels } from "../../../redux/slices/tariffsSlice";
 import PlusIcon from '../../../public/svg/Plus.svg'
 import SaleBanner from "../../SaleBanner/SaleBanner";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 
-function NewCard( { tariffs, tariff, id, collapse, premium } ) {
-
+function NewCard( { tariff, id, collapse, premium } ) {
    const dispatch = useDispatch()
 
    useEffect( styleMinHeightBlockDp, [] )
@@ -38,13 +36,11 @@ function NewCard( { tariffs, tariff, id, collapse, premium } ) {
       } ) )
    }
 
-   function openMftv(props) {
+   function openMftv() {
       dispatch( showModal( {
          modal: 'mftv',
          bool: true,
-         props: {
-            tariff: tariff
-         }
+         props: { tariff }
       } ) )
    }
 
@@ -62,20 +58,6 @@ function NewCard( { tariffs, tariff, id, collapse, premium } ) {
 
    function collapseGroup() {
       collapse.setCollapseGroup( !collapse.collapseGroup )
-   }
-
-   function handleCollapseChannels() {
-      if ( !premium.channels ) {
-         const allTvId = Array.from( new Set(
-            [
-               ...Object.values( tariffs ).filter( tariff => tariff.tvId ).map( tariff => tariff.tvId )
-            ] ) )
-         const allPromise = []
-         allTvId.forEach( ( id ) => allPromise.push( dispatch( getChannels( id ) ) ) )
-         return Promise.all( allPromise ).then( collapseGroup )
-      }
-
-      collapseGroup()
    }
 
 
@@ -130,7 +112,7 @@ function NewCard( { tariffs, tariff, id, collapse, premium } ) {
                         className={ s.params__tv }
                         aria-controls="tv-group"
                         aria-expanded={ collapse.collapseGroup }
-                        onClick={ handleCollapseChannels }
+                        onClick={ collapseGroup }
                      >{ tariff.tvchan } каналов</span>
                      : '—' }
                </p>

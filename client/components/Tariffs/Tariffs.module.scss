@@ -1,0 +1,37 @@
+.container {
+   padding: 72px 0 50px;
+   overflow: hidden;
+}
+
+.title {
+   margin-bottom: 27px;
+
+   span {
+      color: var(--mf-blue);
+      border-bottom: 1px dashed var(--mf-blue);
+      cursor: pointer;
+
+      &:hover {
+         border-style: solid;
+      }
+   }
+}
+
+.slider {
+   position: relative
+}
+
+
+@media (max-width: 1023px) {
+   .container {
+      padding: 78px 0 34px
+   }
+}
+
+
+@media (max-width: 767px) {
+   .container {
+      padding: 56px 0 34px
+   }
+}
+

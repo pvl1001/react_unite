@@ -6,25 +6,44 @@ import Equipments from "../components/Equipments/Equipments";
 import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
 import Nav from "../components/Nav/Nav";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import NewCard from "../components/Tariffs/NewCard/NewCard";
 import { SwiperSlide } from "swiper/react";
 import { wrapper } from "../redux/store";
-import { setInitialStateTariffs } from "../redux/slices/tariffsSlice";
+import { getChannels, setInitialChannels, setInitialStateTariffs } from "../redux/slices/tariffsSlice";
 import getIp from "../api/getIp";
 import getLocation from "../api/getLocation";
 import getLocationData from "../api/getLocationData";
+import axios from "axios";
 
 
-export default function IndexPage( { location } ) {
+export default function IndexPage( { location, data } ) {
+   const dispatch = useDispatch()
+   const [ collapseGroup, setCollapseGroup ] = useState( false )
+   const [ collapseChannels, setCollapseChannels ] = useState( [] )
 
-   const tariffs = useSelector( state => {
+   const t = useSelector( state => {
       const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
       return { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium }
    } )
-   const [ collapseGroup, setCollapseGroup ] = useState( false )
-   const [ collapseChannels, setCollapseChannels ] = useState( [] )
+
+   const [ tariffs, setTariffs ] = useState( t )
+
+   function tariffFilter( group ) {
+      const filteredTariffs = new Map()
+      if ( group === 'Все' ) {
+         return setTariffs( t )
+      }
+      for ( const key in t ) {
+         const tariff = t[key]
+         const tariffGroup = tariff.name.split( ' ' )[0]
+         if ( tariffGroup === group ) {
+            filteredTariffs.set( key, tariff )
+         }
+      }
+      setTariffs( Object.fromEntries( filteredTariffs ) )
+   }
 
    return (
       <>
@@ -32,16 +51,16 @@ export default function IndexPage( { location } ) {
             <title>NextJS !Объединяй</title>
          </Head>
 
-         <Nav region={ location }/>
+         {/*<Nav region={ location }/>*/ }
          <Header/>
          <main>
-            <Tariffs>
+            <Tariffs tariffFilter={ tariffFilter }>
                { Object.keys( tariffs ).map( key =>
                   <SwiperSlide key={ key }>
                      <NewCard
                         key={ key }
                         id={ key }
-                        premium={ tariffs.premium }
+                        premium={ tariffs.premium || tariffs.maximum }
                         tariff={ tariffs[key] }
                         tariffs={ tariffs }
                         collapse={ {
@@ -64,20 +83,33 @@ export default function IndexPage( { location } ) {
 }
 
 
-export const getServerSideProps = wrapper.getServerSideProps( store => async ( { req } ) => {
+export const getServerSideProps = wrapper.getServerSideProps( store => async ( { req, res } ) => {
 
-   const ip = getIp( req )
-   const { location } = await getLocation( ip )
+   // const ip = getIp( req )
+   // const { location } = await getLocation( ip )
+   // if ( location !== null ) {
 
-   if( location !== null ) {
-      const { data } = await getLocationData('moscow')
-      store.dispatch( setInitialStateTariffs( data ) )
-   } else {
-      const { data } = await getLocationData( 'spb' )
-      store.dispatch( setInitialStateTariffs( data ) )
-   }
+   const { tariffs } = store.getState()
+   const allTvId = Array.from( new Set(
+      [
+         ...Object.values( tariffs )
+            .filter( tariff => tariff.tvId )
+            .map( tariff => tariff.tvId )
+      ] ) )
 
-   return {
-      props: { location }
-   }
+   const channelsPromises = allTvId.map( tvId => axios( `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${ tvId }` ) )
+
+   const channelsResponses = await Promise.all( channelsPromises )
+   const { data } = await getLocationData( 'moscow' )
+
+   store.dispatch( setInitialStateTariffs( data ) )
+   store.dispatch( setInitialChannels( channelsResponses ) )
+   // } else {
+   //    const { data } = await getLocationData( 'spb' )
+   //    store.dispatch( setInitialStateTariffs( data ) )
+   // }
+
+   // return {
+   //    props: { location }
+   // }
 } )

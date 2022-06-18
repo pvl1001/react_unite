@@ -4,6 +4,7 @@ import { showModal } from "./modalsSlice";
 import { HYDRATE } from 'next-redux-wrapper';
 import { equipments } from './equipmentsSlice'
 import { amediateka, mir, more, start } from "../../modules/mftv.module";
+import axios from "axios";
 
 const { sim, almond, mftv, fr100, fr1000, androidtv, router_4g } = equipments
 
@@ -118,7 +119,7 @@ export function scrollTo( element, callback = null ) {
 }
 
 
-const tariffs = {
+export const tariffs = {
    internet: {
       equipments: {
          androidtv,
@@ -274,20 +275,20 @@ const tariffsSlice = createSlice( {
          const currentTariff = state[id]
          const equipments = { ...currentTariff.equipments }
 
-         const reducePrice = Object.values(equipments).map( eq => {
-               if ( eq.switch ) {
-                  if ( eq.id === 'almond' && eq.currentPrice ) {
-                     return typeof eq.currentPrice === 'string'
-                        ? parseInt( eq.currentPrice.match( /\d+/ ) )
-                        : eq.currentPrice
-                  }
-                  if ( typeof eq.price === 'string' ) return parseInt( eq.price.match( /\d+/ ) )
-                  if ( eq.id === 'sim' ) return eq.sumPrice || eq.price
-                  if ( eq.plan ) return eq.plan.find( p => p.checked ).value
-                  return eq.price
+         const reducePrice = Object.values( equipments ).map( eq => {
+            if ( eq.switch ) {
+               if ( eq.id === 'almond' && eq.currentPrice ) {
+                  return typeof eq.currentPrice === 'string'
+                     ? parseInt( eq.currentPrice.match( /\d+/ ) )
+                     : eq.currentPrice
                }
-               return 0
-            } )
+               if ( typeof eq.price === 'string' ) return parseInt( eq.price.match( /\d+/ ) )
+               if ( eq.id === 'sim' ) return eq.sumPrice || eq.price
+               if ( eq.plan ) return eq.plan.find( p => p.checked ).value
+               return eq.price
+            }
+            return 0
+         } )
             .reduce( ( a, b ) => a + b )
          currentTariff.totalPrice = +currentTariff.price + reducePrice
          currentTariff.totalOldPrice = currentTariff.oldPrice + reducePrice
@@ -326,13 +327,16 @@ const tariffsSlice = createSlice( {
          const almond = state[id].equipments[eqKey]
          almond.currentPrice = almond.totalPrice || almond.price
       },
-      setChannels( state, action ) {
-         const id = action.payload.id
-         const channels = action.payload.channels
-         Object.values( state ).forEach( tariff => {
-            if ( tariff.tvId === id ) {
-               tariff.channels = channels
-            }
+      setInitialChannels( state, action ) {
+         const responses = action.payload
+
+         responses.forEach( ( { data } ) => {
+            const { id, channels } = Object.values( data.packages )[0]
+            Object.values( state ).forEach( tariff => {
+               if ( tariff.tvId === id ) {
+                  tariff.channels = channels
+               }
+            } )
          } )
       },
       setInitialStateTariffs( state, action ) {
@@ -375,15 +379,14 @@ const tariffsSlice = createSlice( {
    },
 } )
 
-export const getChannels = ( tvId ) => async ( dispatch ) => {
-   try {
-      const res = await fetch( `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${ tvId }` )
-      const data = await res.json()
-      dispatch( setChannels( data.packages[tvId] ) )
-   } catch ( err ) {
-      console.log( 'Ошибка getChannels', err )
-   }
-}
+// export const getChannels = ( tvId ) => async ( dispatch ) => {
+//    try {
+//       const { data } = await axios( `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${ tvId }` )
+//       dispatch( setChannels( data.packages[tvId] ) )
+//    } catch ( err ) {
+//       console.log( 'Ошибка getChannels', err )
+//    }
+// }
 
 
 export const {
@@ -395,7 +398,8 @@ export const {
    counterAlmond,
    sumAlmondTotalPrice,
    changeAlmondTotalPrice,
-   setChannels,
+   filterForTabs,
+   setInitialChannels,
    setInitialStateTariffs
 } = tariffsSlice.actions
 export default tariffsSlice.reducer

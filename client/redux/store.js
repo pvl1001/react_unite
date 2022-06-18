@@ -7,6 +7,7 @@ import modalsSlice from "./slices/modalsSlice";
 import orderSlice from "./slices/orderSlice";
 import tariffVezdeSlice from "./slices/tariffVezdeSlice";
 import megaTariffSlice from "./slices/megaTariffSlice";
+import tariffsFilteredSlice from "./slices/tariffsFilteredSlice";
 
 
 export const store = configureStore( {
@@ -17,7 +18,8 @@ export const store = configureStore( {
       modals: modalsSlice,
       equipments: equipmentsSlice,
       order: orderSlice,
-      tariffVezde: tariffVezdeSlice
+      tariffVezde: tariffVezdeSlice,
+      tariffsFiltered: tariffsFilteredSlice
    },
    middleware: getDefaultMiddleware =>
       getDefaultMiddleware( {
