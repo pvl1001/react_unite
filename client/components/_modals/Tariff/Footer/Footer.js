@@ -5,11 +5,8 @@ import s from './Footer_new.module.sass';
 import { wrapp } from '../ModalTariff.module.sass';
 
 
-function Footer( { tariff } ) {
-   const isPremium = tariff.id === 'premium'
-   const btnClass = isPremium
-      ? s.price__btn + " btn"
-      : s.price__btn + " btn btn-fiolet"
+function Footer( { tariff, id } ) {
+   const isPremium = id === 'premium'
 
 
    function showModalOrder() {
@@ -27,11 +24,8 @@ function Footer( { tariff } ) {
 
 
    return (
-      <div className={ s.backdrop }>
-         <div
-            className={ ` ${ s.container } ${ wrapp } ` }
-            style={ { backgroundColor: isPremium ? 'var(--mf-premium)' : '' } }
-         >
+      <div className={ `${ s.backdrop } ${ isPremium ? s.premium : '' }` }>
+         <div className={ `${ s.container } ${ wrapp }` }>
             <div className={ s.price }>
 
                <div className={ s.title }>{ tariff.name }</div>
@@ -41,7 +35,7 @@ function Footer( { tariff } ) {
                <span className={ s.price__month }> в месяц</span>
 
                <nobr>
-                  { Object.values(tariff.equipments).some( eq => eq.switch ) &&
+                  { Object.values( tariff.equipments ).some( eq => eq.switch ) &&
                      <span className={ s.price__desc }> с учетом выбранных опций</span>
                   }
 
@@ -50,7 +44,7 @@ function Footer( { tariff } ) {
 
             <button
                type="button"
-               className={ btnClass }
+               className={ `${ isPremium ? '' : 'btn-fiolet' } btn` }
                onClick={ showModalOrder }>
                Заказать
             </button>

@@ -8,8 +8,10 @@
    height: 100%;
    display: flex !important;
    flex-direction: column;
+}
 
-
+.premium {
+   border: 2px solid var(--mf-premium);
 }
 
 .header {

@@ -10,6 +10,7 @@ import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 function NewCard( { tariff, id, collapse, premium } ) {
    const dispatch = useDispatch()
+   const isPremium = id === 'premium'
 
    useEffect( styleMinHeightBlockDp, [] )
 
@@ -62,7 +63,7 @@ function NewCard( { tariff, id, collapse, premium } ) {
 
 
    return (
-      <div className={ s.container + ' card' } id={ 'tariff-card-' + id }>
+      <div className={ `${ s.container } ${ isPremium ? s.premium : '' } card` }>
 
          <div className={ s.header }>
 
@@ -156,7 +157,9 @@ function NewCard( { tariff, id, collapse, premium } ) {
 
          <div className={ s.btns }>
 
-            <button className={ `${ s.connect_btn } btn` } onClick={ openOrder }>Подключить</button>
+            <button className={ `${ s.connect_btn } ${ isPremium ? 'btn-fiolet' : '' } btn` }
+                    onClick={ openOrder }>Подключить
+            </button>
 
             { id === 'vse'
                ? <a href="/internetvse" className={ s.about_btn }>Все условия тарифа</a>

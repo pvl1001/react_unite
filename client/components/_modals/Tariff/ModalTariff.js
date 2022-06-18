@@ -9,7 +9,8 @@ import Footer from "./Footer/Footer";
 import BannerMfTv from "./BannerMfTv/BannerMfTv";
 
 
-function ModalTariff( { tariff, show, id, pageName, showModal } ) {
+function ModalTariff( { tariff, show, id, showModal } ) {
+   const isPremium = id === 'premium'
 
    if ( show ) {
       const infoModal = [
@@ -78,10 +79,6 @@ function ModalTariff( { tariff, show, id, pageName, showModal } ) {
          }
       ]
 
-      const premiumStyle = tariff.id === 'premium'
-         ? { backgroundColor: 'var(--mf-premium)' }
-         : {}
-
       function onHide() {
          showModal( {
             modal: 'tariff',
@@ -96,7 +93,7 @@ function ModalTariff( { tariff, show, id, pageName, showModal } ) {
             animation={ false }
             show={ show }
             onHide={ onHide }
-            className={ s.modal }
+            className={ `${ s.modal } ${ isPremium ? s.premium : '' }` }
             dialogClassName={ s.modal_dialog }
             contentClassName={ s.modal_content }>
 
@@ -109,7 +106,7 @@ function ModalTariff( { tariff, show, id, pageName, showModal } ) {
                   />
                </div>
 
-               <div style={ premiumStyle } className={ `${ s.title } ${ s.wrapp }` }>
+               <div className={ `${ s.title } ${ s.wrapp }` }>
                   <h1>{ tariff.name }</h1>
                </div>
 
@@ -168,7 +165,7 @@ function ModalTariff( { tariff, show, id, pageName, showModal } ) {
                   </div>
                </div>
 
-               <Footer tariff={ tariff }/>
+               <Footer tariff={ tariff } id={ id }/>
             </div>
 
          </Modal>
