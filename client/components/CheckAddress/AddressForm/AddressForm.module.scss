@@ -1,0 +1,168 @@
+._ {
+   flex: 0 1 60%;
+   min-width: 536px;
+   max-width: 738px;
+   padding: 62px 56px;
+   z-index: 1;
+
+   @media (max-width: 1023px) {
+      padding: 50px 0;
+   }
+}
+
+.title {
+   margin-bottom: 14px;
+   letter-spacing: .5px;
+
+   span {
+      vertical-align: middle;
+      margin-left: 10px !important;
+   }
+}
+
+.description {
+   font-size: 20px;
+   line-height: 28px;
+   margin-bottom: 32px;
+
+   span {
+      text-decoration: underline;
+      cursor: pointer;
+   }
+}
+
+.form {
+   display: flex;
+   gap: 8px;
+
+   &__container {
+      max-width: 830px;
+      position: relative;
+      width: 100%;
+   }
+}
+
+.inputs_row {
+   display: flex;
+   gap: 8px;
+}
+
+.input {
+   position: relative;
+   line-height: 60px;
+   flex: 1;
+
+   input {
+      border: 1px solid transparent;
+      border-radius: 8px;
+      width: 100%;
+      line-height: inherit;
+      padding-right: 40px;
+   }
+
+   input + label {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: inherit;
+      padding: 0 16px;
+      color: #999;
+      cursor: text;
+      pointer-events: none;
+
+      &:after {
+         content: '*';
+         color: var(--mf-red);
+      }
+   }
+
+   &__label {
+      font-weight: 400;
+      line-height: 16px;
+      margin-bottom: 6px;
+   }
+}
+
+.btn {
+   height: 60px;
+   border-radius: 30px;
+   align-self: end;
+}
+
+.error {
+   line-height: 24px;
+   pointer-events: none;
+   position: absolute;
+   color: #fff;
+}
+
+.clear_btn {
+   position: absolute;
+   width: 40px;
+   height: 40px;
+   right: 9px;
+   z-index: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   top: 10px;
+   background-color: #fff;
+
+   svg {
+      transform: scale(0.6);
+   }
+}
+
+
+@media (max-width: 1023px) {
+
+   ._ {
+      max-width: none;
+      min-width: 0;
+      flex: 1 1 100%;
+      padding: 42px 64px 26px;
+   }
+
+   .form {
+      flex-wrap: wrap;
+   }
+
+   .title, .description {
+      text-align: center;
+   }
+
+   .btn {
+      width: 100%;
+   }
+
+   .inputs_row {
+      flex-wrap: wrap;
+
+      .input {
+         width: 50%;
+         min-width: 200px;
+      }
+   }
+
+   .input {
+      flex-wrap: wrap;
+      justify-content: center;
+   }
+
+   .error {
+      position: static;
+   }
+
+}
+
+@media (max-width: 767px) {
+   ._ {
+      padding: 30px 16px;
+   }
+}
+
+

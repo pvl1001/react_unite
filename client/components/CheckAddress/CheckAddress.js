@@ -1,15 +1,15 @@
-import s from './CheckAddress.module.sass'
-import Form from "./Form/Form";
-import { useEffect, useState } from "react";
-import Offer from "./Offer/Offer";
+import s from './CheckAddress.module.scss'
 import $ from "jquery";
-import Success from "./Success/Success";
+import AddressForm from "./AddressForm/AddressForm";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { showModal } from "../../redux/slices/modalsSlice";
 import { api } from "../../api/api";
 import { onUniteSwitch } from "../../redux/slices/tariffVezdeSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 import { useRouter } from 'next/router'
+import Image from "next/image";
+import OrderForm from "./OrderForm/OrderForm";
 
 
 function CheckAddress( props ) {
@@ -41,6 +41,7 @@ function CheckAddress( props ) {
    const inputAddress = '#addressCheck'
    const textLabelCheck = 'Выберите адрес дома из выпадающего списка!'
    const textLabelError = 'Сервис временно не доступен'
+   const [ addressValue, setAddressValue ] = useState( '' )
    const [ address, setAddress ] = useState( {} )
    const [ formLabel, setFormLabel ] = useState( textLabelCheck )
    const [ result, setResult ] = useState( null )
@@ -52,6 +53,7 @@ function CheckAddress( props ) {
 
    function clearInput() {
       $( inputAddress ).val( '' )
+      setAddressValue('')
    }
 
    function resultNull() {
@@ -70,11 +72,13 @@ function CheckAddress( props ) {
             house_guid: address.house_guid
          } )
          try {
+            // debugger
             setIsLoading( true )
             const data = await api( 'https://api.wifire.ru/api/address/check_dadata_address', address )
             setIsLoading( false )
             setFormLabel( textLabelCheck )
-            return setResult( data.result )
+            setResultHandler( data.result, address.address )
+            return
          } catch ( err ) {
             setIsLoading( false )
             setFormLabel( textLabelError )
@@ -103,38 +107,67 @@ function CheckAddress( props ) {
       } )
    }
 
+   function setResultHandler( result, address ) {
+      if ( result === 1 ) {
+         setResult( {
+            result,
+            text: {
+               title: 'Ура! Есть контакт',
+               icon: 'smile_success',
+               description: `По адресу ${ address } можно подключить интернет.`,
+               label: `Оставь заявку на подключение`
+            }
+         } )
+      }
+      if ( result === 0 ) {
+         setResult( {
+            result,
+            text: {
+               title: 'К сожалению, твой дом пока не подключен к интернету',
+               icon: 'smile_invalid',
+               description: `Но можно попробовать <span class="change-address">изменить адрес</span>`,
+               label: `Или оставь заявку, чтобы узнать, когда будет подключение`
+            }
+         } )
+         const $changeAddress = document.querySelector( '.change-address' )
+         $changeAddress.addEventListener( 'click', resultNull )
+      }
+   }
+
 
    return (
       <section className={ container }>
-         <div className={ 'wrapper ' }>
+         <div className={ 'wrapper' }>
             <div className={ s.address }>
 
-               <Form
-                  result={ result }
-                  address={ address }
-                  setAddress={ setAddress }
-                  isShowLabel={ isShowLabel }
-                  setIsShowLabel={ setIsShowLabel }
-                  submit={ submit }
-                  isLoading={ isLoading }
-                  formLabel={ formLabel }
-               />
-
-               { result === 1 &&
-                  <Success
-                     resultNull={ resultNull }
-                     showModalOrder={ showModalOrder }
-                     address={ address.address }
+               <div className={ s._ }>
+                  <AddressForm
+                     hidden={ result !== null }
+                     showLabel={ isShowLabel }
+                     formLabel={ formLabel }
+                     disabled={ isLoading }
+                     addressValue={ addressValue }
+                     setAddressValue={ setAddressValue }
+                     submit={ submit }
                   />
-               }
+                  { result &&
+                     <OrderForm
+                        result={ result }
+                        showLabel={ isShowLabel }
+                        formLabel={ formLabel }
+                        disabled={ isLoading }
+                     />
+                  }
 
-               { result === 0 &&
-                  <Offer
-                     resultNull={ resultNull }
-                     showModalOrder={ showModalOrder }
-                     address={ address.address }
-                  />
-               }
+                  <div className={ s.container_img }>
+                     <Image
+                        src={ '/images/check_address/check_address.png' }
+                        layout="fill"
+                        objectFit="contain"
+                        objectPosition="bottom right"
+                     />
+                  </div>
+               </div>
 
             </div>
          </div>

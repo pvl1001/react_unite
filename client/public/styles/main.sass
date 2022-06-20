@@ -158,11 +158,11 @@ label
    cursor: pointer
 
 
-input
-   height: 48px
-   padding: 0 24px
+input[type="text"]
+   height: 60px
+   padding: 0 16px
    border: 1px solid #DDDDDD
-   border-radius: 0
+   border-radius: 30px
    -webkit-appearance: none
 
 
@@ -512,7 +512,7 @@ form
 
    input.valid
       border: 1px solid var(--mf-green)
-      background: url('../svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat
+      background: #fff url('../svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat
 
       + label
          display: block
@@ -521,7 +521,7 @@ form
 
    input.error
       border: 1px solid #F62434
-      background: url('../svg/invalid.svg') calc(100% - 23px) 50% / 13px no-repeat
+      background: #fff url('../svg/invalid.svg') calc(100% - 23px) 50% / 13px no-repeat
 
       + label
          display: block
