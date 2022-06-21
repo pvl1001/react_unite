@@ -13,11 +13,12 @@
 .title {
    margin-bottom: 14px;
    letter-spacing: .5px;
+}
 
-   span {
-      vertical-align: middle;
-      margin-left: 10px !important;
-   }
+.smile_icon {
+   position: absolute !important;
+   margin-left: 10px !important;
+   vertical-align: middle;
 }
 
 .description {
@@ -25,9 +26,8 @@
    line-height: 28px;
    margin-bottom: 32px;
 
-   span {
+   > span {
       text-decoration: underline;
-      cursor: pointer;
    }
 }
 

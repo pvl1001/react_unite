@@ -1,15 +1,21 @@
 import s from "../AddressForm/AddressForm.module.scss";
 import $ from "jquery";
 import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
 import { object, string } from "yup";
 import { Formik } from "formik";
 import Image from "next/image";
-// import CloseIcon from "../../../public/svg/close.svg";
+import valid from '../../../mixins/valid'
+import { getMailSender, setRegister } from "../../../mixins/submitOrder";
+import { useDispatch, useSelector } from "react-redux";
+import { setDataOrder } from "../../../redux/slices/orderSlice";
+import { showModal } from "../../../redux/slices/modalsSlice";
+
 
 function OrderForm( props ) {
    const { title, icon, description, label } = props.result.text
-   const [ focus, setFocus ] = useState( { name: false, phone: false } )
+   const { order } = useSelector( state => state )
+   const dispatch = useDispatch()
+   const [ isLoading, setIsLoading ] = useState( false )
 
    useEffect( () => {
       window.mask = require( '../../../plugins/jquery.mask' )
@@ -22,21 +28,30 @@ function OrderForm( props ) {
       name: string().min( 2, errorMessage ).required( errorMessage ),
    } )
 
-   function valid( errors, touch, dirty ) {
-      if ( errors && touch ) return 'error'
-      if ( !errors && dirty ) return 'valid'
-   }
+   async function submit( data ) {
+      setIsLoading( true )
+      const payload = { data, order, setDataOrder }
+      const { response: mailSender, dataOrder } = await getMailSender( payload )
 
-   function submit( data ) {
-      console.log( data )
+      if ( mailSender.code === '200' ) {
+         const error = await setRegister( order.eventLabel, dataOrder )
+         setIsLoading( false )
+         if ( error ) {
+            return dispatch( showModal( { modal: 'orderThx', bool: true, props: error } ) )
+         }
+         props.resultNull()
+      }
+      setIsLoading( false )
+      dispatch( showModal( { modal: 'orderThx', bool: true, props: mailSender } ) )
    }
-
 
    return (
       <div className={ s._ }>
          <h1 className={ s.title }>
             { title }
-            <Image src={ `/svg/${ icon }.svg` } width={ 38 } height={ 40 }/>
+            <span className={ s.smile_icon }>
+               <Image  src={ `/svg/${ icon }.svg` } width={ 38 } height={ 40 }/>
+            </span>
          </h1>
          <p className={ s.description } dangerouslySetInnerHTML={ { __html: description } }/>
 
@@ -47,7 +62,7 @@ function OrderForm( props ) {
             } }
             validateOnBlur
             validationSchema={ validationSchema }
-            onSubmit={ ( data ) => submit( data ) }
+            onSubmit={ data => submit( data ) }
          >{ ( {
                  values,
                  errors,
@@ -66,23 +81,12 @@ function OrderForm( props ) {
                   <p className={ s.input__label }>{ label }</p>
                   <div className={ s.inputs_row }>
                      <div className={ s.input }>
-                        {/*<button*/}
-                        {/*   hidden={ !focus.name }*/}
-                        {/*   className={ s.clear_btn }*/}
-                        {/*   onClick={ () => values.name = '' }*/}
-                        {/*><CloseIcon/>*/}
-                        {/*</button>*/}
-
                         <input
                            type="text"
                            name="name"
                            value={ values.name }
                            onInput={ handleChange }
-                           onFocus={ () => setFocus( { ...focus, name: true } ) }
-                           onBlur={ (e) => {
-                              handleBlur(e)
-                              setFocus( { ...focus, name: false } )
-                           } }
+                           onBlur={ handleBlur }
                            className={ valid( errors.name, touched.name, dirty ) }
                         />
                         <label hidden={ values.name }>Имя</label>
@@ -92,12 +96,6 @@ function OrderForm( props ) {
 
                      </div>
                      <div className={ s.input }>
-                        {/*<button*/}
-                        {/*        className={ s.clear_btn }*/}
-                        {/*        onClick={ () => values.phone = '' }*/}
-                        {/*><CloseIcon/>*/}
-                        {/*</button>*/}
-
                         <input
                            type="text"
                            name="phone"
@@ -114,15 +112,8 @@ function OrderForm( props ) {
                      <button
                         type="submit"
                         className={ "btn " + s.btn }
-                        disabled={ props.disabled }
-                     >Отправить { props.disabled &&
-                        <Spinner
-                           as="span"
-                           animation="border"
-                           size="sm"
-                           role="status"
-                           aria-hidden="true"
-                        /> }
+                        disabled={ isLoading }
+                     >Отправить
                      </button>
                   </div>
 

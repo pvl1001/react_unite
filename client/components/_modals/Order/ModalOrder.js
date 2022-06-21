@@ -6,14 +6,24 @@ import { Formik } from 'formik'
 import { string, object } from 'yup'
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
-import { api } from "../../../api/api";
 import s from './ModalOrder.module.sass';
 import { Spinner } from 'react-bootstrap';
+import valid from '../../../mixins/valid'
+import { getMailSender, setRegister } from '../../../mixins/submitOrder'
 
 
 function ModalOrder( props ) {
+   const { order, setDataOrder, showModal, show } = props
+   const [ apiResponse, setApiResponse ] = useState( null )
+   const [ isLoading, setIsLoading ] = useState( false )
+   const errorMessage = 'Заполните поле!'
+   const validationSchema = object().shape( {
+      phone: string().min( 16, errorMessage ).required( errorMessage ),
+      name: string().min( 2, errorMessage ).required( errorMessage ),
+   } )
+
    useEffect( () => {
-      if ( props.show ) {
+      if ( show ) {
          // analyticsView()
          // analyticsEvent( props.dataOrder.eventLabel.order )
 
@@ -23,89 +33,29 @@ function ModalOrder( props ) {
             }
          )
       }
-   }, [ props.show ] )
-
-   const [ apiResponse, setApiResponse ] = useState( null )
-   const errorMessage = 'Заполните поле!'
-   const errorResponse = {
-      response_head: 'Сервис временно не доступен',
-      response: 'Пожалуйста, свяжитесь с нами по телефону, либо попробуйте позднее'
-   }
-   const validationSchema = object().shape( {
-      phone: string().min( 16, errorMessage ).required( errorMessage ),
-      name: string().min( 2, errorMessage ).required( errorMessage ),
-   } )
-   const [ isLoading, setIsLoading ] = useState( false )
+   }, [ show ] )
 
    function onHide() {
-      props.showModal( {
+      showModal( {
          modal: 'order',
          bool: false
       } )
       setApiResponse( null )
    }
 
-   function valid( errors, touch, dirty ) {
-      if ( errors && touch ) return 'error'
-      if ( !errors && dirty ) return 'valid'
-   }
-
    async function submit( data ) {
-      props.setDataOrder( {
-         ...props.dataOrder,
-         clientName: data.name,
-         clientPhone: data.phone,
-      } )
-
-      const dataOrder = {
-         form_name: 'express_form_ccmp_short',
-         city: props.dataOrder.city,
-         clientName: data.name,
-         clientPhone: data.phone,
-         clientAddress: props.dataOrder.clientAddress,
-         house_guid: props.dataOrder.house_guid,
-         tariffId: props.dataOrder.tariffId,
-         tariffName: props.dataOrder.tariffName,
-         comment: props.dataOrder.comment,
-         clientSite: location.host + location.pathname,
-         calltracking_params: ct( 'calltracking_params', 'g96m2c8n' )?.sessionId ?? '',
-      }
-      try {
-         setIsLoading( true )
-         const resMailSender = await api( 'https://home.megafon.ru/form/mail-sender', dataOrder )
+      setIsLoading( true )
+      const payload = { data, order, setDataOrder }
+      const { response: mailSender, dataOrder } = await getMailSender( payload )
+      if ( mailSender.code !== '200' ) {
+         const error = await setRegister( order.eventLabel, dataOrder )
          setIsLoading( false )
-         // console.log(props.dataOrder.eventLabel.send)
-         if ( resMailSender.code === '200' ) {
-            // analyticsEvent( props.dataOrder.eventLabel.send )
-            // gtag( 'event', 'requestLandingSend', { 'event_category': 'order' } )
-
-            if ( ym !== undefined ) {
-               ym( 66149989, 'reachGoal', 'zayavka_megafon' )
-               ym( 66149989, 'reachGoal', props.dataOrder.eventLabel.send )
-            }
-
-            if ( dataOrder.calltracking_params ) {
-               const ct_site_id = '37410'
-               const ct_data = {
-                  fio: dataOrder.clientName,
-                  phoneNumber: dataOrder.clientPhone,
-                  email: '',
-                  subject: 'Заявка с сайта ' + dataOrder.city,
-                  tags: 'id' + dataOrder.tariffId + ',' + dataOrder.tariffName,
-                  comment: dataOrder.comment,
-                  sessionId: dataOrder.calltracking_params
-               }
-
-               api( `https://api.calltouch.ru/calls-service/RestAPI/requests/'${ ct_site_id }'/register/`, ct_data )
-                  .catch( () => setApiResponse( errorResponse ) )
-            }
-            return
+         if ( error ) {
+            return setApiResponse( error )
          }
-         setApiResponse( resMailSender )
-      } catch ( err ) {
-         setIsLoading( false )
-         setApiResponse( errorResponse )
       }
+      setIsLoading( false )
+      setApiResponse( mailSender )
    }
 
 
@@ -113,7 +63,7 @@ function ModalOrder( props ) {
       <Modal
          centered
          animation={ false }
-         show={ props.show }
+         show={ show }
          onHide={ onHide }
          className={ s.modal }
          dialogClassName={ s.modal_dialog }
@@ -185,7 +135,7 @@ function ModalOrder( props ) {
                            type="submit"
                            className={ s.form__btn + " btn" }
                            disabled={ isLoading }
-                           >
+                        >
                            <span>
                               Отправить
                               { isLoading &&
@@ -219,7 +169,7 @@ function ModalOrder( props ) {
 
 export default connect( state => ({
    show: state.modals.order.show,
-   dataOrder: state.order,
+   order: state.order,
 }), {
    showModal,
    setDataOrder,

@@ -5,7 +5,6 @@ import Range from "../Range/Range";
 import { useState } from "react";
 import { connect } from 'react-redux';
 import { showModal } from "../../../redux/slices/modalsSlice";
-import { getChannels } from "../../../redux/slices/tariffsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 
@@ -113,6 +112,5 @@ function BlockRange( { tariff, name, showModal, getChannels, setDataOrder, pageN
 
 export default connect( null, {
    showModal,
-   getChannels,
    setDataOrder
 } )( BlockRange )

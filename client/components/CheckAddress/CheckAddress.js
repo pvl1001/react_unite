@@ -89,23 +89,23 @@ function CheckAddress( props ) {
       setIsShowLabel( true )
    }
 
-   const eventLabelDefault = {
-      order: `click_button_order_${ props.tariff.id }_ntv`,
-      send: `click_button_send_${ props.tariff.id }_ntv`
-   }
+   // const eventLabelDefault = {
+   //    order: `click_button_order_${ props.tariff.id }_ntv`,
+   //    send: `click_button_send_${ props.tariff.id }_ntv`
+   // }
 
-   function showModalOrder( eventLabel = eventLabelDefault ) {
-      props.showModal( {
-         modal: 'order',
-         bool: true
-      } )
-      props.setDataOrder( {
-         tariffName: `${ props.pageName } ${ props.tariff.name }`,
-         tariffId: props.tariff.tariffId,
-         equipments: props.tariff.equipments,
-         eventLabel: eventLabel
-      } )
-   }
+   // function showModalOrder( eventLabel = eventLabelDefault ) {
+   //    props.showModal( {
+   //       modal: 'order',
+   //       bool: true
+   //    } )
+   //    props.setDataOrder( {
+   //       tariffName: `${ props.pageName } ${ props.tariff.name }`,
+   //       tariffId: props.tariff.tariffId,
+   //       equipments: props.tariff.equipments,
+   //       eventLabel: eventLabel
+   //    } )
+   // }
 
    function setResultHandler( result, address ) {
       if ( result === 1 ) {
@@ -114,7 +114,7 @@ function CheckAddress( props ) {
             text: {
                title: 'Ура! Есть контакт',
                icon: 'smile_success',
-               description: `По адресу ${ address } можно подключить интернет.`,
+               description: `По адресу <span>${ address }</span> можно подключить интернет.`,
                label: `Оставь заявку на подключение`
             }
          } )
@@ -125,11 +125,11 @@ function CheckAddress( props ) {
             text: {
                title: 'К сожалению, твой дом пока не подключен к интернету',
                icon: 'smile_invalid',
-               description: `Но можно попробовать <span class="change-address">изменить адрес</span>`,
+               description: `Но можно попробовать <span id="change-address">изменить адрес</span>`,
                label: `Или оставь заявку, чтобы узнать, когда будет подключение`
             }
          } )
-         const $changeAddress = document.querySelector( '.change-address' )
+         const $changeAddress = document.getElementById( 'change-address' )
          $changeAddress.addEventListener( 'click', resultNull )
       }
    }
@@ -153,6 +153,7 @@ function CheckAddress( props ) {
                   { result &&
                      <OrderForm
                         result={ result }
+                        resultNull={ resultNull }
                         showLabel={ isShowLabel }
                         formLabel={ formLabel }
                         disabled={ isLoading }

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
    order: { show: false },
+   orderThx: { show: false },
    cities: { show: false },
    mftv: { show: false },
    equipment: { show: false },
