@@ -157,8 +157,10 @@ function NewCard( { tariff, id, collapse, premium } ) {
 
          <div className={ s.btns }>
 
-            <button className={ `${ s.connect_btn } ${ isPremium ? 'btn-fiolet' : '' } btn` }
-                    onClick={ openOrder }>Подключить
+            <button
+               className={ `${ s.connect_btn } ${ isPremium ? 'btn-premium' : '' } btn` }
+               onClick={ openOrder }
+            >Подключить
             </button>
 
             { id === 'vse'
