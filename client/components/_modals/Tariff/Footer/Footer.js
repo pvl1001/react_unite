@@ -6,7 +6,7 @@ import { wrapp } from '../ModalTariff.module.sass';
 import SaleBanner from "../../../SaleBanner/SaleBanner";
 
 
-function Footer( { tariff, id } ) {
+function Footer( { tariff, id, showModal, setDataOrder } ) {
    const isPremium = id === 'premium'
 
 
