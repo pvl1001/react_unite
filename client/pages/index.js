@@ -3,23 +3,23 @@ import Header from "../components/Header/Header";
 import Tariffs from "../components/Tariffs/Tariffs";
 import CheckAddress from "../components/CheckAddress/CheckAddress";
 import Equipments from "../components/Equipments/Equipments";
-import AppBanner from "../components/AppBanner/AppBanner";
+// import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
-import Nav from "../components/Nav/Nav";
-import React, { useEffect, useState } from "react";
+// import Nav from "../components/Nav/Nav";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NewCard from "../components/Tariffs/NewCard/NewCard";
 import { SwiperSlide } from "swiper/react";
 import { wrapper } from "../redux/store";
-import { getChannels, setInitialChannels, setInitialStateTariffs } from "../redux/slices/tariffsSlice";
-import getIp from "../api/getIp";
-import getLocation from "../api/getLocation";
+import { setInitialChannels, setInitialStateTariffs } from "../redux/slices/tariffsSlice";
+// import getIp from "../api/getIp";
+// import getLocation from "../api/getLocation";
 import getLocationData from "../api/getLocationData";
 import axios from "axios";
 
 
 export default function IndexPage( { location, data } ) {
-   const dispatch = useDispatch()
+   // const dispatch = useDispatch()
    const [ collapseGroup, setCollapseGroup ] = useState( false )
    const [ collapseChannels, setCollapseChannels ] = useState( [] )
 
@@ -75,7 +75,6 @@ export default function IndexPage( { location, data } ) {
             </Tariffs>
             <CheckAddress/>
             <Equipments/>
-            <AppBanner/>
             <FAQ/>
          </main>
       </>
