@@ -1,28 +1,29 @@
-import s from './Footer.module.sass';
-import { useSelector } from 'react-redux';
+import s from './Footer.module.scss';
+
 
 export default function Footer() {
-   const transfer = useSelector( state => state.page.footer )
-
 
    return (
-      <footer className={ s.container }>
+      <footer className={ s._ }>
          <div className={ s.wrapper + ' wrapper' }>
             <div className={ s.copyright }>
-               <div className={ s.copyright__age }>6+</div>
-               <div className={ s.copyright__text }>© 2022 <br/> ПАО «Мегафон»</div>
+               <p className={ s.copyright__age }>6+</p>
+               <p>© <span id="footer_year">{ new Date().getFullYear() }</span> <br/> ПАО «Мегафон»</p>
             </div>
-            <p className={ s.transfer }>{ transfer }</p>
+            <p className={ s.transfer }>
+               Услуги предоставляются ООО «Нэт Бай Нэт Холдинг»и ПАО «МегаФон» на территории присутствия операторов при
+               наличии технической возможности. Подробности на megafon.ru
+            </p>
             <p className={ s.policy }>
-               Продолжая использовать наш сайт, вы даете согласие на обработку файлов Cookies и других
-               пользовательских данных, в соответствии с <a href="https://www.megafon.ru/ad/politika"
-                                                            target="_blank"
-                                                            rel="noreferrer">Политикой конфиденциальности</a>.
+               Продолжая использовать наш сайт, вы даете согласие на обработку файлов Cookies и других пользовательских
+               данных, в соответствии с <a href="https://www.megafon.ru/ad/politika" target="_blank">Политикой
+               конфиденциальности</a>.
             </p>
             <div className={ s.speedtest }>
-               <img src={ '/svg/speedtest-awards.svg' } alt="speedtest"/>
+               <img src="/svg/speedtest-awards.svg" alt="speedtest-awards"/>
             </div>
          </div>
       </footer>
    )
+
 }
