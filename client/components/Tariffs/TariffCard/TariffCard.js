@@ -1,192 +1,172 @@
-import s from './TariffCard.module.sass';
-import React from 'react';
-import { connect } from "react-redux";
-import Mark from "./Mark/Mark";
-import ProgressBar from "./ProgressBar/ProgressBar";
-import MfTv from "./MfTv/MfTv";
-import TvChannels from "./TvChannels/TvChannels";
+import s from './TariffCard.module.scss';
+import React, { useEffect } from "react";
+import CollapseChannels from "./CollapseChannels/CollapseChannels";
+import { useDispatch } from "react-redux";
+import PlusIcon from '../../../public/svg/Plus.svg'
+import SaleBanner from "../../SaleBanner/SaleBanner";
 import { showModal } from "../../../redux/slices/modalsSlice";
-import Tippy from "@tippyjs/react";
-import { tippyAttrs } from "../../../plugins_config";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
-import YoutubeIcon from '../../../public/svg/youtube.svg';
-import RouterIcon from '../../../public/svg/Router_3.svg';
-import { useRouter } from 'next/router';
 
 
-function TariffCard( props ) {
-   const router = useRouter()
-   const tmplIconInfo = iconInfo( props.tariff.id, props.tariff.iconInfo )
-   const premiumStyle = props.tariff.id === 'premium'
-      ? { backgroundColor: 'var(--mf-premium)' } : {}
+function TariffCard( { tariff, id, collapse, premium } ) {
+   const dispatch = useDispatch()
+   const isPremium = id === 'premium'
 
-   const infoProgress = [
-      props.tariff.web && {
-         title: "Мобильный интернет",
-         value: props.tariff.web + ' ГБ'
-      },
-      props.tariff.min && {
-         title: "Звонки",
-         value: props.tariff.min + ' минут'
-      },
-      props.tariff.speed && {
-         title: "Домашний&nbsp;<br>интернет",
-         value: props.tariff.speed + ' Мбит/с'
-      }
-   ]
+   useEffect( styleMinHeightBlockDp, [] )
 
-   function activeProgress( title, n ) {
-      switch ( title ) {
-         case 'Мобильный интернет':
-            return +n.split( ' ' )[0] * 2
-         case 'Домашний&nbsp;<br>интернет':
-            return n.split( ' ' )[0] / 3
-         case 'Звонки':
-            return n.split( ' ' )[0] / 25
-         case 'ТВ':
-            return n.split( ' ' )[0] / 2.5
-         default:
-            return 0
-      }
+   function styleMinHeightBlockDp() {
+      const $dopParams = document.querySelectorAll( '.js-dop-params' )
+      const arrHeight = Array.from( $dopParams ).map( ($dp => $dp.clientHeight) )
+      const maxHeight = Math.max( ...arrHeight )
+      $dopParams.forEach( dp => dp.style.minHeight = maxHeight + 'px' )
    }
 
-   function showModalOrder() {
-      props.showModal( {
+   function openOrder() {
+      dispatch( showModal( {
          modal: 'order',
          bool: true
-      } )
-      props.setDataOrder( {
-         tariffName: `${ props.pageName } ${ props.tariff.name }`,
-         tariffId: props.tariff.tariffId,
-         price: props.tariff.price,
+      } ) )
+      dispatch( setDataOrder( {
+         tariffName: `${ tariff.name }`,
+         tariffId: tariff.tariffId,
+         price: tariff.price,
          eventLabel: {
-            order: `click_button_order_${ props.tariff.dataView }`,
-            send: `click_button_send_${ props.tariff.dataView }`
+            order: `click_button_order_${ tariff.id }`,
+            send: `click_button_send_${ tariff.id }`
          }
-      } )
+      } ) )
+   }
+
+   function openMftv() {
+      dispatch( showModal( {
+         modal: 'mftv',
+         bool: true,
+         props: { tariff }
+      } ) )
    }
 
    function showModalTariff() {
-      if ( props.tariff.id === 'vse' ) {
-         return router.push( '/internetvse' )
-      }
-      props.showModal( {
+      // if ( tariff.id === 'vse' ) {
+      //    return router.push( '/internetvse' )
+      // }
+      dispatch( showModal( {
          modal: 'tariff',
          bool: true,
-         props: props.tariff.id
-      } )
-      // analyticsEvent( `click_button_details_${ props.tariff.dataView }` )
+         props: id
+      } ) )
+      // analyticsEvent( `click_button_details_${ tariff.id }` )
+   }
+
+   function collapseGroup() {
+      collapse.setCollapseGroup( !collapse.collapseGroup )
    }
 
 
    return (
-      <div className={ s.container + ' card' }
-           id={ 'tariff-card-' + props.tariff.id }>
+      <div className={ `${ s.container } ${ isPremium ? s.premium : '' } card` }>
 
-         <div
-            style={ premiumStyle }
-            className={ `${ s.title } ${ s.wrapper }` }>
+         <div className={ s.header }>
 
-            <h2
-               data-view={ `tariff_card_${ props.tariff.dataView }_start` }
-               onClick={ showModalTariff }>
-               { props.tariff.name }
-            </h2>
-
-            <div className={ s.marks }>
-               { props.tariff.marks.map( ( mark, i ) =>
-                  <Mark
-                     key={ i }
-                     className={ s.title_mark }
-                     mark={ mark }
-                  />
-               ) }
+            <SaleBanner className={ s.sale_banner }/>
+            <div className={ s.tariff_icon }>
+               <img src={ `/svg/tariff_${ id }.svg` } alt={ `${ id }_icon` }/>
             </div>
 
+            <div className={ s.title }>
+               <h5 className={ s.tariff_name }>{ tariff.name }</h5>
+            </div>
+
+            <div className={ s.price }>
+               <span className={ s.old_price }>{ tariff.oldPrice } ₽</span> <span>
+                  <span className={ s.new_price }>{ tariff.price } ₽</span>
+                  <span>/месяц</span>
+               </span>
+            </div>
 
          </div>
 
-         <div className={ `${ s.info } ${ s.wrapper }` }>
-            <div className={ s.block_progress }>
+         <ul className={ s.params }>
+            <li className={ s.params__item }>
+               <p className={ s.params__key }>Мобильный интернет</p>
+               <p className={ s.params__value }>
+                  { tariff.inet ? `${ tariff.inet } ГБ` : '—' }
+               </p>
+            </li>
+            <li className={ s.params__item }>
+               <p className={ s.params__key }>Звонки</p>
+               <p className={ s.params__value }>
+                  { tariff.minutes ? `${ tariff.minutes } минут` : '—' }
+               </p>
+            </li>
+            <li className={ s.params__item }>
+               <p className={ s.params__key }>Домашний интернет</p>
+               <p className={ s.params__value }>
+                  { tariff.speed ? `${ tariff.speed } Мбит/с` : '—' }
+               </p>
+            </li>
+            <li className={ s.params__item }>
 
-               { infoProgress.map( pb =>
-                     pb && <ProgressBar
-                        key={ pb.title } pb={ pb }
-                        lineStyle={ {
-                           width: activeProgress( pb.title, pb.value ) + '%',
-                           ...premiumStyle
-                        } }
-                     />
-               ) }
+               <p className={ s.params__key }>ТВ</p>
+               <p className={ s.params__value }>
+                  { tariff.tvchan != 0
+                     ? <span
+                        className={ s.params__tv }
+                        aria-controls="tv-group"
+                        aria-expanded={ collapse.collapseGroup }
+                        onClick={ collapseGroup }
+                     >{ tariff.tvchan } каналов</span>
+                     : '—' }
+               </p>
+            </li>
 
-
-               { props.tariff.tvLength &&
-                  <TvChannels
-                     tariffs={ props.tariffs }
-                     tariff={ props.tariff }
-                     collapse={ props.collapse }
-                     premium={ props.premium }
-                     lineStyle={ {
-                        width: activeProgress( 'ТВ', props.tariff.tvLength ) + '%',
-                        ...premiumStyle
-                     } }
-                  />
-               }
-            </div>
-
-            { props.tariff.youtube &&
-               <div className={ s.option_icon }>
-                  <div className={ s.icon }>
-                     <YoutubeIcon/>
-                  </div>
-                  <p>Безлимитный мобильный интернет на соцсети и YouTube</p>
-               </div>
-            }
-
-            { props.tariff.id === 'turbo' &&
-               <div className={ `${ s.option_icon } ${ s.option_icon_router }` }>
-                  <div className={ s.icon }>
-                     <RouterIcon/>
-                  </div>
-                  <p>Wi-Fi-роутер (1 Гбит/с)</p>
-               </div>
-            }
-
-            { props.tariff.mftv &&
-               <MfTv
-                  tariff={ props.tariff }
-                  mftv={ props.tariff.mftv }
-                  id={ props.tariff.id }
+            { premium.channels &&
+               <CollapseChannels
+                  collapse={ collapse }
+                  premium={ premium }
+                  tariff={ tariff }
                />
             }
-         </div>
+         </ul>
 
-         <div className={ `${ s.price } ${ s.wrapper }` }>
-            <div className={ s.price__price + " price" }>
+         { (tariff.dop_params || tariff.mftv) &&
+            <div className={ s.dop_params + ' js-dop-params' }>
+               <h5 className={ `${ s.dop_params__title } ${ s.params__key }` }>дополнительно</h5>
 
-               { props.tariff.oldPrice && <span className="old-price">{ props.tariff.oldPrice } ₽</span> }
-               <span className="new-price"> { props.tariff.price } ₽</span>
-               <span className="always"/>
-               <span> в месяц</span>
+               { tariff.dop_params &&
+                  <ul>
+                     { tariff.dop_params.map( dp =>
+                        <li key={ dp } className={ s.dop_params__item }>
+                           <div className={ s.dop_params__icon }><PlusIcon/></div>
+                           <p>{ dp }</p>
+                        </li>
+                     ) }
+                  </ul>
+               }
 
-               { props.tariff.iconInfo &&
-                  <Tippy { ...tippyAttrs } content={ tmplIconInfo }>
-                     <div className="price__icon"/>
-                  </Tippy> }
+               { tariff.mftv &&
+                  <ul className={ s.dop_params_mftv }>
+                     { tariff.mftv.map( m =>
+                        <li key={ m.icon } className={ s.dop_params_mftv__item } onClick={ () => openMftv() }>
+                           <img src={ `/svg/mftv_block_${ m.icon }.svg` } alt={ `иконка ${ m.icon }` }/>
+                        </li>
+                     ) }
+                  </ul>
+               }
             </div>
+         }
+
+         <div className={ s.btns }>
 
             <button
-               className="price-card__btn btn"
-               data-view={ `tariff_card_${ props.tariff.dataView }_end` }
-               onClick={ showModalOrder }>
-               Подключить
+               className={ `${ s.connect_btn } ${ isPremium ? 'btn-premium' : '' } btn` }
+               onClick={ openOrder }
+            >Подключить
             </button>
 
-            <div
-               className={ s.price__link + " link" }
-               onClick={ showModalTariff }>
-               Подробнее
-            </div>
+            { id === 'vse'
+               ? <a href="/internetvse" className={ s.about_btn }>Все условия тарифа</a>
+               : <span className={ s.about_btn } onClick={ showModalTariff }>Все условия тарифа</span>
+            }
          </div>
 
       </div>
@@ -194,10 +174,4 @@ function TariffCard( props ) {
 }
 
 
-export default connect( state => ({
-   tariffs: state.tariffs,
-   pageName: state.page.name,
-}), {
-   showModal,
-   setDataOrder
-} )( TariffCard )
+export default TariffCard

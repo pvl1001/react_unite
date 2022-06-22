@@ -8,7 +8,7 @@ import FAQ from "../components/FAQ/FAQ";
 // import Nav from "../components/Nav/Nav";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NewCard from "../components/Tariffs/NewCard/NewCard";
+import TariffCard from "../components/Tariffs/TariffCard/TariffCard";
 import { SwiperSlide } from "swiper/react";
 import { wrapper } from "../redux/store";
 import { setInitialChannels, setInitialStateTariffs } from "../redux/slices/tariffsSlice";
@@ -57,7 +57,7 @@ export default function IndexPage( { location, data } ) {
             <Tariffs tariffFilter={ tariffFilter }>
                { Object.keys( tariffs ).map( key =>
                   <SwiperSlide key={ key }>
-                     <NewCard
+                     <TariffCard
                         key={ key }
                         id={ key }
                         premium={ tariffs.premium || tariffs.maximum }

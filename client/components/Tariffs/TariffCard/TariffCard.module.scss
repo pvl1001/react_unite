@@ -1,17 +1,18 @@
 .container {
-      position: static;
-      background: #FFFFFF;
-      box-shadow: 0 0 12px rgba(51, 51, 51, .2);
-      border-radius: 16px;
-      padding: 16px 16px 12px;
-      border: 0;
-      height: 100%;
-      display: flex !important;
-      flex-direction: column;
+   position: static;
+   background: #FFFFFF;
+   box-shadow: 0 0 12px rgba(51, 51, 51, .2);
+   border-radius: 16px;
+   padding: 16px 16px 12px;
+   border: 0;
+   height: 100%;
+   display: flex !important;
+   flex-direction: column;
+}
 
-
-
-   }
+.premium {
+   border: 2px solid var(--mf-premium);
+}
 
 .header {
    position: relative;
@@ -153,7 +154,7 @@
       margin-right: 6px;
       flex-shrink: 0;
 
-      img {
+      svg {
          margin: auto;
       }
    }
@@ -201,7 +202,6 @@
    }
 }
 
-
 .old_price {
    font-size: 20px;
    line-height: 28px;
@@ -224,4 +224,11 @@
 .new_price {
    font-size: 32px;
    font-weight: 600;
+}
+
+.sale_banner {
+   position: absolute;
+   top: 0;
+   right: 0;
+   transform: rotate(-6deg);
 }
