@@ -1,0 +1,50 @@
+.title {
+   letter-spacing: .5px;
+   margin-bottom: 12px;
+}
+
+.form {
+
+   &__inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+   }
+
+   &__inputs_row {
+      display: flex;
+      gap: 8px;
+   }
+
+   &__input {
+      flex: 0 1 50%;
+   }
+
+   &__btn {
+      height: 60px;
+      border-radius: 30px;
+      font-weight: 500;
+
+      svg {
+         margin-left: 7px;
+         margin-right: -7px;
+         width: 30px;
+         flex-shrink: 0;
+
+         path {
+            fill: #fff;
+         }
+      }
+   }
+
+   &__btn:disabled {
+      background-color: #EDEDED;
+      color: rgba(51, 51, 51, 0.5);
+      border: 1px solid #D8D8D8;
+
+      svg path {
+         fill: rgba(51, 51, 51, 0.5)
+      }
+   }
+}

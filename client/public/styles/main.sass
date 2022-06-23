@@ -44,11 +44,13 @@ a.btn,
    &:hover
       background-color: #B808D4
 
+
 .btn.btn-premium
    background-color: var(--mf-premium)
 
    &:hover
       background-color: var(--mf-premium-hov)
+
 
 button.back
    width: 70px
@@ -68,7 +70,7 @@ button.back
 
 .modal-content
    border: 0
-   border-radius: 10px
+   border-radius: 24px
 
 
 .modal-content
@@ -165,38 +167,38 @@ label
 
 input[type="text"]
    height: 60px
-   padding: 0 16px
+   padding: 0 40px 0 16px
    border: 1px solid #DDDDDD
-   border-radius: 30px
+   border-radius: 8px
    -webkit-appearance: none
 
 
-input[type="radio"]
-   display: none
-
-   + label
-      display: inline-block
-      height: 20px
-      width: 20px
-      border-radius: 50%
-      border: 2px solid #D8D8D8
-      margin-right: 8px
-
-      + span
-         cursor: pointer
-
-
-   &:checked + label
-      border: 6px solid var(--mf-green)
-
-
-   &:checked:disabled + label
-      border: 6px solid #D8D8D8
-
-
-   &:disabled + label,
-   &:disabled + label + span
-      cursor: default
+//input[type="radio"]
+//   display: none
+//
+//   + label
+//      display: inline-block
+//      height: 20px
+//      width: 20px
+//      border-radius: 50%
+//      border: 2px solid #D8D8D8
+//      margin-right: 8px
+//
+//      + span
+//         cursor: pointer
+//
+//
+//   &:checked + label
+//      border: 6px solid var(--mf-green)
+//
+//
+//   &:checked:disabled + label
+//      border: 6px solid #D8D8D8
+//
+//
+//   &:disabled + label,
+//   &:disabled + label + span
+//      cursor: default
 
 
 input[data-provide="datepicker"]
@@ -211,6 +213,24 @@ input[data-provide="datepicker"]
 
    &:focus
       border-color: #ddd
+
+
+input.valid
+   border: 1px solid var(--mf-green)
+   background: #fff url('../svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat
+
+   + label
+      display: block
+      color: var(--mf-green)
+
+
+input.error
+   border: 1px solid #F62434
+   background: #fff url('../svg/invalid.svg') calc(100% - 23px) 50% / 13px no-repeat
+
+   + label
+      display: block
+      color: #F62434
 
 
 .datepicker.dropdown-menu
@@ -410,7 +430,8 @@ input[data-provide="datepicker"]
    .swiper-slide
       padding: 37px 10px
       height: auto
-      transform: none // исправляет баг z-index tippy
+      transform: none
+   // исправляет баг z-index tippy
 
 
    .swiper-pagination
@@ -491,51 +512,33 @@ input[data-provide="datepicker"]
       padding: 0 16px
 
 
-form
-   input
-      position: relative
-      padding-right: 40px
-
-      + label,
-      + label + label
-         position: absolute
-         font-size: 12px
-         font-weight: 400
-         color: var(--mf-green)
-
-
-      &::placeholder
-         color: #33333380
-
-
-      &:focus
-         border: 1px solid #333333
-
-         &::placeholder
-            color: #333333
-
-
-   input.valid
-      border: 1px solid var(--mf-green)
-      background: #fff url('../svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat
-
-      + label
-         display: block
-         color: var(--mf-green)
-
-
-   input.error
-      border: 1px solid #F62434
-      background: #fff url('../svg/invalid.svg') calc(100% - 23px) 50% / 13px no-repeat
-
-      + label
-         display: block
-         color: #F62434
-
-
-   @media (max-width: 337px)
-      label.error
-         position: static
+//form
+//   input
+//      position: relative
+//      padding-right: 40px
+//
+//      + label,
+//      + label + label
+//         position: absolute
+//         font-size: 12px
+//         font-weight: 400
+//         color: var(--mf-green)
+//
+//
+//      &::placeholder
+//         color: #33333380
+//
+//
+//      &:focus
+//         border: 1px solid #333333
+//
+//         &::placeholder
+//            color: #333333
+//
+//
+//   @media (max-width: 337px)
+//      label.error
+//         position: static
 
 
 .autocomplete-suggestions
@@ -571,7 +574,6 @@ form
          font-size: 12px
          line-height: 16px
          padding: 8px 12px
-
 
 
 .tippy-box[data-theme~=light]
@@ -793,6 +795,7 @@ form
 .spinner-border
    position: absolute !important
    right: -18px
+
 
 #change-address
    cursor: pointer

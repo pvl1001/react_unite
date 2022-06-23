@@ -1,0 +1,31 @@
+._ {
+   display: inline-flex;
+   height: 44px;
+   background-color: #F6F6F6;
+   padding: 4px;
+   border-radius: 12px;
+
+   input[type=radio] {
+      display: none;
+
+      &:checked + label {
+         color: #333;
+         border-radius: 8px;
+         background-color: #fff;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);;
+      }
+   }
+}
+
+.item label{
+   color: #999;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   width: 140px;
+   height: 100%;
+}
+
+.active {
+   color: red;
+}

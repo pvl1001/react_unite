@@ -10,31 +10,13 @@ import { setDataOrder } from "../../redux/slices/orderSlice";
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import OrderForm from "./OrderForm/OrderForm";
+import autocompleteHandler from "../../mixins/autocompleteHandler";
 
 
 function CheckAddress( props ) {
    const router = useRouter()
    useEffect( () => {
-      window.autocomplete = require( '../../plugins/jquery.autocomplete' )
-
-      $( inputAddress ).autocomplete( {
-         width: 'auto',
-         maxHeight: window.innerWidth > 767 ? 417 : 337,
-         minChars: 1,
-         deferRequestBy: 200,
-         serviceUrl: 'https://api.wifire.ru/api/address/check_address_dadata',
-         type: 'POST',
-
-         onSelect( suggestion ) {
-            setIsShowLabel( false )
-
-            setAddress( {
-               house_guid: suggestion.data.aoguid,
-               address: suggestion.data.address
-            } )
-         }
-      } )
-
+      autocompleteHandler( inputAddress, setIsShowLabel, setAddress )
       props.onUniteSwitch( true )
    }, [] )
 
@@ -43,9 +25,9 @@ function CheckAddress( props ) {
    const textLabelError = 'Сервис временно не доступен'
    const [ addressValue, setAddressValue ] = useState( '' )
    const [ address, setAddress ] = useState( {} )
+   const [ isShowLabel, setIsShowLabel ] = useState( false )
    const [ formLabel, setFormLabel ] = useState( textLabelCheck )
    const [ result, setResult ] = useState( null )
-   const [ isShowLabel, setIsShowLabel ] = useState( false )
    const [ isLoading, setIsLoading ] = useState( false )
    const container = router.route === '/internetvse'
       ? s.container_vse
@@ -53,7 +35,7 @@ function CheckAddress( props ) {
 
    function clearInput() {
       $( inputAddress ).val( '' )
-      setAddressValue('')
+      setAddressValue( '' )
    }
 
    function resultNull() {
