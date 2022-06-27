@@ -9,9 +9,9 @@ const initialState = {
    equipment: { show: false },
    tariff: { show: false },
    tariffAll: { show: false },
-   almond: { show: false },
-   aboutAlmond: { show: false },
-   choiceRouter: { show: false },
+   // almond: { show: false },
+   // aboutAlmond: { show: false },
+   // choiceRouter: { show: false },
    channels: { show: false },
 }
 

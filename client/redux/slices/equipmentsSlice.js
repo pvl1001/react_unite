@@ -268,12 +268,12 @@ export const equipments = {
    }
 }
 
-const { androidtv, fr100, fr1000, mftv, almond } = equipments
+const { androidtv, fr100, fr1000, mftv } = equipments
 
 
 export const equipmentsSlice = createSlice( {
    name: 'equipments',
-   initialState: { androidtv, fr100, fr1000, mftv, almond },
+   initialState: { androidtv, fr100, fr1000, mftv },
    reducers: {
       changePlan( state, action ) {
          const { id } = action.payload

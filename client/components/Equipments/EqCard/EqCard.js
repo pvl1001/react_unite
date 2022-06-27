@@ -10,13 +10,13 @@ function EqCard( props ) {
    const pageName = useSelector( state => state.page.name )
    const tariff = useSelector( state => state.tariffs.their )
 
-   function showModalAlmond() {
-      props.showModal( {
-         modal: 'almond',
-         bool: true
-      } )
-      // analyticsEvent( `click_button_details_${ props.eq.dataView }` )
-   }
+   // function showModalAlmond() {
+   //    props.showModal( {
+   //       modal: 'almond',
+   //       bool: true
+   //    } )
+   //    // analyticsEvent( `click_button_details_${ props.eq.dataView }` )
+   // }
 
    function showModalOrder() {
       props.showModal( {
@@ -85,9 +85,9 @@ function EqCard( props ) {
          </div>
 
          <p className={ s.text }>{ props.eq.text }
-            { props.eq.id === "eq-almond"
-               ? <span className={ `${ s.link } link` } onClick={ showModalAlmond }>Подробнее</span>
-               : <span className={ `${ s.link } link` } onClick={ showModalEquipment }>Подробнее</span>
+            { props.eq.id === "eq-almond" &&
+               // ? <span className={ `${ s.link } link` } onClick={ showModalAlmond }>Подробнее</span>
+               <span className={ `${ s.link } link` } onClick={ showModalEquipment }>Подробнее</span>
             }</p>
 
          <button

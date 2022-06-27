@@ -6,7 +6,7 @@ import { equipments } from './equipmentsSlice'
 import { amediateka, mir, more, start } from "../../modules/mftv.module";
 import axios from "axios";
 
-const { sim, almond, mftv, fr100, fr1000, androidtv, router_4g } = equipments
+const { sim, mftv, fr100, fr1000, androidtv, router_4g } = equipments
 
 export const templateEqAlmond = [
    {
@@ -125,7 +125,6 @@ export const tariffs = {
          androidtv,
          fr1000,
          mftv,
-         almond,
          sim
       },
    },
@@ -134,7 +133,6 @@ export const tariffs = {
          androidtv,
          fr1000,
          mftv,
-         almond,
          sim
       },
    },
@@ -144,7 +142,6 @@ export const tariffs = {
          androidtv,
          fr1000,
          mftv,
-         almond,
          sim
       }
    },
@@ -158,7 +155,6 @@ export const tariffs = {
          androidtv,
          fr1000,
          mftv,
-         almond,
          sim
       },
       mftv: [
@@ -181,7 +177,6 @@ export const tariffs = {
          androidtv,
          fr100,
          mftv,
-         almond,
          sim
       }
    },
@@ -190,7 +185,6 @@ export const tariffs = {
          androidtv,
          fr100,
          mftv,
-         almond,
          sim
       },
       mftv: [
@@ -204,7 +198,6 @@ export const tariffs = {
          androidtv,
          fr1000,
          mftv,
-         almond,
       },
    },
    premium: {
@@ -217,7 +210,6 @@ export const tariffs = {
          androidtv,
          fr1000,
          mftv,
-         almond,
          sim
       },
       mftv: [
