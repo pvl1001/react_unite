@@ -84,9 +84,10 @@ function CardOption( props ) {
                      { props.equipment.plan.map( ( p, i ) => (
                         <label key={ p.name } className="option-radio__radio-btn">
                            <input
+                              type="radio"
                               name={ `radio-${ props.equipment.id }-${ props.idx }` }
                               id={ `plan-${ i }-${ props.equipment.id }-${ props.idx }` }
-                              type="radio"
+                              className={'mf-radio'}
                               value={ p.value }
                               onChange={ handleRadio }
                               checked={ p.checked }

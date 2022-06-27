@@ -174,32 +174,32 @@ input[type="text"]
    -webkit-appearance: none
 
 
-//input[type="radio"]
-//   display: none
-//
-//   + label
-//      display: inline-block
-//      height: 20px
-//      width: 20px
-//      border-radius: 50%
-//      border: 2px solid #D8D8D8
-//      margin-right: 8px
-//
-//      + span
-//         cursor: pointer
-//
-//
-//   &:checked + label
-//      border: 6px solid var(--mf-green)
-//
-//
-//   &:checked:disabled + label
-//      border: 6px solid #D8D8D8
-//
-//
-//   &:disabled + label,
-//   &:disabled + label + span
-//      cursor: default
+input[type="radio"].mf-radio
+   display: none
+
+   + label
+      display: inline-block
+      height: 20px
+      width: 20px
+      border-radius: 50%
+      border: 2px solid #D8D8D8
+      margin-right: 8px
+
+      + span
+         cursor: pointer
+
+
+   &:checked + label
+      border: 6px solid var(--mf-green)
+
+
+   &:checked:disabled + label
+      border: 6px solid #D8D8D8
+
+
+   &:disabled + label,
+   &:disabled + label + span
+      cursor: default
 
 
 input[data-provide="datepicker"]
