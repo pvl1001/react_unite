@@ -82,6 +82,14 @@ button.back
 
 
 .modal-close
+   height: 40px
+   width: 40px
+   background: url('/svg/close.svg') center / 15px no-repeat
+   position: absolute
+   top: 8px
+   right: 8px
+
+.modal-close-round
    height: 32px
    width: 32px
    background: url('../svg/close-round.svg') center / contain no-repeat
@@ -200,20 +208,6 @@ input[type="radio"].mf-radio
    &:disabled + label,
    &:disabled + label + span
       cursor: default
-
-
-input[data-provide="datepicker"]
-   background: url('../svg/Calendar_16.svg') calc(100% - 21px) 50% / 14px no-repeat
-   border-radius: 0
-
-   &::placeholder
-      color: #333
-      font-size: 15px
-      font-weight: 500
-
-
-   &:focus
-      border-color: #ddd
 
 
 input.valid
@@ -511,35 +505,6 @@ input.error
 
    @media (max-width: 767px)
       padding: 0 16px
-
-
-//form
-//   input
-//      position: relative
-//      padding-right: 40px
-//
-//      + label,
-//      + label + label
-//         position: absolute
-//         font-size: 12px
-//         font-weight: 400
-//         color: var(--mf-green)
-//
-//
-//      &::placeholder
-//         color: #33333380
-//
-//
-//      &:focus
-//         border: 1px solid #333333
-//
-//         &::placeholder
-//            color: #333333
-//
-//
-//   @media (max-width: 337px)
-//      label.error
-//         position: static
 
 
 .autocomplete-suggestions

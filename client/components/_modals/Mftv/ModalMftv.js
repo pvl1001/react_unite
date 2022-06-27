@@ -30,7 +30,7 @@ function ModalMftv( { show, tariff, showModal, setDataOrder } ) {
             <div className={ s.btn_close }>
                <button
                   type="button"
-                  className={ s.modal_close + " modal-close" }
+                  className={ s.modal_close + " modal-close-round" }
                   onClick={ onHide }
                />
             </div>

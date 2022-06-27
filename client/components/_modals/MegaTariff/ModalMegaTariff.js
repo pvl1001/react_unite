@@ -53,7 +53,7 @@ function ModalMegaTariff( props ) {
          <div className={ s_modalMftv.btn_close }>
             <button
                type="button"
-               className={ s_modalMftv.modal_close + " modal-close" }
+               className={ s_modalMftv.modal_close + " modal-close-round" }
                onClick={ onHide }
             />
          </div>

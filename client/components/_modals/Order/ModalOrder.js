@@ -45,7 +45,7 @@ function ModalOrder( props ) {
 
                <button
                   type="button"
-                  className="modal-close"
+                  className={s.close_btn}
                   onClick={ onHide }
                />
 
