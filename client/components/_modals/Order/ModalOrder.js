@@ -14,6 +14,7 @@ import Input from "./Input/Input";
 import autocompleteHandler from "../../../mixins/autocompleteHandler";
 import AddressInput from "./Input/AddressInput";
 import ClientForm from "./ClientForm/ClientForm";
+import ArrowIcon from '../../../public/svg/arrow_slider.svg'
 
 
 function ModalOrder( props ) {
@@ -45,9 +46,16 @@ function ModalOrder( props ) {
 
                <button
                   type="button"
-                  className={s.close_btn}
+                  className={ s.modal_close + ' modal-close' }
                   onClick={ onHide }
                />
+
+               <div className={ s.header_mobile }>
+                  <button
+                     type="button"
+                     onClick={ onHide }
+                  ><ArrowIcon/><span>Назад</span></button>
+               </div>
 
                <h2 className={ s.title }>Заявка на подключение</h2>
 
@@ -65,7 +73,7 @@ function ModalOrder( props ) {
                <ClientForm
                   order={ order }
                   setDataOrder={ setDataOrder }
-                  setApiResponse={setApiResponse}
+                  setApiResponse={ setApiResponse }
                />
 
 

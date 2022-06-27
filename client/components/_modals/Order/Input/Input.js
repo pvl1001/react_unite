@@ -9,7 +9,7 @@ function Input( props ) {
       value,
       onChange,
       onBlur,
-      className,
+      className = '',
       classNameInput,
    } = props
 

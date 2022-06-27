@@ -50,3 +50,17 @@
       }
    }
 }
+
+
+@media (max-width: 767px) {
+   .form {
+      &__inputs_row {
+         flex-wrap: wrap;
+      }
+
+      &__input {
+         flex: 0 1 100%;
+      }
+   }
+
+}

@@ -15,11 +15,13 @@ function ClientForm( props ) {
    const self = [
       {
          name: 'name',
+         type: 'text',
          label: 'Ваше ФИО',
          validate: validateName
       },
       {
          name: 'phone',
+         type: 'tel',
          label: 'Ваш номер',
          validate: validatePhone
       }
@@ -27,10 +29,12 @@ function ClientForm( props ) {
    const friend = [
       {
          name: 'friend_name',
+         type: 'text',
          label: 'ФИО друга',
          validate: validateName
       }, {
          name: 'friend_phone',
+         type: 'tel',
          label: 'Номер друга',
          validate: validatePhone
       }
@@ -113,12 +117,12 @@ function ClientForm( props ) {
 
                   <div className={ s.form__inputs }>
                      <fieldset className={ s.form__inputs_row }>
-                        { inputs.self.map( ( { name, label, validate } ) =>
+                        { inputs.self.map( ( { name, type, label, validate } ) =>
                            <span key={ name } className={ s.form__input }>
                               <Field
                                  as={ Input }
                                  validate={ validate }
-                                 type="text"
+                                 type={ type }
                                  name={ name }
                                  label={ label }
                                  classNameInput={ valid( errors[name], touched[name], dirty, values[name] ) }
@@ -131,12 +135,12 @@ function ClientForm( props ) {
 
                      { inputs.friend &&
                         <fieldset className={ s.form__inputs_row }>
-                           { inputs.friend.map( ( { name, label, validate } ) =>
+                           { inputs.friend.map( ( { name, type, label, validate } ) =>
                                  <span key={ name } className={ s.form__input }>
                                     <Field
                                        as={ Input }
                                        validate={ validate }
-                                       type="text"
+                                       type={ type }
                                        handleChange={ handleChange }
                                        name={ name }
                                        label={ label }
