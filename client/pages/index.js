@@ -5,7 +5,7 @@ import CheckAddress from "../components/CheckAddress/CheckAddress";
 import Equipments from "../components/Equipments/Equipments";
 // import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
-// import Nav from "../components/Nav/Nav";
+import Nav from "../components/Nav/Nav";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TariffCard from "../components/Tariffs/TariffCard/TariffCard";
@@ -51,7 +51,7 @@ export default function IndexPage( { location, data } ) {
             <title>NextJS !Объединяй</title>
          </Head>
 
-         {/*<Nav region={ location }/>*/ }
+         <Nav/>
          <Header/>
          <main>
             <Tariffs tariffFilter={ tariffFilter }>
