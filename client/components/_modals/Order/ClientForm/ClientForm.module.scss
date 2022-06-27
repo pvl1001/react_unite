@@ -26,14 +26,17 @@
       border-radius: 30px;
 
       svg {
-         margin-left: 7px;
-         margin-right: -7px;
          width: 30px;
          flex-shrink: 0;
 
          path {
             fill: #fff;
          }
+      }
+
+      .spinner, svg {
+         margin-left: 7px;
+         margin-right: -7px;
       }
    }
 

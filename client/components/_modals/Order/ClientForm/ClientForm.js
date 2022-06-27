@@ -6,6 +6,7 @@ import Input from "../Input/Input"
 import valid from "../../../../mixins/valid"
 import { getMailSender, setRegister } from "../../../../mixins/submitOrder"
 import OrderTabs from "../OrderTabs/OrderTabs";
+import { Spinner } from "react-bootstrap";
 
 
 function ClientForm( props ) {
@@ -56,6 +57,7 @@ function ClientForm( props ) {
          $( 'input[name=friend_phone]' ).mask( '+7(000)000-00-00', { placeholder: "" } )
       }
    }, [ inputs ] )
+
 
    async function submit( data ) {
       setIsLoading( true )
@@ -151,9 +153,19 @@ function ClientForm( props ) {
                      disabled={ isLoading || isValid }
                      className={ s.form__btn + " btn" }
                   ><span>Отправить заявку</span>
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M8 13l3-3-3-3 1-1 4 4-4 4z"></path>
-                     </svg>
+                     { isLoading
+                        ? <Spinner
+                           as="span"
+                           bsPrefix={ s.spinner + ' spinner' }
+                           animation="border"
+                           size="sm"
+                           role="status"
+                           aria-hidden="true"
+                        />
+                        : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                           <path d="M8 13l3-3-3-3 1-1 4 4-4 4z"></path>
+                        </svg> }
+
                   </button>
 
                   <FormikContext validateForm={ validateForm }/>
