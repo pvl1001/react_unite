@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 
 function EqCard( props ) {
-   
+
    const pageName = useSelector( state => state.page.name )
    const tariff = useSelector( state => state.tariffs.their )
 
@@ -84,11 +84,11 @@ function EqCard( props ) {
             <span> в месяц</span>
          </div>
 
-         <p className={ s.text }>{ props.eq.text }
-            { props.eq.id === "eq-almond" &&
-               // ? <span className={ `${ s.link } link` } onClick={ showModalAlmond }>Подробнее</span>
-               <span className={ `${ s.link } link` } onClick={ showModalEquipment }>Подробнее</span>
-            }</p>
+         <p className={ s.text } title={ props.eq.text }>{ props.eq.text }</p>
+         { props.eq.id === "eq-almond"
+            ? <p className={ s.link }><span className="link" onClick={ showModalAlmond }>Подробнее</span></p>
+            : <p className={ s.link }><span className="link" onClick={ showModalEquipment }>Подробнее</span></p>
+         }
 
          <button
             className={ `${ s.btn } btn btn-fiolet` }
