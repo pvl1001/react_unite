@@ -2,6 +2,8 @@ import s from './Input.module.scss'
 import { useEffect, useState } from "react";
 
 import autocompleteHandler from "../../../../mixins/autocompleteHandler";
+import { api } from "../../../../api/api";
+import { checkAddressPath } from "../../../../api/paths";
 
 
 function AddressInput( props ) {
@@ -13,22 +15,60 @@ function AddressInput( props ) {
       classNameInput = ''
    } = props
 
+   const helpText = {
+      default: 'Например, Москва, ул. Ленина, д. 1',
+      check: 'Проверка адреса...',
+      house_fail: 'Необходимо указать номер дома',
+      success: 'Дом подключен к сети домашнего интернета',
+      fail: 'Дом находится вне зоны технического покрытия',
+      error: 'Какие-то проблемы... Попробуйте позднее'
+   }
    const [ value, setValue ] = useState( '' )
    const [ address, setAddress ] = useState( {} )
-   const [ help, setHelp ] = useState( 'Например, Москва, ул. Ленина, д. 1' )
-   const [ isShowLabel, setIsShowLabel ] = useState( false )
+   const [ suggestion, setSuggestion ] = useState( null )
+   const [ help, setHelp ] = useState( helpText.default )
 
-   useEffect( () => {
-      autocompleteHandler( `.${ classNameInput }`, setIsShowLabel, setAddress )
-   }, [] )
+   useEffect( () =>
+      autocompleteHandler( `.${ classNameInput }`, setSuggestion ),
+      [] )
 
-   function changeHandler( e ) {
+   useEffect( async () => {
+      if ( suggestion ) {
+         try {
+            const data = {
+               house_guid: suggestion.data.aoguid,
+               address: suggestion.data.address
+            }
+            setAddress( data )
+            setHelp( helpText.check )
+            const { result } = await api( checkAddressPath, data )
+            showResult( result )
+         } catch ( err ) {
+            console.error( err )
+            setHelp( helpText.error )
+         }
+
+      }
+   }, [ suggestion ] )
+
+   async function changeHandler( e ) {
       setValue( e.target.value )
       if ( address.house_guid ) {
          setValue( e.target.value = '' )
-         setAddress('')
+         setAddress( '' )
+         setHelp( helpText.default )
       }
+   }
 
+   function showResult( result ) {
+      switch ( result ) {
+         case 0:
+            return setHelp( helpText.fail )
+         case 1:
+            return setHelp( helpText.success )
+         default:
+            setHelp( helpText.house_fail )
+      }
    }
 
 
@@ -39,12 +79,12 @@ function AddressInput( props ) {
                type={ type }
                name={ name }
                defaultValue={ value }
-               onChange={ changeHandler }
-               className={
-                  `${ classNameInput } 
-               ${ value ? s.not_empty : '' } 
-               ${ address.house_guid ? 'valid' : '' }`
-               }
+               onInput={ changeHandler }
+               className={ `
+                  ${ classNameInput } 
+                  ${ value ? s.not_empty : '' } 
+                  ${ address.house_guid ? 'valid' : '' }
+                  ` }
             />
             <label>{ label }</label>
          </div>

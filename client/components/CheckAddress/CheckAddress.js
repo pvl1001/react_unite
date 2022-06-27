@@ -11,24 +11,25 @@ import { useRouter } from 'next/router'
 import Image from "next/image";
 import OrderForm from "./OrderForm/OrderForm";
 import autocompleteHandler from "../../mixins/autocompleteHandler";
+import { checkAddressPath } from "../../api/paths";
 
 
 function CheckAddress( props ) {
    const router = useRouter()
-   useEffect( () => {
-      autocompleteHandler( inputAddress, setIsShowLabel, setAddress )
-      props.onUniteSwitch( true )
-   }, [] )
 
    const inputAddress = '#addressCheck'
-   const textLabelCheck = 'Выберите адрес дома из выпадающего списка!'
-   const textLabelError = 'Сервис временно не доступен'
+   const labelText = {
+      select: 'Выберите адрес дома из выпадающего списка!',
+      check: 'Проверка адреса...',
+      error: 'Сервис временно не доступен',
+   }
    const [ addressValue, setAddressValue ] = useState( '' )
    const [ address, setAddress ] = useState( {} )
    const [ isShowLabel, setIsShowLabel ] = useState( false )
-   const [ formLabel, setFormLabel ] = useState( textLabelCheck )
+   const [ formLabel, setFormLabel ] = useState( labelText.select )
    const [ result, setResult ] = useState( null )
    const [ isLoading, setIsLoading ] = useState( false )
+   const [ suggestion, setSuggestion ] = useState( null )
    const container = router.route === '/internetvse'
       ? s.container_vse
       : s.container
@@ -44,6 +45,22 @@ function CheckAddress( props ) {
       clearInput()
    }
 
+   useEffect( () => {
+      autocompleteHandler( inputAddress, setSuggestion )
+      props.onUniteSwitch( true )
+   }, [] )
+
+   useEffect( async () => {
+      if ( suggestion ) {
+         const data = {
+            house_guid: suggestion.data.aoguid,
+            address: suggestion.data.address
+         }
+         setAddress( data )
+         setIsShowLabel(false)
+      }
+   }, [ suggestion ] )
+
    async function submit( e ) {
       e.preventDefault()
       // analyticsEvent( 'click_button_address' )
@@ -54,16 +71,17 @@ function CheckAddress( props ) {
             house_guid: address.house_guid
          } )
          try {
-            // debugger
+            setFormLabel( labelText.check )
+            setIsShowLabel( true )
             setIsLoading( true )
-            const data = await api( 'https://api.wifire.ru/api/address/check_dadata_address', address )
+            const data = await api( checkAddressPath, address )
             setIsLoading( false )
-            setFormLabel( textLabelCheck )
+            setFormLabel( labelText.select )
             setResultHandler( data.result, address.address )
             return
          } catch ( err ) {
             setIsLoading( false )
-            setFormLabel( textLabelError )
+            setFormLabel( labelText.error )
          }
 
       }

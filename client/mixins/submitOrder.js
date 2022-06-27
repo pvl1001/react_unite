@@ -1,4 +1,5 @@
 import { api } from "../api/api";
+import { ctRegisterPath, mailSenderPath } from "../api/paths";
 
 
 const errorResponse = {
@@ -27,8 +28,7 @@ export async function setRegister( eventLabel, dataOrder ) {
       }
 
       try {
-         const res = await api( `https://api.calltouch.ru/calls-service/RestAPI/requests/'${ ct_site_id }'/register/`, ct_data )
-         console.log(res)
+         await api( ctRegisterPath(ct_site_id), ct_data )
       } catch ( err ) {
          console.log( err )
          return errorResponse
@@ -59,7 +59,7 @@ export async function getMailSender( payload ) {
    }
 
    try {
-      const response = await api( 'https://home.megafon.ru/form/mail-sender', dataOrder )
+      const response = await api( mailSenderPath, dataOrder )
       return { response, dataOrder }
    } catch ( err ) {
       console.error( err )

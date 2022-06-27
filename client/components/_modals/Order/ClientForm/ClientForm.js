@@ -87,6 +87,8 @@ function ClientForm( props ) {
       <div>
          <h3 className={ s.title }>Кому подключаем?</h3>
 
+         <OrderTabs setActiveTab={ setActiveTab }/>
+
          <Formik
             initialValues={ {
                name: '',
@@ -106,7 +108,6 @@ function ClientForm( props ) {
                    validateForm
                 } ) =>
                <Form onSubmit={ handleSubmit } className={ s.form }>
-                  <OrderTabs setActiveTab={ setActiveTab }/>
 
                   <div className={ s.form__inputs }>
                      <fieldset className={ s.form__inputs_row }>
@@ -149,7 +150,7 @@ function ClientForm( props ) {
                      type="submit"
                      disabled={ isLoading || isValid }
                      className={ s.form__btn + " btn" }
-                  ><span>Отправить</span>
+                  ><span>Отправить заявку</span>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M8 13l3-3-3-3 1-1 4 4-4 4z"></path>
                      </svg>

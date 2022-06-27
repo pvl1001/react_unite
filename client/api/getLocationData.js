@@ -1,5 +1,6 @@
 import axios from "axios";
+import { getAllTariffsPath } from "./paths";
 
 export default async function getLocationData( location ) {
-   return await axios.get( `https://${ location }.home.megafon.ru/billing/bt/json/getalltarifs` )
+   return await axios.get( getAllTariffsPath(location) )
 }
