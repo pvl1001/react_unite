@@ -18,9 +18,10 @@ export default function Plan( props ) {
                <label key={ i } className="option-radio__radio-btn">
 
                   <input
+                     type="radio"
                      name="radio-plan"
                      id={ `plan-${ i }` }
-                     type="radio"
+                     className={'mf-radio'}
                      onChange={ () => handleChangePlan( el.value ) }
                      value={ el.value }
                      defaultChecked={ el.checked }
