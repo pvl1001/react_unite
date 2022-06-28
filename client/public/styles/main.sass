@@ -69,12 +69,20 @@ button.back
    max-width: 820px
 
 
+
+@media (max-width: 767px)
+   .modal.fade .modal-dialog
+      transition: opacity .2s, transform .2s
+      transform: translate(100%, 0)
+
+   .modal.show .modal-dialog
+      transform: translate(0)
+
+
+
 .modal-content
    border: 0
    border-radius: 24px
-
-
-.modal-content
    padding: 47px 78px 54px
    font-size: 15px
    line-height: 20px

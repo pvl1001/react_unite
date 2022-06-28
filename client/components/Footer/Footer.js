@@ -1,10 +1,10 @@
 import s from './Footer.module.scss';
 
 
-export default function Footer() {
+export default function Footer({className = ''}) {
 
    return (
-      <footer className={ s._ }>
+      <footer className={ `${ s._ } ${ className }` }>
          <div className={ s.wrapper + ' wrapper' }>
             <div className={ s.copyright }>
                <p className={ s.copyright__age }>6+</p>

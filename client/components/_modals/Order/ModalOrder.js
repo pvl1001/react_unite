@@ -2,24 +2,24 @@ import s from './ModalOrder.module.sass';
 import { useEffect, useState } from "react";
 import { connect } from 'react-redux'
 import { Modal } from "react-bootstrap";
-import $ from 'jquery'
-import { Formik } from 'formik'
-import { string, object } from 'yup'
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
-import { Spinner } from 'react-bootstrap';
-import valid from '../../../mixins/valid'
-import { getMailSender, setRegister } from '../../../mixins/submitOrder'
-import Input from "./Input/Input";
-import autocompleteHandler from "../../../mixins/autocompleteHandler";
 import AddressInput from "./Input/AddressInput";
 import ClientForm from "./ClientForm/ClientForm";
 import ArrowIcon from '../../../public/svg/arrow_slider.svg'
+import Response from "./Response/Response";
+import Footer from "../../Footer/Footer";
 
 
 function ModalOrder( props ) {
-   const { order, setDataOrder, showModal, show } = props
+   const { order, setDataOrder, showModal, show, responseFromCheckAddress } = props
    const [ apiResponse, setApiResponse ] = useState( null )
+   const isAnimation = typeof window !== 'undefined' && window.innerWidth < 768
+
+
+   useEffect( () => {
+      setApiResponse( responseFromCheckAddress )
+   }, [ responseFromCheckAddress ] )
 
 
    function onHide() {
@@ -34,28 +34,29 @@ function ModalOrder( props ) {
    return (
       <Modal
          centered
-         animation={ false }
+         animation={ isAnimation }
+         backdrop={ !isAnimation }
          show={ show }
          onHide={ onHide }
          className={ s.modal }
          dialogClassName={ s.modal_dialog }
          contentClassName={ s.modal_content }
       >
-         { !apiResponse
-            ? <div>
+         <div className={ s.header_mobile }>
+            <button
+               type="button"
+               onClick={ onHide }
+            ><ArrowIcon/><span>Назад</span></button>
+         </div>
 
+         { apiResponse
+            ? <Response onHide={ onHide } apiResponse={ apiResponse }/>
+            : <div>
                <button
                   type="button"
                   className={ s.modal_close + ' modal-close' }
                   onClick={ onHide }
                />
-
-               <div className={ s.header_mobile }>
-                  <button
-                     type="button"
-                     onClick={ onHide }
-                  ><ArrowIcon/><span>Назад</span></button>
-               </div>
 
                <h2 className={ s.title }>Заявка на подключение</h2>
 
@@ -75,25 +76,19 @@ function ModalOrder( props ) {
                   setDataOrder={ setDataOrder }
                   setApiResponse={ setApiResponse }
                />
-
-
-            </div>
-            : <div className={ s.order_thx }>
-               <button type="button" className="modal-close" onClick={ onHide }/>
-
-               <h2 className={ s.order_thx__title }>{ apiResponse.response_head }</h2>
-               <p className={ s.order_thx__text }>{ apiResponse.response }</p>
             </div>
          }
+
+         <Footer className={ s.footer }/>
       </Modal>
    )
-
 }
 
 
 export default connect( state => ({
    show: state.modals.order.show,
    order: state.order,
+   responseFromCheckAddress: state.modals.order.props
 }), {
    showModal,
    setDataOrder,

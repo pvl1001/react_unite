@@ -1,0 +1,47 @@
+._ {
+   min-height: auto;
+   width: auto;
+   margin: 0 auto;
+   text-align: center;
+}
+
+.title {
+   margin-bottom: 3px
+}
+
+.text {
+   font-size: 15px;
+   font-weight: 400;
+}
+
+.success_icon {
+   display: none;
+   width: 100px;
+   height: 100px;
+   border-radius: 50%;
+   background-color: #DDFFEC;
+   margin: 0 auto 23px;
+
+   svg {
+      margin: auto;
+      transform: scale(3.1);
+   }
+}
+
+@media (max-width: 1279px) {
+     .modal_close {
+      position: fixed;
+   }
+}
+
+@media (max-width: 767px) {
+   .success_icon {
+      display: flex;
+   }
+}
+
+@media (max-width: 340px) {
+   .title {
+      font-size: 28px;
+   }
+}

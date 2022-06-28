@@ -10,7 +10,6 @@ import ModalMegaTariff from "./_modals/MegaTariff/ModalMegaTariff";
 // import ChoiceRouter from "./_modals/ChoiceRouter/ChoiceRouter";
 import ModalEquipment from "./_modals/Equipment/ModalEquipment";
 // import ModalChannels from "./_modals/Channels/ModalChannels";
-import ModalOrderThx from "./_modals/OrderThx/ModalOrderThx";
 
 
 export default function Layout( { children } ) {
@@ -19,10 +18,8 @@ export default function Layout( { children } ) {
          {/*<Support/>*/ }
          { children }
          <Footer/>
-
          <ModalCity/>
          <ModalOrder/>
-         <ModalOrderThx/>
          <ModalTariff/>
          <ModalMftv/>
          <ModalMegaTariff/>

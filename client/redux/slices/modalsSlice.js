@@ -3,16 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
    order: { show: false },
-   orderThx: { show: false },
+   orderResponse: { show: false },
    cities: { show: false },
    mftv: { show: false },
    equipment: { show: false },
    tariff: { show: false },
    tariffAll: { show: false },
+   channels: { show: false },
    // almond: { show: false },
    // aboutAlmond: { show: false },
    // choiceRouter: { show: false },
-   channels: { show: false },
 }
 
 
@@ -21,8 +21,9 @@ export const modalsSlice = createSlice( {
    initialState,
    reducers: {
       showModal( state, action ) {
-         state[action.payload.modal].show = action.payload.bool
-         state[action.payload.modal].props = action.payload.props || null
+         const { modal, bool, props } = action.payload
+         state[modal].show = bool
+         state[modal].props = props || null
       }
    }
 } )

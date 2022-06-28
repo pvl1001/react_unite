@@ -48,6 +48,8 @@ function ClientForm( props ) {
    useEffect( () => {
       window.mask = require( '../../../../plugins/jquery.mask' )
       $( 'input[name=phone]' ).mask( '+7(000)000-00-00', { placeholder: "" } )
+
+      return () => setIsValid(0)
    }, [] )
 
    useEffect( () => {

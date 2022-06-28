@@ -37,12 +37,12 @@ function OrderForm( props ) {
          const error = await setRegister( order.eventLabel, dataOrder )
          setIsLoading( false )
          if ( error ) {
-            return dispatch( showModal( { modal: 'orderThx', bool: true, props: error } ) )
+            return dispatch( showModal( { modal: 'orderResponse', bool: true, props: error } ) )
          }
          props.resultNull()
       }
       setIsLoading( false )
-      dispatch( showModal( { modal: 'orderThx', bool: true, props: mailSender } ) )
+      dispatch( showModal( { modal: 'order', bool: true, props: mailSender } ) )
    }
 
    return (
