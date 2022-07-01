@@ -16,18 +16,18 @@ import { setInitialChannels, setInitialStateTariffs } from "../redux/slices/tari
 // import getLocation from "../api/getLocation";
 import getLocationData from "../api/getLocationData";
 import axios from "axios";
+import TariffBtn from "../components/TariffBtn/TariffBtn";
 
 
 export default function IndexPage( { location, data } ) {
    // const dispatch = useDispatch()
    const [ collapseGroup, setCollapseGroup ] = useState( false )
    const [ collapseChannels, setCollapseChannels ] = useState( [] )
-
+   const [ stateOnChangeSlider, setStateOnChangeSlider ] = useState( null )
    const t = useSelector( state => {
       const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
       return { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium }
    } )
-
    const [ tariffs, setTariffs ] = useState( t )
 
    function tariffFilter( group ) {
@@ -45,6 +45,7 @@ export default function IndexPage( { location, data } ) {
       setTariffs( Object.fromEntries( filteredTariffs ) )
    }
 
+
    return (
       <>
          <Head>
@@ -54,15 +55,14 @@ export default function IndexPage( { location, data } ) {
          <Nav/>
          <Header/>
          <main>
-            <Tariffs tariffFilter={ tariffFilter }>
+            <Tariffs tariffFilter={ tariffFilter } setStateOnChangeSlider={ setStateOnChangeSlider }><>
                { Object.keys( tariffs ).map( key =>
-                  <SwiperSlide key={ key }>
+                  <SwiperSlide key={ key } id={ key }>
                      <TariffCard
                         key={ key }
                         id={ key }
                         premium={ tariffs.premium || tariffs.maximum }
                         tariff={ tariffs[key] }
-                        tariffs={ tariffs }
                         collapse={ {
                            collapseGroup,
                            setCollapseGroup,
@@ -72,7 +72,9 @@ export default function IndexPage( { location, data } ) {
                      />
                   </SwiperSlide>
                ) }
+            </>
             </Tariffs>
+            <TariffBtn tariffs={ tariffs }/>
             <CheckAddress/>
             <Equipments/>
             <FAQ/>

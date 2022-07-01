@@ -63,7 +63,7 @@ function TariffCard( { tariff, id, collapse, premium } ) {
 
 
    return (
-      <div className={ `${ s.container } ${ isPremium ? s.premium : '' } card` }>
+      <div className={ `${ s.container } ${ isPremium ? s.premium : '' } card` } id={id}>
 
          <div className={ s.header }>
 

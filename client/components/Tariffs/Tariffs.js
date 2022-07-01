@@ -7,11 +7,16 @@ import { useDispatch } from "react-redux";
 import { showModal } from "../../redux/slices/modalsSlice";
 
 
-function Tariffs( { children, tariffFilter } ) {
+function Tariffs( { children, tariffFilter, setStateOnChangeSlider } ) {
    const dispatch = useDispatch()
 
    function showModalCity() {
       dispatch( showModal( { modal: 'cities', bool: true } ) )
+   }
+
+   function onSetTransition( slider ) {
+      const activeSlideBtn = Array.from( slider.slides ).find( s => s.classList.contains( 'swiper-slide-active' ) )
+      setStateOnChangeSlider( activeSlideBtn )
    }
 
 
@@ -26,7 +31,7 @@ function Tariffs( { children, tariffFilter } ) {
             <div className={ `${ s.slider } slider-tariffs` }>
                <button className="swiper-btn swiper-next"/>
                <button className="swiper-btn swiper-prev"/>
-               <Swiper { ...swiperConfig } navigation={ {
+               <Swiper { ...swiperConfig } onSetTransition={ onSetTransition } navigation={ {
                   nextEl: '.slider-tariffs .swiper-next',
                   prevEl: '.slider-tariffs .swiper-prev',
                } }>
