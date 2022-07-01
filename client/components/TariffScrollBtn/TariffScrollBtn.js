@@ -1,12 +1,12 @@
-import s from "./TariffBtn.module.scss"
+import s from "./TariffScrollBtn.module.scss"
 import { useEffect, useState } from "react";
 import { showModal } from "../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../redux/slices/orderSlice";
 import { useDispatch } from "react-redux";
 
 
-function TariffBtn( props ) {
-   const { tariffs, $btn } = props
+function TariffScrollBtn( props ) {
+   const { tariffs } = props
    const dispatch = useDispatch()
    const [ bounding, setBounding ] = useState( {} )
    const [ styleBtn, setStyleBtn ] = useState( {} )
@@ -104,4 +104,4 @@ function TariffBtn( props ) {
 }
 
 
-export default TariffBtn
+export default TariffScrollBtn

@@ -16,7 +16,7 @@ import { setInitialChannels, setInitialStateTariffs } from "../redux/slices/tari
 // import getLocation from "../api/getLocation";
 import getLocationData from "../api/getLocationData";
 import axios from "axios";
-import TariffBtn from "../components/TariffBtn/TariffBtn";
+import TariffScrollBtn from "../components/TariffScrollBtn/TariffScrollBtn";
 
 
 export default function IndexPage( { location, data } ) {
@@ -74,7 +74,7 @@ export default function IndexPage( { location, data } ) {
                ) }
             </>
             </Tariffs>
-            <TariffBtn tariffs={ tariffs }/>
+            <TariffScrollBtn tariffs={ tariffs }/>
             <CheckAddress/>
             <Equipments/>
             <FAQ/>
