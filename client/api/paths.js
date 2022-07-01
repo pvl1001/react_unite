@@ -3,3 +3,4 @@ export const checkAddressAutocomplete = 'https://api.wifire.ru/api/address/check
 export const mailSenderPath = 'https://home.megafon.ru/form/mail-sender'
 export const getAllTariffsPath = ( location ) => `https://${ location }.home.megafon.ru/billing/bt/json/getalltarifs`
 export const ctRegisterPath = ( ct_site_id ) => `https://api.calltouch.ru/calls-service/RestAPI/requests/'${ ct_site_id }'/register/`
+export const channelsPath = ( id ) => `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${ id }`

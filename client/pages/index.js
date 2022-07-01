@@ -17,6 +17,7 @@ import { setInitialChannels, setInitialStateTariffs } from "../redux/slices/tari
 import getLocationData from "../api/getLocationData";
 import axios from "axios";
 import TariffScrollBtn from "../components/TariffScrollBtn/TariffScrollBtn";
+import { channelsPath } from "../api/paths";
 
 
 export default function IndexPage( { location, data } ) {
@@ -98,7 +99,7 @@ export const getServerSideProps = wrapper.getServerSideProps( store => async ( {
             .map( tariff => tariff.tvId )
       ] ) )
 
-   const channelsPromises = allTvId.map( tvId => axios( `https://home.megafon.ru/billing/bt/json/gettvchannelsbygroup?pack_id=${ tvId }` ) )
+   const channelsPromises = allTvId.map( tvId => axios( channelsPath(tvId) ) )
 
    const channelsResponses = await Promise.all( channelsPromises )
    const { data } = await getLocationData( 'moscow' )
