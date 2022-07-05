@@ -2,12 +2,14 @@ import { Modal } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import s from './ModalCity.module.sass';
-import { setInitialStateTariffs } from "../../../redux/slices/tariffsSlice";
+import { setInitialChannels, setInitialStateTariffs } from "../../../redux/slices/tariffsSlice";
 import getLocationData from "../../../api/getLocationData";
 import { setRegion } from "../../../redux/slices/pageSlice";
+import getChannels from "../../../mixins/getChannels";
 
 
 function ModalCity( props ) {
+   const { show, tariffs } = props
    const dispatch = useDispatch()
    const regions = {
       А: [
@@ -133,11 +135,13 @@ function ModalCity( props ) {
       const { id } = region
       try {
          const { data } = await getLocationData( id )
+         const channelsResponses = await getChannels( tariffs )
          dispatch( setInitialStateTariffs( data ) )
+         dispatch( setInitialChannels( channelsResponses ) )
          dispatch( setRegion( region ) )
          onHide()
-      } catch(err) {
-         console.error(err)
+      } catch ( err ) {
+         console.error( err )
       }
    }
 
@@ -149,7 +153,7 @@ function ModalCity( props ) {
          className={ s.modal }
          dialogClassName={ s.modal_dialog }
          contentClassName={ s.modal_content }
-         show={ props.show }
+         show={ show }
          onHide={ onHide }
       >
          <button
@@ -198,7 +202,8 @@ function ModalCity( props ) {
 
 
 export default connect( state => ({
-   show: state.modals.cities.show
+   show: state.modals.cities.show,
+   tariffs: state.tariffs
 }), {
    showModal
 } )( ModalCity )

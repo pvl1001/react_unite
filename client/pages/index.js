@@ -18,6 +18,7 @@ import getLocationData from "../api/getLocationData";
 import axios from "axios";
 import TariffScrollBtn from "../components/TariffScrollBtn/TariffScrollBtn";
 import { channelsPath } from "../api/paths";
+import getChannels from "../mixins/getChannels";
 
 
 export default function IndexPage( { location, data } ) {
@@ -105,16 +106,7 @@ export const getServerSideProps = wrapper.getServerSideProps( store => async ( {
    // if ( location !== null ) {
 
    const { page, tariffs } = store.getState()
-   const allTvId = Array.from( new Set(
-      [
-         ...Object.values( tariffs )
-            .filter( tariff => tariff.tvId )
-            .map( tariff => tariff.tvId )
-      ] ) )
-
-   const channelsPromises = allTvId.map( tvId => axios( channelsPath( tvId ) ) )
-
-   const channelsResponses = await Promise.all( channelsPromises )
+   const channelsResponses = await getChannels( tariffs )
    const { data } = await getLocationData( page.region.id )
 
    store.dispatch( setInitialStateTariffs( data ) )
