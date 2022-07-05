@@ -4,7 +4,7 @@ import { showModal } from "./modalsSlice";
 import { HYDRATE } from 'next-redux-wrapper';
 import { equipments } from './equipmentsSlice'
 import { amediateka, mir, more, start } from "../../modules/mftv.module";
-import axios from "axios";
+
 
 const { sim, mftv, fr100, fr1000, androidtv, router_4g } = equipments
 
@@ -396,7 +396,6 @@ export const {
    counterAlmond,
    sumAlmondTotalPrice,
    changeAlmondTotalPrice,
-   filterForTabs,
    setInitialChannels,
    setInitialStateTariffs
 } = tariffsSlice.actions

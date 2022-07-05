@@ -1,7 +1,12 @@
 import s from './Header.module.scss'
+import { useSelector } from "react-redux";
+import { memo } from "react";
 
 
 function Header() {
+   const { tariffs } = useSelector( state => state )
+   const allPrices = Object.entries( tariffs ).map( t => t[1].price )
+
 
    return (
       <header className={ s._ + " wrapper" }>
@@ -15,7 +20,7 @@ function Header() {
                   услуг
                   связи!
                </p>
-               <p className={ s.price }>от <b>275 ₽</b> в месяц</p>
+               <p className={ s.price }>от <b>{ Math.min( ...allPrices ) } ₽</b> в месяц</p>
             </div>
          </div>
       </header>
@@ -24,4 +29,4 @@ function Header() {
 }
 
 
-export default Header
+export default memo( Header )
