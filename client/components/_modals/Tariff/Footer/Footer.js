@@ -37,11 +37,14 @@ function Footer( { tariff, id, showModal, setDataOrder } ) {
 
                <span className={ s.price__month }> в месяц</span>
 
-               <nobr>
-                  { Object.values( tariff.equipments ).some( eq => eq.switch ) &&
-                     <span className={ s.price__desc }> с учетом выбранных опций</span>
-                  }
-               </nobr>
+               { tariff.equipments &&
+                  <nobr>
+                     { Object.values( tariff.equipments ).some( eq => eq.switch ) &&
+                        <span className={ s.price__desc }> с учетом выбранных опций</span>
+                     }
+                  </nobr>
+               }
+
             </div>
 
             <button

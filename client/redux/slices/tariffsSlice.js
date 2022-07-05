@@ -119,7 +119,7 @@ export function scrollTo( element, callback = null ) {
 }
 
 
-export const tariffs = {
+const initialTariffs = {
    internet: {
       equipments: {
          androidtv,
@@ -163,7 +163,13 @@ export const tariffs = {
       ],
    },
    vse: {
-      tvId: 3
+      tvId: 3,
+      equipments: {
+         androidtv,
+         fr1000,
+         mftv,
+         sim
+      },
    },
    turbo: {
       dop_params: [ 'Wi-Fi роутер в подарок' ],
@@ -234,7 +240,7 @@ export const tariffs = {
 
 const tariffsSlice = createSlice( {
    name: 'tariffs',
-   initialState: tariffs,
+   initialState: initialTariffs,
    reducers: {
       optionSwitch( state, action ) {
          const { id, eqKey, checked } = action.payload
@@ -351,17 +357,17 @@ const tariffsSlice = createSlice( {
          const data = new Map()
 
          for ( const key in payloadTariffs ) {
-            const tariff = payloadTariffs[key]
-            const group = tariff.name.split( ' ' )[0]
-            tariff.oldPrice = +tariff.price
+            const payloadTariff = payloadTariffs[key]
+            if ( payloadTariff ) {
+               const group = payloadTariff.name.split( ' ' )[0]
+               payloadTariff.oldPrice = +payloadTariff.price
 
-            if ( group === 'Объединяй!' ) { // скидка
-               tariff.price = Math.ceil( tariff.price * 0.5 )
-            } else {
-               tariff.price = Math.ceil( tariff.price * 0.7 )
+               group === 'Объединяй!'  // скидка
+                  ? payloadTariff.price = Math.ceil( payloadTariff.price * 0.5 )
+                  : payloadTariff.price = Math.ceil( payloadTariff.price * 0.7 )
+
+               data.set( key, { ...initialTariffs[key], ...payloadTariff } )
             }
-
-            data.set( key, { ...state[key], ...tariff } )
          }
          return Object.fromEntries( data )
       }

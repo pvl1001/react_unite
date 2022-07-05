@@ -53,7 +53,6 @@ function TariffScrollBtn( props ) {
    function openOrder() {
       const { id } = activeCard
       const tariff = tariffs[id]
-      console.log( id )
 
       dispatch( showModal( {
          modal: 'order',

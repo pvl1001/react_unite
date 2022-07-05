@@ -129,40 +129,42 @@ function ModalTariff( { tariff, show, id, showModal } ) {
                      />
                   }
 
-                  <div className={ `${ s.dop_options } ${ s.wrapp }` }>
-                     <h2 className={ s.dop_options__title }>Дополнительные опции:</h2>
+                  { tariff.equipments &&
+                     <div className={ `${ s.dop_options } ${ s.wrapp }` }>
+                        <h2 className={ s.dop_options__title }>Дополнительные опции:</h2>
 
-                     <ul className={ s.dop_options__cards }>
-                        { Object.keys( tariff.equipments ).map( ( key ) =>
-                           tariff.equipments[key].id === 'sim'
-                              ? <CardOptionSim
-                                 key={ key }
-                                 eqKey={ key }
-                                 equipment={ tariff.equipments[key] }
-                                 id={ id }
-                              />
-                              : <CardOption
-                                 key={ key }
-                                 eqKey={ key }
-                                 equipment={ tariff.equipments[key] }
-                                 id={ id }
-                              />
-                        ) }
-                     </ul>
+                        <ul className={ s.dop_options__cards }>
+                           { Object.keys( tariff.equipments ).map( ( key ) =>
+                              tariff.equipments[key].id === 'sim'
+                                 ? <CardOptionSim
+                                    key={ key }
+                                    eqKey={ key }
+                                    equipment={ tariff.equipments[key] }
+                                    id={ id }
+                                 />
+                                 : <CardOption
+                                    key={ key }
+                                    eqKey={ key }
+                                    equipment={ tariff.equipments[key] }
+                                    id={ id }
+                                 />
+                           ) }
+                        </ul>
 
-                     { tariff.link &&
-                        <div className={ "download-pdf" }>
-                           <button className="download-pdf__icon">
-                              <img src={ '/svg/download-pdf.svg' } alt="download-pdf"/>
-                           </button>
-                           <div className={ s.download_pdf__text }>
-                              <a href={ tariff.link } className="download-pdf__text-link">
-                                 Скачать подробную информацию о тарифе</a>
-                              <span className="download-pdf__text-pdf"> (PDF, 0.4 MB)</span>
+                        { tariff.link &&
+                           <div className={ "download-pdf" }>
+                              <button className="download-pdf__icon">
+                                 <img src={ '/svg/download-pdf.svg' } alt="download-pdf"/>
+                              </button>
+                              <div className={ s.download_pdf__text }>
+                                 <a href={ tariff.link } className="download-pdf__text-link">
+                                    Скачать подробную информацию о тарифе</a>
+                                 <span className="download-pdf__text-pdf"> (PDF, 0.4 MB)</span>
+                              </div>
                            </div>
-                        </div>
-                     }
-                  </div>
+                        }
+                     </div>
+                  }
                </div>
 
                <Footer tariff={ tariff } id={ id }/>

@@ -1,259 +1,145 @@
 import { Modal } from "react-bootstrap";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import s from './ModalCity.module.sass';
-import { useRouter } from 'next/router';
+import { setInitialStateTariffs } from "../../../redux/slices/tariffsSlice";
+import getLocationData from "../../../api/getLocationData";
+import { setRegion } from "../../../redux/slices/pageSlice";
 
 
 function ModalCity( props ) {
-   const { route } = useRouter()
-   const cities = {
-      "А": [
+   const dispatch = useDispatch()
+   const regions = {
+      А: [
          {
-            "name": "Астрахань",
-            "link": "https://astrakhan.home.megafon.ru"
+            name: "Астраханская область",
+            id: 15
          },
       ],
-      "Б": [
+      Б: [
          {
-            "name": "Балашиха",
-            "link": "https://balashiha.home.megafon.ru"
-         },
-         {
-            "name": "Белая Калитва",
-            "link": "https://kalitva.home.megafon.ru"
-         },
-         {
-            "name": "Белгород",
-            "link": "https://bel.home.megafon.ru"
-         },
-         {
-            "name": "Белоярский",
-            "link": "https://beloyarsky.home.megafon.ru"
+            name: "Белгородская область",
+            id: 16
          }
       ],
-      "В": [
+      В: [
          {
-            "name": "Волгодонск",
-            "link": "https://volgodonsk.home.megafon.ru"
-         },
-         {
-            "name": "Воронеж",
-            "link": "https://vrn.home.megafon.ru"
-         },
-      ],
-      "Д": [
-         {
-            "name": "Дмитров",
-            "link": "https://dmitrov.home.megafon.ru"
-         },
-         {
-            "name": "Дубна",
-            "link": "https://dubna.home.megafon.ru"
+            name: "Воронежская область",
+            id: 21
          }
       ],
-      "Ж": [
+      К: [
          {
-            "name": "Железнодорожный",
-            "link": "https://zheldor.home.megafon.ru"
+            name: "Калининградская область",
+            id: 22
+         },
+         {
+            name: "Курская область",
+            id: 26
+         }
+      ],
+      Л: [
+         {
+            name: "Липецкая область",
+            id: 28
+         }
+      ],
+      М: [
+         {
+            name: "Москва и область",
+            id: 1
+         },
+         {
+            name: "Мурманская область",
+            id: 29
+         }
+      ],
+      О: [
+         {
+            name: "Орловская область",
+            id: 33
          },
       ],
-      "З": [
+      П: [
          {
-            "name": "Зеленоград",
-            "link": "https://zelenograd.home.megafon.ru"
+            name: "Приморский край",
+            id: 68
+         },
+         {
+            name: "Псковская область",
+            id: 39
+         }
+      ],
+      Р: [
+         {
+            name: "Ростовская область",
+            id: 42
+         }
+      ],
+      С: [
+         {
+            name: "Самарская область",
+            id: 65
+         },
+         {
+            name: "Санкт-Петербург и область",
+            id: 14
+         }
+      ],
+      Т: [
+         {
+            name: "Тверская область",
+            id: 47
+         }
+      ],
+      Х: [
+         {
+            name: "Ханты-Мансийский АО",
+            id: 57
          },
       ],
-      "К": [
+      Ч: [
          {
-            "name": "Калининград",
-            "link": "https://kaliningrad.home.megafon.ru"
-         },
-         {
-            "name": "Клин",
-            "link": "https://klin.home.megafon.ru"
-         },
-         {
-            "name": "Королев",
-            "link": "https://korolev.home.megafon.ru"
-         },
-         {
-            "name": "Курск",
-            "link": "https://ks.home.megafon.ru"
-         },
-         {
-            "name": "Курчатов",
-            "link": "https://kurchatov.home.megafon.ru"
+            name: "Чувашская Республика",
+            id: 61
          },
       ],
-      "Л": [
+      Я: [
          {
-            "name": "Лангепас",
-            "link": "https://langepas.home.megafon.ru"
+            name: "Ямало-Ненецкий АО",
+            id: 63
          },
-         {
-            "name": "Липецк",
-            "link": "https://lc.home.megafon.ru"
-         },
-         {
-            "name": "Лобня",
-            "link": "https://lobnya.home.megafon.ru"
-         },
-         {
-            "name": "Люберцы",
-            "link": "https://lyubercy.home.megafon.ru"
-         },
-      ],
-      "М": [
-         {
-            "name": "Мурманск",
-            "link": "https://murmansk.home.megafon.ru"
-         },
-         {
-            "name": "Москва и область",
-            "link": "https://moscow.home.megafon.ru"
-         },
-         {
-            "name": "Мценск",
-            "link": "https://mtsensk.home.megafon.ru"
-         },
-      ],
-      "Н": [
-         {
-            "name": "Находка",
-            "link": "https://nht.home.megafon.ru"
-         },
-         {
-            "name": "Нефтеюганск",
-            "link": "https://nefteyugansk.home.megafon.ru"
-         },
-         {
-            "name": "Новосибирск",
-            "link": "https://nsk.home.megafon.ruvezde"
-         },
-         {
-            "name": "Новочебоксарск",
-            "link": "https://cheb.home.megafon.ru"
-         },
-         {
-            "name": "Новый Уренгой",
-            "link": "https://n-urengoy.home.megafon.ru"
-         },
-         {
-            "name": "Нягань",
-            "link": "https://nyagan.home.megafon.ru"
-         },
-      ],
-      "О": [
-         {
-            "name": "Орел",
-            "link": "https://orl.home.megafon.ru"
-         },
-      ],
-      "П": [
-         {
-            "name": "Пойковский",
-            "link": "https://poykovsky.home.megafon.ru"
-         },
-         {
-            "name": "Приморский край",
-            "link": "https://prim.home.megafon.ru"
-         },
-         {
-            "name": "Псков",
-            "link": "https://pskov.home.megafon.ru"
-         },
-      ],
-      "Р": [
-         {
-            "name": "Раменское",
-            "link": "https://ramensk.home.megafon.ru"
-         },
-         {
-            "name": "Ростов-на-Дону",
-            "link": "https://rostov.home.megafon.ru"
-         },
-      ],
-      "С": [
-         {
-            "name": "Самара",
-            "link": "https://samara.home.megafon.ru"
-         },
-         {
-            "name": "Североморск",
-            "link": "https://murmansk.home.megafon.ru"
-         },
-         {
-            "name": "Серпухов",
-            "link": "https://serpuhov.home.megafon.ru"
-         },
-         {
-            "name": "Советский",
-            "link": "https://sovetsky.home.megafon.ru"
-         },
-         {
-            "name": "Солнечногорск",
-            "link": "https://moscow.home.megafon.ru"
-         },
-         {
-            "name": "Сочи",
-            "link": "https://sochi.home.megafon.ru"
-         },
-         {
-            "name": "Старый Оскол",
-            "link": "https://osk.home.megafon.ru"
-         },
-         {
-            "name": "Сургут",
-            "link": "https://surgut.home.megafon.ru"
-         },
-      ],
-      "Т": [
-         {
-            "name": "Тверь",
-            "link": "https://tver.home.megafon.ru"
-         },
-         {
-            "name": "Тихвин",
-            "link": "https://tikhvin.home.megafon.ru"
-         },
-      ],
-      "У": [
-         {
-            "name": "Ульяновск", //!
-            "link": "https://ulyanovsk.home.megafon.ru"
-         },
-      ],
-      "Х": [
-         {
-            "name": "Ханты-Мансийск",
-            "link": "https://khanty-mansiysk.home.megafon.ru"
-         },
-      ],
-      "Ч": [
-         {
-            "name": "Чебоксары",
-            "link": "https://cheb.home.megafon.ru"
-         },
-      ],
-      "Ш": [
-         {
-            "name": "Шумерля",
-            "link": "https://shumerlya.home.megafon.ru"
-         },
-      ],
-      "Ю": [
-         {
-            "name": "Югорск",
-            "link": "https://yugorsk.home.megafon.ru"
-         },
-      ],
+      ]
    }
+   const topRegions = [
+      {
+         name: "Москва и область",
+         id: 1
+      },
+      {
+         name: "Санкт-Петербург и область",
+         id: 14
+      }
+   ]
+
 
    const onHide = () => props.showModal( {
       modal: 'cities',
       bool: false
    } )
+
+   async function clickHandler( e, region ) {
+      e.preventDefault()
+      const { id } = region
+      try {
+         const { data } = await getLocationData( id )
+         dispatch( setInitialStateTariffs( data ) )
+         dispatch( setRegion( region ) )
+         onHide()
+      } catch(err) {
+         console.error(err)
+      }
+   }
 
 
    return (
@@ -278,33 +164,26 @@ function ModalCity( props ) {
 
             <div className={ s.region }>
                <div className={ s.region__top }>
-                  <div className={ s.region__link_container }>
-                     <a
-                        href={ "https://moscow.home.megafon.ru" + route }
-                        className={ s.region__link }>
-                        Москва и область
-                     </a>
-                  </div>
-                  <div className={ s.region__link_container }>
-                     <a
-                        href={ "https://spb.home.megafon.ru" + route }
-                        className={ s.region__link }>
-                        Санкт-Петербург и область
-                     </a>
-                  </div>
+                  { topRegions.map( region =>
+                     <div key={ region.id } className={ s.region__link_container }>
+                        <a
+                           onClick={ ( e ) => clickHandler( e, region ) }
+                           className={ s.region__link }
+                        >{ region.name }</a>
+                     </div>
+                  ) }
                </div>
 
-               { Object.keys( cities ).map( group =>
+               { Object.keys( regions ).map( group =>
                   <div key={ group } className={ s.region__group }>
                      <div className={ s.region__title }>{ group }</div>
 
-                     { cities[group].map( ( city ) =>
-                        <div key={ city.name } className={ s.region__link_container }>
+                     { regions[group].map( ( region ) =>
+                        <div key={ region.name } className={ s.region__link_container }>
                            <a
-                              href={ city.link + route }
-                              className={ s.region__link }>
-                              { city.name }
-                           </a>
+                              className={ s.region__link }
+                              onClick={ ( e ) => clickHandler( e, region ) }
+                           >{ region.name }</a>
                         </div>
                      ) }
 

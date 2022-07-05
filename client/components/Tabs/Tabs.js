@@ -5,7 +5,7 @@ import UniteIcon from '../../public/svg/tabs_unite.svg'
 import ForHomeIcon from '../../public/svg/tabs_forhome.svg'
 
 
-function Tabs( { tariffFilter } ) {
+function Tabs( { setActiveTab } ) {
    const [ tabs, setTabs ] = useState( {
       'Все': {
          name: 'Все тарифы',
@@ -30,7 +30,7 @@ function Tabs( { tariffFilter } ) {
             : tabs[k].active = false
       }
       setTabs( newTabs )
-      tariffFilter( key )
+      setActiveTab( key )
    }
 
    function activeClass( active ) {

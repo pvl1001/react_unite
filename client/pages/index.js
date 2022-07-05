@@ -6,7 +6,7 @@ import Equipments from "../components/Equipments/Equipments";
 // import AppBanner from "../components/AppBanner/AppBanner";
 import FAQ from "../components/FAQ/FAQ";
 import Nav from "../components/Nav/Nav";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TariffCard from "../components/Tariffs/TariffCard/TariffCard";
 import { SwiperSlide } from "swiper/react";
@@ -25,19 +25,29 @@ export default function IndexPage( { location, data } ) {
    const [ collapseGroup, setCollapseGroup ] = useState( false )
    const [ collapseChannels, setCollapseChannels ] = useState( [] )
    const [ stateOnChangeSlider, setStateOnChangeSlider ] = useState( null )
-   const t = useSelector( state => {
+   const [ activeTab, setActiveTab ] = useState( '' )
+   const allTariffs = useSelector( state => state.tariffs )
+   const slideTariffs = useSelector( state => {
       const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
       return { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium }
    } )
-   const [ tariffs, setTariffs ] = useState( t )
+   const fromEntriesTariffs = Object.fromEntries(
+      Object.entries( slideTariffs ).filter( t => t[1] )
+   )
+   const [ tariffs, setTariffs ] = useState( fromEntriesTariffs )
+
+
+   useEffect( () => {
+      tariffFilter( activeTab || 'Все' )
+   }, [ activeTab, allTariffs ] )
 
    function tariffFilter( group ) {
       const filteredTariffs = new Map()
       if ( group === 'Все' ) {
-         return setTariffs( t )
+         return setTariffs( fromEntriesTariffs )
       }
-      for ( const key in t ) {
-         const tariff = t[key]
+      for ( const key in fromEntriesTariffs ) {
+         const tariff = fromEntriesTariffs[key]
          const tariffGroup = tariff.name.split( ' ' )[0]
          if ( tariffGroup === group ) {
             filteredTariffs.set( key, tariff )
@@ -56,7 +66,10 @@ export default function IndexPage( { location, data } ) {
          <Nav/>
          <Header/>
          <main>
-            <Tariffs tariffFilter={ tariffFilter } setStateOnChangeSlider={ setStateOnChangeSlider }><>
+            <Tariffs
+               setActiveTab={ setActiveTab }
+               setStateOnChangeSlider={ setStateOnChangeSlider }
+            ><>
                { Object.keys( tariffs ).map( key =>
                   <SwiperSlide key={ key } id={ key }>
                      <TariffCard
@@ -91,7 +104,7 @@ export const getServerSideProps = wrapper.getServerSideProps( store => async ( {
    // const { location } = await getLocation( ip )
    // if ( location !== null ) {
 
-   const { tariffs } = store.getState()
+   const { page, tariffs } = store.getState()
    const allTvId = Array.from( new Set(
       [
          ...Object.values( tariffs )
@@ -99,10 +112,10 @@ export const getServerSideProps = wrapper.getServerSideProps( store => async ( {
             .map( tariff => tariff.tvId )
       ] ) )
 
-   const channelsPromises = allTvId.map( tvId => axios( channelsPath(tvId) ) )
+   const channelsPromises = allTvId.map( tvId => axios( channelsPath( tvId ) ) )
 
    const channelsResponses = await Promise.all( channelsPromises )
-   const { data } = await getLocationData( 'moscow' )
+   const { data } = await getLocationData( page.region.id )
 
    store.dispatch( setInitialStateTariffs( data ) )
    store.dispatch( setInitialChannels( channelsResponses ) )

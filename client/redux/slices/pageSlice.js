@@ -3,6 +3,10 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { stateMegaTariff } from './megaTariffSlice';
 
 const initialState = {
+   region: {
+      name: "Москва и область",
+      id: 1
+   },
    name: 'Объединяй!',
    tariffDefault: 'for-their',
    header: {
@@ -87,6 +91,9 @@ const pageSlice = createSlice( {
    name: 'page',
    initialState,
    reducers: {
+      setRegion( state, action ) {
+         state.region = action.payload
+      },
       setInitialStatePage( state, action ) {
          return action.payload
       }
@@ -96,5 +103,5 @@ const pageSlice = createSlice( {
    }
 } )
 
-export const { setInitialStatePage } = pageSlice.actions
+export const { setInitialStatePage, setRegion } = pageSlice.actions
 export default pageSlice.reducer
