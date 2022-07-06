@@ -12,10 +12,10 @@ import '../public/styles/main.sass'
 
 
 import Head from 'next/head';
-// import Analytics from "../analytics/Analytics";
 import { wrapper } from '../redux/store';
-import Script from 'next/script';
 import Layout from "../components/Layout";
+import Analytics from "../analytics/Analytics";
+import HeadAnalytics from "../analytics/HeadAnalytics";
 
 
 function App( { Component, pageProps } ) {
@@ -25,12 +25,12 @@ function App( { Component, pageProps } ) {
          <Head>
             <title>NextJS</title>
             <link rel="icon" href="/favicon.ico"/>
-            {/*<Script async src="https://www.googletagmanager.com/gtag/js?id=UA-23688716-34"/>*/}
+            <HeadAnalytics/>
          </Head>
          <Layout>
             <Component { ...pageProps }/>
          </Layout>
-         {/*<Analytics/>*/}
+         <Analytics/>
       </>
    )
 }

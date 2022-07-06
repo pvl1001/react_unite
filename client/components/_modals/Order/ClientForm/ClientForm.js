@@ -48,8 +48,7 @@ function ClientForm( props ) {
    useEffect( () => {
       window.mask = require( '../../../../plugins/jquery.mask' )
       $( 'input[name=phone]' ).mask( '+7(000)000-00-00', { placeholder: "" } )
-
-      return () => setIsValid(0)
+      return () => setIsValid( 0 )
    }, [] )
 
    useEffect( () => {
@@ -68,6 +67,7 @@ function ClientForm( props ) {
    async function submit( data ) {
       setIsLoading( true )
       const payload = { data, order, setDataOrder }
+      console.log(order)
       const { response: mailSender, dataOrder } = await getMailSender( payload )
       if ( mailSender.code !== '200' ) {
          const error = await setRegister( order.eventLabel, dataOrder )

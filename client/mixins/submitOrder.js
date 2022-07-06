@@ -1,5 +1,6 @@
 import { api } from "../api/api";
 import { ctRegisterPath, mailSenderPath } from "../api/paths";
+import { analytic_id } from "../analytics/Analytics";
 
 
 const errorResponse = {
@@ -9,10 +10,11 @@ const errorResponse = {
 
 
 export async function setRegister( eventLabel, dataOrder ) {
+   // console.log(eventLabel)
    const { calltracking_params, clientName, clientPhone, city, tariffId, tariffName, comment } = dataOrder
-   if ( window.ym !== undefined ) {
-      ym( 66149989, 'reachGoal', 'zayavka_megafon' )
-      ym( 66149989, 'reachGoal', eventLabel.send )
+   if ( ym ) {
+      ym( analytic_id, 'reachGoal', 'zayavka_megafon' )
+      ym( analytic_id, 'reachGoal', eventLabel.send )
    }
 
    if ( calltracking_params ) {
@@ -55,7 +57,7 @@ export async function getMailSender( payload ) {
       tariffId,
       tariffName,
       comment,
-      calltracking_params: window.ct !== undefined ? ct( 'calltracking_params', 'g96m2c8n' ).sessionId : '',
+      calltracking_params: ct( 'calltracking_params', 'g96m2c8n' )?.sessionId ?? '',
    }
 
    try {
