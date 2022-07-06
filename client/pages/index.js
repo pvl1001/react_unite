@@ -30,7 +30,18 @@ export default function IndexPage( { location, data } ) {
    const allTariffs = useSelector( state => state.tariffs )
    const slideTariffs = useSelector( state => {
       const { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium } = state.tariffs
-      return { internet, dvainet, hit, their, vse, turbo, econom, films, maximum, premium }
+      return {
+         dvainet,
+         turbo,
+         their,
+         premium,
+         maximum,
+         hit,
+         films,
+         econom,
+         vse,
+         internet,
+      }
    } )
    const fromEntriesTariffs = Object.fromEntries(
       Object.entries( slideTariffs ).filter( t => t[1] )
