@@ -12,15 +12,21 @@ import { showModal } from "../../../redux/slices/modalsSlice";
 
 
 function OrderForm( props ) {
-   const { title, icon, description, label } = props.result.text
-   const { order } = useSelector( state => state )
+   const { result, resultNull } = props
    const dispatch = useDispatch()
+   const { order, tariffs } = useSelector( state => state )
    const [ isLoading, setIsLoading ] = useState( false )
+   const [ eventLabel, setEventLabel ] = useState( {} )
 
    useEffect( () => {
       window.mask = require( '../../../plugins/jquery.mask' )
       $( 'input[name="phone"]' ).mask( '+7(000)000-00-00', { placeholder: "" } )
-   }, [ props.result.result ] )
+
+      setEventLabel( {
+         order: `click_button_order_${ result.result === 1 ? 'address_success' : 'address' }`,
+         send: `click_button_send_${ result.result === 1 ? 'address_success' : 'address' }`
+      } )
+   }, [ result.result ] )
 
    const errorMessage = 'Заполните поле!'
    const validationSchema = object().shape( {
@@ -28,32 +34,43 @@ function OrderForm( props ) {
       name: string().min( 2, errorMessage ).required( errorMessage ),
    } )
 
-   async function submit( data ) {
+   async function submit( { name, phone } ) {
       setIsLoading( true )
-      const payload = { data, order, setDataOrder }
-      const { response: mailSender, dataOrder } = await getMailSender( payload )
-
-      if ( mailSender.code === '200' ) {
-         const error = await setRegister( order.eventLabel, dataOrder )
-         setIsLoading( false )
-         if ( error ) {
-            return dispatch( showModal( { modal: 'orderResponse', bool: true, props: error } ) )
-         }
-         props.resultNull()
+      const clientData = { clientName: name, clientPhone: phone }
+      const payload = {
+         ...order, ...clientData,
+         tariffId: tariffs.their.tariffId,
+         tariffName: tariffs.their.name,
+         price: tariffs.their.price
       }
-      setIsLoading( false )
-      dispatch( showModal( { modal: 'order', bool: true, props: mailSender } ) )
+      dispatch( setDataOrder( payload ) )
+      try {
+         const { response: mailSender, dataOrder } = await getMailSender( payload )
+         if ( mailSender.code === '200' ) {
+            const error = await setRegister( eventLabel, dataOrder )
+            setIsLoading( false )
+            if ( error ) {
+               return dispatch( showModal( { modal: 'orderResponse', bool: true, props: error } ) )
+            }
+            resultNull()
+         }
+         setIsLoading( false )
+         dispatch( showModal( { modal: 'order', bool: true, props: mailSender } ) )
+      } catch ( err ) {
+         console.error( err )
+      }
+
    }
 
    return (
       <div className={ s._ }>
          <h1 className={ s.title }>
-            { title }
+            { result.text.title }
             <span className={ s.smile_icon }>
-               <Image  src={ `/svg/${ icon }.svg` } width={ 38 } height={ 40 }/>
+               <Image src={ `/svg/${ result.text.icon }.svg` } width={ 38 } height={ 40 }/>
             </span>
          </h1>
-         <p className={ s.description } dangerouslySetInnerHTML={ { __html: description } }/>
+         <p className={ s.description } dangerouslySetInnerHTML={ { __html: result.text.description } }/>
 
          <Formik
             initialValues={ {
@@ -78,7 +95,7 @@ function OrderForm( props ) {
                onSubmit={ handleSubmit }
             >
                <div className={ s.form__container }>
-                  <p className={ s.input__label }>{ label }</p>
+                  <p className={ s.input__label }>{ result.text.label }</p>
                   <div className={ s.inputs_row }>
                      <div className={ s.input }>
                         <input

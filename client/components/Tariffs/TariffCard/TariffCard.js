@@ -27,12 +27,12 @@ function TariffCard( { tariff, id, collapse, premium } ) {
          bool: true
       } ) )
       dispatch( setDataOrder( {
-         tariffName: `${ tariff.name }`,
+         tariffName: tariff.name,
          tariffId: tariff.tariffId,
          price: tariff.price,
          eventLabel: {
-            order: `click_button_order_${ tariff.id }`,
-            send: `click_button_send_${ tariff.id }`
+            order: `click_button_order_${ id }`,
+            send: `click_button_send_${ id }`
          }
       } ) )
    }
@@ -41,20 +41,16 @@ function TariffCard( { tariff, id, collapse, premium } ) {
       dispatch( showModal( {
          modal: 'mftv',
          bool: true,
-         props: { tariff }
+         props: { tariff, id }
       } ) )
    }
 
    function showModalTariff() {
-      // if ( tariff.id === 'vse' ) {
-      //    return router.push( '/internetvse' )
-      // }
       dispatch( showModal( {
          modal: 'tariff',
          bool: true,
          props: id
       } ) )
-      // analyticsEvent( `click_button_details_${ tariff.id }` )
    }
 
    function collapseGroup() {

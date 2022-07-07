@@ -11,7 +11,7 @@
 }
 
 .premium {
-   border: 2px solid var(--mf-premium);
+   outline: 2px solid var(--mf-premium);
 }
 
 .header {
@@ -21,6 +21,7 @@
 }
 
 .tariff_icon {
+   display: flex;
    width: 32px;
    height: 32px;
    margin-bottom: 8px;

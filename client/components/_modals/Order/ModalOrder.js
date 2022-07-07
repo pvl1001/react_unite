@@ -1,9 +1,8 @@
 import s from './ModalOrder.module.sass';
 import { useEffect, useState } from "react";
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from "react-bootstrap";
 import { showModal } from "../../../redux/slices/modalsSlice";
-import { setDataOrder } from "../../../redux/slices/orderSlice";
 import AddressInput from "./Input/AddressInput";
 import ClientForm from "./ClientForm/ClientForm";
 import ArrowIcon from '../../../public/svg/arrow_slider.svg'
@@ -11,8 +10,9 @@ import Response from "./Response/Response";
 import Footer from "../../Footer/Footer";
 
 
-function ModalOrder( props ) {
-   const { order, setDataOrder, showModal, show, responseFromCheckAddress } = props
+function ModalOrder() {
+   const dispatch = useDispatch()
+   const { show, props: responseFromCheckAddress } = useSelector( state => state.modals.order )
    const [ apiResponse, setApiResponse ] = useState( null )
    const isAnimation = typeof window !== 'undefined' && window.innerWidth < 768
 
@@ -23,10 +23,10 @@ function ModalOrder( props ) {
 
 
    function onHide() {
-      showModal( {
+      dispatch( showModal( {
          modal: 'order',
          bool: false
-      } )
+      } ) )
       setApiResponse( null )
    }
 
@@ -71,11 +71,7 @@ function ModalOrder( props ) {
                   classNameInput={ 'js-address-input' }
                />
 
-               <ClientForm
-                  order={ order }
-                  setDataOrder={ setDataOrder }
-                  setApiResponse={ setApiResponse }
-               />
+               <ClientForm setApiResponse={ setApiResponse }/>
             </div>
          }
 
@@ -85,11 +81,4 @@ function ModalOrder( props ) {
 }
 
 
-export default connect( state => ({
-   show: state.modals.order.show,
-   order: state.order,
-   responseFromCheckAddress: state.modals.order.props
-}), {
-   showModal,
-   setDataOrder,
-} )( ModalOrder )
+export default ModalOrder

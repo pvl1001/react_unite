@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { initialStatePage } from "./pageSlice";
 
 
 function arrEquipmentsChecked( value ) {
    if ( Array.isArray( value ) ) {
       const arrEq = value.filter( eq => eq.switch ).map( eq => eq.id )
-      return arrEq.length
-         ? ' ' + arrEq.join( ', ' )
-         : ''
+      return arrEq.length ? arrEq.join( ', ' ) : ''
    }
-   return ` ${ value }`
+   return ' ' + value
 }
 
 function isPrice( value ) {
@@ -20,7 +19,7 @@ function isPrice( value ) {
 
 const initialState = {
    eventLabel: {},
-   city: '',
+   city: initialStatePage.region.name,
    clientName: '',
    clientPhone: '',
    clientAddress: '',
@@ -37,32 +36,21 @@ export const orderSlice = createSlice( {
    name: 'order',
    initialState,
    reducers: {
-      setDataOrder( state, action ) {
-         const data = action.payload
-
-         const orderData = {
-            city: data.city || state.city,
-            clientName: data.clientName || state.clientName,
-            clientPhone: data.clientPhone || state.clientPhone,
-            clientAddress: data.clientAddress || state.clientAddress,
-            house_guid: data.house_guid || state.house_guid,
-            tariffId: data.tariffId || state.tariffId,
-            tariffName: data.tariffName && data.tariffName !== state.tariffName
-               ? data.tariffName
-               : state.tariffName,
-            equipments: data.equipments
-               ? arrEquipmentsChecked( data.equipments )
-               : '',
-            price: data.price
-               ? isPrice( data.price )
-               : '',
-            eventLabel: data.eventLabel,
+      setDataOrder( state, { payload } ) {
+         const { equipments, price, tariffName, tariffId } = payload
+         return {
+            ...state, ...payload,
+            tariffName: tariffName || '',
+            tariffId: tariffId || '',
+            equipments: equipments ? arrEquipmentsChecked( equipments ).trim() : '',
+            price: price ? isPrice( price ).trim() : '',
             get comment() {
-               return (`${ (this.clientAddress && 'По адресу ' + this.clientAddress) } ${ this.tariffName } ${ this.equipments } ${ this.price }`)
-                  .replace( /\s+/g, ' ' ).trim()
-            },
+               return (
+                  `${ (this.clientAddress ? 'По адресу ' + this.clientAddress : '') } ${ this.tariffName } ${ this.equipments } ${ this.price }`)
+                  .replace( /\s+/g, ' '
+                  ).trim()
+            }
          }
-         return { ...state, ...orderData }
       }
    }
 } )

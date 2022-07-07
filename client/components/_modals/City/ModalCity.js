@@ -6,6 +6,7 @@ import { setInitialChannels, setInitialStateTariffs } from "../../../redux/slice
 import getLocationData from "../../../api/getLocationData";
 import { setRegion } from "../../../redux/slices/pageSlice";
 import getChannels from "../../../mixins/getChannels";
+import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 
 function ModalCity( props ) {
@@ -139,6 +140,7 @@ function ModalCity( props ) {
          dispatch( setInitialStateTariffs( data ) )
          dispatch( setInitialChannels( channelsResponses ) )
          dispatch( setRegion( region ) )
+         dispatch( setDataOrder( { city: region.name } ) )
          onHide()
       } catch ( err ) {
          console.error( err )

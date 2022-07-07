@@ -87,7 +87,6 @@ export const templateEqAlmond = [
    }
 ]
 
-
 const closeModal = ( modal ) => {
    store.getState().modals[modal].show && store.dispatch( showModal( { modal, bool: false } ) )
 }
@@ -119,128 +118,137 @@ export function scrollTo( element, callback = null ) {
 }
 
 
-const initialTariffs = {
-   internet: {
-      equipments: {
-         androidtv,
-         fr1000,
-         mftv,
-         sim
-      },
-   },
-   dvainet: {
-      equipments: {
-         androidtv,
-         fr1000,
-         mftv,
-         sim
-      },
-   },
-   hit: {
-      tvId: 2,
-      equipments: {
-         androidtv,
-         fr1000,
-         mftv,
-         sim
-      }
-   },
-   their: {
-      tvId: 3,
-      dop_params: [
-         'Аренда роутера за 0 ₽',
-         'Безлимитный мобильный интернет на соц. сети и Youtube'
-      ],
-      equipments: {
-         androidtv,
-         fr1000,
-         mftv,
-         sim
-      },
-      mftv: [
-         start,
-         mir
-      ],
-   },
-   vse: {
-      tvId: 3,
-      equipments: {
-         androidtv,
-         fr1000,
-         mftv,
-         sim
-      },
-   },
-   turbo: {
-      dop_params: [ 'Wi-Fi роутер в подарок' ],
-      equipments: {
-         fr1000,
-      }
-   },
-   econom: {
-      tvId: 1,
-      equipments: {
-         androidtv,
-         fr100,
-         mftv,
-         sim
-      }
-   },
-   films: {
-      equipments: {
-         androidtv,
-         fr100,
-         mftv,
-         sim
-      },
-      mftv: [
-         start,
-         mir
-      ],
-   },
-   maximum: {
-      tvId: 4,
-      equipments: {
-         androidtv,
-         fr1000,
-         mftv,
-      },
-   },
-   premium: {
-      tvId: 4,
-      dop_params: [
-         'Аренда роутера и ТВ-приставки за 0 ₽',
-         'Безлимитный мобильный интернет на соц. сети и Youtube'
-      ],
-      equipments: {
-         androidtv,
-         fr1000,
-         mftv,
-         sim
-      },
-      mftv: [
-         start,
-         mir,
-         amediateka,
-         more
-      ],
-   },
-   vezde: {
-      tvId: 1,
-      rentDevice: [
-         {
-            text: "Аренда 4G Wi-Fi роутера",
-            price: 100
-         }
-      ],
-      equipments: { router_4g },
-      link: "/uploads/docs/2022/home/tariff_5687_chuvashia.pdf"
-   }
-}
-
 const tariffsSlice = createSlice( {
    name: 'tariffs',
-   initialState: initialTariffs,
+   initialState: {
+      internet: {
+         tariffId: 4271,
+         equipments: {
+            androidtv,
+            fr1000,
+            mftv,
+            sim
+         },
+      },
+      dvainet: {
+         tariffId: 5328,
+         equipments: {
+            androidtv,
+            fr1000,
+            mftv,
+            sim
+         },
+      },
+      hit: {
+         tariffId: 5329,
+         tvId: 2,
+         equipments: {
+            androidtv,
+            fr1000,
+            mftv,
+            sim
+         }
+      },
+      their: {
+         tariffId: 5330,
+         tvId: 3,
+         dop_params: [
+            'Аренда роутера за 0 ₽',
+            'Безлимитный мобильный интернет на соц. сети и Youtube'
+         ],
+         equipments: {
+            androidtv,
+            fr1000,
+            mftv,
+            sim
+         },
+         mftv: [
+            start,
+            mir
+         ],
+      },
+      vse: {
+         tariffId: 4273,
+         tvId: 3,
+         equipments: {
+            androidtv,
+            fr1000,
+            mftv,
+            sim
+         },
+      },
+      turbo: {
+         tariffId: 4276,
+         dop_params: [ 'Wi-Fi роутер в подарок' ],
+         equipments: {
+            fr1000,
+         }
+      },
+      econom: {
+         tariffId: 5327,
+         tvId: 1,
+         equipments: {
+            androidtv,
+            fr100,
+            mftv,
+            sim
+         }
+      },
+      films: {
+         tariffId: 5331,
+         equipments: {
+            androidtv,
+            fr100,
+            mftv,
+            sim
+         },
+         mftv: [
+            start,
+            mir
+         ],
+      },
+      maximum: {
+         tariffId: 4275,
+         tvId: 4,
+         equipments: {
+            androidtv,
+            fr1000,
+            mftv,
+         },
+      },
+      premium: {
+         tariffId: 5347,
+         tvId: 4,
+         dop_params: [
+            'Аренда роутера и ТВ-приставки за 0 ₽',
+            'Безлимитный мобильный интернет на соц. сети и Youtube'
+         ],
+         equipments: {
+            androidtv,
+            fr1000,
+            mftv,
+            sim
+         },
+         mftv: [
+            start,
+            mir,
+            amediateka,
+            more
+         ],
+      },
+      vezde: {
+         tariffId: 3981,
+         tvId: 1,
+         rentDevice: [
+            {
+               text: "Аренда 4G Wi-Fi роутера",
+               price: 100
+            }
+         ],
+         equipments: { router_4g },
+         link: "/uploads/docs/2022/home/tariff_5687_chuvashia.pdf"
+      }
+   },
    reducers: {
       optionSwitch( state, action ) {
          const { id, eqKey, checked } = action.payload
@@ -366,7 +374,8 @@ const tariffsSlice = createSlice( {
                   ? payloadTariff.price = Math.ceil( payloadTariff.price * 0.5 )
                   : payloadTariff.price = Math.ceil( payloadTariff.price * 0.7 )
 
-               data.set( key, { ...initialTariffs[key], ...payloadTariff } )
+               const initialState = tariffsSlice.getInitialState()[key]
+               data.set( key, { ...initialState, ...payloadTariff } )
             }
          }
          return Object.fromEntries( data )

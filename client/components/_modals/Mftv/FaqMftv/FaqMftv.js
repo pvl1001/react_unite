@@ -1,12 +1,12 @@
 import s from './FaqMftv.module.sass'
 import { wrapp } from '../../Tariff/ModalTariff.module.sass'
 import { Accordion } from "react-bootstrap";
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { showModal } from "../../../../redux/slices/modalsSlice";
-import { setDataOrder } from "../../../../redux/slices/orderSlice";
 
 
-function FaqMftv( props ) {
+function FaqMftv() {
+   const dispatch = useDispatch()
    const faq = [
       {
          "question": "Как смотреть фильмы и сериалы из пакетов и сервисов, включённых в тариф «Объединяй!»?",
@@ -26,16 +26,9 @@ function FaqMftv( props ) {
       }
    ]
 
+
    function showModalOrder() {
-      props.showModal( { modal: 'order', bool: true } )
-      props.setDataOrder( {
-         tariffName: props.tariff.name,
-         tariffId: props.tariff.tariffId,
-         eventLabel: {
-            order: `click_button_order_${ props.tariff.id }`,
-            send: `click_button_send_${ props.tariff.id }`
-         }
-      } )
+      dispatch( showModal( { modal: 'order', bool: true } ) )
    }
 
 
@@ -69,7 +62,4 @@ function FaqMftv( props ) {
 }
 
 
-export default connect( null, {
-   showModal,
-   setDataOrder
-} )( FaqMftv )
+export default  FaqMftv

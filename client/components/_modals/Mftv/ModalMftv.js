@@ -1,20 +1,34 @@
 import s from './ModalMftv.module.sass'
 import { Modal } from "react-bootstrap";
 import FaqMftv from "./FaqMftv/FaqMftv";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
-import { setDataOrder } from "../../../redux/slices/orderSlice";
 import ItemMftv from "./ItemMftv/ItemMftv";
+import { useEffect } from "react";
+import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 
-function ModalMftv( { show, tariff, showModal, setDataOrder } ) {
+function ModalMftv() {
+   const dispatch = useDispatch()
+   const { show, props } = useSelector( state => state.modals.mftv )
+   const tariff = props?.tariff
+   const id = props?.id
+
+
+   useEffect( () => {
+      if ( show ) {
+         dispatch( setDataOrder( {
+            tariffName: tariff.name,
+            tariffId: tariff.tariffId,
+            equipments: Object.entries( tariff.equipments ).map( eq => eq[1] ),
+            price: tariff.totalPrice || tariff.price,
+         } ) )
+      }
+   }, [ show ] )
 
    if ( tariff ) {
 
-      function onHide() {
-         showModal( { modal: 'mftv', bool: false } )
-      }
-
+      const onHide = () => dispatch( showModal( { modal: 'mftv', bool: false } ) )
 
       return (
          <Modal
@@ -45,12 +59,7 @@ function ModalMftv( { show, tariff, showModal, setDataOrder } ) {
                   ) }
                </ul>
 
-               <FaqMftv
-                  faq={ tariff.mftv.faq }
-                  tariff={ tariff }
-                  showModal={ showModal }
-                  setDataOrder={ setDataOrder }
-               />
+               <FaqMftv tariff={ tariff } id={ id }/>
             </div>
 
          </Modal>
@@ -61,10 +70,4 @@ function ModalMftv( { show, tariff, showModal, setDataOrder } ) {
 }
 
 
-export default connect(
-   state => ({
-      show: state.modals.mftv.show,
-      tariff: state.modals.mftv.props?.tariff,
-   }),
-   { showModal, setDataOrder }
-)( ModalMftv )
+export default ModalMftv

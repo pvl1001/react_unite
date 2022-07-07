@@ -10,7 +10,6 @@ const errorResponse = {
 
 
 export async function setRegister( eventLabel, dataOrder ) {
-   // console.log(eventLabel)
    const { calltracking_params, clientName, clientPhone, city, tariffId, tariffName, comment } = dataOrder
    if ( ym ) {
       ym( analytic_id, 'reachGoal', 'zayavka_megafon' )
@@ -30,7 +29,7 @@ export async function setRegister( eventLabel, dataOrder ) {
       }
 
       try {
-         await api( ctRegisterPath(ct_site_id), ct_data )
+         await api( ctRegisterPath( ct_site_id ), ct_data )
       } catch ( err ) {
          console.log( err )
          return errorResponse
@@ -40,11 +39,7 @@ export async function setRegister( eventLabel, dataOrder ) {
 
 
 export async function getMailSender( payload ) {
-   const { data, order, setDataOrder } = payload
-   const { name: clientName, phone: clientPhone } = data
-   const { city, clientAddress, house_guid, tariffId, tariffName, comment } = order
-
-   setDataOrder( { ...order, clientName, clientPhone } )
+   const { clientName, clientPhone, city, clientAddress, house_guid, tariffId, tariffName, comment } = payload
 
    const dataOrder = {
       clientSite: location.host + location.pathname,

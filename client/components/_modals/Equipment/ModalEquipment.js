@@ -1,7 +1,7 @@
 import s from './ModalEquipment.module.sass'
 import s_modalMftv from '../Mftv/ModalMftv.module.sass'
 import { Modal } from "react-bootstrap";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import Plan from "./Plan/Plan";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { changePlan } from "../../../redux/slices/equipmentsSlice";
@@ -10,10 +10,9 @@ import { useEffect, useState } from "react";
 import Image from 'next/image';
 
 
-function ModalEquipment( props ) {
+function ModalEquipment() {
+   const dispatch = useDispatch()
    const [ pricePlan, setPricePlan ] = useState( null )
-   const pageName = useSelector( state => state.page.name )
-   
    const show = useSelector( state => state.modals.equipment.show )
    const showModalTariff = useSelector( state => state.modals.tariff.show )
    const eqId = useSelector( state => state.modals.equipment.props )
@@ -34,7 +33,7 @@ function ModalEquipment( props ) {
 
    if ( show ) {
 
-      const onHide = () => props.showModal( { modal: 'equipment', bool: false } )
+      const onHide = () => dispatch(showModal( { modal: 'equipment', bool: false } ) )
 
       const eventLabel = eq.id === 'router-4g'
          ? {
@@ -47,19 +46,19 @@ function ModalEquipment( props ) {
          }
 
       function handleChangePlan( payload ) {
-         props.changePlan( payload )
+         dispatch( changePlan( payload ) )
          setPricePlan( payload.value )
       }
 
       function showModalOrder() {
-         props.showModal( { modal: 'order', bool: true } )
-         props.setDataOrder( {
-            tariffName: `${ pageName } ${ tariff.name }`,
+         dispatch( showModal( { modal: 'order', bool: true } ) )
+         dispatch( setDataOrder( {
+            tariffName: tariff.name,
             tariffId: tariff.tariffId,
             equipments: eq.id,
             price: pricePlan,
             eventLabel: eventLabel
-         } )
+         } ) )
       }
 
 

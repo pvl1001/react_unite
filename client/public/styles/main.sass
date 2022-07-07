@@ -63,21 +63,20 @@ button.back
    text-align: right
 
 
+.modal
+   @media (max-width: 767px)
+      &.fade .modal-dialog
+         transition: opacity .2s, transform .2s
+         transform: translate(100%, 0)
+
+      &.show .modal-dialog
+         transform: translate(0)
+
+
 .modal-dialog
    height: auto !important
    width: 100%
    max-width: 820px
-
-
-
-@media (max-width: 767px)
-   .modal.fade .modal-dialog
-      transition: opacity .2s, transform .2s
-      transform: translate(100%, 0)
-
-   .modal.show .modal-dialog
-      transform: translate(0)
-
 
 
 .modal-content
@@ -187,7 +186,7 @@ input[type="text"],
 input[type="tel"]
    height: 60px
    padding: 0 40px 0 16px
-   border: 1px solid #DDDDDD
+   outline: 1px solid #DDDDDD
    border-radius: 8px
    -webkit-appearance: none
 
@@ -221,7 +220,7 @@ input[type="radio"].mf-radio
 
 
 input.valid
-   border: 1px solid var(--mf-green)
+   outline: 1px solid var(--mf-green)
    background: #fff url('../svg/check.svg') calc(100% - 20px) 50% / 15px no-repeat
 
    + label
@@ -230,99 +229,12 @@ input.valid
 
 
 input.error
-   border: 1px solid #F62434
+   outline: 1px solid #F62434
    background: #fff url('../svg/invalid.svg') calc(100% - 23px) 50% / 13px no-repeat
 
    + label
       display: block
       color: #F62434
-
-
-.datepicker.dropdown-menu
-   font-size: 18px
-   padding: 45px 5px 20px
-   border-radius: 0
-   margin-top: 10px
-
-   &:before, &:after
-      display: none
-
-
-   .datepicker-switch
-      font-size: 20px
-      color: var(--mf-green)
-      font-weight: 500
-
-
-   .dow
-      color: #DDDDDD
-      font-size: 15px
-      font-weight: 500
-
-
-   .prev, .next
-      font-size: 0
-      background: url('../svg/arrow-green-l.svg') center / 10px no-repeat
-
-      &:hover
-         background: #eee url('../svg/arrow-green-l.svg') center / 10px no-repeat
-
-
-   .next
-      background: url('../svg/arrow.green-r.svg') center / 10px no-repeat
-
-      &:hover
-         background: #eee url('../svg/arrow.green-r.svg') center / 10px no-repeat
-
-
-   .table-condensed thead > tr:nth-child(2)
-      position: absolute
-      top: 0
-      left: 0
-      width: 100%
-      display: flex
-      align-items: center
-      padding: 10px 5px 0 17px
-
-      th
-         display: flex
-         align-items: center
-
-         &:nth-child(2)
-            order: 1
-            pointer-events: none
-
-
-         &:nth-child(1)
-            margin-left: auto
-            margin-right: 10px
-            order: 2
-
-
-         &:nth-child(3)
-            order: 3
-
-
-   table tr td, .datepicker table tr th
-      width: 47px
-      height: 40px
-
-
-   .active.day
-      color: var(--mf-green) !important
-      border: 0 !important
-      background-color: transparent !important
-
-      &:hover
-         background-color: #eee !important
-
-
-   @media (max-height: 700px)
-      position: fixed
-      top: auto !important
-      left: 10px !important
-      bottom: 10px !important
-      right: 10px !important
 
 
 .switch

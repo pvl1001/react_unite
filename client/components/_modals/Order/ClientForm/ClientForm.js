@@ -7,9 +7,17 @@ import valid from "../../../../mixins/valid"
 import { getMailSender, setRegister } from "../../../../mixins/submitOrder"
 import OrderTabs from "../OrderTabs/OrderTabs";
 import { Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { setDataOrder } from "../../../../redux/slices/orderSlice";
 
 
 function ClientForm( props ) {
+   const { setApiResponse } = props
+   const dispatch = useDispatch()
+   const { order } = useSelector( state => state )
+   const [ isLoading, setIsLoading ] = useState( false )
+   const [ activeTab, setActiveTab ] = useState( '' )
+   const [ isValid, setIsValid ] = useState( true )
    const validateName = value => !value ? 'Введите ФИО' : ''
    const validatePhone = value => value?.length <= 15 ? 'Введите номер' : ''
    const self = [
@@ -39,10 +47,6 @@ function ClientForm( props ) {
          validate: validatePhone
       }
    ]
-   const { order, setDataOrder, setApiResponse } = props
-   const [ isLoading, setIsLoading ] = useState( false )
-   const [ activeTab, setActiveTab ] = useState( '' )
-   const [ isValid, setIsValid ] = useState( true )
    const [ inputs, setInputs ] = useState( { self } )
 
    useEffect( () => {
@@ -64,20 +68,26 @@ function ClientForm( props ) {
    }, [ inputs ] )
 
 
-   async function submit( data ) {
+   async function submit( { name, phone } ) {
+      const clientData = { clientName: name, clientPhone: phone }
+      const payload = { ...order, ...clientData }
+      dispatch( setDataOrder( payload ) )
       setIsLoading( true )
-      const payload = { data, order, setDataOrder }
-      console.log(order)
-      const { response: mailSender, dataOrder } = await getMailSender( payload )
-      if ( mailSender.code !== '200' ) {
-         const error = await setRegister( order.eventLabel, dataOrder )
-         setIsLoading( false )
-         if ( error ) {
-            return setApiResponse( error )
+      try {
+         const { response: mailSender, dataOrder } = await getMailSender( payload )
+         if ( mailSender.code !== '200' ) {
+            const error = await setRegister( order.eventLabel, dataOrder )
+            setIsLoading( false )
+            if ( error ) {
+               return setApiResponse( error )
+            }
          }
+         setIsLoading( false )
+         setApiResponse( mailSender )
+      } catch ( err ) {
+         console.error( err )
       }
-      setIsLoading( false )
-      setApiResponse( mailSender )
+
    }
 
    function FormikContext( { validateForm } ) {

@@ -1,13 +1,15 @@
-import { connect } from "react-redux";
+import s from './BannerMfTv.module.sass'
+import { useDispatch } from "react-redux";
 import { showModal } from "../../../../redux/slices/modalsSlice";
 import Image from 'next/image'
 import { useEffect, useState } from "react";
 import images from '../../../../public/images/mftv-banner'
-import s from './BannerMfTv.module.sass'
+
 
 function BannerMfTv( props ) {
-
-   const imgName = props.mftv.length === 2
+   const { mftv, tariff } = props
+   const dispatch = useDispatch()
+   const imgName = mftv.length === 2
       ? 'start'
       : 'all'
    const [ img, setImg ] = useState( images[imgName] )
@@ -27,14 +29,11 @@ function BannerMfTv( props ) {
       }
    } )
 
-   const showModalMfTv = () => props.showModal( {
+   const showModalMfTv = () => dispatch( showModal( {
       modal: 'mftv',
       bool: true,
-      props: {
-         mftv: props.mftv,
-         tariff: props.tariff
-      }
-   } )
+      props: { mftv, tariff }
+   } ) )
 
 
    return (
@@ -43,7 +42,7 @@ function BannerMfTv( props ) {
             <h1 className={ s.title }>МегаФон ТВ</h1>
 
             <p className={ s.desc }>
-               { props.mftv.map( el => el.name ).join( ', ' ) }
+               { mftv.map( el => el.name ).join( ', ' ) }
             </p>
 
             <div>
@@ -63,7 +62,4 @@ function BannerMfTv( props ) {
 }
 
 
-export default connect(
-   null,
-   { showModal }
-)( BannerMfTv )
+export default BannerMfTv

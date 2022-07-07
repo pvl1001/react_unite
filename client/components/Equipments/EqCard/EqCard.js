@@ -1,13 +1,12 @@
 import s from './EqCard.module.sass';
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../redux/slices/orderSlice";
 import Image from 'next/image';
 
 
-function EqCard( props ) {
-
-   const pageName = useSelector( state => state.page.name )
+function EqCard( { eq } ) {
+   const dispatch = useDispatch()
    const tariff = useSelector( state => state.tariffs.their )
 
    // function showModalAlmond() {
@@ -15,32 +14,32 @@ function EqCard( props ) {
    //       modal: 'almond',
    //       bool: true
    //    } )
-   //    // analyticsEvent( `click_button_details_${ props.eq.dataView }` )
+   //    // analyticsEvent( `click_button_details_${ eq.id }` )
    // }
 
    function showModalOrder() {
-      props.showModal( {
+      dispatch( showModal( {
          modal: 'order',
          bool: true
-      } )
-      props.setDataOrder( {
-         tariffName: `${ pageName } ${ tariff.name }`,
+      } ) )
+      dispatch( setDataOrder( {
+         tariffName: tariff.name,
          tariffId: tariff.tariffId,
-         equipments: props.eq.dataView,
+         equipments: eq.id,
+         price: eq.plan[0].value,
          eventLabel: {
-            order: `click_button_order_${ props.eq.dataView }`,
-            send: `click_button_${ props.eq.dataView }_send_equipment`
+            order: `click_button_order_${ eq.id }`,
+            send: `click_button_${ eq.id }_send_equipment`
          }
-      } )
+      } ) )
    }
 
    function showModalEquipment() {
-      props.showModal( {
+      dispatch( showModal( {
          modal: 'equipment',
          bool: true,
-         props: props.eq.id
-      } )
-      // analyticsEvent( `click_button_details_${ props.eq.dataView }` )
+         props: eq.id
+      } ) )
    }
 
 
@@ -48,7 +47,7 @@ function EqCard( props ) {
       <div className={ `${ s._ } card slider__card` }>
 
          <div>
-            { props.eq.marks.map( mark =>
+            { eq.marks.map( mark =>
                <div key={ mark.text } className={ s.mark__container }>
                   <div
                      className="mark"
@@ -62,37 +61,34 @@ function EqCard( props ) {
 
          <div className={ s.img }>
             <Image
-               alt={ props.eq.name }
-               src={ `/images/equipments/${ props.eq.img }.webp` }
+               alt={ eq.name }
+               src={ `/images/equipments/${ eq.img }.webp` }
                layout={ 'fill' }
                objectFit={ 'contain' }
             />
          </div>
 
-         <h2 className={ s.title }>{ props.eq.name }</h2>
+         <h2 className={ s.title }>{ eq.name }</h2>
 
          <div className={ `${ s.price } price` }>
-            { props.eq.oldPrice && <span className="old-price"/> }
+            { eq.oldPrice && <span className="old-price"/> }
 
             <span className="new-price">
-                  { props.eq.plan
-                     ? <>от { props.eq.plan[0].value } ₽</>
-                     : <>{ props.eq.price } ₽</>
+                  { eq.plan
+                     ? <>от { eq.plan[0].value } ₽</>
+                     : <>{ eq.price } ₽</>
                   }
                </span>
             <span className="always"/>
             <span> в месяц</span>
          </div>
 
-         <p className={ s.text } title={ props.eq.text }>{ props.eq.text }</p>
-         { props.eq.id === "eq-almond"
-            ? <p className={ s.link }><span className="link" onClick={ showModalAlmond }>Подробнее</span></p>
-            : <p className={ s.link }><span className="link" onClick={ showModalEquipment }>Подробнее</span></p>
-         }
+         <p className={ s.text } title={ eq.text }>{ eq.text }</p>
+         <p className={ s.link }><span className="link" onClick={ showModalEquipment }>Подробнее</span></p>
 
          <button
             className={ `${ s.btn } btn btn-fiolet` }
-            data-view={ `block_${ props.eq.dataView }` }
+            data-view={ `block_${ eq.id }` }
             onClick={ showModalOrder }>
             Заказать
          </button>
@@ -101,8 +97,4 @@ function EqCard( props ) {
    )
 }
 
-
-export default connect( null, {
-   showModal,
-   setDataOrder,
-} )( EqCard )
+export default EqCard

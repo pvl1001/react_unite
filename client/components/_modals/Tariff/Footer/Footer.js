@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showModal } from "../../../../redux/slices/modalsSlice";
 import { setDataOrder } from "../../../../redux/slices/orderSlice";
 import s from './Footer_new.module.sass';
@@ -6,21 +6,23 @@ import { wrapp } from '../ModalTariff.module.sass';
 import SaleBanner from "../../../SaleBanner/SaleBanner";
 
 
-function Footer( { tariff, id, showModal, setDataOrder } ) {
+function Footer( { tariff, id } ) {
+   const dispatch = useDispatch()
    const isPremium = id === 'premium'
 
 
    function showModalOrder() {
-      showModal( { modal: 'order', bool: true } )
-      setDataOrder( {
-         tariffName: `${ tariff.name }`,
+      dispatch( showModal( { modal: 'order', bool: true } ) )
+      dispatch( setDataOrder( {
+         tariffName: tariff.name,
          tariffId: tariff.tariffId,
-         equipments: tariff.equipments,
+         equipments: Object.entries( tariff.equipments ).map( eq => eq[1] ),
+         price: tariff.totalPrice || tariff.price,
          eventLabel: {
-            order: `click_button_order_${ tariff.id }`,
-            send: `click_button_send_${ tariff.id }`
+            order: `click_button_order_${ id }`,
+            send: `click_button_send_${ id }`
          }
-      } )
+      } ) )
    }
 
 
@@ -60,7 +62,4 @@ function Footer( { tariff, id, showModal, setDataOrder } ) {
 }
 
 
-export default connect(
-   null,
-   { showModal, setDataOrder }
-)( Footer )
+export default Footer
