@@ -124,8 +124,8 @@ function ModalTariff( { tariff, show, id, showModal } ) {
 
                   { tariff.mftv &&
                      <BannerMfTv
-                        mftv={ tariff.mftv }
                         tariff={ tariff }
+                        id={ id }
                      />
                   }
 

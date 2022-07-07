@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import PlusIcon from '../../../public/svg/Plus.svg'
 import SaleBanner from "../../SaleBanner/SaleBanner";
 import { showModal } from "../../../redux/slices/modalsSlice";
-import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 
 function TariffCard( { tariff, id, collapse, premium } ) {
@@ -24,16 +23,8 @@ function TariffCard( { tariff, id, collapse, premium } ) {
    function openOrder() {
       dispatch( showModal( {
          modal: 'order',
-         bool: true
-      } ) )
-      dispatch( setDataOrder( {
-         tariffName: tariff.name,
-         tariffId: tariff.tariffId,
-         price: tariff.price,
-         eventLabel: {
-            order: `click_button_order_${ id }`,
-            send: `click_button_send_${ id }`
-         }
+         bool: true,
+         props: { tariff, id }
       } ) )
    }
 
@@ -155,7 +146,8 @@ function TariffCard( { tariff, id, collapse, premium } ) {
                <button
                   className={ `${ s.connect_btn } ${ isPremium ? 'btn-premium' : '' } btn` }
                   onClick={ openOrder }
-               >Подключить</button>
+               >Подключить
+               </button>
                <span
                   className={ s.about_btn }
                   onClick={ showModalTariff }

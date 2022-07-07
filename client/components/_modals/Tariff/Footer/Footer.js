@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { showModal } from "../../../../redux/slices/modalsSlice";
-import { setDataOrder } from "../../../../redux/slices/orderSlice";
 import s from './Footer_new.module.sass';
 import { wrapp } from '../ModalTariff.module.sass';
 import SaleBanner from "../../../SaleBanner/SaleBanner";
@@ -12,16 +11,10 @@ function Footer( { tariff, id } ) {
 
 
    function showModalOrder() {
-      dispatch( showModal( { modal: 'order', bool: true } ) )
-      dispatch( setDataOrder( {
-         tariffName: tariff.name,
-         tariffId: tariff.tariffId,
-         equipments: Object.entries( tariff.equipments ).map( eq => eq[1] ),
-         price: tariff.totalPrice || tariff.price,
-         eventLabel: {
-            order: `click_button_order_${ id }`,
-            send: `click_button_send_${ id }`
-         }
+      dispatch( showModal( {
+         modal: 'order',
+         bool: true,
+         props: { tariff, id }
       } ) )
    }
 

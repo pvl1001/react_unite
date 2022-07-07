@@ -13,17 +13,13 @@ import Image from 'next/image';
 function ModalEquipment() {
    const dispatch = useDispatch()
    const [ pricePlan, setPricePlan ] = useState( null )
-   const show = useSelector( state => state.modals.equipment.show )
-   const showModalTariff = useSelector( state => state.modals.tariff.show )
-   const eqId = useSelector( state => state.modals.equipment.props )
+   const { tariffs } = useSelector( state => state )
+   const { equipment, tariff: modalTariff } = useSelector( state => state.modals )
+   const { show, props: eqId } = equipment
+   const { show: showModalTariff } = modalTariff
    const eq = useSelector( state => eqId === 'router-4g'
       ? state.tariffVezde.equipments.router_4g
       : state.equipments[eqId]
-   )
-
-   const tariff = useSelector( state => eq?.id === 'router-4g'
-      ? state.tariffVezde
-      : state.tariffs.their
    )
 
    useEffect( () => {
@@ -33,17 +29,17 @@ function ModalEquipment() {
 
    if ( show ) {
 
-      const onHide = () => dispatch(showModal( { modal: 'equipment', bool: false } ) )
+      const onHide = () => dispatch( showModal( { modal: 'equipment', bool: false } ) )
 
-      const eventLabel = eq.id === 'router-4g'
-         ? {
-            order: `click_button_order_vezde_ntv`,
-            send: `click_button_send_vezde_ntv`
-         }
-         : {
-            order: `click_button_order_${ eq.id }`,
-            send: `click_button_${ eq.id }_send_equipment`
-         }
+      // const eventLabel = eq.id === 'router-4g'
+      //    ? {
+      //       order: `click_button_order_vezde_ntv`,
+      //       send: `click_button_send_vezde_ntv`
+      //    }
+      //    : {
+      //       order: `click_button_order_${ eq.id }`,
+      //       send: `click_button_${ eq.id }_send_equipment`
+      //    }
 
       function handleChangePlan( payload ) {
          dispatch( changePlan( payload ) )
@@ -51,13 +47,15 @@ function ModalEquipment() {
       }
 
       function showModalOrder() {
-         dispatch( showModal( { modal: 'order', bool: true } ) )
-         dispatch( setDataOrder( {
-            tariffName: tariff.name,
-            tariffId: tariff.tariffId,
-            equipments: eq.id,
-            price: pricePlan,
-            eventLabel: eventLabel
+         dispatch( showModal( {
+            modal: 'order',
+            bool: true,
+            props: {
+               tariff: tariffs.their,
+               id: 'their',
+               eventLabel: `click_button_${ eq.id }_send_equipment`,
+               equipments: { id: eq.id, price: pricePlan }
+            }
          } ) )
       }
 

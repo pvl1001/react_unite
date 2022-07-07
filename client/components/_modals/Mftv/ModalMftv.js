@@ -4,8 +4,6 @@ import FaqMftv from "./FaqMftv/FaqMftv";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import ItemMftv from "./ItemMftv/ItemMftv";
-import { useEffect } from "react";
-import { setDataOrder } from "../../../redux/slices/orderSlice";
 
 
 function ModalMftv() {
@@ -15,20 +13,12 @@ function ModalMftv() {
    const id = props?.id
 
 
-   useEffect( () => {
-      if ( show ) {
-         dispatch( setDataOrder( {
-            tariffName: tariff.name,
-            tariffId: tariff.tariffId,
-            equipments: Object.entries( tariff.equipments ).map( eq => eq[1] ),
-            price: tariff.totalPrice || tariff.price,
-         } ) )
-      }
-   }, [ show ] )
-
    if ( tariff ) {
 
-      const onHide = () => dispatch( showModal( { modal: 'mftv', bool: false } ) )
+      const onHide = () => dispatch( showModal( {
+         modal: 'mftv',
+         bool: false
+      } ) )
 
       return (
          <Modal

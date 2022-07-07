@@ -7,12 +7,12 @@ import images from '../../../../public/images/mftv-banner'
 
 
 function BannerMfTv( props ) {
-   const { mftv, tariff } = props
+   const { tariff, id } = props
+   const { mftv } = tariff
    const dispatch = useDispatch()
-   const imgName = mftv.length === 2
-      ? 'start'
-      : 'all'
+   const imgName = mftv.length === 2 ? 'start' : 'all'
    const [ img, setImg ] = useState( images[imgName] )
+
 
    function resize() {
       window.innerWidth < 768
@@ -29,11 +29,13 @@ function BannerMfTv( props ) {
       }
    } )
 
-   const showModalMfTv = () => dispatch( showModal( {
-      modal: 'mftv',
-      bool: true,
-      props: { mftv, tariff }
-   } ) )
+   function showModalMfTv() {
+      dispatch( showModal( {
+         modal: 'mftv',
+         bool: true,
+         props: { tariff, id }
+      } ) )
+   }
 
 
    return (

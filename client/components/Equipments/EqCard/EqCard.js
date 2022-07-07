@@ -1,7 +1,6 @@
 import s from './EqCard.module.sass';
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
-import { setDataOrder } from "../../../redux/slices/orderSlice";
 import Image from 'next/image';
 
 
@@ -20,16 +19,12 @@ function EqCard( { eq } ) {
    function showModalOrder() {
       dispatch( showModal( {
          modal: 'order',
-         bool: true
-      } ) )
-      dispatch( setDataOrder( {
-         tariffName: tariff.name,
-         tariffId: tariff.tariffId,
-         equipments: eq.id,
-         price: eq.plan[0].value,
-         eventLabel: {
-            order: `click_button_order_${ eq.id }`,
-            send: `click_button_${ eq.id }_send_equipment`
+         bool: true,
+         props: {
+            tariff,
+            id: 'their',
+            eventLabel: `click_button_${ eq.id }_send_equipment`,
+            equipments: { id: eq.id, price: eq.plan[0].value }
          }
       } ) )
    }

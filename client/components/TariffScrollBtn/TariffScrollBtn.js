@@ -1,7 +1,6 @@
 import s from "./TariffScrollBtn.module.scss"
 import { useEffect, useState } from "react";
 import { showModal } from "../../redux/slices/modalsSlice";
-import { setDataOrder } from "../../redux/slices/orderSlice";
 import { useDispatch } from "react-redux";
 
 
@@ -56,16 +55,8 @@ function TariffScrollBtn( props ) {
 
       dispatch( showModal( {
          modal: 'order',
-         bool: true
-      } ) )
-      dispatch( setDataOrder( {
-         tariffName: `${ tariff.name }`,
-         tariffId: tariff.tariffId,
-         price: tariff.price,
-         eventLabel: {
-            order: `click_button_order_${ tariff.id }`,
-            send: `click_button_send_${ tariff.id }`
-         }
+         bool: true,
+         props: { tariff, id }
       } ) )
 
    }

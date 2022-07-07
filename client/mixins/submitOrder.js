@@ -13,7 +13,7 @@ export async function setRegister( eventLabel, dataOrder ) {
    const { calltracking_params, clientName, clientPhone, city, tariffId, tariffName, comment } = dataOrder
    if ( ym ) {
       ym( analytic_id, 'reachGoal', 'zayavka_megafon' )
-      ym( analytic_id, 'reachGoal', eventLabel.send )
+      ym( analytic_id, 'reachGoal', eventLabel )
    }
 
    if ( calltracking_params ) {

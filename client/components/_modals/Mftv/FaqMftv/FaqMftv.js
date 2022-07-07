@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux'
 import { showModal } from "../../../../redux/slices/modalsSlice";
 
 
-function FaqMftv() {
+function FaqMftv( props ) {
+   const { tariff, id } = props
    const dispatch = useDispatch()
    const faq = [
       {
@@ -28,7 +29,11 @@ function FaqMftv() {
 
 
    function showModalOrder() {
-      dispatch( showModal( { modal: 'order', bool: true } ) )
+      dispatch( showModal( {
+         modal: 'order',
+         bool: true,
+         props: { tariff, id }
+      } ) )
    }
 
 
@@ -62,4 +67,4 @@ function FaqMftv() {
 }
 
 
-export default  FaqMftv
+export default FaqMftv

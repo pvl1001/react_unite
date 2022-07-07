@@ -22,10 +22,7 @@ function OrderForm( props ) {
       window.mask = require( '../../../plugins/jquery.mask' )
       $( 'input[name="phone"]' ).mask( '+7(000)000-00-00', { placeholder: "" } )
 
-      setEventLabel( {
-         order: `click_button_order_${ result.result === 1 ? 'address_success' : 'address' }`,
-         send: `click_button_send_${ result.result === 1 ? 'address_success' : 'address' }`
-      } )
+      setEventLabel( `click_button_send_${ result.result === 1 ? 'address_success' : 'address' }` )
    }, [ result.result ] )
 
    const errorMessage = 'Заполните поле!'
@@ -55,7 +52,12 @@ function OrderForm( props ) {
             resultNull()
          }
          setIsLoading( false )
-         dispatch( showModal( { modal: 'order', bool: true, props: mailSender } ) )
+         dispatch( showModal( {
+            modal: 'order',
+            bool: true,
+            eventLabel,
+            props: { mailSender, tariff: tariffs.their, id: 'their', eventLabel }
+         } ) )
       } catch ( err ) {
          console.error( err )
       }

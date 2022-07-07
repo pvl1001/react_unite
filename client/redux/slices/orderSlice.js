@@ -18,7 +18,7 @@ function isPrice( value ) {
 
 
 const initialState = {
-   eventLabel: {},
+   eventLabel: '',
    city: initialStatePage.region.name,
    clientName: '',
    clientPhone: '',
