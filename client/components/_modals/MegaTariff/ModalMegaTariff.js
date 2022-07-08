@@ -2,14 +2,16 @@ import s from './ModalMegaTariff.module.sass'
 import s_modalMftv from '../Mftv/ModalMftv.module.sass'
 import s_info from '../Tariff/BlockInfo/BlockInfo.module.sass'
 import { Modal } from "react-bootstrap";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../../redux/slices/modalsSlice";
 import ItemOption from "./ItemOption";
 
 
-function ModalMegaTariff( props ) {
+function ModalMegaTariff() {
+   const dispatch = useDispatch()
+   const { show } = useSelector( state => state.modals.megaTariff )
+   const { name, price, minutes, web, sms } = useSelector( state => state.megaTariff )
    const linkDownload = '/uploads/docs/2021/bez_pereplat/tariff_5189_chuvashia.pdf'
-   const { name, price, minutes, web, sms } = props.megaTariff
    const options = [
       {
          "name": "Абонентская плата",
@@ -37,14 +39,14 @@ function ModalMegaTariff( props ) {
          "value": "Безлимитно"
       }
    ]
-   const onHide = () => props.showModal( { modal: 'tariffAll', bool: false } )
+   const onHide = () => dispatch( showModal( { modal: 'megaTariff', bool: false } ) )
 
 
    return (
       <Modal
          centered
          animation={ false }
-         show={ props.show }
+         show={ show }
          onHide={ onHide }
          className={ s_modalMftv.modal }
          dialogClassName={ s_modalMftv.modal_dialog }
@@ -95,9 +97,4 @@ function ModalMegaTariff( props ) {
 }
 
 
-export default connect( state => ({
-   show: state.modals.tariffAll.show,
-   megaTariff: state.megaTariff
-}), {
-   showModal
-} )( ModalMegaTariff )
+export default ModalMegaTariff

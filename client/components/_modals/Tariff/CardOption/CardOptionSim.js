@@ -11,7 +11,7 @@ function CardOptionSim( props ) {
    const _class = props.equipment.switch
       ? s._ + ' ' + s.active
       : s._
-   const showModalTariffAll = () => props.showModal( { modal: 'tariffAll', bool: true } )
+   const showModalMegaTariff = () => props.showModal( { modal: 'megaTariff', bool: true } )
 
    const handleSwitch = ( e ) => {
       props.optionSwitch( { ...payload, checked: e.target.checked } )
@@ -30,7 +30,7 @@ function CardOptionSim( props ) {
          <div className={ `${ s.container } ${ s.sim__container }` }>
             <div className={ s.sim__text }>
                <p>SIM-карта с тарифом
-                  <span onClick={ showModalTariffAll }> «Без переплат. { megaTariff.name }»</span> Скидка 40% на
+                  <span onClick={ showModalMegaTariff }> «Без переплат. { megaTariff.name }»</span> Скидка 40% на
                   абонентскую плату
                </p>
                <div className="counter">

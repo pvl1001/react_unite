@@ -8,7 +8,7 @@ const initialState = {
    mftv: { show: false },
    equipment: { show: false },
    tariff: { show: false },
-   tariffAll: { show: false },
+   megaTariff: { show: false },
    channels: { show: false },
    // almond: { show: false },
    // aboutAlmond: { show: false },

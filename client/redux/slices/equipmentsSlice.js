@@ -290,10 +290,8 @@ export const equipmentsSlice = createSlice( {
             : null
       },
       counterAlmondEq( state, action ) {
-         let cnt = action.payload.cnt
-         const name = action.payload.name
-         const data = action.payload.data
          const { almond } = state
+         let { cnt, name, data } = action.payload
 
          if ( name === 'plus' ) {
             almond.equipments[data.index] = { ...data, cnt: ++cnt, checked: true }
@@ -303,10 +301,8 @@ export const equipmentsSlice = createSlice( {
          }
       },
       switchAlmondEq( state, action ) {
-         const data = action.payload.data
-         const checked = action.payload.checked
-         const cnt = action.payload.cnt
          const { almond } = state
+         const { data, checked, cnt } = action.payload
 
          almond.equipments[data.index] = { ...data, cnt, checked }
       }
